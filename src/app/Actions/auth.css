@@ -1,0 +1,40 @@
+.text-error {
+  color: var(--Red, #e55353);
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 22.4px */
+}
+.text-success {
+  color: var(--Red, #2EB85C);
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 22.4px */
+}
+
+.custom-image {
+  margin: 0px;
+}
+
+.custom-confirm-btn {
+  background-color: unset !important;
+  color: black !important;
+  border: unset !important;
+}
+.custom-confirm-btn:hover {
+  background-color: unset !important;
+}
+
+.title-btn {
+  color: var(--text-title-3, #516583);
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px; /* 133.333% */
+  letter-spacing: 1.25px;
+  text-transform: capitalize;
+}

@@ -1,0 +1,494 @@
+img.buttonImport {
+  width: 100%;
+  height: 100%;
+}
+
+span.ant-upload-wrapper.btnUploadImport {
+  display: flex;
+  justify-content: center;
+}
+
+.HeaderModalSelect {
+  padding: 5%;
+}
+.content-image {
+  height: 61svh;
+  max-height: 61svh;
+  overflow-y: auto;
+}
+.imageGallery {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 110px);
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 10px;
+  max-height: 61svh;
+  margin: 0 24px 0;
+}
+.image-item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  height: 110px;
+  width: 110px;
+}
+
+button.buttonDeleteImage {
+  display: flex;
+  align-items: center;
+  height: 50px;
+
+  border-radius: 24px;
+  background: #e55353;
+
+  border: none;
+  box-shadow: 0px -1px 20px 0px #006ee91a;
+  margin: auto;
+}
+
+.FooterDeleteImage {
+  padding: 24px;
+}
+.footerModal {
+  position: absolute;
+  width: 100%;
+  bottom: -3svh;
+}
+
+.divCheckPrioritize {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  right: 15px;
+}
+.buttonCloseModalView {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  border: none;
+
+  background: #006ee914;
+}
+
+.TitleUpdateModal,
+.TitleDeleteImage {
+  text-align: center;
+}
+
+.ButtonDeleteAll:hover {
+  color: #231b9a;
+}
+
+.ButtonUpdateAll:hover {
+  color: #231b9a;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+.custome-class-success {
+  border: 0;
+  height: auto;
+
+  img {
+    width: 76px;
+    height: 76px;
+  }
+}
+.custome-class-error {
+  border: 0;
+  height: auto;
+  margin: 1.25em auto;
+  img {
+    width: 72px;
+    height: 72px;
+  }
+}
+.custome-class-loading {
+  border: 0;
+  height: auto;
+
+  img {
+    width: 76px;
+    height: 76px;
+    animation: spin 1s linear infinite;
+    transform-origin: center center;
+  }
+}
+
+img.imageSourceGalley {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+img.imageSourceChecksheet {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.ModalViewImageSelect > .ant-modal-content {
+  border-radius: 0;
+  padding: 0;
+}
+button.buttonStarCheck {
+  background: #231b9a;
+  border: none;
+  box-shadow: 0px -1px 20px 0px #006ee91a;
+  height: 50px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+span.textButtonStarCheck {
+  font-family: "Lato", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: -0.40799999237060547px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.ant-modal.ModalViewImageSelect {
+  max-width: 100% !important;
+  width: 100% !important;
+  top: 30px;
+}
+
+.btnUploadImport .ant-upload.ant-upload-select {
+  height: 110px;
+  width: 110px;
+}
+
+.buttonChoose {
+  width: 80px;
+}
+
+img.iconCloseSelect {
+  width: 14px;
+  height: 14px;
+}
+span.textButtonDelete {
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: -0.40799999237060547px;
+  text-align: center;
+  color: #ffffff;
+}
+span.spanTitleHeader {
+  font-family: ""Lato", sans-serif", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 14.04px;
+  text-align: center;
+  color: #25355b;
+}
+span.buttonChoose {
+  display: flex;
+  justify-content: end;
+
+  font-family: ""Lato", sans-serif", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: -0.40799999237060547px;
+  text-align: center;
+
+  color: #0c4da2;
+}
+/*MODAL UPLOAD DELETE*/
+.ant-modal.ModalDeleteImageSelect {
+  width: 75% !important;
+  top: 30svh;
+}
+.ant-modal.ModalDeleteImageSelect .ant-modal-content {
+  padding: 12px;
+}
+.TitleDeleteImage {
+  span {
+    font-family: "Lato", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+    text-align: center;
+    color: #0c4da2;
+  }
+  margin-bottom: 5%;
+}
+.ButtonDeleteModal {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+.ButtonDeleteAllYes {
+  width: 140px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px;
+  background-color: #0c4da2;
+}
+.ButtonDeleteAllYes span {
+  font-family: ""Lato", sans-serif", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19.2px;
+  text-align: left;
+  color: #ffffff;
+}
+.ButtonDeleteAllNo {
+  width: 140px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid #00aaf1;
+  background-color: #ffffff;
+}
+.ButtonDeleteAllNo span {
+  font-family: ""Lato", sans-serif", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19.2px;
+  text-align: left;
+  color: #394b76;
+}
+.ant-modal.ModelUploadImage {
+  max-width: 60%;
+  width: 60% !important;
+  top: 30svh;
+}
+
+.TitleUpdateModal span {
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: center;
+  color: #337aee;
+}
+.TitleUpdateModalButton {
+  justify-content: center;
+  width: 140px;
+  height: 40px;
+  margin-top: 12px;
+  background-color: #0c4da2;
+}
+.TitleUpdateModalButton span {
+  font-family: ""Lato", sans-serif", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19.2px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.ButtonUpdateAll {
+  width: 100%;
+  height: 28px;
+
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #394b76;
+}
+
+.swal2-title.custome-title-error {
+  font-family: "Lato", sans-serif;
+  font-size: 20px !important;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.20000000298023224px;
+  text-align: center;
+  color: #394b76;
+}
+.swal2-popup.swal2-modal.custome-form-error.swal2-show {
+  width: 360px;
+  top: -20%;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swal2-title.custome-title-loading {
+  font-family: "Lato", sans-serif;
+  font-size: 20px !important;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.20000000298023224px;
+  text-align: center;
+  color: #394b76;
+}
+.swal2-popup.swal2-modal.custome-form-loading.swal2-show {
+  width: 400px;
+  top: -20%;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swal2-title.custome-title-success {
+  font-family: "Lato", sans-serif;
+  font-size: 20px !important;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.20000000298023224px;
+  text-align: center;
+  color: #394b76;
+}
+.swal2-popup.swal2-modal.custome-form-success.swal2-show {
+  width: 400px;
+  top: -20%;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img.button-prioriti {
+  width: 100%;
+  height: 100%;
+}
+
+span.buttonChoose,
+span.spanTitleHeader {
+  width: 100%;
+}
+
+.btnChoose {
+  border: none;
+  background: transparent;
+  border-radius: 24px;
+}
+
+.divUploadBtn,
+.divDeleteBtn {
+  position: absolute;
+}
+.divDeleteBtn {
+  left: 20px;
+}
+.divUploadBtn {
+  right: 20px;
+}
+
+.uploadButton,
+.deleteButton {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  border: none;
+}
+img.button-upload,
+img.button-delete {
+  width: 32px;
+  height: 32px;
+}
+
+.inputChooseSelect {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+}
+
+.inputChooseSelect span {
+  width: 18px;
+  height: 18px;
+}
+.inputChooseSelect > span > .ant-checkbox-inner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+.inputChooseSelect .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #0c4da2;
+  border-color: #0c4da2;
+}
+.ant-modal-wrap.wrapModalViewImageSelect {
+  background: #f2f2f2;
+}
+.ant-modal.ModalConfirm {
+  width: 90% !important;
+}
+
+@media (min-width: 475px) {
+  .ant-modal.ModalConfirm {
+    width: 45% !important;
+  }
+  .ant-modal.ModalDeleteImageSelect {
+    width: 45% !important;
+    top: 30svh;
+  }
+}
+@media (min-width: 1135px) {
+  .ant-modal.ModalConfirm {
+    width: 35% !important;
+  }
+
+  .ant-modal.ModalDeleteImageSelect {
+    width: 35% !important;
+    top: 30svh;
+  }
+}
+
+.ButtonUpdateModal {
+  width: 100%;
+  display: flex;
+  margin-top: 12px;
+  gap: 20px;
+  justify-content: space-between;
+}
+.btnOkConfirmUpload {
+  width: 140px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px;
+  background-color: #0c4da2;
+}
+.btnOkConfirmUpload span {
+  font-family: ""Lato", sans-serif", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19.2px;
+  text-align: left;
+  color: #ffffff;
+}
+.btnCancelConfirmUpload {
+  width: 140px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid #00aaf1;
+  background-color: #ffffff;
+}
+.btnCancelConfirmUpload span {
+  font-family: ""Lato", sans-serif", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19.2px;
+  text-align: left;
+  color: #394b76;
+}

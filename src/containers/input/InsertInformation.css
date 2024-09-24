@@ -1,0 +1,157 @@
+.ant-form-item.insert-infor {
+  margin-bottom: 0px;
+}
+
+.ant-table-thead .ant-table-cell {
+  background-color: #231b9a0d !important;
+}
+
+.load-image-desktop {
+  animation: loading-image-dt 0.7s linear infinite;
+}
+
+.size-image .react-transform-wrapper {
+  width: auto;
+}
+
+@keyframes loading-image-dt {
+  from {
+    /* pushes the sun down past the viewport */
+    transform: rotate(360deg);
+  }
+  to {
+    /* returns the sun to its default position */
+    transform: rotate(0deg);
+  }
+}
+
+.thumbnail-class-desktop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2%;
+
+  & img {
+    width: 75px;
+    height: 75px;
+    border-radius: 15px;
+    cursor: pointer;
+    margin: 0px 10px;
+  }
+}
+
+.splide__slide img {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+}
+
+.btn-next-image {
+  position: absolute;
+  top: 38%;
+  z-index: 50;
+  right: 4%;
+  height: 60px;
+  width: 60px;
+  border-radius: 100%;
+  opacity: 0.1;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-previous-image {
+  position: absolute;
+  top: 38%;
+  z-index: 50;
+  left: 4%;
+  height: 60px;
+  width: 60px;
+  border-radius: 100%;
+  opacity: 0.1;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-previous-image:hover,
+.btn-next-image:hover {
+  opacity: 0.9;
+}
+
+.swiper-slide {
+  flex-shrink: 0;
+  width: 100%;
+  height: 10vh;
+  position: relative;
+  transition-property: transform;
+  display: block;
+}
+
+@media only screen and (max-width: 1500px) {
+  .thumbnail-class-desktop img {
+    width: 55px;
+    height: 55px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .thumbnail-class-desktop img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 20px;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: #fff;
+  border: 1px solid #007aff;
+  opacity: 0.9;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  border: 1px solid black;
+  opacity: 0.3;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.container-hotKeys {
+  border: 1px solid #0000001c;
+  border-radius: 16px;
+  height: 100%;
+
+  & #title-hotKeys {
+    border-bottom: 1px solid #0000001c;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f3fa;
+    color: rgba(0, 0, 0, 0.88);
+    font-weight: 600;
+    border-radius: 16px 16px 0px 0px;
+  }
+
+  & #content-hotKeys {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    row-gap: 2ch;
+    color: #25355b;
+    font-weight: 600;
+  }
+}
+
+.modal-shortcut .ant-table-wrapper .ant-table-pagination-right {
+  justify-content: center;
+}

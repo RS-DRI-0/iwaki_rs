@@ -1,0 +1,51 @@
+.modal-infor-form-item .ant-col.ant-form-item-label {
+  width: 150px;
+}
+
+.modal-infor-form-item.ant-form-item .ant-form-item-label {
+  text-align: start;
+}
+
+.btnSubmitModel {
+  background-color: #1677ff !important;
+  width: 96px;
+  height: 36px;
+  font-size: 16px !important;
+  color: #fff !important;
+  float: right;
+}
+
+.modal-infor-detail-form-item .ant-col.ant-form-item-label {
+  width: 120px;
+}
+
+.modal-infor-detail-form-item.ant-form-item .ant-form-item-label {
+  text-align: start;
+}
+
+.modal-infor-detail-form-item .ant-input-disabled {
+  background-color: transparent;
+  color: black;
+  font-size: 14px;
+}
+
+.value-check-case {
+  color: red;
+  font-size: 12px;
+
+  &[data-length-string="true"] {
+    color: green;
+  }
+  &[data-upper-case="true"] {
+    color: green;
+  }
+  &[data-lower-case="true"] {
+    color: green;
+  }
+  &[data-number="true"] {
+    color: green;
+  }
+  &[data-special-characters="true"] {
+    color: green;
+  }
+}

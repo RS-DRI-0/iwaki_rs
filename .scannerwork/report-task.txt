@@ -1,0 +1,6 @@
+projectKey=new_iwaki_v3
+serverUrl=http://localhost:9123
+serverVersion=10.6.0.92116
+dashboardUrl=http://localhost:9123/dashboard?id=new_iwaki_v3
+ceTaskId=22af79e1-8f2a-434a-ab46-e03eda1b3bb5
+ceTaskUrl=http://localhost:9123/api/ce/task?id=22af79e1-8f2a-434a-ab46-e03eda1b3bb5

@@ -1,0 +1,1004 @@
+/* .imageNenVectorFormSelect {
+  height: 30svh;
+  display: flex;
+  img {
+    border-radius: 0px;
+  }
+} */
+.spanTextPrioritize {
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.40799999237060547px;
+  text-align: center;
+  color: #ffffff;
+}
+.optionMachineSelect .ant-select-selector {
+  height: 50px !important;
+}
+
+span.spanOptionLanguageItem {
+  display: flex;
+  align-items: center;
+
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22.4px;
+  letter-spacing: 0.20000000298023224px;
+
+  color: #64748b;
+  gap: 8px;
+}
+.optionLanguage .ant-select-selector {
+  border-radius: 0px !important;
+  border: none !important;
+}
+.optionLanguage .ant-select-dropdown.ant-select-dropdown-placement-bottomLeft {
+  background: #f1f1f1;
+  height: fit-content !important;
+  width: fit-content !important;
+}
+.spanLabelLanguage,
+.imgIconLanguage {
+  width: 30px;
+  height: 22px;
+}
+img.iconDropDownLanguage {
+  width: 14px !important;
+  height: 14px;
+}
+.ant-select.optionMachineSelect.ant-select-single.ant-select-show-arrow {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 470px) {
+  .logoIwakiSelect {
+    height: 18svh;
+  }
+  img.imgLogoIwaki {
+    width: 45%;
+  }
+  .button-select {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: 50svh;
+    row-gap: 12%;
+    margin: 4% auto 0;
+    align-items: center;
+  }
+  button.buttonSelect.btnSelectCapture {
+    width: 100%;
+  }
+  button.buttonSelect.btnSelectManager {
+    width: 100%;
+  }
+  button.buttonSelect.btnSelectUpload {
+    width: 100%;
+  }
+  .btnUploadSelect > .ant-upload.ant-upload-select {
+    width: 100%;
+  }
+
+  .optionMachineSelect.ant-select-selector
+    span.ant-select-selection-placeholder {
+    display: flex;
+    align-items: center;
+  }
+  .ant-select.optionMachineSelect span.ant-select-selection-placeholder {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .optionKeyItem .ant-select-item-option-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  span.ant-select-selection-item {
+    display: flex;
+    justify-content: center;
+  }
+  .spanSuffixIconDropdown {
+    display: flex;
+  }
+  span.spanOptionKeyItem {
+    color: #64748b;
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 15.6px;
+    text-align: center;
+  }
+  .ant-select.optionMachineSelect
+    .ant-select-selection-item
+    span.spanOptionKeyItem {
+    color: #231b9a;
+  }
+  span.spanOptionKeyItem:hover {
+    color: #231b9a;
+  }
+  .btnSelectCapture {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #f3f3f3;
+    border-radius: 46px;
+    .textCapture {
+      font-family: "Inter", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      text-decoration: none;
+      display: flex;
+      align-items: flex-end;
+      text-align: center;
+      letter-spacing: -0.02em;
+
+      color: #231b9a;
+
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    &:hover {
+      background: #ffffff;
+      box-shadow: 0px 0px 12.2px rgba(41, 189, 136, 0.26);
+    }
+  }
+
+  .btnSelectUpload {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #f3f3f3;
+    border-radius: 36px;
+    .textUpload {
+      font-family: "Inter", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      display: flex;
+      align-items: flex-end;
+      text-align: center;
+      letter-spacing: -0.02em;
+
+      color: #231b9a;
+
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    &:hover {
+      background: #ffffff;
+      box-shadow: 0px 0px 12.2px rgba(41, 189, 136, 0.26);
+    }
+  }
+  .btnSelectManager {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #f3f3f3;
+    border-radius: 36px;
+    .textFileManager {
+      font-family: "Inter", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+
+      display: flex;
+      align-items: flex-end;
+      text-align: center;
+      letter-spacing: -0.02em;
+
+      color: #231b9a;
+
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    &:hover {
+      background: #ffffff;
+      box-shadow: 0px 0px 12.2px rgba(41, 189, 136, 0.26);
+    }
+  }
+
+  .ant-select.optionMachineSelect.ant-select-single.ant-select-show-arrow {
+    width: 200px !important;
+    height: 40px !important;
+  }
+  .optionMachineSelect .ant-select-selector {
+    border: 1px solid #f6f6f6 !important;
+    border-radius: 24px;
+    box-shadow: 0px 2px 4px 0px #0000000a;
+  }
+  .optionMachineSelect
+    .ant-select-selector
+    span.ant-select-selection-placeholder {
+    height: 50px;
+  }
+
+  .ant-select.optionMachineSelect.ant-select-single.ant-select-show-arrow
+    .ant-select-selection-placeholder {
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 15.6px;
+    text-align: left;
+    padding-inline-end: 18px;
+    color: #394b76;
+  }
+
+  .iconDropDownSelect {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (min-width: 471px) {
+  .logoIwakiSelect {
+    height: 16.3svh;
+  }
+  img.imgLogoIwaki {
+    width: 35%;
+  }
+  .button-select {
+    width: 25%;
+    height: 50svh;
+    display: flex;
+    flex-direction: column;
+    row-gap: 12%;
+    margin: 4.2% auto 0;
+    align-items: center;
+  }
+  button.buttonSelect.btnSelectCapture {
+    width: 30%;
+    margin: auto;
+  }
+  button.buttonSelect.btnSelectManager {
+    width: 100%;
+  }
+  button.buttonSelect.btnSelectUpload {
+    width: 100%;
+  }
+  .btnUploadSelect > .ant-upload.ant-upload-select {
+    width: 100%;
+  }
+
+  .optionMachineSelect
+    .ant-select-selector
+    span.ant-select-selection-placeholder {
+    display: flex;
+    align-items: center;
+    height: 50px;
+  }
+  .ant-select.optionMachineSelect span.ant-select-selection-placeholder {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .optionKeyItem .ant-select-item-option-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  span.ant-select-selection-item {
+    display: flex;
+    justify-content: center;
+  }
+  .spanSuffixIconDropdown {
+    display: flex;
+  }
+  span.spanOptionKeyItem {
+    color: #64748b;
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 15.6px;
+    text-align: center;
+  }
+  .ant-select.optionMachineSelect
+    .ant-select-selection-item
+    span.spanOptionKeyItem {
+    color: #231b9a;
+  }
+  span.spanOptionKeyItem:hover {
+    color: #231b9a;
+  }
+  .btnSelectCapture {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #f3f3f3;
+    border-radius: 46px;
+    .textCapture {
+      font-family: "Inter", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      text-decoration: none;
+      display: flex;
+      align-items: flex-end;
+      text-align: center;
+      letter-spacing: -0.02em;
+
+      color: #231b9a;
+
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    &:hover {
+      background: #ffffff;
+      box-shadow: 0px 0px 12.2px rgba(41, 189, 136, 0.26);
+    }
+  }
+
+  .btnSelectUpload {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #f3f3f3;
+    border-radius: 36px;
+    .textUpload {
+      font-family: "Inter", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      display: flex;
+      align-items: flex-end;
+      text-align: center;
+      letter-spacing: -0.02em;
+
+      color: #231b9a;
+
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    &:hover {
+      background: #ffffff;
+      box-shadow: 0px 0px 12.2px rgba(41, 189, 136, 0.26);
+    }
+  }
+  .btnSelectManager {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #f3f3f3;
+    border-radius: 36px;
+    .textFileManager {
+      font-family: "Inter", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+
+      display: flex;
+      align-items: flex-end;
+      text-align: center;
+      letter-spacing: -0.02em;
+
+      color: #231b9a;
+
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    &:hover {
+      background: #ffffff;
+      box-shadow: 0px 0px 12.2px rgba(41, 189, 136, 0.26);
+    }
+  }
+
+  .ant-select.optionMachineSelect.ant-select-single.ant-select-show-arrow {
+    width: 70% !important;
+    height: 40px !important;
+  }
+  .optionMachineSelect .ant-select-selector {
+    border: 1px solid #f6f6f6 !important;
+    border-radius: 24px;
+    box-shadow: 0px 2px 4px 0px #0000000a;
+  }
+
+  .ant-select.optionMachineSelect.ant-select-single.ant-select-show-arrow
+    .ant-select-selection-placeholder {
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 15.6px;
+    text-align: left;
+    padding-inline-end: 18px;
+    color: #394b76;
+  }
+
+  .ant-select.optionMachineSelect .ant-select-arrow {
+    right: 14%;
+  }
+
+  .iconDropDownSelect {
+    width: 14px;
+    height: 14px;
+  }
+}
+@media (min-width: 769px) {
+  .logoIwakiSelect {
+    height: 15svh;
+  }
+  img.imgLogoIwaki {
+    width: 30%;
+  }
+  .button-select {
+    width: 20%;
+    height: 50svh;
+    display: flex;
+    flex-direction: column;
+    row-gap: 12%;
+    margin: 4.2% auto 0;
+  }
+  button.buttonSelect.btnSelectUpload {
+    width: 100%;
+  }
+  .btnUploadSelect > .ant-upload.ant-upload-select {
+    width: 100%;
+  }
+
+  .optionMachineSelect
+    .ant-select-selector
+    span.ant-select-selection-placeholder {
+    display: flex;
+    align-items: center;
+    height: 50px;
+  }
+  .ant-select.optionMachineSelect span.ant-select-selection-placeholder {
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+  }
+  .optionKeyItem .ant-select-item-option-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  span.ant-select-selection-item {
+    display: flex;
+    justify-content: center;
+  }
+  .spanSuffixIconDropdown {
+    display: flex;
+  }
+  span.spanOptionKeyItem {
+    color: #64748b;
+
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 15.6px;
+    text-align: center;
+  }
+  .ant-select.optionMachineSelect
+    .ant-select-selection-item
+    span.spanOptionKeyItem {
+    color: #231b9a;
+  }
+  span.spanOptionKeyItem:hover {
+    color: #231b9a;
+  }
+  .btnSelectCapture {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #f3f3f3;
+    border-radius: 46px;
+    .textCapture {
+      font-family: "Inter", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      text-decoration: none;
+      display: flex;
+      align-items: flex-end;
+      text-align: center;
+      letter-spacing: -0.02em;
+
+      color: #231b9a;
+
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    &:hover {
+      background: #ffffff;
+      box-shadow: 0px 0px 12.2px rgba(41, 189, 136, 0.26);
+    }
+  }
+
+  .btnSelectUpload {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #f3f3f3;
+    border-radius: 36px;
+    .textUpload {
+      font-family: "Inter", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      display: flex;
+      align-items: flex-end;
+      text-align: center;
+      letter-spacing: -0.02em;
+
+      color: #231b9a;
+
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    &:hover {
+      background: #ffffff;
+      box-shadow: 0px 0px 12.2px rgba(41, 189, 136, 0.26);
+    }
+  }
+  .btnSelectManager {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #f3f3f3;
+    border-radius: 36px;
+    .textFileManager {
+      font-family: "Inter", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+
+      display: flex;
+      align-items: flex-end;
+      text-align: center;
+      letter-spacing: -0.02em;
+
+      color: #231b9a;
+
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    &:hover {
+      background: #ffffff;
+      box-shadow: 0px 0px 12.2px rgba(41, 189, 136, 0.26);
+    }
+  }
+
+  .ant-select.optionMachineSelect.ant-select-single.ant-select-show-arrow {
+    width: 250px !important;
+    height: 40px !important;
+  }
+  .optionMachineSelect .ant-select-selector {
+    border: 1px solid #f6f6f6 !important;
+    border-radius: 24px;
+    box-shadow: 0px 2px 4px 0px #0000000a;
+  }
+
+  .ant-select.optionMachineSelect.ant-select-single.ant-select-show-arrow
+    .ant-select-selection-placeholder {
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 15.6px;
+    text-align: left;
+    padding-inline-end: 18px;
+    color: #394b76;
+  }
+
+  .ant-select.optionMachineSelect .ant-select-arrow {
+    right: 14%;
+  }
+
+  .iconDropDownSelect {
+    width: 14px;
+    height: 14px;
+  }
+}
+@media (min-width: 1025px) {
+  .logoIwakiSelect {
+    height: 13svh;
+  }
+  img.imgLogoIwaki {
+    width: 20%;
+  }
+  .button-select {
+    width: 10%;
+    height: 50svh;
+    display: flex;
+    flex-direction: column;
+    row-gap: 12%;
+    margin: 3.3% auto 0;
+  }
+  button.buttonSelect.btnSelectUpload {
+    width: 100%;
+  }
+  .btnUploadSelect > .ant-upload.ant-upload-select {
+    width: 100%;
+  }
+
+  .optionMachineSelect
+    .ant-select-selector
+    span.ant-select-selection-placeholder {
+    display: flex;
+    align-items: center;
+    height: 50px;
+  }
+  .ant-select.optionMachineSelect span.ant-select-selection-placeholder {
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+  }
+  .optionKeyItem .ant-select-item-option-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  span.ant-select-selection-item {
+    display: flex;
+    justify-content: center;
+  }
+  .spanSuffixIconDropdown {
+    display: flex;
+  }
+  span.spanOptionKeyItem {
+    color: #64748b;
+  }
+  .ant-select.optionMachineSelect
+    .ant-select-selection-item
+    span.spanOptionKeyItem {
+    color: #231b9a;
+  }
+  span.spanOptionKeyItem:hover {
+    color: #231b9a;
+  }
+  .btnSelectCapture {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #f3f3f3;
+    border-radius: 46px;
+    .textCapture {
+      font-family: "Inter", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      text-decoration: none;
+      display: flex;
+      align-items: flex-end;
+      text-align: center;
+      letter-spacing: -0.02em;
+
+      color: #231b9a;
+
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    &:hover {
+      background: #ffffff;
+      box-shadow: 0px 0px 12.2px rgba(41, 189, 136, 0.26);
+    }
+  }
+
+  .btnSelectUpload {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #f3f3f3;
+    border-radius: 36px;
+    .textUpload {
+      font-family: "Inter", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      display: flex;
+      align-items: flex-end;
+      text-align: center;
+      letter-spacing: -0.02em;
+
+      color: #231b9a;
+
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    &:hover {
+      background: #ffffff;
+      box-shadow: 0px 0px 12.2px rgba(41, 189, 136, 0.26);
+    }
+  }
+  .btnSelectManager {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #f3f3f3;
+    border-radius: 36px;
+    .textFileManager {
+      font-family: "Inter", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+
+      display: flex;
+      align-items: flex-end;
+      text-align: center;
+      letter-spacing: -0.02em;
+
+      color: #231b9a;
+
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    &:hover {
+      background: #ffffff;
+      box-shadow: 0px 0px 12.2px rgba(41, 189, 136, 0.26);
+    }
+  }
+
+  .ant-select.optionMachineSelect.css-dev-only-do-not-override-i46qwz.ant-select-single.ant-select-show-arrow {
+    width: 350px;
+    height: 40px !important;
+  }
+  .optionMachineSelect .ant-select-selector {
+    border: 1px solid #f6f6f6 !important;
+    border-radius: 24px;
+    box-shadow: 0px 2px 4px 0px #0000000a;
+  }
+
+  .ant-select.optionMachineSelect.ant-select-single.ant-select-show-arrow
+    .ant-select-selection-placeholder {
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 15.6px;
+    text-align: left;
+    padding-inline-end: 18px;
+    color: #394b76;
+  }
+
+  .ant-select.optionMachineSelect .ant-select-arrow {
+    right: 14%;
+  }
+
+  .iconDropDownSelect {
+    width: 14px;
+    height: 14px;
+  }
+}
+@media (min-width: 1921px) {
+  .logoIwakiSelect {
+    height: 17.8svh;
+  }
+  img.imgLogoIwaki {
+    width: 20%;
+  }
+  .button-select {
+    width: 10%;
+    height: 50svh;
+    display: flex;
+    flex-direction: column;
+    row-gap: 12%;
+    margin: 1.08% auto 0;
+  }
+  button.buttonSelect.btnSelectUpload {
+    width: 100%;
+  }
+  .btnUploadSelect > .ant-upload.ant-upload-select {
+    width: 100%;
+  }
+
+  .optionMachineSelect
+    .ant-select-selector
+    span.ant-select-selection-placeholder {
+    display: flex;
+    align-items: center;
+    height: 50px;
+  }
+  .ant-select.optionMachineSelect span.ant-select-selection-placeholder {
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+  }
+  .optionKeyItem .ant-select-item-option-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  span.ant-select-selection-item {
+    display: flex;
+    justify-content: center;
+  }
+  .spanSuffixIconDropdown {
+    display: flex;
+  }
+  span.spanOptionKeyItem {
+    color: #64748b;
+
+    font-family: "Lato", sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 15.6px;
+    text-align: center;
+  }
+
+  .ant-select.optionMachineSelect
+    .ant-select-selection-item
+    span.spanOptionKeyItem {
+    color: #231b9a;
+  }
+
+  span.spanOptionKeyItem:hover {
+    color: #231b9a;
+  }
+
+  .btnSelectCapture {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #f3f3f3;
+    border-radius: 46px;
+    .textCapture {
+      font-family: "Inter", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 17px;
+      text-decoration: none;
+      display: flex;
+      align-items: flex-end;
+      text-align: center;
+      letter-spacing: -0.02em;
+
+      color: #231b9a;
+
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    &:hover {
+      background: #ffffff;
+      box-shadow: 0px 0px 12.2px rgba(41, 189, 136, 0.26);
+    }
+  }
+
+  .btnSelectUpload {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #f3f3f3;
+    border-radius: 36px;
+    .textUpload {
+      font-family: "Inter", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 17px;
+      display: flex;
+      align-items: flex-end;
+      text-align: center;
+      letter-spacing: -0.02em;
+
+      color: #231b9a;
+
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    &:hover {
+      background: #ffffff;
+      box-shadow: 0px 0px 12.2px rgba(41, 189, 136, 0.26);
+    }
+  }
+
+  .btnSelectManager {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #f3f3f3;
+    border-radius: 36px;
+    .textFileManager {
+      font-family: "Inter", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 17px;
+
+      display: flex;
+      align-items: flex-end;
+      text-align: center;
+      letter-spacing: -0.02em;
+
+      color: #231b9a;
+
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    &:hover {
+      background: #ffffff;
+      box-shadow: 0px 0px 12.2px rgba(41, 189, 136, 0.26);
+    }
+  }
+
+  .ant-select.optionMachineSelect.ant-select-single.ant-select-show-arrow {
+    width: 500px !important;
+    height: 40px !important;
+  }
+  .optionMachineSelect .ant-select-selector {
+    border: 1px solid #f6f6f6 !important;
+    border-radius: 24px;
+    box-shadow: 0px 2px 4px 0px #0000000a;
+    height: 64px !important;
+  }
+
+  .ant-select.optionMachineSelect.ant-select-single.ant-select-show-arrow
+    .ant-select-selection-placeholder {
+    font-family: "Lato", sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 15.6px;
+    text-align: left;
+    padding-inline-end: 18px;
+    color: #394b76;
+  }
+
+  .iconDropDownSelect {
+    width: 26px;
+    height: 26px;
+  }
+
+  .optionMachineSelect .ant-select-selector span.ant-select-selection-item {
+    height: 40px;
+    align-items: center;
+  }
+}
+.optionLanguage span.ant-select-arrow {
+  display: block;
+}
+
+#basic-menu-formSelect
+  .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.MuiMenu-paper.MuiMenu-paper {
+  min-width: fit-content;
+  & ul {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+}

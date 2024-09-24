@@ -1,0 +1,47 @@
+.container-infor-user {
+  margin-top: 30px;
+
+  & input {
+    width: 100%;
+  }
+
+  & .ant-col-12 {
+    display: grid;
+    row-gap: 2ch;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.btn-like-antd {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 4px 8px;
+  color: rgba(0, 0, 0, 0.88);
+  font-size: 14px;
+  line-height: 1.5714285714285714;
+
+  list-style: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  border-radius: 6px;
+  transition: all 0.2s;
+  overflow: hidden;
+  white-space: break-spaces;
+}
+
+.btn-like-antd:focus-visible {
+  border-color: #1677ff !important;
+  box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
+  outline: 0;
+  background-color: #ffffff;
+}
+
+.ant-modal.modal-check-QA .ant-modal-content {
+  padding: 8px 24px;
+}

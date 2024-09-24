@@ -1,0 +1,157 @@
+.Login {
+  width: 335px;
+  margin: 176px auto 0;
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+}
+img.logoIwakiSVG {
+  width: 145px;
+}
+p.spanSignInTitle {
+  margin-top: 0;
+  font-family: "Lato", sans-serif;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #394b76;
+}
+.logoIwakiLogin {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.loginForm {
+  display: flex;
+}
+.ant-form.ant-form-inline.formLogin {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 44px;
+  row-gap: 2ch;
+}
+.FooterLoginForm {
+  display: flex;
+  justify-content: center;
+}
+.ant-form-inline.formLogin .ant-form-item {
+  flex: none;
+  margin-inline-end: 0;
+  margin-bottom: 0;
+}
+.FooterItemLogin {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 10svh;
+  gap: 10px;
+}
+.rememberForgot {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.linkForgot {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  span {
+    font-family: "Lato", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+}
+span.spanForgot {
+  font-family: "Lato", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: center;
+  color: #64748b;
+}
+.signIn {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+button.btnSignIn {
+  width: 78px;
+  height: 48px;
+  gap: 0px;
+  border-radius: 14px;
+  background: #0c4da2;
+  padding: 12px;
+}
+span.spanSignIn {
+  font-family: "Lato", sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 30px;
+  text-align: left;
+  color: #25355b;
+  margin: auto 0;
+}
+img.iconArrow {
+  width: 22.06px;
+  height: 22.06px;
+}
+.formLogin .ant-input-affix-wrapper {
+  height: 50px;
+  border-radius: 40px;
+}
+.alertLogin {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+  height: 50px;
+  gap: 14px;
+}
+.iconAlertLogin {
+  width: 20px;
+  height: 20px;
+}
+.textAlertLogin {
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: left;
+  color: #e54848;
+}
+
+.ant-form-item-control-input-content
+  > .ant-input-affix-wrapper.textInputLogin
+  > input.ant-input {
+  color: #394b76;
+}
+
+.ant-input-affix-wrapper.textInputLogin
+  > span.anticon.anticon-eye-invisible.ant-input-password-icon {
+  color: #94a3b8;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  color: #94a3b8;
+}
+.cbRemeber {
+  align-items: center;
+}
+.cbRemeber span {
+  color: #64748b;
+  font-family: "Lato", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+}

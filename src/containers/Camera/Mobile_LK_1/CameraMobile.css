@@ -1,0 +1,193 @@
+.CameraDesign {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-height: 100svh;
+  background: #00000080;
+}
+
+.CameraVideoDesign {
+  max-height: 100svh;
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.titleCameraDesign {
+  height: 9svh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: #053457;
+}
+
+.titleCameraDesign .CheckBoxRadio {
+  color: black;
+}
+
+.VideoDesign {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 78svh;
+  width: 100%;
+}
+
+.FooterCameraDesign {
+  height: 13svh;
+  background: #053457;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.btn-capture {
+  position: relative;
+  text-decoration: none;
+  transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  border-radius: 50%;
+  border: unset;
+}
+
+.btn-capture:after {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 4em;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 0.5s;
+  box-shadow: 0 0 10px 20px white;
+}
+
+.btn-capture:active:after {
+  box-shadow: 0 0 0 0 white;
+  position: absolute;
+  border-radius: 4em;
+  left: 0;
+  top: 0;
+  opacity: 1;
+  transition: 0s;
+}
+
+.btn-capture:active {
+  top: 1px;
+}
+
+.btn-switch-camera {
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-switch-camera:focus {
+  animation-name: switchCamera;
+  animation-duration: 0.6s;
+}
+
+@keyframes switchCamera {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+button.buttonBack {
+  background: none;
+  border: none;
+  box-shadow: none;
+  margin-left: 5%;
+}
+.swal2-title.custom-title-alert-camera {
+  font-size: 22px !important;
+}
+.my-custom-progress-bar-success {
+  background-color: #f8bb86;
+}
+
+.modal-check-sheet.ant-modal .ant-modal-content {
+  padding: 20px 0 !important;
+}
+
+.icon-button-check-sheet.Mui-disabled {
+  color: transparent !important;
+}
+
+.modal-show-image-capture-badge.ant-badge .ant-badge-count {
+  transform: translate(25%, -40%);
+}
+.pumpNameTitleCamera {
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 19.2px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.FormVideo {
+  position: relative;
+}
+.OptionCSO {
+  z-index: 1;
+
+  position: absolute;
+  top: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  background-color: #00000024;
+}
+
+.CheckBoxRadio {
+  width: 45%;
+  height: 36px !important;
+  border: 1px solid #00aaf1 !important;
+  border-radius: 12px !important;
+  background: #0000004d;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ant-radio-button-wrapper.CheckBoxRadio:first-child {
+  border-inline-start: none;
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+}
+.ant-radio-button-wrapper.CheckBoxRadio:not(:first-child)::before {
+  content: unset;
+}
+.textOptionCSO {
+  font-family: "Lato", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 18px;
+  color: white;
+}
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+  background: #0c4da2;
+}
+
+.text-total-size-image .ant-col-8 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

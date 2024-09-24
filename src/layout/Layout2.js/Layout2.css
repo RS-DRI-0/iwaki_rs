@@ -1,0 +1,29 @@
+.logoIwaki {
+  height: 15svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+}
+img.logoIwaki {
+  width: 100%;
+}
+.layoutUserLogin {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-height: 100svh;
+}
+
+.imageNenVector {
+  height: 30svh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: start;
+  order: 3;
+}
+img.imageNenVector {
+  border-radius: 0;
+  height: 100%;
+}
+

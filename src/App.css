@@ -1,0 +1,155 @@
+:root {
+  --global-font: "Lato", sans-serif !important;
+}
+
+.App {
+  height: 100vh;
+  width: 100%;
+  font-family: "Lato", sans-serif !important;
+}
+
+.ant-typography,
+.ant-form,
+.ant-table-cell,
+.ant-btn,
+.ant-col,
+.ant-upload-wrapper,
+.ant-upload-wrapper .ant-upload-drag .ant-upload-drag-container,
+.ant-select-single.ant-select-show-arrow .ant-select-selection-item,
+.ant-select-multiple .ant-select-selection-item-content,
+.ant-radio-wrapper,
+[class*="ant-input"],
+[class*="ant-picker"],
+[class^="ant-row"],
+[class^="ant-layout"],
+.ant-checkbox-wrapper,
+.ant-tag,
+.ant-collapse,
+.ant-pagination-total-text,
+.label-form,
+p,
+span {
+  font-family: var(--global-font);
+}
+
+.ant-layout {
+  background: transparent !important;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.controls {
+  display: flex;
+  gap: 16px;
+}
+
+.btn-container {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.btn-container button {
+  cursor: pointer;
+  display: inline-block;
+  outline: 0;
+  border: none;
+  padding: 16px 56px;
+  border-radius: 8px;
+  background-color: #0070f3;
+  color: white;
+  font-size: 16px;
+  box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%);
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-container button:hover {
+  background: rgba(0, 118, 255, 0.9);
+  box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.webcam-container {
+  position: relative;
+}
+
+.ant-table-thead th{
+  text-align: center !important;
+}
+
+.webcam-animation {
+  animation: fadeInOut 0.5s ease-in-out;
+}
+
+.element-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(172, 166, 166, 0.699);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(134, 132, 132);
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0px 0 2px grey;
+  border-radius: 20px;
+}
+
+.custom-notification {
+  margin-top: 10%;
+}
+div:where(.swal2-container) h2:where(.swal2-title) {
+  padding: 0px;
+}
+
+.swal2-popup .swal2-image {
+  max-width: 100%;
+  margin: 0.5em auto !important;
+}
+
+.swal2-popup {
+  width: 28em !important;
+}
+
+div:where(.swal2-container) div:where(.swal2-popup) {
+  padding: 1.25em 0 1.25em;
+}
+
+.ant-layout.layoutUserLogin1 {
+  max-height: 100svh;
+}
+.centerItems {
+  display: flex;
+  align-items: center;
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPopover-paper.MuiMenu-paper.MuiMenu-paper {
+  border-radius: 14px;
+  min-width: 150px;
+}

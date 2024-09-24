@@ -1,0 +1,47 @@
+.btnInfoUser {
+  border-radius: 5px !important;
+  border: 1px solid var(--primary-1, #058df4) !important;
+  background: #fff !important;
+  color: var(--text-title-2, #394b76) !important;
+  text-align: center !important;
+  font-size: 14px !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  line-height: 160% !important; /* 22.4px */
+}
+
+.btnInfoUser:hover {
+  background: #c8d6e12e !important;
+  border: 1px solid var(--primary-1, #058df4) !important;
+}
+
+.css-1n2mv2k {
+  align-items: center;
+  padding-right: 1%;
+}
+
+.text-title-page {
+  color: var(--text-title-3, #516583);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 100% */
+}
+
+.menu-user.css-am1rfv-MuiButtonBase-root-MuiMenuItem-root {
+  display: flex;
+  align-items: center;
+  color: var(--text-title-2, #394b76);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 100% */
+}
+
+.css-am1rfv-MuiButtonBase-root-MuiMenuItem-root:hover {
+  background-color: rgba(5, 141, 244, 0.12) !important;
+}
+
+#basic-menu .css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
+  min-width: 158px;
+}
