@@ -331,10 +331,10 @@ const FileManager = ({
             icon={<LeftOutlined key="left" />}
             onClick={() => setOnShowOption(prev => !prev)}
           >
-            <FloatButton onClick={sortData} icon={<img src={!valueIsSort ? IconDecreasing : IconAscending} alt=""></img>} />
-            <FloatButton onClick={showModalHistory} icon={<img src={IconHistory} alt=""></img>} />
-            <FloatButton onClick={() => setOpenModalFilter(true)} icon={<img src={iconSearch} alt=""></img>} />
-            <FloatButton onClick={clearFilter} icon={<img src={IconDeleteFilter} alt=""></img>} />
+            <FloatButton onClick={sortData} icon={<img style={{paddingTop: 4}} src={!valueIsSort ? IconDecreasing : IconAscending} alt=""></img>} />
+            <FloatButton onClick={showModalHistory} icon={<img style={{paddingTop: 4}} src={IconHistory} alt=""></img>} />
+            <FloatButton onClick={() => setOpenModalFilter(true)} icon={<img style={{paddingTop: 4}} src={iconSearch} alt=""></img>} />
+            <FloatButton onClick={clearFilter} icon={<img style={{paddingTop: 4}} src={IconDeleteFilter} alt=""></img>} />
           </FloatButton.Group>
           {/* </Col> */}
           {/* <Col
@@ -449,24 +449,22 @@ const FileManager = ({
                             </Col>
                             <Col span={10}>
                               {Number(item.qa_timeout) === 1 ?
-                                <span style={{ color: "red", fontWeight: "600", fontSize: 10, display: "flex", alignItems: "center", columnGap: "0.5ch" }}><img src={IconTimeout} alt=""></img>{language[chooseLanguage].time_out}</span>
+                                <span className="text-timeOut"><img src={IconTimeout} alt=""></img>{language[chooseLanguage].time_out}</span>
                                 : null}
                             </Col>
 
 
                           </Row>
-                          <Row className="row-time-handle" style={{ columnGap: "2ch", fontSize: 12 }}>
-                            <span
-                            // style={{
-                            //   // color: "#64748B",
-                            //   // fontWeight: 400,
-                            //   display: "flex",
-                            //   alignItems: "center"
-                            // }}
-                            >
-                              <img src={IconTimeHandle} alt=""></img>&nbsp;{dayjs(item.upload_date).format("HH:mm:ss")} ~ {item.submit_date.toLowerCase() !== "none" ? dayjs(item.submit_date).format("HH:mm:ss") : "N/A"}
-                            </span>
-                            <span ><img src={IconLocation} alt=""></img>&nbsp;1600</span>
+                          <Row className="row-time-handle">
+                            <Col span={18}>
+                              <span>
+                                <img src={IconTimeHandle} alt=""></img>&nbsp;{dayjs(item.upload_date).format("HH:mm:ss")} ~ {item.submit_date.toLowerCase() !== "none" ? dayjs(item.submit_date).format("HH:mm:ss") : "N/A"}
+                              </span>
+                            </Col>
+                            <Col span={5} offset={1}>
+                              <span><img src={IconLocation} alt=""></img>&nbsp;{item.vl_scan_no}</span>
+                            </Col>
+
                           </Row>
                         </div>
                       </Col>
