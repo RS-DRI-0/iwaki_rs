@@ -232,6 +232,7 @@ const SetPassword = ({ onFinish }) => {
               size="large"
               placeholder="Mật khẩu mới"
               onChange={handleCheckLogicChangePW}
+              maxLength={255}
             />
           </Form.Item>
         </Col>
