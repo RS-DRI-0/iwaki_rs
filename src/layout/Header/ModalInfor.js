@@ -7,11 +7,18 @@ import { IconButton } from "@mui/material";
 import { CloseOutlined } from "@mui/icons-material";
 import PropTypes from "prop-types";
 import { authAxios } from "../../api/axiosClient";
-import "./Header.css"
+import "./Header.css";
 import Cookies from "universal-cookie";
+import { KeyOutlined } from "@ant-design/icons";
 const cookies = new Cookies();
 
-const ModalInfor = ({ isOpenModalInfor, handleCloseModalInfor, setIsOpenModalInfor }) => {
+const ModalInfor = ({
+  isOpenModalInfor,
+  handleCloseModalInfor,
+  setIsOpenModalInfor,
+}) => {
+  const userMSNV = JSON.parse(sessionStorage.getItem("info_user")).user_msnv;
+
   const [isKeyTab, setIsKeyTab] = useState("1");
   const items = [
     {
@@ -75,17 +82,22 @@ const ModalInfor = ({ isOpenModalInfor, handleCloseModalInfor, setIsOpenModalInf
   }, [screenWidth]);
 
   useEffect(() => {
-    console.log("Chạy")
-
+    console.log("Chạy");
   }, [isOpenModalInfor]);
 
   const onCancel = () => {
-    setIsOpenModalInfor(false)
-  }
+    setIsOpenModalInfor(false);
+  };
 
   return (
-    <Modal className="modal-changePW" open={isOpenModalInfor} closable={false} footer={null} width="90%" >
-      {console.log(123)}
+    <Modal
+      className="modal-changePW"
+      open={isOpenModalInfor}
+      closable={false}
+      footer={null}
+      width="90%"
+      style={{ fontWeight: 700 }}
+    >
       <Row>
         {/* <Col span={24}>
           <IconButton
@@ -95,7 +107,10 @@ const ModalInfor = ({ isOpenModalInfor, handleCloseModalInfor, setIsOpenModalInf
             <CloseOutlined />
           </IconButton>
         </Col> */}
-        <Col span={valueColTabsUserCol[0]} style={{ display: 'flex', justifyContent: "center" }}>
+        <Col
+          span={valueColTabsUserCol[0]}
+          style={{ display: "flex", justifyContent: "center" }}
+        >
           <Tabs
             defaultActiveKey="1"
             items={items}
@@ -106,8 +121,15 @@ const ModalInfor = ({ isOpenModalInfor, handleCloseModalInfor, setIsOpenModalInf
         {/* <Col span={valueColTabsUserCol[1]} > */}
         {/* </Col> */}
       </Row>
-      <SetPassword isOpenModalInfor={isOpenModalInfor} onFinish={onFinish} setIsOpenModalInfor={setIsOpenModalInfor} />
-
+      <div style={{ paddingBottom: 10 }}>
+        <KeyOutlined style={{ color: "#1677ff" }} /> ID
+        <span style={{ marginLeft: 10 }}>{userMSNV}</span>
+      </div>
+      <SetPassword
+        isOpenModalInfor={isOpenModalInfor}
+        onFinish={onFinish}
+        setIsOpenModalInfor={setIsOpenModalInfor}
+      />
     </Modal>
   );
 };
@@ -200,9 +222,7 @@ const SetPassword = ({ isOpenModalInfor, onFinish, setIsOpenModalInfor }) => {
     setSpecialCharacters(containsSpecialCharacters);
   };
 
-
   useEffect(() => {
-
     // if (!isOpenModalInfor) {
     setUpperCase(false);
     setLowerCase(false);
@@ -213,9 +233,9 @@ const SetPassword = ({ isOpenModalInfor, onFinish, setIsOpenModalInfor }) => {
   }, [isOpenModalInfor]);
 
   const onCancel = () => {
-    form.resetFields()
-    setIsOpenModalInfor(false)
-  }
+    form.resetFields();
+    setIsOpenModalInfor(false);
+  };
 
   return (
     <Form form={form} onFinish={onFinish}>
@@ -311,11 +331,10 @@ const SetPassword = ({ isOpenModalInfor, onFinish, setIsOpenModalInfor }) => {
             type="primary"
             htmlType="submit"
 
-          // loading={loadings}
+            // loading={loadings}
           >
             SAVE
           </Button>
-
         </Col>
       </Row>
     </Form>
