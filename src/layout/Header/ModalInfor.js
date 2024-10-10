@@ -84,7 +84,7 @@ const ModalInfor = ({ isOpenModalInfor, handleCloseModalInfor, setIsOpenModalInf
   }
 
   return (
-    <Modal open={isOpenModalInfor} style={{ top: 10 }} closable={false} footer={null} width="90%" >
+    <Modal className="modal-changePW" open={isOpenModalInfor} closable={false} footer={null} width="90%" >
       {console.log(123)}
       <Row>
         {/* <Col span={24}>

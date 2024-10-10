@@ -193,7 +193,7 @@ const HeaderManager = ({
             }}
           >
             <MenuItem
-              style={{ width: "100%", fontFamily: "Lato sans-serif" }}
+              style={{ width: "100%", fontFamily: "Lato sans-serif", background: "#fff", borderBottom: "1px solid #0000004a" }}
               className={"menu-user"}
               onClick={handleClickOpenModalInfor}
             >

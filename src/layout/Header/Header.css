@@ -56,3 +56,10 @@
 .col-btn-changePW > button {
   width: 80px
 }
+
+.modal-changePW {
+  top: 15px
+}
+.ant-modal.modal-changePW .ant-modal-content {
+  padding: 0px 24px 12px;
+}
