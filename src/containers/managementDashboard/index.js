@@ -319,6 +319,10 @@ const ManagementDashboardIndex = () => {
 
   useEffect(() => {
     fetchListPumb();
+    const idMenu = sessionStorage.getItem("id_menu");
+    if (idMenu !== null) {
+      setValueKeyMenu(idMenu);
+    }
   }, []);
 
   useEffect(() => {
@@ -400,6 +404,7 @@ const ManagementDashboardIndex = () => {
   };
   const onClickMenuDashboard = (value) => {
     setValueKeyMenu(value.key);
+    sessionStorage.setItem("id_menu", value.key);
   };
 
   return (
@@ -415,6 +420,7 @@ const ManagementDashboardIndex = () => {
               chooseLanguage={chooseLanguage}
               handleChangeSelectLanguage={handleChangeSelectLanguage}
               onClickMenuDashboard={onClickMenuDashboard}
+              valueKeyMenu={valueKeyMenu}
             />
             <div className="container-fluid" style={{ maxWidth: "100%" }}>
               {valueKeyMenu === "1" ? (

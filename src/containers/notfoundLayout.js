@@ -40,7 +40,7 @@ const NotFoundLayout = () => {
             </Link>
           )}
           {role_title === "APP_MANAGER" && (
-            <Link to={"/dashboard"}>
+            <Link to={"/management"}>
               <Button type="primary">Back to the home page</Button>
             </Link>
           )}

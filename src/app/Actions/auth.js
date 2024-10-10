@@ -87,7 +87,7 @@ export const authLogin = (username, password, loading) => {
         } else if (res.data.user_role_title === "ADMIN") {
           window.location = "/user";
         } else if (res.data.user_role_title === "APP_MANAGER") {
-          window.location = "/dashboard";
+          window.location = "/management";
         } else if (res.data.user_role_title === "CLF") {
           window.location = "/entry_classification";
         } else if (res.data.user_role_title === "CHECK_CLF") {

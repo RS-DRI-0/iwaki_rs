@@ -88,9 +88,9 @@ span {
   position: relative;
 }
 
-.ant-table-thead th{
+/* .ant-table-thead th{
   text-align: center !important;
-}
+} */
 
 .webcam-animation {
   animation: fadeInOut 0.5s ease-in-out;

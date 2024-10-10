@@ -100,7 +100,10 @@ const ModalInfor = ({ isOpenModalInfor, handleCloseModalInfor }) => {
           {isKeyTab === "1" ? (
             <InforDetail isOpenModalInfor={isOpenModalInfor} />
           ) : (
-            <SetPassword onFinish={onFinish} />
+            <SetPassword
+              onFinish={onFinish}
+              isOpenModalInfor={isOpenModalInfor}
+            />
           )}
         </Col>
       </Row>
@@ -174,7 +177,7 @@ const InforDetail = ({ isOpenModalInfor }) => {
   );
 };
 
-const SetPassword = ({ onFinish }) => {
+const SetPassword = ({ onFinish, isOpenModalInfor }) => {
   const [form] = Form.useForm();
   const [upperCase, setUpperCase] = useState(false);
   const [lowerCase, setLowerCase] = useState(false);

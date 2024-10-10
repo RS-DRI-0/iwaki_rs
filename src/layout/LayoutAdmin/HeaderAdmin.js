@@ -40,7 +40,7 @@ const HeaderAdmin = () => {
   };
 
   const defaultSelectedKeys = [
-    (window.location.pathname === "/dashboard" && "1") ||
+    (window.location.pathname === "/management" && "1") ||
       (window.location.pathname === "/user" && "2"),
   ];
 
@@ -101,7 +101,7 @@ const HeaderAdmin = () => {
             {role_title === "APP_MANAGER" && (
               <Menu.Item key="1">
                 <span></span>
-                <Link to="/dashboard"></Link>
+                <Link to="/management"></Link>
               </Menu.Item>
             )}
 

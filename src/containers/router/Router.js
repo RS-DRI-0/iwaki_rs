@@ -39,7 +39,7 @@ function PageTitleUpdater() {
 
   const pathToTitleMap = {
     "/CaptureCamera": "Camera",
-    "/dashboard": "Dashboard",
+    "/management": "Management",
     "/entry": "Entry",
     "/entry_classification": "CLF",
     "/check_classification": "CHECK_CLF",
@@ -224,7 +224,7 @@ function Main() {
           component={ManagementDashboardIndex}
           exact
           layout={CustomNoLayout}
-          path="/dashboard"
+          path="/management"
           isPrivate={true}
           lsPermissions={lsPermissions}
           permission={["APP_MANAGER"]}

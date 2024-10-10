@@ -46,13 +46,17 @@
 .header-page-admin-user-col-14 {
   display: flex;
   justify-content: right;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .header-page-admin-user-button {
   height: 40px;
   font-weight: 600 !important;
   font-size: 14px !important;
+}
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedPrimary.MuiButton-sizeMedium.MuiButton-outlinedSizeMedium.MuiButton-colorPrimary.MuiButton-root.MuiButton-outlined.MuiButton-outlinedPrimary.MuiButton-sizeMedium.MuiButton-outlinedSizeMedium.MuiButton-colorPrimary.header-page-admin-user-button {
+  color: #0b2545;
 }
 
 .tabs-page-admin-user {
