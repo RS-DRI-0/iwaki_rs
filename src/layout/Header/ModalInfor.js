@@ -60,7 +60,7 @@ const ModalInfor = ({
           logout_new();
         })
         .catch((err) => {
-          openNotificationSweetAlertAdmin(ErrorIcon, err.response.data.message);
+          openNotificationSweetAlertAdmin(ErrorIcon, err.data.message);
         });
     }
   };
@@ -93,7 +93,7 @@ const ModalInfor = ({
       closable={false}
       footer={null}
       width="90%"
-      style={{ fontWeight: 700 }}
+      style={{ fontWeight: 700, marginTop: "23%" }}
     >
       <Row>
         {/* <Col span={24}>
@@ -268,6 +268,7 @@ const SetPassword = ({ isOpenModalInfor, onFinish, setIsOpenModalInfor }) => {
               size="large"
               placeholder="Mật khẩu mới"
               onChange={handleCheckLogicChangePW}
+              maxLength={255}
             />
           </Form.Item>
         </Col>

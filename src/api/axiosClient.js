@@ -28,7 +28,8 @@ const authAxiosTest = () => {
             error.response.status === 500 ||
             error.response.status === 403
           ) {
-            reject(new Error(error.response));
+            reject(error.response); // trả kết quả đúng ở catch 
+            // reject(new Error(error.response));
           } else if (error.response.status === 401 && error.config) {
             oroginReq._retry = true;
             let refresh = cookies.get(`refresh_iwaki_${userId}`);
