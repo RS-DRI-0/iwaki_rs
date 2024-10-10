@@ -10,3 +10,15 @@
 .modal-user-form-item.ant-form-item {
   margin-bottom: 12px;
 }
+
+.table-management-user.ant-table-wrapper .ant-table.ant-table-middle {
+  font-size: 16px !important;
+}
+
+.table-row-light {
+  background-color: #f9f9f9; /* Màu sáng cho dòng chẵn */
+}
+
+.table-row-dark {
+  background-color: #e0e0e0; /* Màu tối cho dòng lẻ */
+}

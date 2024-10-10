@@ -832,7 +832,11 @@ const Entry_Classification = () => {
                   <Row gutter={16} className="entry_classification_row">
                     {valueBase64.length !== 0 &&
                       valueBase64.map((item, _index) => (
-                        <Col span={3} key={item.id}>
+                        <Col
+                          span={4}
+                          key={item.id}
+                          style={{ paddingLeft: 10, paddingRight: 10 }}
+                        >
                           <Card
                             hoverable
                             className="entry_classification_card"
@@ -853,7 +857,7 @@ const Entry_Classification = () => {
                                 <img
                                   alt="Red dot"
                                   src={item.img_base64}
-                                  style={{ height: "18vh", width: "100%" }}
+                                  style={{ height: "20vh", width: "100%" }}
                                 ></img>
                               </button>
                             }

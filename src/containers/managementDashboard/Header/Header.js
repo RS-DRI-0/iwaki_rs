@@ -16,6 +16,7 @@ const Header = ({
   chooseLanguage,
   handleChangeSelectLanguage,
   onClickMenuDashboard,
+  valueKeyMenu
 }) => {
   const [isAnchorEl, setIsAnchorEl] = useState(null);
   const open = Boolean(isAnchorEl);
@@ -36,11 +37,6 @@ const Header = ({
     sessionStorage.clear();
     window.location = "/";
   };
-
-  const defaultSelectedKeys = [
-    (window.location.pathname === "/dashboard" && "1") ||
-      (window.location.pathname === "/user" && "2"),
-  ];
 
   const role_title = sessionStorage.getItem("Role_Title");
 
@@ -80,14 +76,13 @@ const Header = ({
               minWidth: 0,
             }}
             className="menu-admin"
-            defaultSelectedKeys={defaultSelectedKeys}
             onClick={onClickMenuDashboard}
           >
             <Menu.Item key="1">
               <span>Dashboard</span>
             </Menu.Item>
             <Menu.Item key="2">
-              <span>User</span>
+              <span>Management</span>
             </Menu.Item>
           </Menu>
         </Col>

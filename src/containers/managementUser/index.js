@@ -117,12 +117,6 @@ const ManagementUser = () => {
       align: "center",
     },
     {
-      title: "User Center",
-      dataIndex: "user_center",
-      key: "user_center",
-      align: "center",
-    },
-    {
       title: "Action",
       key: "action",
       align: "center",
