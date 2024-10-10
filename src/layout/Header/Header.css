@@ -45,3 +45,14 @@
 #basic-menu .css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
   min-width: 158px;
 }
+
+.col-btn-changePW {
+  padding-top: 5%;
+  column-gap: 1ch;
+  justify-content: flex-end;
+  display: flex;
+}
+
+.col-btn-changePW > button {
+  width: 80px
+}

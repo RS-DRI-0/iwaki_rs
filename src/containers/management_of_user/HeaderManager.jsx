@@ -211,10 +211,13 @@ const HeaderManager = ({
           </Menu>
         </Col>
       </Row>
-      <ModalInfor
-        isOpenModalInfor={isOpenModalInfor}
-        handleCloseModalInfor={handleCloseModalInfor}
-      />
+      {isOpenModalInfor &&
+        <ModalInfor
+          isOpenModalInfor={isOpenModalInfor}
+          handleCloseModalInfor={handleCloseModalInfor}
+          setIsOpenModalInfor={setIsOpenModalInfor}
+        />
+      }
     </div>
   );
 };

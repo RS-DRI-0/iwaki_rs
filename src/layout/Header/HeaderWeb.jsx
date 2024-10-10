@@ -227,6 +227,7 @@ const HeaderWeb = () => {
       <ModalInfor
         isOpenModalInfor={isOpenModalInfor}
         handleCloseModalInfor={handleCloseModalInfor}
+        setIsOpenModalInfor = {setIsOpenModalInfor}
       />
     </Box>
   );

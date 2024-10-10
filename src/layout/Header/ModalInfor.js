@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button, Col, Form, Input, Modal, Row, Tabs } from "antd";
 import { openNotificationSweetAlertAdmin } from "../../Function";
 import ErrorIcon from "../../images/ErrorNotifiIcon.svg";
@@ -7,18 +7,15 @@ import { IconButton } from "@mui/material";
 import { CloseOutlined } from "@mui/icons-material";
 import PropTypes from "prop-types";
 import { authAxios } from "../../api/axiosClient";
+import "./Header.css"
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
-const ModalInfor = ({ isOpenModalInfor, handleCloseModalInfor }) => {
+const ModalInfor = ({ isOpenModalInfor, handleCloseModalInfor, setIsOpenModalInfor }) => {
   const [isKeyTab, setIsKeyTab] = useState("1");
   const items = [
     {
       key: "1",
-      label: "Thông tin người dùng",
-    },
-    {
-      key: "2",
       label: "Đặt lại mật khẩu",
     },
   ];
@@ -77,18 +74,28 @@ const ModalInfor = ({ isOpenModalInfor, handleCloseModalInfor }) => {
     }
   }, [screenWidth]);
 
+  useEffect(() => {
+    console.log("Chạy")
+
+  }, [isOpenModalInfor]);
+
+  const onCancel = () => {
+    setIsOpenModalInfor(false)
+  }
+
   return (
-    <Modal open={isOpenModalInfor} closable={false} footer={null} width="50%">
+    <Modal open={isOpenModalInfor} style={{ top: 10 }} closable={false} footer={null} width="90%" >
+      {console.log(123)}
       <Row>
-        <Col span={24}>
+        {/* <Col span={24}>
           <IconButton
             style={{ float: "right" }}
             onClick={handleCloseModalInfor}
           >
             <CloseOutlined />
           </IconButton>
-        </Col>
-        <Col span={valueColTabsUserCol[0]}>
+        </Col> */}
+        <Col span={valueColTabsUserCol[0]} style={{ display: 'flex', justifyContent: "center" }}>
           <Tabs
             defaultActiveKey="1"
             items={items}
@@ -96,14 +103,11 @@ const ModalInfor = ({ isOpenModalInfor, handleCloseModalInfor }) => {
             tabPosition={valueColTabsUser}
           />
         </Col>
-        <Col span={valueColTabsUserCol[1]}>
-          {isKeyTab === "1" ? (
-            <InforDetail isOpenModalInfor={isOpenModalInfor} />
-          ) : (
-            <SetPassword onFinish={onFinish} />
-          )}
-        </Col>
+        {/* <Col span={valueColTabsUserCol[1]} > */}
+        {/* </Col> */}
       </Row>
+      <SetPassword isOpenModalInfor={isOpenModalInfor} onFinish={onFinish} setIsOpenModalInfor={setIsOpenModalInfor} />
+
     </Modal>
   );
 };
@@ -174,7 +178,7 @@ const InforDetail = ({ isOpenModalInfor }) => {
   );
 };
 
-const SetPassword = ({ onFinish }) => {
+const SetPassword = ({ isOpenModalInfor, onFinish, setIsOpenModalInfor }) => {
   const [form] = Form.useForm();
   const [upperCase, setUpperCase] = useState(false);
   const [lowerCase, setLowerCase] = useState(false);
@@ -195,6 +199,23 @@ const SetPassword = ({ onFinish }) => {
     setLengthString(lengthString);
     setSpecialCharacters(containsSpecialCharacters);
   };
+
+
+  useEffect(() => {
+
+    // if (!isOpenModalInfor) {
+    setUpperCase(false);
+    setLowerCase(false);
+    setNumber(false);
+    setLengthString(false);
+    setSpecialCharacters(false);
+    // }
+  }, [isOpenModalInfor]);
+
+  const onCancel = () => {
+    form.resetFields()
+    setIsOpenModalInfor(false)
+  }
 
   return (
     <Form form={form} onFinish={onFinish}>
@@ -280,15 +301,21 @@ const SetPassword = ({ onFinish }) => {
             * Nhập tối thiểu 1 ký tự đặc biệt !@#$%^&*()
           </span>
         </Col>
-        <Col span={24}>
-          <Button
-            className="btnSubmitModel"
-            type="success"
-            htmlType="submit"
-            // loading={loadings}
-          >
-            SUBMIT
+        <Col span={24} className="col-btn-changePW">
+          <Button onClick={onCancel} htmlType="button">
+            CANCEL
           </Button>
+          <Button
+            // className="btnSubmitModel"
+            // type="success"
+            type="primary"
+            htmlType="submit"
+
+          // loading={loadings}
+          >
+            SAVE
+          </Button>
+
         </Col>
       </Row>
     </Form>
@@ -297,6 +324,7 @@ const SetPassword = ({ onFinish }) => {
 
 SetPassword.propTypes = {
   onFinish: PropTypes.func,
+  setIsOpenModalInfor: PropTypes.func,
 };
 
 InforDetail.propTypes = {

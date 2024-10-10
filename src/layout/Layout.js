@@ -16,7 +16,7 @@ const CustomLayoutFC = ({ children }) => {
 
           <main className="content1">
             {/* <NotificationSuccess /> */}
-            <HeaderWeb />
+            <HeaderWeb/>
             <div className="container-fluid" style={{ maxWidth: "100%" }}>
               {children}
             </div>
@@ -33,10 +33,10 @@ export const CustomLayout = ({ children }) => {
   return <CustomLayoutFC>{children}</CustomLayoutFC>;
 };
 
-CustomLayoutFC.propTypes = {
-  children: PropTypes.any,
-};
+// CustomLayoutFC.propTypes = {
+//   children: PropTypes.any,
+// };
 
-CustomLayout.propTypes = {
-  children: PropTypes.any,
-};
+// CustomLayout.propTypes = {
+//   children: PropTypes.any,
+// };

@@ -328,7 +328,7 @@ const FileManager = ({
               position: "sticky"
             }}
             open={onShowOption}
-            icon={<SettingOutlined key="left" />}
+            icon={<LeftOutlined key="left" />}
             onClick={() => setOnShowOption(prev => !prev)}
           >
             <FloatButton onClick={sortData} icon={<img src={!valueIsSort ? IconDecreasing : IconAscending} alt=""></img>} />
@@ -373,10 +373,10 @@ const FileManager = ({
 
                 {dataSource.map((item, index) => (
                   <Row className="bg-thumbnail-list-file" key={item.pack_id} style={{ position: "relative" }}>
-                    <Row style={{ width: "100%" }}>
-                      <div className="content-type-pump">
-                        <span>{item.pumb_name}</span>
-                      </div>
+                    <div className="content-type-pump">
+                      <span>{item.pumb_name}</span>
+                    </div>
+                    <Row style={{ width: "100%", paddingTop: 5 }}>
                       <Col span={8} style={{ position: "relative" }}>
 
                         <button aria-label="btn-detail" className="thumbNail-manager-app" onClick={() => showModalDetail(item)} style={{ background: "none", padding: 0, border: 0 }}>
@@ -464,7 +464,7 @@ const FileManager = ({
                             //   alignItems: "center"
                             // }}
                             >
-                              <img src={IconTimeHandle} alt=""></img>&nbsp;{dayjs(item.upload_date).format("HH:mm:ss")} ~ 12:00:00
+                              <img src={IconTimeHandle} alt=""></img>&nbsp;{dayjs(item.upload_date).format("HH:mm:ss")} ~ {item.submit_date.toLowerCase() !== "none" ? dayjs(item.submit_date).format("HH:mm:ss") : "N/A"}
                             </span>
                             <span ><img src={IconLocation} alt=""></img>&nbsp;1600</span>
                           </Row>

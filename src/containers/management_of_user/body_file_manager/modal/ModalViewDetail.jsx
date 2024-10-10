@@ -219,11 +219,17 @@ const ModalViewDetail = ({
                 {language[chooseLanguage].location}:{" "}
                 <span className="text-detail">{dataDetail.pump_location}</span>
               </span> */}
+
               <span>
                 {language[chooseLanguage].upload_date}:{" "}
                 <span className="text-detail">
                   {dayjs(dataDetail.upload_date).format("DD-MM-YYYY HH:mm:ss")}
                 </span>
+              </span>
+
+              <span>
+                {language[chooseLanguage].completion_date}:{" "}
+                <span className="text-detail"> {dataDetail.submit_date.toLowerCase() !== "none" ? dayjs(dataDetail.submit_date).format("DD-MM-YYYY HH:mm:ss") : "N/A" }</span>
               </span>
 
               {parseInt(dataDetail.pumb_id) !== 1 && <span>
