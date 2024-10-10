@@ -1,4 +1,4 @@
-import { Button, Card, Col, Row, Select } from "antd";
+import { Button, Card, Col, Row, Select, Empty } from "antd";
 import "./style.scss";
 import { useEffect, useState } from "react";
 import ShowModalDetailEntry from "./modal";
@@ -16,6 +16,19 @@ import AutorenewIcon from "@mui/icons-material/Autorenew";
 import { check_classification } from "./data";
 import ModalQA from "./modal/ModalQA";
 import ModalQATotal from "./modal/ModalQATotal";
+import {
+  LeftOutlined,
+  RedoOutlined,
+  RightOutlined,
+  UndoOutlined,
+} from "@ant-design/icons";
+import LoadingIcon from "./../../images/iconLoading.svg";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Navigation } from "swiper/modules";
 
 export const Prop = styled("h3")`
 f5 f4-ns mb0 white`;
@@ -41,10 +54,25 @@ const Check_Classification = () => {
   const [isOpenModalQATotal, setIsOpenModalQATotal] = useState(false);
   const [isIndexQA, setIsIndexQA] = useState();
   const [listContentQA, setListContentQA] = useState([]);
-  // const [valueSubmitInput, setValueSubmitInput] = useState("");
+
+  const [checkBtnRotate, setCheckBtnRotate] = useState(true);
+  const [rotate, setRotate] = useState(0);
+  const [mainImageURL, setMainImageURL] = useState();
+  const [thumbnailURL, setThumbnailURL] = useState([]);
+  const [lockBtnNextPage, setLockBtnNextPage] = useState(false);
+  const [lockBtnPreviousPage, setLockBtnPreviousPage] = useState(true);
+  const [loadingTable, setLoadingTable] = useState(true);
+  const [indexImage, setIndexImage] = useState(0);
+  const [checkChooseModel, setCheckChooseModel] = useState(false);
+
+  const [loadingImage, setLoadingImage] = useState(true);
+
+  const positionZoom = window.screen.availWidth * 0.25;
+
   const inforUser = JSON.parse(sessionStorage.getItem("info_user"));
 
   const fetchDataInsert = (pumbModel) => {
+    setLoadingTable(true);
     const FormData = require("form-data");
     let data = new FormData();
     data.append("pumb_id", pumbModel);
@@ -57,7 +85,28 @@ const Check_Classification = () => {
       .then((res) => {
         if (res.status === 201) {
           openNotificationSweetAlert(WarningIcon, res.data.message);
+          setLoadingTable(true);
+          setLoadingImage(true);
+          setThumbnailURL([]);
+        } else if (res.status === 200) {
+          if (res.data.path_files[0].length === 1) {
+            setLockBtnNextPage(true);
+            setLockBtnPreviousPage(true);
+          } else if (res.data.path_files[0].length === 2) {
+            setLockBtnNextPage(false);
+            setLockBtnPreviousPage(true);
+          }
+          setCheckBtnRotate(false);
+          fetchListImage(0, res.data, true);
+          setLoadingTable(false);
+          setDataDetail(res.data);
+          setCheckBtnRotate(false);
+        } else {
+          setLoadingTable(true);
+          setLoadingImage(true);
+          setThumbnailURL([]);
         }
+
         setStartTime(startTimeClick);
         sessionStorage.setItem("clf_id", res.data.clf_id);
         sessionStorage.setItem("clf_table", res.data.clf_table);
@@ -146,12 +195,13 @@ const Check_Classification = () => {
           };
         });
 
-        setDataDetail(res.data);
         setValueBase64(mergedList);
         // }
       })
       .catch((err) => {
         setValueBase64([]);
+        setLoadingTable(false);
+        setThumbnailURL([]);
         console.log(err);
       });
   };
@@ -188,7 +238,7 @@ const Check_Classification = () => {
       data.append("user_role", inforUser.user_role);
       authAxios()
         .post(`${localhost}/return_pack_check_clf`, data)
-        .then((res) => { })
+        .then((res) => {})
         .catch((err) => {
           console.log(err);
         });
@@ -255,14 +305,14 @@ const Check_Classification = () => {
         item.Input_e1 === "☑"
           ? "S"
           : item.Input_e1 === "QA"
-            ? item.qa_e1
-            : item.Input_e1,
+          ? item.qa_e1
+          : item.Input_e1,
       Input_e2:
         item.Input_e2 === "☑"
           ? "S"
           : item.Input_e2 === "QA"
-            ? item.qa_e2
-            : item.Input_e2,
+          ? item.qa_e2
+          : item.Input_e2,
     }));
 
     const concatenatedValues = updatedDataList
@@ -335,10 +385,10 @@ const Check_Classification = () => {
           dataPumb.value === "1"
             ? ""
             : dataPumb.value === "3"
-              ? valueSubmitInput === null
-                ? ""
-                : valueSubmitInput
-              : "",
+            ? valueSubmitInput === null
+              ? ""
+              : valueSubmitInput
+            : "",
         str_result:
           dataPumb.value === "1"
             ? valueSubmitInput === null
@@ -514,7 +564,7 @@ const Check_Classification = () => {
               ...updatedData[_index], // Keep other properties unchanged
               check_QA:
                 updatedData[_index].is_qa_e1 === "0" &&
-                  updatedData[_index].is_qa_e2 === "0"
+                updatedData[_index].is_qa_e2 === "0"
                   ? false
                   : true, // Set check_QA to false
               qa_e1: "",
@@ -529,7 +579,7 @@ const Check_Classification = () => {
               ...updatedData[_index], // Keep other properties unchanged
               check_QA:
                 updatedData[_index].is_qa_e1 === "0" &&
-                  updatedData[_index].is_qa_e2 === "0"
+                updatedData[_index].is_qa_e2 === "0"
                   ? false
                   : true, // Set check_QA to false
               qa_e2: "",
@@ -544,7 +594,7 @@ const Check_Classification = () => {
               ...updatedData[_index], // Keep other properties unchanged
               check_QA:
                 updatedData[_index].is_qa_e1 === "0" &&
-                  updatedData[_index].is_qa_e2 === "0"
+                updatedData[_index].is_qa_e2 === "0"
                   ? false
                   : true, // Set check_QA to false
               qa_e1: "",
@@ -561,7 +611,7 @@ const Check_Classification = () => {
               ...updatedData[_index], // Keep other properties unchanged
               check_QA:
                 updatedData[_index].is_qa_e1 === "0" &&
-                  updatedData[_index].is_qa_e2 === "0"
+                updatedData[_index].is_qa_e2 === "0"
                   ? false
                   : true, // Set check_QA to false
               qa_e1: "",
@@ -667,7 +717,7 @@ const Check_Classification = () => {
         ...updatedData[isIndexQA], // Keep other properties unchanged
         check_QA:
           updatedData[isIndexQA].is_qa_e1 === "0" &&
-            updatedData[isIndexQA].is_qa_e2 === "0"
+          updatedData[isIndexQA].is_qa_e2 === "0"
             ? false
             : true, // Set check_QA to false
       };
@@ -774,6 +824,242 @@ const Check_Classification = () => {
     }
   };
 
+  const convertToImage = (value) => {
+    let arrData = [];
+
+    for (const base64 of value.lst_thum_base64) {
+      arrData.push(`data:image/webp;base64,${base64}`);
+    }
+
+    setThumbnailURL(arrData);
+    setMainImageURL(`data:image/webp;base64,${value.img_base64}`);
+    setLoadingImage(false);
+  };
+
+  const fetchListImage = (index, data, changeModel) => {
+    setCheckChooseModel(changeModel);
+    setLoadingImage(true);
+    setIndexImage(index);
+    authAxios()
+      .post(
+        `${localhost}/file_details`,
+        {
+          pack_file_path:
+            data.path_files.length > 0 ? data.path_files[0][index] : [],
+          pack_list_thumbnail_path:
+            data.path_thumbs.length > 0 ? data.path_thumbs[0] : [],
+          user_role: inforUser.user_role,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        setLoadingImage(false);
+        convertToImage(res.data);
+        setCheckChooseModel(false);
+      })
+      .catch((err) => {
+        setLoadingImage(false);
+        setCheckChooseModel(false);
+      });
+  };
+
+  const renderImageButtons = () => {
+    if (mainImageURL && thumbnailURL.length > 0) {
+      return (
+        <>
+          <Button
+            onClick={nextImage}
+            disabled={lockBtnNextPage}
+            className="btn-next-image"
+          >
+            <RightOutlined style={{ fontSize: 25, color: "pray" }} />
+          </Button>
+          <Button
+            onClick={previousImage}
+            disabled={lockBtnPreviousPage}
+            className="btn-previous-image"
+          >
+            <LeftOutlined style={{ fontSize: 25, color: "pray" }} />
+          </Button>
+        </>
+      );
+    }
+    return null;
+  };
+
+  const renderLoadingState = () => {
+    if (!loadingTable) {
+      return (
+        <div
+          style={{
+            display: "flex",
+            padding: "1% 1% 2%",
+            height: "64vh",
+            justifyContent: "center",
+          }}
+        >
+          <img
+            style={{ width: "7%" }}
+            src={LoadingIcon}
+            className="load-image-desktop"
+            alt=""
+          />
+        </div>
+      );
+    }
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "64vh",
+          padding: "1% 1% 2%",
+        }}
+      >
+        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+      </div>
+    );
+  };
+  const renderImage = () => (
+    <TransformWrapper initialScale={1}>
+      {({ zoomIn, zoomOut, resetTransform, setTransform }) => (
+        <>
+          <Button
+            id="reset-zoom"
+            onClick={() => resetTransform()}
+            style={{ display: "none" }}
+          ></Button>
+          <Button
+            id="zoom-in1"
+            onClick={() => setTransform(0, 0, 1.7)}
+            style={{ display: "none" }}
+          ></Button>
+          <Button
+            id="zoom-in2"
+            onClick={() => setTransform(-positionZoom, 0, 1.7)}
+            style={{ display: "none" }}
+          ></Button>
+          <Button
+            id="zoom-in3"
+            onClick={() => setTransform(0, -positionZoom, 1.7)}
+            style={{ display: "none" }}
+          ></Button>
+          <Button
+            id="zoom-in4"
+            onClick={() => setTransform(-positionZoom, -positionZoom, 1.7)}
+            style={{ display: "none" }}
+          ></Button>
+          <TransformComponent
+            contentStyle={{
+              cursor: "zoom-in",
+              width: "100%",
+              display: "flex",
+              height: "64vh",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              src={mainImageURL}
+              className="image-entry"
+              alt="Hình ảnh không có"
+              style={{ transform: `rotate(${rotate}deg)` }}
+            />
+          </TransformComponent>
+        </>
+      )}
+    </TransformWrapper>
+  );
+
+  const nextImage = () => {
+    fetchListImage(indexImage + 1, dataDetail, false);
+    setIndexImage(indexImage + 1);
+  };
+
+  const previousImage = () => {
+    fetchListImage(indexImage - 1, dataDetail, false);
+    setIndexImage(indexImage - 1);
+  };
+
+  const changeMainImage = (index) => {
+    if (index !== indexImage) {
+      fetchListImage(index, dataDetail, false);
+    }
+  };
+
+  const listKeyShortcuts = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"];
+
+  useEffect(() => {
+    if (loadingImage !== true) {
+      try {
+        document.addEventListener("keydown", function (event) {
+          const arrNum = ["5", "6", "7", "8", "9"];
+          if (event.key === "0" && event.ctrlKey) {
+            document.getElementById("reset-zoom").click();
+            event.preventDefault();
+          } else if (event.key === "1" && event.ctrlKey) {
+            document.getElementById("zoom-in1").click();
+            event.preventDefault();
+          } else if (event.key === "2" && event.ctrlKey) {
+            document.getElementById("zoom-in2").click();
+            event.preventDefault();
+          } else if (event.key === "3" && event.ctrlKey) {
+            document.getElementById("zoom-in3").click();
+            event.preventDefault();
+          } else if (event.key === "4" && event.ctrlKey) {
+            document.getElementById("zoom-in4").click();
+            event.preventDefault();
+          } else if (arrNum.includes(event.key) && event.ctrlKey) {
+            event.preventDefault();
+          }
+        });
+
+        const handleKeyPress = (event) =>
+          thumbnailURL.forEach((item, index) => {
+            const shortcutKey = listKeyShortcuts[index];
+            if (event.shiftKey && event.key === shortcutKey) {
+              event.preventDefault();
+              if (indexImage !== index) {
+                if (index !== indexImage) {
+                  return fetchListImage(index, dataDetail, false);
+                }
+              }
+            }
+          });
+
+        document.addEventListener("keydown", handleKeyPress);
+
+        return () => {
+          document.removeEventListener("keydown", handleKeyPress);
+        };
+      } catch {
+        console.log("Lỗi");
+      }
+    }
+  }, [loadingImage]);
+
+  useEffect(() => {
+    setRotate(0);
+    if (dataDetail !== undefined) {
+      if (dataDetail.path_files.length > 0) {
+        if (indexImage + 1 === dataDetail.path_files[0].length) {
+          setLockBtnNextPage(true);
+        } else {
+          setLockBtnNextPage(false);
+        }
+      }
+      if (indexImage === 0) {
+        setLockBtnPreviousPage(true);
+      } else {
+        setLockBtnPreviousPage(false);
+      }
+    }
+  }, [indexImage]);
+
   return (
     <>
       {loadingBtnSubmit && (
@@ -786,8 +1072,17 @@ const Check_Classification = () => {
       )}
 
       <Row style={{ display: "flex", justifyContent: "center", width: "100%" }}>
-
-        <span style={{ fontWeight: "bold", fontSize: 16, padding: "0% 1%", alignContent: "center" }}>Phân loại:</span> <Select
+        <span
+          style={{
+            fontWeight: "bold",
+            fontSize: 16,
+            padding: "0% 1%",
+            alignContent: "center",
+          }}
+        >
+          Phân loại:
+        </span>{" "}
+        <Select
           size={"middle"}
           id="code_city"
           style={{ width: "10%" }}
@@ -812,141 +1107,236 @@ const Check_Classification = () => {
           <ButtonViewInforUser dataDetail={dataDetail} />
         )}
       </Row>
+
       <Row style={{ display: "flex", padding: "1% 0% 0% 1%" }}>
         {valueBase64.length !== 0 && (
           <>
             <Col span={6}>
-              <span ><span style={{ fontWeight: "bold" }}>Nội dung QA 1:</span> {showValueQaE1()}</span>
+              <span>
+                <span style={{ fontWeight: "bold" }}>Nội dung QA 1:</span>{" "}
+                {showValueQaE1()}
+              </span>
             </Col>
             <Col span={6}>
-              <span ><span style={{ fontWeight: "bold" }}>Nội dung QA 2:</span> {showValueQaE2()}</span>
+              <span>
+                <span style={{ fontWeight: "bold" }}>Nội dung QA 2:</span>{" "}
+                {showValueQaE2()}
+              </span>
             </Col>
           </>
         )}
       </Row>
 
-
-
       {valueBase64.length !== 0 ? (
         <>
-          <div className="check_classification_container-fluid">
-            <div className="check_classification_container">
-              <Row gutter={16} className="check_classification_row">
-                {valueBase64.length !== 0 &&
-                  valueBase64.map((item, _index) => (
-                    <Col span={3} key={item.id}>
-                      <Card
-                        hoverable
-                        className="check_classification_card"
-                        cover={
-                          <img
-                            alt="Red dot"
-                            src={item.img_base64}
-                            style={{ height: "18vh" }}
-                          ></img>
-                        }
-                        data-color={!item.check_QA && item.color}
-                        data-check_qa={item.check_QA}
-                        onClick={() => handleClickCard(_index)}
-                      >
-                        {dataPumb.key !== "1" && (
-                          <>
-                            <span
-                              style={{
-                                fontWeight: 600,
-                                display: "flex",
-                                justifyContent: "center",
-                                fontSize: 18,
-                              }}
-                            >
-                              {getDisplayValue(item)}
-                            </span>
-                            <Row
-                              style={{
-                                display: "flex",
-                                justifyContent: "center",
-                              }}
-                            >
-                              <Col span={8} style={{ textAlign: "center" }}>
-                                <Tooltip title="Mặt sau">
-                                  <IconButton
-                                    onClick={(e) =>
-                                      handleClickButton(e, _index, "☑")
-                                    }
-                                  >
-                                    <span style={{ fontSize: 12 }}>☑</span>
-                                  </IconButton>
-                                </Tooltip>
-                              </Col>
-                              <Col span={8} style={{ textAlign: "center" }}>
-                                <Tooltip title="Other">
-                                  <IconButton
-                                    onClick={(e) =>
-                                      handleClickButton(e, _index, "P")
-                                    }
-                                  >
-                                    <span style={{ fontSize: 12 }}>P</span>
-                                  </IconButton>
-                                </Tooltip>
-                              </Col>
+          <Row>
+            <Col span={9}>
+              <>
+                <Row>
+                  <Col span={8}></Col>
+                  <Col
+                    span={8}
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      columnGap: "2ch",
+                      paddingTop: 4,
+                    }}
+                  >
+                    <Button
+                      style={{ padding: 0, height: 28, width: 28 }}
+                      disabled={checkBtnRotate}
+                      icon={<UndoOutlined style={{ fontSize: 18 }} />}
+                      onClick={() => setRotate(rotate - 90)}
+                    ></Button>
+                    <Button
+                      style={{ padding: 0, height: 28, width: 28 }}
+                      disabled={checkBtnRotate}
+                      icon={<RedoOutlined style={{ fontSize: 18 }} />}
+                      onClick={() => setRotate(rotate + 90)}
+                    ></Button>
+                  </Col>
+                  <Col span={8}></Col>
+                </Row>
 
-                              <Col span={8} style={{ textAlign: "center" }}>
-                                <Tooltip title="Nameplate">
-                                  <IconButton
-                                    onClick={(e) =>
-                                      handleClickButton(e, _index, "N")
-                                    }
-                                  >
-                                    <span style={{ fontSize: 12 }}>N</span>
-                                  </IconButton>
-                                </Tooltip>
-                              </Col>
-                              <Col span={8} style={{ textAlign: "center" }}>
-                                <Tooltip title="Xóa ảnh">
-                                  <IconButton
-                                    onClick={(e) =>
-                                      handleClickButton(e, _index, "✖")
-                                    }
-                                  >
-                                    <span style={{ fontSize: 12 }}>✖</span>
-                                  </IconButton>
-                                </Tooltip>
-                              </Col>
-                              <Col span={8} style={{ textAlign: "center" }}>
-                                <Tooltip title="Reset">
-                                  <IconButton
-                                    onClick={(e) =>
-                                      handleClickButton(e, _index, "R")
-                                    }
-                                  >
-                                    <AutorenewIcon style={{ fontSize: 14 }} />
-                                  </IconButton>
-                                </Tooltip>
-                              </Col>
-                              <Col span={8} style={{ textAlign: "center" }}>
-                                <Tooltip title="QA">
-                                  <IconButton
-                                    onClick={(e) =>
-                                      handleClickButton(e, _index, "QA")
-                                    }
-                                  >
-                                    <span
-                                      style={{ fontSize: 12, color: "#e3e321" }}
-                                    >
-                                      QA
-                                    </span>
-                                  </IconButton>
-                                </Tooltip>
-                              </Col>
-                            </Row>
-                          </>
-                        )}
-                      </Card>
-                    </Col>
-                  ))}
-              </Row>
-            </div>
-          </div>
+                <div
+                  style={{ position: "relative", paddingTop: "0.6%" }}
+                  className="size-image"
+                >
+                  {renderImageButtons()}
+                  {loadingImage === false
+                    ? renderImage()
+                    : renderLoadingState()}
+                </div>
+                <div className="thumbnail-class-desktop">
+                  {checkChooseModel === false ? (
+                    <Swiper
+                      slidesPerView={window.visualViewport.width * 0.0035}
+                      // spaceBetween={50}
+
+                      navigation={true}
+                      centerInsufficientSlides={true}
+                      modules={[Navigation]}
+                      style={{ width: "100%" }}
+                      className="mySwiper"
+                    >
+                      {thumbnailURL.map((item, index) => (
+                        <SwiperSlide
+                          style={{
+                            height: "11.5vh",
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                          key={item}
+                        >
+                          <button
+                            onClick={() => changeMainImage(index)}
+                            style={{ border: 0, background: "none" }}
+                          >
+                            <img
+                              style={{
+                                border:
+                                  index === indexImage ? "2px solid red" : null,
+                              }}
+                              src={item}
+                              alt={`Thumbnail ${index + 1}`}
+                            />
+                          </button>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  ) : null}
+                </div>
+              </>
+            </Col>
+            <Col span={15}>
+              <div className="check_classification_container-fluid">
+                <div className="check_classification_container">
+                  <Row gutter={16} className="check_classification_row">
+                    {valueBase64.length !== 0 &&
+                      valueBase64.map((item, _index) => (
+                        <Col span={4} key={item.id}>
+                          <Card
+                            hoverable
+                            className="check_classification_card"
+                            cover={
+                              <img
+                                alt="Red dot"
+                                src={item.img_base64}
+                                style={{ height: "18vh" }}
+                              ></img>
+                            }
+                            data-color={!item.check_QA && item.color}
+                            data-check_qa={item.check_QA}
+                            onClick={() => handleClickCard(_index)}
+                          >
+                            {dataPumb.key !== "1" && (
+                              <>
+                                <span
+                                  style={{
+                                    fontWeight: 600,
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    fontSize: 18,
+                                  }}
+                                >
+                                  {getDisplayValue(item)}
+                                </span>
+                                <Row
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                  }}
+                                >
+                                  <Col span={8} style={{ textAlign: "center" }}>
+                                    <Tooltip title="Mặt sau">
+                                      <IconButton
+                                        onClick={(e) =>
+                                          handleClickButton(e, _index, "☑")
+                                        }
+                                      >
+                                        <span style={{ fontSize: 12 }}>☑</span>
+                                      </IconButton>
+                                    </Tooltip>
+                                  </Col>
+                                  <Col span={8} style={{ textAlign: "center" }}>
+                                    <Tooltip title="Other">
+                                      <IconButton
+                                        onClick={(e) =>
+                                          handleClickButton(e, _index, "P")
+                                        }
+                                      >
+                                        <span style={{ fontSize: 12 }}>P</span>
+                                      </IconButton>
+                                    </Tooltip>
+                                  </Col>
+
+                                  <Col span={8} style={{ textAlign: "center" }}>
+                                    <Tooltip title="Nameplate">
+                                      <IconButton
+                                        onClick={(e) =>
+                                          handleClickButton(e, _index, "N")
+                                        }
+                                      >
+                                        <span style={{ fontSize: 12 }}>N</span>
+                                      </IconButton>
+                                    </Tooltip>
+                                  </Col>
+                                  <Col span={8} style={{ textAlign: "center" }}>
+                                    <Tooltip title="Xóa ảnh">
+                                      <IconButton
+                                        onClick={(e) =>
+                                          handleClickButton(e, _index, "✖")
+                                        }
+                                      >
+                                        <span style={{ fontSize: 12 }}>✖</span>
+                                      </IconButton>
+                                    </Tooltip>
+                                  </Col>
+                                  <Col span={8} style={{ textAlign: "center" }}>
+                                    <Tooltip title="Reset">
+                                      <IconButton
+                                        onClick={(e) =>
+                                          handleClickButton(e, _index, "R")
+                                        }
+                                      >
+                                        <AutorenewIcon
+                                          style={{ fontSize: 14 }}
+                                        />
+                                      </IconButton>
+                                    </Tooltip>
+                                  </Col>
+                                  <Col span={8} style={{ textAlign: "center" }}>
+                                    <Tooltip title="QA">
+                                      <IconButton
+                                        onClick={(e) =>
+                                          handleClickButton(e, _index, "QA")
+                                        }
+                                      >
+                                        <span
+                                          style={{
+                                            fontSize: 12,
+                                            color: "#e3e321",
+                                          }}
+                                        >
+                                          QA
+                                        </span>
+                                      </IconButton>
+                                    </Tooltip>
+                                  </Col>
+                                </Row>
+                              </>
+                            )}
+                          </Card>
+                        </Col>
+                      ))}
+                  </Row>
+                </div>
+              </div>
+            </Col>
+          </Row>
+
           <div>
             <Row>
               <Col

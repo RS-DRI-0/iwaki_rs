@@ -14,88 +14,8 @@ const EditUser = ({
   const [isActive, setIsActive] = useState(false);
   const treeData = [
     {
-      value: "App_Entry",
-      title: <span style={{ fontWeight: 800 }}>App_Entry</span>,
-      selectable: false,
-      children: [
-        {
-          value: "ENTRY",
-          title: <span style={{ fontWeight: 600 }}>ENTRY</span>,
-          selectable: false,
-          children: [
-            {
-              value: "ENTRY+3+1+1",
-              title: "E11",
-            },
-            {
-              value: "ENTRY+3+1+2",
-              title: "E12",
-            },
-            {
-              value: "ENTRY+3+3+1",
-              title: "E31",
-            },
-            {
-              value: "ENTRY+3+3+2",
-              title: "E32",
-            },
-          ],
-        },
-        {
-          value: "CHECK",
-          title: <span style={{ fontWeight: 600 }}>CHECK</span>,
-          selectable: false,
-          children: [
-            {
-              value: "CHECK+4+1+0",
-              title: "C2",
-            },
-            {
-              value: "CHECK+4+3+0",
-              title: "C4",
-            },
-          ],
-        },
-        {
-          value: "LASTCHECK+5+0+0",
-          title: <span style={{ fontWeight: 600 }}>LASTCHECK</span>,
-        },
-      ],
-    },
-    {
-      value: "ADMIN+7+0+0",
-      title: <span style={{ fontWeight: 800 }}>ADMIN</span>,
-    },
-    {
-      value: "APP_USER+1+1+0",
-      title: <span style={{ fontWeight: 800 }}>APP_USER</span>,
-    },
-    {
-      value: "APP_MANAGER+2+0+0",
-      title: <span style={{ fontWeight: 800 }}>APP_MANAGER</span>,
-    },
-    {
-      value: "NOUHIN+6+0+0",
-      title: <span style={{ fontWeight: 800 }}>NOUHIN</span>,
-    },
-    {
-      value: "CLF",
-      title: <span style={{ fontWeight: 800 }}>CLF</span>,
-      selectable: false,
-      children: [
-        {
-          value: "CLF+8+1+1",
-          title: "P1",
-        },
-        {
-          value: "CLF+8+1+2",
-          title: "P2",
-        },
-      ],
-    },
-    {
-      value: "CHECK_CLF+9+0+0",
-      title: <span style={{ fontWeight: 800 }}>CHECK_CLF</span>,
+      value: "STAFF+1+0+0",
+      title: <span style={{ fontWeight: 800 }}>STAFF</span>,
     },
   ];
 
@@ -223,60 +143,6 @@ const EditUser = ({
               ></Input>
             </Form.Item>
           </Col>
-          <Col span={11}>
-            <Form.Item
-              name="user_fullname"
-              label="Full Name"
-              className="modal-user-form-item"
-              rules={[
-                {
-                  required: true,
-                  message: "Please enter Full Name!",
-                },
-                { validator: handleValidateSpaces },
-              ]}
-            >
-              <Input
-                placeholder="Full Name"
-                size="large"
-                autoComplete="off"
-                onKeyDown={handleKeyPress}
-                onPaste={handlePaste}
-                readOnly={isActive}
-              ></Input>
-            </Form.Item>
-          </Col>
-          <Col span={11} offset={2}>
-            <Form.Item
-              name="user_center"
-              label="User Center"
-              className="modal-user-form-item"
-              rules={[
-                {
-                  required: true,
-                  message: "Please enter User Center!",
-                },
-              ]}
-            >
-              <Select
-                placeholder="User Center"
-                size="large"
-                allowClear
-                options={[
-                  {
-                    value: "RS",
-                    label: "RS",
-                  },
-                  {
-                    value: "IWAKI",
-                    label: "IWAKI",
-                  },
-                ]}
-                disabled={isActive}
-              />
-            </Form.Item>
-          </Col>
-
           <Col span={11}>
             <Form.Item
               name="user_role_title"

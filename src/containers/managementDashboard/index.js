@@ -9,6 +9,7 @@ import { ColorModeContext, useMode } from "../../theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
+import ManagementUser from "../managementUser";
 
 const ManagementDashboardIndex = () => {
   const currentDate = dayjs();
@@ -51,6 +52,7 @@ const ManagementDashboardIndex = () => {
       ? sessionStorage.getItem("choosedLanguage")
       : "japanese"
   );
+  const [valueKeyMenu, setValueKeyMenu] = useState("1");
 
   const inforUser = JSON.parse(sessionStorage.getItem("info_user"));
 
@@ -396,6 +398,9 @@ const ManagementDashboardIndex = () => {
     setChooseLanguage(value);
     sessionStorage.setItem("choosedLanguage", value);
   };
+  const onClickMenuDashboard = (value) => {
+    setValueKeyMenu(value.key);
+  };
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -409,55 +414,60 @@ const ManagementDashboardIndex = () => {
             <Header
               chooseLanguage={chooseLanguage}
               handleChangeSelectLanguage={handleChangeSelectLanguage}
+              onClickMenuDashboard={onClickMenuDashboard}
             />
             <div className="container-fluid" style={{ maxWidth: "100%" }}>
-              <ManagementDashboard
-                isOpenModalChecksheets={isOpenModalChecksheets}
-                handleClickOpenModalChecksheets={
-                  handleClickOpenModalChecksheets
-                }
-                isOpenModalDailyLC={isOpenModalDailyLC}
-                handleClickOpenModalDailyLC={handleClickOpenModalDailyLC}
-                isOpenModalDailyAverage={isOpenModalDailyAverage}
-                handleClickOpenModalDailyAverage={
-                  handleClickOpenModalDailyAverage
-                }
-                isOpenTable={isOpenTable}
-                listPackageAll={listPackageAll}
-                isValueDashBoard={isValueDashBoard}
-                isValueCheckSheets={isValueCheckSheets}
-                isValueDailyNotqualified={isValueDailyNotqualified}
-                isValueDailyNG={isValueDailyNG}
-                isValueDailyAll={isValueDailyAll}
-                isValueDailyAverage={isValueDailyAverage}
-                handleClickButtonOpenTable={handleClickButtonOpenTable}
-                handleDatePickerModalCheckSheet={
-                  handleDatePickerModalCheckSheet
-                }
-                handleDatePickerModalDaily={handleDatePickerModalDaily}
-                handleDatePickerModalDailyAverage={
-                  handleDatePickerModalDailyAverage
-                }
-                handleDatePickerManagement={handleDatePickerManagement}
-                handleSearchTableManagemant={handleSearchTableManagemant}
-                valueSearch={valueSearch}
-                checkValueSearch={checkValueSearch}
-                handleChangeResult={handleChangeResult}
-                handleClickSearch={handleClickSearch}
-                handleChangeStatus={handleChangeStatus}
-                checkClickSearch={checkClickSearch}
-                checkValueStatus={checkValueStatus}
-                checkValueResult={checkValueResult}
-                isValueAverageTimeLc={isValueAverageTimeLc}
-                handleClearDataSearch={handleClearDataSearch}
-                listPumb={listPumb}
-                chooseModel={chooseModel}
-                datePickerValue={datePickerValue}
-                chooseLanguage={chooseLanguage}
-              />
+              {valueKeyMenu === "1" ? (
+                <ManagementDashboard
+                  isOpenModalChecksheets={isOpenModalChecksheets}
+                  handleClickOpenModalChecksheets={
+                    handleClickOpenModalChecksheets
+                  }
+                  isOpenModalDailyLC={isOpenModalDailyLC}
+                  handleClickOpenModalDailyLC={handleClickOpenModalDailyLC}
+                  isOpenModalDailyAverage={isOpenModalDailyAverage}
+                  handleClickOpenModalDailyAverage={
+                    handleClickOpenModalDailyAverage
+                  }
+                  isOpenTable={isOpenTable}
+                  listPackageAll={listPackageAll}
+                  isValueDashBoard={isValueDashBoard}
+                  isValueCheckSheets={isValueCheckSheets}
+                  isValueDailyNotqualified={isValueDailyNotqualified}
+                  isValueDailyNG={isValueDailyNG}
+                  isValueDailyAll={isValueDailyAll}
+                  isValueDailyAverage={isValueDailyAverage}
+                  handleClickButtonOpenTable={handleClickButtonOpenTable}
+                  handleDatePickerModalCheckSheet={
+                    handleDatePickerModalCheckSheet
+                  }
+                  handleDatePickerModalDaily={handleDatePickerModalDaily}
+                  handleDatePickerModalDailyAverage={
+                    handleDatePickerModalDailyAverage
+                  }
+                  handleDatePickerManagement={handleDatePickerManagement}
+                  handleSearchTableManagemant={handleSearchTableManagemant}
+                  valueSearch={valueSearch}
+                  checkValueSearch={checkValueSearch}
+                  handleChangeResult={handleChangeResult}
+                  handleClickSearch={handleClickSearch}
+                  handleChangeStatus={handleChangeStatus}
+                  checkClickSearch={checkClickSearch}
+                  checkValueStatus={checkValueStatus}
+                  checkValueResult={checkValueResult}
+                  isValueAverageTimeLc={isValueAverageTimeLc}
+                  handleClearDataSearch={handleClearDataSearch}
+                  listPumb={listPumb}
+                  chooseModel={chooseModel}
+                  datePickerValue={datePickerValue}
+                  chooseLanguage={chooseLanguage}
+                />
+              ) : (
+                <ManagementUser />
+              )}
             </div>
           </main>
-          <Footer chooseLanguage={chooseLanguage}/>
+          <Footer chooseLanguage={chooseLanguage} />
         </div>
       </ThemeProvider>
     </ColorModeContext.Provider>

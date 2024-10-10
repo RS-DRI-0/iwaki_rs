@@ -4,7 +4,6 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import Cookies from "universal-cookie";
-import { Link } from "react-router-dom";
 import { Avatar, Col, Menu, Row, Select } from "antd";
 import logoIwaki from "../../../images/LogoIwaki.svg";
 import "./style.scss";
@@ -13,7 +12,11 @@ import fileLanguage from "../../../language.json";
 
 const cookies = new Cookies();
 
-const Header = ({ chooseLanguage, handleChangeSelectLanguage }) => {
+const Header = ({
+  chooseLanguage,
+  handleChangeSelectLanguage,
+  onClickMenuDashboard,
+}) => {
   const [isAnchorEl, setIsAnchorEl] = useState(null);
   const open = Boolean(isAnchorEl);
 
@@ -78,21 +81,14 @@ const Header = ({ chooseLanguage, handleChangeSelectLanguage }) => {
             }}
             className="menu-admin"
             defaultSelectedKeys={defaultSelectedKeys}
+            onClick={onClickMenuDashboard}
           >
-            {role_title === "APP_MANAGER" && (
-              <Menu.Item key="1">
-                <span></span>
-                <Link to="/dashboard"></Link>
-              </Menu.Item>
-            )}
-
-            {role_title === "ADMIN" && (
-              <Menu.Item key="2">
-                <span></span>
-                <Link to="/user"></Link>
-              </Menu.Item>
-            )}
-
+            <Menu.Item key="1">
+              <span>Dashboard</span>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <span>User</span>
+            </Menu.Item>
           </Menu>
         </Col>
         {/* ICONS */}
