@@ -1,4 +1,4 @@
-import {useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Avatar, Col, Row, Select } from "antd";
 import { optionLanguage } from "../../data";
 import { Menu, MenuItem } from "@mui/material";
@@ -11,6 +11,7 @@ import language from "../../language.json";
 import Cookies from "universal-cookie";
 import { authAxios } from "../../api/axiosClient";
 import PropTypes from "prop-types";
+import ModalInfor from "../../layout/Header/ModalInfor";
 
 const { Option } = Select;
 const cookies = new Cookies();
@@ -21,10 +22,11 @@ const HeaderManager = ({
   setCheckNoti,
   checkNoti,
   countNotification,
-  setCountNotification
+  setCountNotification,
 }) => {
   const [isAnchorEl, setIsAnchorEl] = useState(null);
   const inforUser = JSON.parse(sessionStorage.getItem("info_user"));
+  const [isOpenModalInfor, setIsOpenModalInfor] = useState(false);
 
   const handleChangeSelectLanguage = (value) => {
     setChooseLanguage(value);
@@ -40,7 +42,7 @@ const HeaderManager = ({
   };
 
   const logout_new = (e) => {
-    const userId = JSON.parse(sessionStorage.getItem("info_user")).user_id
+    const userId = JSON.parse(sessionStorage.getItem("info_user")).user_id;
     sessionStorage.clear();
     window.location = "/";
     cookies.remove(`token_iwaki_${userId}`);
@@ -75,9 +77,18 @@ const HeaderManager = ({
   };
 
   const showNumberNotification = () => {
-    if(Number(countNotification) < 99) return countNotification
-    return "99+"
-  }
+    if (Number(countNotification) < 99) return countNotification;
+    return "99+";
+  };
+
+  const handleClickOpenModalInfor = () => {
+    setIsOpenModalInfor(true);
+    setIsAnchorEl(null);
+  };
+
+  const handleCloseModalInfor = () => {
+    setIsOpenModalInfor(false);
+  };
 
   return (
     <div style={{ padding: "10px 5% 15px", borderBottom: "6px solid #F8FAFC" }}>
@@ -126,7 +137,11 @@ const HeaderManager = ({
             ))}
           </Select>
 
-          <button className="notification" onClick={showNotification} aria-label="btn-notification">
+          <button
+            className="notification"
+            onClick={showNotification}
+            aria-label="btn-notification"
+          >
             <svg
               width="30"
               height="30"
@@ -154,7 +169,9 @@ const HeaderManager = ({
                 </clipPath>
               </defs>
             </svg>
-            <span className="notification--num">{showNumberNotification()}</span>
+            <span className="notification--num">
+              {showNumberNotification()}
+            </span>
           </button>
 
           <Avatar
@@ -178,6 +195,14 @@ const HeaderManager = ({
             <MenuItem
               style={{ width: "100%", fontFamily: "Lato sans-serif" }}
               className={"menu-user"}
+              onClick={handleClickOpenModalInfor}
+            >
+              <UserOutlined style={{ marginRight: "5%" }} />
+              View Account
+            </MenuItem>
+            <MenuItem
+              style={{ width: "100%", fontFamily: "Lato sans-serif" }}
+              className={"menu-user"}
               onClick={() => logout_new()}
             >
               <LogoutIcon style={{ marginRight: "5%" }} />
@@ -186,6 +211,10 @@ const HeaderManager = ({
           </Menu>
         </Col>
       </Row>
+      <ModalInfor
+        isOpenModalInfor={isOpenModalInfor}
+        handleCloseModalInfor={handleCloseModalInfor}
+      />
     </div>
   );
 };
@@ -197,7 +226,6 @@ HeaderManager.propTypes = {
   checkNoti: PropTypes.bool,
   countNotification: PropTypes.any,
   setCountNotification: PropTypes.func,
-}
-
+};
 
 export default HeaderManager;

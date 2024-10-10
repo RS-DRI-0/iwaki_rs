@@ -100,7 +100,7 @@ function Main() {
           path="/notification"
           isPrivate={true}
           lsPermissions={lsPermissions}
-          permission={["APP_USER"]}
+          permission={["STAFF"]}
           isLogged={auth}
         />
 
@@ -165,7 +165,7 @@ function Main() {
           path="/formselect"
           isPrivate={true}
           lsPermissions={lsPermissions}
-          permission={["APP_USER"]}
+          permission={["STAFF"]}
           isLogged={auth}
         />
         <RouteWithLayout
@@ -175,7 +175,7 @@ function Main() {
           path="/CaptureCamera"
           isPrivate={true}
           lsPermissions={lsPermissions}
-          permission={["APP_USER"]}
+          permission={["STAFF"]}
           isLogged={auth}
         />
         <RouteWithLayout
@@ -185,7 +185,7 @@ function Main() {
           path="/"
           isPrivate={true}
           lsPermissions={lsPermissions}
-          permission={["APP_USER"]}
+          permission={["STAFF"]}
           isLogged={auth}
         />
         {/* <RouteWithLayout

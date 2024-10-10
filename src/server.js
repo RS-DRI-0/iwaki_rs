@@ -1,5 +1,5 @@
 // export const localhost = "http://42.113.15.62:5001";
-export const localhost = "http://192.168.1.240:5010";
+export const localhost = "http://117.2.155.191:5010";
 // export const localhost = "https://iwaki.rainscales.com/api";     //5000 // Build xong nhớ copy lại src
 // export const localhost = 'https://truongtx.dominatech.xyz/api'
 // export const localhost = 'https://iwaki-test.dominatech.xyz/api' //5001

@@ -35,7 +35,7 @@ const BlankLayout = () => {
               <Button type="primary">Back to the home page</Button>
             </Link>
           )}
-          {role_title === "APP_USER" && (
+          {role_title === "STAFF" && (
             <Link to={"/"}>
               <Button type="primary">Back to the home page</Button>
             </Link>

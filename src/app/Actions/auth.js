@@ -76,7 +76,7 @@ export const authLogin = (username, password, loading) => {
           dispatch(authFail(res.data.message));
         }
 
-        if (res.data.user_role_title === "APP_USER") {
+        if (res.data.user_role_title === "STAFF") {
           window.location = "/";
         } else if (res.data.user_role_title === "ENTRY") {
           window.location = "/entry";
