@@ -77,8 +77,8 @@ const ModalShowHistory = ({ open, setIsOpenModalHistory, chooseLanguage }) => {
                             {listHistory.length > 0 ?
                                 listHistory.map(item => (
                                     <Row key={item.id} style={{ padding: "3% 6%", background: "rgb(209 228 248 / 40%)", borderRadius: 14 }}>
-                                        <Col span={22} style={{ display: "grid" }}>
-                                            <span style={{ color: "rgb(33,38,67)", fontWeight: "bold", fontSize: 14 }}>{item.pack_name}</span>
+                                        <Col span={20} style={{ display: "grid" }}>
+                                            <span style={{ color: "rgb(33,38,67)", fontWeight: "bold", fontSize: 16 }}>{item.pack_name}</span>
                                             <Row>
                                                 <Col span={16}>
                                                     <span style={{ color: "rgb(109,121,203)", fontSize: 12 }}>{item.upload_date}</span>
@@ -88,7 +88,7 @@ const ModalShowHistory = ({ open, setIsOpenModalHistory, chooseLanguage }) => {
                                                 </Col>
                                             </Row>
                                         </Col>
-                                        <Col span={2} style={{ display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
+                                        <Col span={4} style={{ display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
                                             <EyeOutlined style={{ fontSize: 22, opacity: "0.7" }} onClick={() => showImage(item)} />
                                         </Col>
                                     </Row>

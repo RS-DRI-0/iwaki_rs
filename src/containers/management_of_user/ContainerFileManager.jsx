@@ -25,6 +25,7 @@ const ContainerFileManager = () => {
   const [dataNotification, setDataNotification] = useState([]);
   const [countNotification, setCountNotification] = useState("");
   const [dataSource, setDataSource] = useState([]);
+  const [valueIsSort, setValueIsSort] = useState(false)
   const [pager, setPager] = useState({
     pageSize: 5,
     count: 0,
@@ -33,8 +34,8 @@ const ContainerFileManager = () => {
   const inforUser = JSON.parse(sessionStorage.getItem("info_user"));
   const [form] = Form.useForm();
 
-  const fetchListData = (params) => {
-
+  const fetchListData = (params, valueSort) => {
+    console.log(valueSort)
     const FormData = require("form-data");
     let data = new FormData();
     data.append("id_user", params.id_user);
@@ -47,10 +48,11 @@ const ContainerFileManager = () => {
     data.append("is_search", params.is_search);
     data.append("pack_status", params.pack_status);
     data.append("user_role", inforUser.user_role);
+    data.append("is_sort", valueSort !== undefined ? valueSort : !valueIsSort ? 0 : 1);
 
     data.append("pack_id", "");
     data.append("tb_package", "");
-
+    
     authAxios()
       .post(`${localhost}/list_file`, data)
       .then((res) => {
@@ -105,7 +107,6 @@ const ContainerFileManager = () => {
       pump_id: "",
       is_search: "",
       pack_status: "",
-
       pack_id: "",
       tb_package: "",
     }
@@ -138,7 +139,8 @@ const ContainerFileManager = () => {
             setDataNotification={setDataNotification}
             setCheckNoti={setCheckNoti}
             loadingPage={loadingPage}
-
+            setValueIsSort = {setValueIsSort}
+            valueIsSort = {valueIsSort}
             inforUser={inforUser}
             pager={pager}
             setPager={setPager}

@@ -40,7 +40,7 @@
         "checked_date": "Ngày check",
         "model_name": "Tên Model",
         "result": "Kết quả",
-        "images_not_good": "Images not good",
+        "images_not_good": "Không thể đánh giá",
         "verified": "Xác nhận",
         "save": "Lưu",
         "pump_type": "Loại máy bơm",
@@ -111,8 +111,9 @@
         "all_rights_reserved": "All rights reserved. Rainscales",
         "content_forgot_pw": "Liên hệ với Admin nếu bạn cần đặt lại mật khẩu",
         "content_notQualified_detail": "X trường Not qualified",
-        "cannot_make_decision": "Không thể đánh giá",
-        "notification_date": "Tìm kiếm trong vòng 30 ngày trước"
+        "time_out": "Quá thời hạn",
+        "notification_date": "Tìm kiếm trong vòng 30 ngày trước",
+        "ok_for_capture": "OK"
     },
     "english": {
         "machine_code": "Select Machine Code",
@@ -152,11 +153,11 @@
         "image_processing": "Image processing ...",
 
         "close": "Close",
-        "upload_date": "Sent date",
+        "upload_date": "Upload date",
         "checked_date": "Checked date",
         "model_name": "Model name",
         "result": "Result",
-        "images_not_good": "Images not good",
+        "images_not_good": "Unable to evaluate",
         "verified": "Verified",
         "save": "Save",
         "pump_type": "Pump type",
@@ -229,11 +230,10 @@
         "all_rights_reserved": "All rights reserved. Rainscales",
         "content_forgot_pw": "Contact with admin if you need to reset password",
         "content_notQualified_detail": "X Not Qualified",
-        "cannot_make_decision": "Cannot make decision",
+        "time_out": "Time-out",
 
-        "notification_date": "Search within the past 30 days."
-
-
+        "notification_date": "Search within the past 30 days.",
+        "ok_for_capture": "OK"
     },
     "japanese": {
         "machine_code": "ポンプの受注番号を選択",
@@ -277,7 +277,7 @@
         "checked_date": "確認日",
         "model_name": "モデル名",
         "result": "結果",
-        "images_not_good": "画像が良くない",
+        "images_not_good": "判定不可",
         "verified": "検証済み",
         "save": "保存",
         "pump_type": "ポンプタイプ",
@@ -349,8 +349,10 @@
         "all_rights_reserved": "Rainscalesに権限所有",
         "content_forgot_pw": "パスワードをリセットする必要がある場合は、管理者に連絡してください",
         "content_notQualified_detail": "X の項目が不合格です",
-        "cannot_make_decision": "判断不可",
+        "time_out": "タイムアウト",
 
-         "notification_date": "過去30日間のデータを検索します。"
+         "notification_date": "過去30日間のデータを検索します。",
+
+         "ok_for_capture": "選択完了"
     }
 }

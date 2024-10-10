@@ -166,6 +166,7 @@ const PageNotification = ({
 
     data.append("pack_id", value.pack_id);
     data.append("tb_package", value.tb_package);
+    // data.append("is_sort", 0);
 
     authAxios()
       .post(`${localhost}/list_file`, data)
@@ -283,7 +284,7 @@ const PageNotification = ({
                         <Col span={16} style={{ display: "grid", rowGap: "0.5ch" }}>
                           {textStatus(item.check_status, item)}
                           {Number(item.qa_timeout) === 1 ?
-                            <span style={{ color: "red", fontWeight: "bold", fontSize: 10, display: "flex", alignItems: "center", columnGap: "0.5ch" }}><img src={IconTimeout} alt=""></img>{language[chooseLanguage].cannot_make_decision}</span>
+                            <span style={{ color: "red", fontWeight: "bold", fontSize: 10, display: "flex", alignItems: "center", columnGap: "0.5ch" }}><img src={IconTimeout} alt=""></img>{language[chooseLanguage].time_out}</span>
                             : null}
                         </Col>
                       </Row>

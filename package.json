@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@ant-design/icons": "^5.2.6",
+    "@ant-design/icons": "^5.5.1",
     "@blackbox-vision/use-torch-light": "^0.0.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -21,7 +21,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "antd": "^5.9.0",
+    "antd": "^5.21.2",
     "axios": "^1.5.0",
     "canvas": "^2.11.2",
     "chart.js": "^4.4.2",

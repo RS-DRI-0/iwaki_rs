@@ -213,12 +213,12 @@ const ModalViewDetail = ({
               </span>
               <span>
                 {language[chooseLanguage].model_name}:{" "}
-                <span className="text-detail">{dataDetail.vl_model_name}</span>
+                <span className="text-detail">{dataDetail.vl_model_name === "" ? "N/A" : dataDetail.vl_model_name}</span>
               </span>
-              <span>
+              {/* <span>
                 {language[chooseLanguage].location}:{" "}
                 <span className="text-detail">{dataDetail.pump_location}</span>
-              </span>
+              </span> */}
               <span>
                 {language[chooseLanguage].upload_date}:{" "}
                 <span className="text-detail">
@@ -227,7 +227,7 @@ const ModalViewDetail = ({
               </span>
 
               {parseInt(dataDetail.pumb_id) !== 1 && <span>
-                {language[chooseLanguage].total}:{" "}
+                {language[chooseLanguage].total} {language[chooseLanguage].checksheet}:
                 <span className="text-detail">
                   {dataDetail.total_pump + " / " + dataDetail.total_files}
                 </span>

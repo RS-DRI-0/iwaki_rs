@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./ModalFileManager.css";
-import { Button, Col, Row, Pagination } from "antd";
+import { Button, Col, Row, Pagination, Flex, FloatButton } from "antd";
 import dayjs from "dayjs";
 import { localhost } from "../../../server";
 import language from "../../../language.json";
@@ -18,16 +18,50 @@ import IconTimeout from "../../../images/file_manager/timeOutIcon.svg";
 import dataAlertIcon from "../../../images/file_manager/data_alert.svg";
 import NoDataIcon from "../../../images/file_manager/NoDataIcon.svg";
 import IconDeleteFilter from "../../../images/file_manager/IconDeleteFilter.svg";
+import IconDecreasing from "../../../images/file_manager/decreasingIcon.svg";
+import IconAscending from "../../../images/file_manager/ascendingIcon.svg";
+import IconTimeHandle from "../../../images/file_manager/timeHandleIcon.svg";
 import LoadingIcon from "../../../images/iconLoading.svg";
 import IconTotalFile from "../../../images/file_manager/IconTotalFile.svg";
+import IconHistory from "../../../images/file_manager/historyIcon.svg";
 
 import ModalViewDetail from "./modal/ModalViewDetail";
 import { authAxios } from "../../../api/axiosClient";
-import { HistoryOutlined } from "@ant-design/icons";
+import { CommentOutlined, CustomerServiceOutlined, DownOutlined, HistoryOutlined, LeftOutlined, RightOutlined, SettingOutlined, UpOutlined } from "@ant-design/icons";
 import ModalShowHistory from "./modal/ModalShowHistory";
 import { templateNodata } from "../../../Function";
 import PropTypes from "prop-types";
-
+const BOX_SIZE = 100;
+const BUTTON_SIZE = 40;
+const wrapperStyle = {
+  width: '100%',
+  height: '100vh',
+  overflow: 'hidden',
+  position: 'relative',
+};
+const boxStyle = {
+  width: BOX_SIZE,
+  height: BOX_SIZE,
+  position: 'relative',
+};
+const insetInlineEnd = [
+  (BOX_SIZE - BUTTON_SIZE) / 2,
+  -(BUTTON_SIZE / 2),
+  (BOX_SIZE - BUTTON_SIZE) / 2,
+  BOX_SIZE - BUTTON_SIZE / 2,
+];
+const bottom = [
+  BOX_SIZE - BUTTON_SIZE / 2,
+  (BOX_SIZE - BUTTON_SIZE) / 2,
+  -BUTTON_SIZE / 2,
+  (BOX_SIZE - BUTTON_SIZE) / 2,
+];
+const icons = [
+  <UpOutlined key="up" />,
+  <RightOutlined key="right" />,
+  <DownOutlined key="down" />,
+  <LeftOutlined key="left" />,
+];
 const FileManager = ({
   chooseLanguage,
   setCheckNoti,
@@ -37,13 +71,15 @@ const FileManager = ({
   fetchListData,
   dataSource,
   loadingPage,
-  form
+  form,
+  setValueIsSort,
+  valueIsSort
 }) => {
   const [dataDetail, setDataDetail] = useState();
   const [openModalFilter, setOpenModalFilter] = useState(false);
   const [openModalDetail, setOpenModalDetail] = useState(false);
   const [rotatePhone, setRotatePhone] = useState(false);
-
+  const [onShowOption, setOnShowOption] = useState(false)
   const [fieldFilter, setFieldFilter] = useState({
     id_user: inforUser.user_id,
     upload_date: dayjs().format("YYYY-MM-DD"),
@@ -239,7 +275,7 @@ const FileManager = ({
     form.setFieldsValue({
       date: dayjs(),
     });
-
+    setFieldFilter(functionSetData(dayjs().format("YYYY-MM-DD")))
     fetchListData(functionSetData(dayjs().format("YYYY-MM-DD")));
   };
 
@@ -265,25 +301,49 @@ const FileManager = ({
     setIsOpenModalHistory(true)
   }
 
+  const sortData = () => {
+
+    fetchListData(fieldFilter, !valueIsSort ? 1 : 0)
+    setValueIsSort(prev => !prev)
+  }
+
   return (
     <div
       className="container-file-manager"
       style={{ height: rotatePhone === true ? "110svh" : "81svh" }}
     >
-
       <div style={{ padding: "0% 5%" }}>
         <Row className="title-page-manager" style={{ paddingTop: "2%" }}>
-          <Col span={15} style={{ display: "flex", alignItems: "center" }}>
-            <span
-              className="text-title-manager"
-            >
-              {language[chooseLanguage].file_manager}
-            </span>
-          </Col>
-          <Col
+          {/* <Col span={24} style={{ display: "flex", alignItems: "center" }}> */}
+          <span
+            className="text-title-manager"
+          // style={{opacity: onShowOption && 0}}
+          >
+            {language[chooseLanguage].file_manager}
+          </span>
+          <FloatButton.Group
+            trigger="click"
+            placement={'left'}
+            style={{
+              position: "sticky"
+            }}
+            open={onShowOption}
+            icon={<SettingOutlined key="left" />}
+            onClick={() => setOnShowOption(prev => !prev)}
+          >
+            <FloatButton onClick={sortData} icon={<img src={!valueIsSort ? IconDecreasing : IconAscending} alt=""></img>} />
+            <FloatButton onClick={showModalHistory} icon={<img src={IconHistory} alt=""></img>} />
+            <FloatButton onClick={() => setOpenModalFilter(true)} icon={<img src={iconSearch} alt=""></img>} />
+            <FloatButton onClick={clearFilter} icon={<img src={IconDeleteFilter} alt=""></img>} />
+          </FloatButton.Group>
+          {/* </Col> */}
+          {/* <Col
             span={9}
             className="col-btn-manager"
-          >
+          > */}
+          {/* <Button style={{ padding: "4px" }} onClick={sortData} aria-label="search">
+              <img src={IconDecreasing} alt=""></img>
+            </Button>
             <Button
               className="btn-history"
               onClick={showModalHistory}
@@ -300,18 +360,25 @@ const FileManager = ({
             </Button>
             <Button style={{ padding: "4px" }} onClick={clearFilter} aria-label="search">
               <img src={IconDeleteFilter} alt=""></img>
-            </Button>
-          </Col>
+            </Button> */}
+
+
+          {/* </Col> */}
         </Row>
 
         {!loadingPage ? (
           dataSource.length > 0 ? (
             <>
               <div className="container-list-package">
+
                 {dataSource.map((item, index) => (
-                  <Row className="bg-thumbnail-list-file" key={item.pack_id}>
+                  <Row className="bg-thumbnail-list-file" key={item.pack_id} style={{ position: "relative" }}>
                     <Row style={{ width: "100%" }}>
+                      <div className="content-type-pump">
+                        <span>{item.pumb_name}</span>
+                      </div>
                       <Col span={8} style={{ position: "relative" }}>
+
                         <button aria-label="btn-detail" className="thumbNail-manager-app" onClick={() => showModalDetail(item)} style={{ background: "none", padding: 0, border: 0 }}>
                           <img
                             src={`data:image/webp;base64,${item.thumb_base64}`}
@@ -324,7 +391,7 @@ const FileManager = ({
                         style={{
                           display: "flex",
                           flexDirection: "column",
-                          padding: "4% 2%",
+                          padding: "0% 2%",
                         }}
                       >
                         <div className="list-thumbnail-manager">
@@ -365,8 +432,8 @@ const FileManager = ({
                               </span>
                             </Col>
                           </Row>
-                          <Row>
-                            <Col span={8}>
+                          <Row >
+                            {/* <Col span={8}>
                               <span
                                 style={{
                                   paddingLeft: "1.5%",
@@ -376,28 +443,45 @@ const FileManager = ({
                               >
                                 {dayjs(item.upload_date).format("HH:mm:ss")}
                               </span>
-                            </Col>
-                            <Col span={16} style={{ display: "grid", rowGap: "0.5ch" }}>
+                            </Col> */}
+                            <Col span={14}>
                               {textStatus(item.check_status, item)}
+                            </Col>
+                            <Col span={10}>
                               {Number(item.qa_timeout) === 1 ?
-                                <span style={{ color: "red", fontWeight: "600", fontSize: 10, display: "flex", alignItems: "center", columnGap: "0.5ch" }}><img src={IconTimeout} alt=""></img>{language[chooseLanguage].cannot_make_decision}</span>
+                                <span style={{ color: "red", fontWeight: "600", fontSize: 10, display: "flex", alignItems: "center", columnGap: "0.5ch" }}><img src={IconTimeout} alt=""></img>{language[chooseLanguage].time_out}</span>
                                 : null}
                             </Col>
+
+
+                          </Row>
+                          <Row className="row-time-handle" style={{ columnGap: "2ch", fontSize: 12 }}>
+                            <span
+                            // style={{
+                            //   // color: "#64748B",
+                            //   // fontWeight: 400,
+                            //   display: "flex",
+                            //   alignItems: "center"
+                            // }}
+                            >
+                              <img src={IconTimeHandle} alt=""></img>&nbsp;{dayjs(item.upload_date).format("HH:mm:ss")} ~ 12:00:00
+                            </span>
+                            <span ><img src={IconLocation} alt=""></img>&nbsp;1600</span>
                           </Row>
                         </div>
                       </Col>
                     </Row>
 
-                    <Row style={{ width: "100%" }}>
+                    {/* <Row style={{ width: "100%" }}>
                       <Col
-                        span={8}
+                        span={6}
                         style={{ display: "flex", alignItems: "center" }}
                       >
                         <img src={IconPumbType} alt=""></img>&nbsp;
                         {item.pumb_name}
                       </Col>
                       <Col
-                        span={11}
+                        span={13}
                         style={{ display: "flex", alignItems: "center" }}
                       >
                         <img src={IconNameOrder} alt=""></img>&nbsp;
@@ -410,7 +494,7 @@ const FileManager = ({
                         <img src={IconLocation} alt=""></img>&nbsp;
                         {item.vl_scan_no}
                       </Col>
-                    </Row>
+                    </Row> */}
 
                     {
                       item.pack_status === "1" ? (

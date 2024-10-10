@@ -206,7 +206,7 @@ const NotificationSuccess = () => {
       if (checkUpload === "false") {
         const id = setInterval(() => {
           fecthApiNotification()
-        }, 3000);
+        }, 5000);
         return () => clearInterval(id);
       }
     }

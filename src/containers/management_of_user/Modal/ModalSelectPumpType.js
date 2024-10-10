@@ -90,7 +90,6 @@ const ModalSelectPumpType = ({
                   ? items2.pumb_model
                   : null
               }
-              listHeight={120}
               style={{ width: "100%", height: "40px" }}
               onChange={handleChangeSelectOptions}
               suffixIcon={
@@ -132,7 +131,7 @@ const ModalSelectPumpType = ({
               fontWeight: 700,
             }}
           >
-            {language[chooseLanguage].ok}
+            {language[chooseLanguage].ok_for_capture}
           </Button>
         </Row>
       </Row>

@@ -321,7 +321,7 @@ const MobileWebCam2 = () => {
       if (video && canvas) {
         const context = canvas.getContext("2d");
 
-        soundNotification("./audio/sound2.mp3");
+        soundNotification("./audio/new_sound_capture.mp3");
 
         context.save();
         if (facingMode === "user") {
