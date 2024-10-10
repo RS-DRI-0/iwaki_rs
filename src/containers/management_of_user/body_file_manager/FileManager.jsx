@@ -314,10 +314,8 @@ const FileManager = ({
     >
       <div style={{ padding: "0% 5%" }}>
         <Row className="title-page-manager" style={{ paddingTop: "2%" }}>
-          {/* <Col span={24} style={{ display: "flex", alignItems: "center" }}> */}
           <span
             className="text-title-manager"
-          // style={{opacity: onShowOption && 0}}
           >
             {language[chooseLanguage].file_manager}
           </span>
@@ -372,7 +370,7 @@ const FileManager = ({
               <div className="container-list-package">
 
                 {dataSource.map((item, index) => (
-                  <Row className="bg-thumbnail-list-file" key={item.pack_id} style={{ position: "relative" }}>
+                  <Row className="bg-thumbnail-list-file" key={item.pack_id} >
                     <div className="content-type-pump">
                       <span>{item.pumb_name}</span>
                     </div>

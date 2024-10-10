@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button, Col, Form, Input, Modal, Row, Tabs } from "antd";
 import { openNotificationSweetAlertAdmin } from "../../Function";
 import ErrorIcon from "../../images/ErrorNotifiIcon.svg";
+import IconChangePassword from "../../images/file_manager/changePasswordIcon.svg";
 import { localhost } from "../../server";
 import { IconButton } from "@mui/material";
 import { CloseOutlined } from "@mui/icons-material";
@@ -23,7 +24,7 @@ const ModalInfor = ({
   const items = [
     {
       key: "1",
-      label: "Đặt lại mật khẩu",
+      label: <span className="title-modal-changePW"><img src={IconChangePassword} alt=""></img>Đặt lại mật khẩu</span>,
     },
   ];
 
@@ -80,10 +81,6 @@ const ModalInfor = ({
       setValueColTabsUser("top");
     }
   }, [screenWidth]);
-
-  useEffect(() => {
-    console.log("Chạy");
-  }, [isOpenModalInfor]);
 
   const onCancel = () => {
     setIsOpenModalInfor(false);

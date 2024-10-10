@@ -140,7 +140,7 @@ img.logoIwakiManager {
 .bg-thumbnail-list-file,
 .btn-filter-data {
   display: grid;
-  row-gap: 1.5ch;
+  row-gap: 1ch;
 }
 
 .list-thumbnail-manager button,
@@ -240,7 +240,9 @@ img.logoIwakiManager {
   border-radius: 16px;
   box-shadow: rgb(0 16 0 / 53%) 0px 1px 3px 0px;
   border: 1px solid #cccccc;
+  position: relative;
 }
+
 .bg-thumbnail-list-file .content-type-pump {
   position: absolute;
   top: -10px;
