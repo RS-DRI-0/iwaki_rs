@@ -1216,7 +1216,11 @@ const Check_Classification = () => {
                   <Row gutter={16} className="check_classification_row">
                     {valueBase64.length !== 0 &&
                       valueBase64.map((item, _index) => (
-                        <Col span={4} key={item.id}>
+                        <Col
+                          span={4}
+                          key={item.id}
+                          style={{ paddingLeft: 10, paddingRight: 10 }}
+                        >
                           <Card
                             hoverable
                             className="check_classification_card"
