@@ -142,8 +142,8 @@ img.imageSourceChecksheet {
   border-radius: 8px;
 }
 .ModalViewImageSelect > .ant-modal-content {
-  border-radius: 0;
-  padding: 0;
+  border-radius: 0px;
+  padding: 0px;
 }
 button.buttonStarCheck {
   background: #231b9a;
