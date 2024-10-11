@@ -3,12 +3,14 @@ import { IconButton } from "@mui/material";
 import { Button, Col, Form, Input, Modal, Row, Select, TreeSelect } from "antd";
 import CancelIcon from "@mui/icons-material/Cancel";
 import PropTypes from "prop-types";
+import fileLanguage from "../../language.json";
 
 const EditUser = ({
   onFinishEdit,
   showDrawerEditUser,
   openDrawerEditUser,
   valueEdit,
+  chooseLanguage,
 }) => {
   const [form] = Form.useForm();
   const [isActive, setIsActive] = useState(false);
@@ -20,7 +22,19 @@ const EditUser = ({
   ];
 
   const handleKeyPress = (event) => {
-    const forbiddenChars = ["<", ">", ":", "?", '"', "'", ".", "&", "/", ";"];
+    const forbiddenChars = [
+      "<",
+      ">",
+      ":",
+      "?",
+      '"',
+      "'",
+      ".",
+      "&",
+      "/",
+      ";",
+      " ",
+    ];
     if (forbiddenChars.includes(event.key)) {
       event.preventDefault();
     }
@@ -88,7 +102,7 @@ const EditUser = ({
       >
         <Row>
           <Col span={12}>
-            <h2>Edit User</h2>
+            <h2>{fileLanguage[chooseLanguage].edit_user}</h2>
           </Col>
           <Col span={12} style={{ margin: "auto", textAlign: "end" }}>
             <IconButton onClick={() => showDrawerEditUser(false)}>
@@ -117,13 +131,14 @@ const EditUser = ({
                 onKeyDown={handleKeyPress}
                 onPaste={handlePaste}
                 readOnly={isActive}
+                maxLength={50}
               ></Input>
             </Form.Item>
           </Col>
           <Col span={11} offset={2}>
             <Form.Item
               name="user_name"
-              label="User Name"
+              label={fileLanguage[chooseLanguage].user_name}
               className="modal-user-form-item"
               rules={[
                 {
@@ -134,19 +149,20 @@ const EditUser = ({
               ]}
             >
               <Input
-                placeholder="User Name"
+                placeholder={fileLanguage[chooseLanguage].user_name}
                 size="large"
                 autoComplete="off"
                 onKeyDown={handleKeyPress}
                 onPaste={handlePaste}
                 readOnly
+                maxLength={50}
               ></Input>
             </Form.Item>
           </Col>
           <Col span={11}>
             <Form.Item
               name="user_role_title"
-              label="Role"
+              label={fileLanguage[chooseLanguage].role}
               className="modal-user-form-item"
               rules={[
                 {
@@ -165,7 +181,7 @@ const EditUser = ({
                   maxHeight: 400,
                   overflow: "auto",
                 }}
-                placeholder="Role"
+                placeholder={fileLanguage[chooseLanguage].role}
                 allowClear
                 treeDefaultExpandAll
                 treeData={treeData}
@@ -185,7 +201,7 @@ const EditUser = ({
               htmlType="submit"
               disabled={isActive}
             >
-              Save
+              {fileLanguage[chooseLanguage].save}
             </Button>
           </Col>
         </Row>

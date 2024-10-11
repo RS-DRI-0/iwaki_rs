@@ -469,7 +469,7 @@ const ManagementDashboardIndex = () => {
                   chooseLanguage={chooseLanguage}
                 />
               ) : (
-                <ManagementUser />
+                <ManagementUser chooseLanguage={chooseLanguage} />
               )}
             </div>
           </main>

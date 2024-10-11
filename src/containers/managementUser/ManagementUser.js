@@ -3,6 +3,7 @@ import { Button } from "@mui/material";
 import { Col, Input, Row, Table, Tabs } from "antd";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import PropTypes from "prop-types";
+import fileLanguage from "../../language.json";
 
 const ManagementUserIndex = ({
   columns,
@@ -17,6 +18,7 @@ const ManagementUserIndex = ({
   valueSearch,
   checkValueSearch,
   activeKey,
+  chooseLanguage
 }) => {
   const screenHeight = window.innerHeight;
   const screenWidth = window.innerWidth;
@@ -50,7 +52,7 @@ const ManagementUserIndex = ({
                 <Input
                   size="large"
                   style={{ width: "20%", marginRight: 10 }}
-                  placeholder="Search..."
+                  placeholder={fileLanguage[chooseLanguage].search}
                   value={checkValueSearch}
                   onChange={handleSearchUser}
                 ></Input>
@@ -60,7 +62,7 @@ const ManagementUserIndex = ({
                   startIcon={<PersonAddAltIcon />}
                   onClick={() => showDrawerAddUser(true)}
                 >
-                  ADD USER
+                  {fileLanguage[chooseLanguage].add_user}
                 </Button>
               </Col>
             </Row>

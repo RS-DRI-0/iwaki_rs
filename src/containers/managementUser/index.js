@@ -16,10 +16,11 @@ import { openNotificationSweetAlertAdmin } from "../../Function";
 import SuccessIcon from "../../images/SuccessNotiIcon.svg";
 import ErrorIcon from "../../images/ErrorNotifiIcon.svg";
 import { authAxios } from "../../api/axiosClient";
+import fileLanguage from "../../language.json";
 
 const { confirm } = Modal;
 
-const ManagementUser = () => {
+const ManagementUser = ({chooseLanguage}) => {
   const [listInforUserAll, setListInforUserAll] = useState([]);
   const [listInforUserFilter, setListInforUserFilter] = useState([]);
 
@@ -118,7 +119,7 @@ const ManagementUser = () => {
     },
 
     {
-      title: "User Name",
+      title: fileLanguage[chooseLanguage].user_name,
       dataIndex: "user_name",
       key: "user_name",
       render: (text) => (
@@ -135,13 +136,13 @@ const ManagementUser = () => {
       ),
     },
     {
-      title: "Role",
+      title: fileLanguage[chooseLanguage].role,
       dataIndex: "user_role_title",
       key: "user_role_title",
       align: "center",
     },
     {
-      title: "Action",
+      title: fileLanguage[chooseLanguage].action,
       key: "action",
       align: "center",
       render: (index, record) => (
@@ -374,12 +375,14 @@ const ManagementUser = () => {
         valueSearch={valueSearch}
         checkValueSearch={checkValueSearch}
         activeKey={activeKey}
+        chooseLanguage={chooseLanguage}
       />
 
       <AddUser
         onFinishAdd={onFinishAdd}
         showDrawerAddUser={showDrawerAddUser}
         openDrawerAddUser={openDrawerAddUser}
+        chooseLanguage={chooseLanguage}
       />
 
       <EditUser
@@ -387,6 +390,7 @@ const ManagementUser = () => {
         showDrawerEditUser={showDrawerEditUser}
         openDrawerEditUser={openDrawerEditUser}
         valueEdit={valueEdit}
+        chooseLanguage={chooseLanguage}
       />
     </>
   );
