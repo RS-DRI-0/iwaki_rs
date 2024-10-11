@@ -313,7 +313,7 @@ const ManagementUser = ({chooseLanguage}) => {
         openNotificationSweetAlertAdmin(SuccessIcon, res.data.message);
       })
       .catch((err) => {
-        openNotificationSweetAlertAdmin(ErrorIcon, err.response.data.message);
+        openNotificationSweetAlertAdmin(ErrorIcon, err.data.message);
       });
   };
 

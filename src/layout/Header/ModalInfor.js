@@ -349,14 +349,14 @@ const SetPassword = ({
         </Col>
         <Col span={24} className="col-btn-changePW">
           <Button onClick={onCancel} htmlType="button">
-            {language[chooseLanguage].cancel}
+            {language[chooseLanguage].close}
           </Button>
           <Button
             // className="btnSubmitModel"
             // type="success"
             type="primary"
             htmlType="submit"
-
+            style={{ background: "#053457" }}
             // loading={loadings}
           >
             {language[chooseLanguage].save}

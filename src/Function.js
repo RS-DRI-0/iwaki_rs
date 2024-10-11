@@ -69,7 +69,7 @@ export function openNotificationSweetAlertAdmin(
   let showButton = !!button;
 
   MySwal.fire({
-    timer: 111000,
+    timer: 1000,
     title: (
       <span className={className} style={{ color: color }}>
         {status}

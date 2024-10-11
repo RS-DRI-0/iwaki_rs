@@ -133,7 +133,11 @@
         "edit_user": "Chỉnh sửa tài khoản",
         "staff": "Nhân viên",
         "default_password": "Mật khẩu mặc định",
-        "dashboard": "Thống kê"
+        "dashboard": "Thống kê",
+        "please_enter_id_code": "Vui lòng nhập mã ID.",
+        "please_enter_a_valid_input": "Vui lòng nhập thông tin hợp lệ (không có khoảng trắng)",
+        "please_choose_a_role":"Vui lòng chọn Vai trò.",
+        "please_enter_user_name":"Vui lòng nhập tên đăng nhập."
     },
     "english": {
         "machine_code": "Select Machine Code",
@@ -269,7 +273,11 @@
         "edit_user": "Edit User",
         "staff": "Staff",
         "default_password": "Default Password",
-        "dashboard": "Dashboard"
+        "dashboard": "Dashboard",
+        "please_enter_id_code": "Please enter ID code!",
+        "please_enter_a_valid_input": "Please enter a valid input (no spaces)",
+        "please_choose_a_role":"Please choose a Role!",
+        "please_enter_user_name":"Please enter User Name!"
     },
     "japanese": {
         "machine_code": "ポンプの受注番号を選択",
@@ -405,6 +413,10 @@
         "edit_user": "ユーザーを編集",
         "staff": "作業者",
         "default_password": "デフォルトのパスワード",
-        "dashboard": "ダッシュボード"
+        "dashboard": "ダッシュボード",
+        "please_enter_id_code": "IDコードを入力してください！",
+        "please_enter_a_valid_input": "有効な入力をしてください（スペースは不可）。",
+        "please_choose_a_role":"役割を選択してください！",
+        "please_enter_user_name":"ユーザー名を入力してください！"
     }
 }

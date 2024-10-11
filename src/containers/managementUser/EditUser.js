@@ -71,7 +71,7 @@ const EditUser = ({
   const handleValidateSpaces = (rule, value) => {
     if (!value || value.trim() === "") {
       return Promise.reject(
-        new Error("Please enter a valid input (no spaces only).")
+        new Error(fileLanguage[chooseLanguage].please_enter_a_valid_input)
       );
     }
     return Promise.resolve(); // Success
@@ -119,7 +119,7 @@ const EditUser = ({
               rules={[
                 {
                   required: true,
-                  message: "Please enter ID code!",
+                  message: fileLanguage[chooseLanguage].please_enter_id_code,
                 },
                 { validator: handleValidateSpaces },
               ]}
@@ -143,7 +143,7 @@ const EditUser = ({
               rules={[
                 {
                   required: true,
-                  message: "Please enter User Name!",
+                  message: fileLanguage[chooseLanguage].please_enter_user_name,
                 },
                 { validator: handleValidateSpaces },
               ]}
@@ -167,7 +167,7 @@ const EditUser = ({
               rules={[
                 {
                   required: true,
-                  message: "Please choose a Role!",
+                  message: fileLanguage[chooseLanguage].please_choose_a_role,
                 },
               ]}
             >
