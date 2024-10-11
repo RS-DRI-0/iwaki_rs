@@ -93,7 +93,7 @@ const ModalInfor = ({
       closable={false}
       footer={null}
       width="90%"
-      style={{ fontWeight: 700, marginTop: "23%" }}
+      style={{ fontWeight: 700, marginTop: "20%" }}
     >
       <Row>
         {/* <Col span={24}>

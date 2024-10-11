@@ -712,18 +712,18 @@ img.logoIwakiManager {
 }
 
 .row-time-handle {
-  font-size: 13px;
   display: flex;
 }
 
 .row-time-handle .ant-col > span {
   display: flex;
+  font-size: 13px;
   align-items: center;
 }
 .text-timeOut {
   color: #b00303;
   font-weight: 700;
-  font-size: 10px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   column-gap: 0.5ch;
@@ -731,7 +731,18 @@ img.logoIwakiManager {
 
 .ant-float-btn-circle {
   border-radius: 8px;
-  height: 27px;
-  width: 27px;
+  height: 30px;
+  width: 30px;
   cursor: unset;
+  border: 0.5px solid #dadada;
+}
+.ant-float-btn-circle .ant-float-btn-body {
+  border-radius: 8px;
+}
+.ant-float-btn-circle .ant-float-btn-body:hover {
+  background-color: #fff;
+}
+.ant-float-btn-circle .ant-float-btn-body:active {
+  background-color: rgba(236, 239, 240, 0.842);
+  box-shadow: rgba(3, 101, 214, 0.11) 0px 0px 0px 3px;
 }

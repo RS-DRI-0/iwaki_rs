@@ -115,7 +115,7 @@
         "notification_date": "Tìm kiếm trong vòng 30 ngày trước",
         "ok_for_capture": "OK",
 
-        "completion_date": "Completion Date"
+        "completion_date": "Ngày hoàn thành"
     },
     "english": {
         "machine_code": "Select Machine Code",
@@ -358,6 +358,6 @@
 
          "ok_for_capture": "選択完了",
 
-         "completion_date": "Completion Date"
+         "completion_date": "完了日"
     }
 }
