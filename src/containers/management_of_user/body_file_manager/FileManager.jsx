@@ -325,14 +325,15 @@ const FileManager = ({
             style={{
               position: "sticky"
             }}
-            open={onShowOption}
+            key = {'left'}
+            // open={onShowOption}
             icon={<LeftOutlined key="left" />}
             onClick={() => setOnShowOption(prev => !prev)}
           >
-            <FloatButton onClick={sortData} icon={<img style={{paddingTop: 4}} src={!valueIsSort ? IconDecreasing : IconAscending} alt=""></img>} />
-            <FloatButton onClick={showModalHistory} icon={<img style={{paddingTop: 4}} src={IconHistory} alt=""></img>} />
-            <FloatButton onClick={() => setOpenModalFilter(true)} icon={<img style={{paddingTop: 4}} src={iconSearch} alt=""></img>} />
-            <FloatButton onClick={clearFilter} icon={<img style={{paddingTop: 4}} src={IconDeleteFilter} alt=""></img>} />
+            <FloatButton onClick={sortData} icon={<img style={{paddingTop: 2}} src={!valueIsSort ? IconDecreasing : IconAscending} alt=""></img>} />
+            <FloatButton onClick={showModalHistory} icon={<img style={{paddingTop: 2}} src={IconHistory} alt=""></img>} />
+            <FloatButton onClick={() => setOpenModalFilter(true)} icon={<img style={{paddingTop: 2}} src={iconSearch} alt=""></img>} />
+            <FloatButton onClick={clearFilter} icon={<img style={{paddingTop: 2}} src={IconDeleteFilter} alt=""></img>} />
           </FloatButton.Group>
           {/* </Col> */}
           {/* <Col
@@ -389,7 +390,7 @@ const FileManager = ({
                         style={{
                           display: "flex",
                           flexDirection: "column",
-                          padding: "0% 2%",
+                          padding: "0%",
                         }}
                       >
                         <div className="list-thumbnail-manager">
@@ -404,7 +405,7 @@ const FileManager = ({
                               style={{
                                 display: "flex",
                                 alignItems: "center",
-                                columnGap: '0.5ch'
+                                columnGap:  item.is_wait_order === "1" && item.qa_all === "0" && item.cus_status === "-1" && item.is_checksheet !== 3 && '0.5ch'
                               }}
                             >
                               <span>
@@ -430,7 +431,7 @@ const FileManager = ({
                               </span>
                             </Col>
                           </Row>
-                          <Row >
+                          <Row style={{display: "flex", columnGap: "1ch"}}>
                             {/* <Col span={8}>
                               <span
                                 style={{
@@ -442,14 +443,14 @@ const FileManager = ({
                                 {dayjs(item.upload_date).format("HH:mm:ss")}
                               </span>
                             </Col> */}
-                            <Col span={14}>
+                            {/* <Col span={14}> */}
                               {textStatus(item.check_status, item)}
-                            </Col>
-                            <Col span={10}>
+                            {/* </Col>
+                            <Col span={10}> */}
                               {Number(item.qa_timeout) === 1 ?
                                 <span className="text-timeOut"><img src={IconTimeout} alt=""></img>{language[chooseLanguage].time_out}</span>
                                 : null}
-                            </Col>
+                            {/* </Col> */}
 
 
                           </Row>
@@ -497,7 +498,7 @@ const FileManager = ({
                         <Row className="container-check-cusStatus">
                           <Col span={8}>
                             <Button
-                              style={{ color: "#394B76" }}
+                              style={{ color: "#394B76", fontSize: 17 }}
                               onClick={() => UpdateCusStatus(item, "0")}
                             >
                               {language[chooseLanguage].not_ok}
@@ -505,7 +506,7 @@ const FileManager = ({
                           </Col>
                           <Col span={8}>
                             <Button
-                              style={{ color: "#fff", background: "#0C4DA2" }}
+                              style={{ color: "#fff", background: "#0C4DA2", fontSize: 17  }}
                               onClick={() => UpdateCusStatus(item, "1")}
                             >
                               {language[chooseLanguage].ok}
