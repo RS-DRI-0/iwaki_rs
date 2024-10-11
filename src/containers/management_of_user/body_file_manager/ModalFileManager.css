@@ -140,7 +140,7 @@ img.logoIwakiManager {
 .bg-thumbnail-list-file,
 .btn-filter-data {
   display: grid;
-  row-gap: 1.5ch;
+  row-gap: 1ch;
 }
 
 .list-thumbnail-manager button,
@@ -240,16 +240,18 @@ img.logoIwakiManager {
   border-radius: 16px;
   box-shadow: rgb(0 16 0 / 53%) 0px 1px 3px 0px;
   border: 1px solid #cccccc;
+  position: relative;
 }
-.bg-thumbnail-list-file .content-type-pump{
+
+.bg-thumbnail-list-file .content-type-pump {
   position: absolute;
   top: -10px;
   left: 7%;
-  background: #0C4DA2; 
-  color: #FFFFFF;
-  font-weight: bold; 
+  background: #0c4da2;
+  color: #ffffff;
+  font-weight: bold;
   width: 70px;
-  font-size: 12px;
+  font-size: 13px;
   text-align: center;
   border-radius: 4px;
 }
@@ -709,7 +711,27 @@ img.logoIwakiManager {
   padding-left: 200px;
 }
 
-.row-time-handle > span {
+.row-time-handle {
+  font-size: 13px;
+  display: flex;
+}
+
+.row-time-handle .ant-col > span {
   display: flex;
   align-items: center;
+}
+.text-timeOut {
+  color: #b00303;
+  font-weight: 700;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  column-gap: 0.5ch;
+}
+
+.ant-float-btn-circle {
+  border-radius: 8px;
+  height: 27px;
+  width: 27px;
+  cursor: unset;
 }

@@ -64,3 +64,12 @@
   padding: 0px 24px 12px;
   border-radius: 15px !important;
 }
+
+.title-modal-changePW {
+  display: flex;
+  align-items: center;
+  column-gap: 1ch;
+  font-size: 15px;
+  font-weight: 400;
+  color: #085fa0;
+}

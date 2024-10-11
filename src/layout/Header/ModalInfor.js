@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button, Col, Form, Input, Modal, Row, Tabs } from "antd";
 import { openNotificationSweetAlertAdmin } from "../../Function";
 import ErrorIcon from "../../images/ErrorNotifiIcon.svg";
+import IconChangePassword from "../../images/file_manager/changePasswordIcon.svg";
 import { localhost } from "../../server";
 import PropTypes from "prop-types";
 import { authAxios } from "../../api/axiosClient";
@@ -81,10 +82,6 @@ const ModalInfor = ({
       setValueColTabsUser("top");
     }
   }, [screenWidth]);
-
-  useEffect(() => {
-    console.log("Chạy");
-  }, [isOpenModalInfor]);
 
   const onCancel = () => {
     setIsOpenModalInfor(false);

@@ -229,7 +229,7 @@ const ModalViewDetail = ({
 
               <span>
                 {language[chooseLanguage].completion_date}:{" "}
-                <span className="text-detail"> {dataDetail.submit_date.toLowerCase() !== "none" ? dayjs(dataDetail.submit_date).format("DD-MM-YYYY HH:mm:ss") : "N/A" }</span>
+                <span className="text-detail"> {dataDetail.submit_date.toLowerCase() !== "none" ? dayjs(dataDetail.submit_date).format("DD-MM-YYYY HH:mm:ss") : "" }</span>
               </span>
 
               {parseInt(dataDetail.pumb_id) !== 1 && <span>
@@ -239,7 +239,7 @@ const ModalViewDetail = ({
                 </span>
               </span>}
 
-              {dataDetail.vl_scan_no !== "" &&
+              {Number(dataDetail.is_multi) === 0 &&
                 <span>
                   {language[chooseLanguage].vl_scan_no}:{" "}
                   <span className="text-detail">

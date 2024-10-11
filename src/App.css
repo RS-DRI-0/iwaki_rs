@@ -124,7 +124,7 @@ span {
 .custom-notification {
   margin-top: 10%;
 }
-div:where(.swal2-container) h2:where(.swal2-title) {
+div > h2 {
   padding: 0px;
 }
 
@@ -137,7 +137,7 @@ div:where(.swal2-container) h2:where(.swal2-title) {
   width: 28em !important;
 }
 
-div:where(.swal2-container) div:where(.swal2-popup) {
+.swal2-container .swal2-popup {
   padding: 1.25em 0 1.25em;
 }
 

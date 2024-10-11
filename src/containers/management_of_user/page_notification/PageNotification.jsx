@@ -9,6 +9,8 @@ import IconTimeout from "../../../images/file_manager/timeOutIcon.svg";
 import IconStatusNotQualified from "../../../images/file_manager/IconStatusNotQualified.svg";
 import IconStatusImgNotGood from "../../../images/file_manager/IconStatusImgNotGood.svg";
 import IconStatusProcessing from "../../../images/file_manager/IconStatusProcessing.svg";
+import IconLocation from "../../../images/file_manager/IconLocation.svg";
+
 import ArrowBackIcon from "../../../images/arrow/ArrowBack.svg";
 
 import IconPumbType from "../../../images/file_manager/IconPumbType.svg";
@@ -213,6 +215,7 @@ const PageNotification = ({
             fontWeight: 800,
             fontSize: 14,
             color: "#25355B",
+            textTransform: "uppercase"
           }}
         >
           {language[chooseLanguage].notifications}
@@ -232,9 +235,11 @@ const PageNotification = ({
                     String(item.notified) === "1" ? "aliceBlue" : null,
                 }}
                 key={item.pack_id}
-
               >
-                <Row style={{ width: "100%" }}>
+                <div className="content-type-pump">
+                  <span>{item.pumb_name}</span>
+                </div>
+                <Row style={{ width: "100%", paddingTop: 5 }}>
                   <Col span={8} style={{ position: "relative" }}>
                     <img
                       src={`data:image/webp;base64,${item.thumb_base64}`}
@@ -247,7 +252,7 @@ const PageNotification = ({
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      padding: "4% 2%",
+                      padding: "0% 2%",
                     }}
                   >
                     <div className="list-thumbnail-manager">
@@ -274,19 +279,22 @@ const PageNotification = ({
                           display: "flex",
                         }}
                       >
-                        <Col
+                        {/* <Col
                           span={8}
                           style={{ display: "flex", alignItems: "flex-start" }}
                         >
                           <img src={IconPumbType} alt=""></img>&nbsp;
                           {item.pumb_name}
-                        </Col>
-                        <Col span={16} style={{ display: "grid", rowGap: "0.5ch" }}>
+                        </Col> */}
+                        <Col span={24} style={{ display: "grid", rowGap: "0.5ch" }}>
                           {textStatus(item.check_status, item)}
-                          {Number(item.qa_timeout) === 1 ?
+                          {/* {Number(item.qa_timeout) === 1 ?
                             <span style={{ color: "red", fontWeight: "bold", fontSize: 10, display: "flex", alignItems: "center", columnGap: "0.5ch" }}><img src={IconTimeout} alt=""></img>{language[chooseLanguage].time_out}</span>
-                            : null}
+                            : null} */}
                         </Col>
+                      </Row>
+                      <Row className="row-time-handle">
+                          <span><img src={IconLocation} alt=""></img>&nbsp;{item.vl_scan_no}</span>
                       </Row>
                     </div>
                   </Col>

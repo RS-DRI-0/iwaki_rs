@@ -35,7 +35,6 @@ const ContainerFileManager = () => {
   const [form] = Form.useForm();
 
   const fetchListData = (params, valueSort) => {
-    console.log(valueSort)
     const FormData = require("form-data");
     let data = new FormData();
     data.append("id_user", params.id_user);
