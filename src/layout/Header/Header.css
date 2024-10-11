@@ -32,7 +32,7 @@
   display: flex;
   align-items: center;
   color: var(--text-title-2, #394b76);
-  font-size: 14px;
+  font-size: 12px !important;
   font-style: normal;
   font-weight: 500;
   line-height: 20px; /* 100% */
@@ -53,15 +53,16 @@
   display: flex;
 }
 
-.col-btn-changePW > button {
+/* .col-btn-changePW > button {
   width: 80px;
-}
+} */
 
 .modal-changePW {
   top: 15px;
 }
 .ant-modal.modal-changePW .ant-modal-content {
   padding: 0px 24px 12px;
+  border-radius: 15px !important;
 }
 
 .title-modal-changePW {

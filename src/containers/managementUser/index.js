@@ -103,12 +103,36 @@ const ManagementUser = () => {
       title: "ID",
       dataIndex: "user_msnv",
       key: "user_msnv",
+      render: (text) => (
+        <div
+          style={{
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+          title={text} // Tooltip on hover to show full text
+        >
+          {text}
+        </div>
+      ),
     },
 
     {
       title: "User Name",
       dataIndex: "user_name",
       key: "user_name",
+      render: (text) => (
+        <div
+          style={{
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+          title={text} // Tooltip on hover to show full text
+        >
+          {text}
+        </div>
+      ),
     },
     {
       title: "Role",

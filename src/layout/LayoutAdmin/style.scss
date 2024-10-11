@@ -1,6 +1,4 @@
-.modal-infor-form-item .ant-col.ant-form-item-label {
-  width: 150px;
-}
+
 
 .modal-infor-form-item.ant-form-item .ant-form-item-label {
   text-align: start;
@@ -30,22 +28,22 @@
 }
 
 .value-check-case {
-  color: red;
+  color: #f50100;
   font-size: 12px;
 
   &[data-length-string="true"] {
-    color: green;
+    color: #0fa958;
   }
   &[data-upper-case="true"] {
-    color: green;
+    color: #0fa958;
   }
   &[data-lower-case="true"] {
-    color: green;
+    color: #0fa958;
   }
   &[data-number="true"] {
-    color: green;
+    color: #0fa958;
   }
   &[data-special-characters="true"] {
-    color: green;
+    color: #0fa958;
   }
 }
