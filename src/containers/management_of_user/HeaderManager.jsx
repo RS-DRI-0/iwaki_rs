@@ -198,7 +198,7 @@ const HeaderManager = ({
                 fontFamily: "Lato sans-serif",
                 background: "#fff",
                 borderBottom: "1px solid #0000004a",
-                fontSize: 12,
+                fontSize: 13,
               }}
               className={"menu-user"}
               onClick={handleClickOpenModalInfor}
@@ -207,7 +207,13 @@ const HeaderManager = ({
               {language[chooseLanguage].change_password}
             </MenuItem>
             <MenuItem
-              style={{ width: "100%", fontFamily: "Lato sans-serif" }}
+              style={{
+                width: "100%",
+                fontFamily: "Lato sans-serif",
+                background: "#fff",
+                borderBottom: "1px solid #0000004a",
+                fontSize: 13,
+              }}
               className={"menu-user"}
               onClick={() => logout_new()}
             >

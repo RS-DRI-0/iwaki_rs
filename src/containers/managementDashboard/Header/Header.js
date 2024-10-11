@@ -79,10 +79,10 @@ const Header = ({
             onClick={onClickMenuDashboard}
           >
             <Menu.Item key="1">
-              <span>Dashboard</span>
+              <span>{fileLanguage[chooseLanguage].dashboard}</span>
             </Menu.Item>
             <Menu.Item key="2">
-              <span>Management</span>
+              <span>{fileLanguage[chooseLanguage].user_management}</span>
             </Menu.Item>
           </Menu>
         </Col>

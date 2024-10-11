@@ -3,8 +3,14 @@ import { IconButton } from "@mui/material";
 import { Button, Col, Form, Input, Modal, Row, Select, TreeSelect } from "antd";
 import CancelIcon from "@mui/icons-material/Cancel";
 import PropTypes from "prop-types";
+import fileLanguage from "../../language.json";
 
-const AddUser = ({ onFinishAdd, showDrawerAddUser, openDrawerAddUser }) => {
+const AddUser = ({
+  onFinishAdd,
+  showDrawerAddUser,
+  openDrawerAddUser,
+  chooseLanguage,
+}) => {
   const [form] = Form.useForm();
 
   const treeData = [
@@ -22,7 +28,19 @@ const AddUser = ({ onFinishAdd, showDrawerAddUser, openDrawerAddUser }) => {
   const onChange = (newValue) => {};
 
   const handleKeyPress = (event) => {
-    const forbiddenChars = ["<", ">", ":", "?", '"', "'", ".", "&", "/", ";"];
+    const forbiddenChars = [
+      "<",
+      ">",
+      ":",
+      "?",
+      '"',
+      "'",
+      ".",
+      "&",
+      "/",
+      ";",
+      " ",
+    ];
     if (forbiddenChars.includes(event.key)) {
       event.preventDefault();
     }
@@ -72,7 +90,7 @@ const AddUser = ({ onFinishAdd, showDrawerAddUser, openDrawerAddUser }) => {
       >
         <Row>
           <Col span={12}>
-            <h2>Add User</h2>
+            <h2>{fileLanguage[chooseLanguage].add_user}</h2>
           </Col>
           <Col span={12} style={{ margin: "auto", textAlign: "end" }}>
             <IconButton onClick={handleCancelAddUser}>
@@ -100,13 +118,14 @@ const AddUser = ({ onFinishAdd, showDrawerAddUser, openDrawerAddUser }) => {
                 autoComplete="off"
                 onKeyDown={handleKeyPress}
                 onPaste={handlePaste}
+                maxLength={50}
               ></Input>
             </Form.Item>
           </Col>
           <Col span={11} offset={2}>
             <Form.Item
               name="user_name"
-              label="User Name"
+              label={fileLanguage[chooseLanguage].user_name}
               className="modal-user-form-item"
               rules={[
                 {
@@ -117,18 +136,19 @@ const AddUser = ({ onFinishAdd, showDrawerAddUser, openDrawerAddUser }) => {
               ]}
             >
               <Input
-                placeholder="User Name"
+                placeholder={fileLanguage[chooseLanguage].user_name}
                 size="large"
                 autoComplete="off"
                 onKeyDown={handleKeyPress}
                 onPaste={handlePaste}
+                maxLength={50}
               ></Input>
             </Form.Item>
           </Col>
           <Col span={11}>
             <Form.Item
               name="user_role_title"
-              label="Role"
+              label={fileLanguage[chooseLanguage].role}
               className="modal-user-form-item"
               rules={[
                 {
@@ -147,7 +167,7 @@ const AddUser = ({ onFinishAdd, showDrawerAddUser, openDrawerAddUser }) => {
                   maxHeight: 400,
                   overflow: "auto",
                 }}
-                placeholder="Role"
+                placeholder={fileLanguage[chooseLanguage].role}
                 allowClear
                 treeDefaultExpandAll
                 onChange={onChange}
@@ -166,7 +186,7 @@ const AddUser = ({ onFinishAdd, showDrawerAddUser, openDrawerAddUser }) => {
               type="primary"
               htmlType="submit"
             >
-              Save
+              {fileLanguage[chooseLanguage].save}
             </Button>
           </Col>
         </Row>

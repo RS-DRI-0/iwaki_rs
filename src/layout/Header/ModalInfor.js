@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button, Col, Form, Input, Modal, Row, Tabs } from "antd";
 import { openNotificationSweetAlertAdmin } from "../../Function";
 import ErrorIcon from "../../images/ErrorNotifiIcon.svg";
-import IconChangePassword from "../../images/file_manager/changePasswordIcon.svg";
+import IconChangePassword from "../../images/mdi_password_outline.svg";
 import { localhost } from "../../server";
 import PropTypes from "prop-types";
 import { authAxios } from "../../api/axiosClient";
@@ -25,7 +25,18 @@ const ModalInfor = ({
   const items = [
     {
       key: "1",
-      label: `${language[chooseLanguage].change_password}`,
+      label: (
+        <div style={{ display: "flex" }}>
+          <img
+            src={IconChangePassword}
+            alt=""
+            style={{ width: 20, height: 20 }}
+          />
+          <div style={{ color: "#085FA0", marginLeft: 5 }}>
+            {language[chooseLanguage].change_password}
+          </div>
+        </div>
+      ),
     },
   ];
 
