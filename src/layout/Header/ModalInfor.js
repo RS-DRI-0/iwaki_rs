@@ -3,19 +3,20 @@ import { Button, Col, Form, Input, Modal, Row, Tabs } from "antd";
 import { openNotificationSweetAlertAdmin } from "../../Function";
 import ErrorIcon from "../../images/ErrorNotifiIcon.svg";
 import { localhost } from "../../server";
-import { IconButton } from "@mui/material";
-import { CloseOutlined } from "@mui/icons-material";
 import PropTypes from "prop-types";
 import { authAxios } from "../../api/axiosClient";
 import "./Header.css";
 import Cookies from "universal-cookie";
 import { KeyOutlined } from "@ant-design/icons";
+import language from "../../language.json";
+
 const cookies = new Cookies();
 
 const ModalInfor = ({
   isOpenModalInfor,
   handleCloseModalInfor,
   setIsOpenModalInfor,
+  chooseLanguage,
 }) => {
   const userMSNV = JSON.parse(sessionStorage.getItem("info_user")).user_msnv;
 
@@ -23,7 +24,7 @@ const ModalInfor = ({
   const items = [
     {
       key: "1",
-      label: "Đặt lại mật khẩu",
+      label: `${language[chooseLanguage].change_password}`,
     },
   ];
 
@@ -73,8 +74,8 @@ const ModalInfor = ({
       setValueColTabsUser("left");
       setValueColTabsUserCol([7, 17]);
     } else if (screenWidth > 1024) {
-      setValueColTabsUserCol([7, 17]);
-      setValueColTabsUser("left");
+      setValueColTabsUserCol([24, 24]);
+      setValueColTabsUser("top");
     } else if (screenWidth <= 1024) {
       setValueColTabsUserCol([24, 24]);
       setValueColTabsUser("top");
@@ -88,15 +89,15 @@ const ModalInfor = ({
   const onCancel = () => {
     setIsOpenModalInfor(false);
   };
-
+  console.log(screenWidth);
   return (
     <Modal
       className="modal-changePW"
       open={isOpenModalInfor}
       closable={false}
       footer={null}
-      width="90%"
-      style={{ fontWeight: 700, marginTop: "23%" }}
+      width={screenWidth >= 1024 ? "50%" : "90%"}
+      style={screenWidth >= 1024 ? { marginTop: "10%" } : { marginTop: "23%" }}
     >
       <Row>
         {/* <Col span={24}>
@@ -121,7 +122,7 @@ const ModalInfor = ({
         {/* <Col span={valueColTabsUserCol[1]} > */}
         {/* </Col> */}
       </Row>
-      <div style={{ paddingBottom: 10 }}>
+      <div style={{ paddingBottom: 10, fontWeight: 700, color: "#626262" }}>
         <KeyOutlined style={{ color: "#1677ff" }} /> ID
         <span style={{ marginLeft: 10 }}>{userMSNV}</span>
       </div>
@@ -129,6 +130,7 @@ const ModalInfor = ({
         isOpenModalInfor={isOpenModalInfor}
         onFinish={onFinish}
         setIsOpenModalInfor={setIsOpenModalInfor}
+        chooseLanguage={chooseLanguage}
       />
     </Modal>
   );
@@ -200,7 +202,12 @@ const InforDetail = ({ isOpenModalInfor }) => {
   );
 };
 
-const SetPassword = ({ isOpenModalInfor, onFinish, setIsOpenModalInfor }) => {
+const SetPassword = ({
+  isOpenModalInfor,
+  onFinish,
+  setIsOpenModalInfor,
+  chooseLanguage,
+}) => {
   const [form] = Form.useForm();
   const [upperCase, setUpperCase] = useState(false);
   const [lowerCase, setLowerCase] = useState(false);
@@ -240,36 +247,39 @@ const SetPassword = ({ isOpenModalInfor, onFinish, setIsOpenModalInfor }) => {
   return (
     <Form form={form} onFinish={onFinish}>
       <Row>
-        <Col span={24}>
+        <Col span={24} style={{ color: "#626262" }}>
           <Form.Item
-            label="Mật khẩu cũ"
+            label={language[chooseLanguage].current_password}
             name="user_pw"
             rules={[
               {
                 required: true,
-                message: "Vui lòng nhập mật khẩu cũ!",
-              },
-            ]}
-            className="modal-infor-form-item"
-          >
-            <Input.Password size="large" placeholder="Mật khẩu cũ" />
-          </Form.Item>
-        </Col>
-        <Col span={24}>
-          <Form.Item
-            label="Mật khẩu mới"
-            name="user_new_pw"
-            rules={[
-              {
-                required: true,
-                message: "Vui lòng nhập mật khẩu mới!",
+                message: `${language[chooseLanguage].please_enter_your_current_password}`,
               },
             ]}
             className="modal-infor-form-item"
           >
             <Input.Password
               size="large"
-              placeholder="Mật khẩu mới"
+              placeholder={language[chooseLanguage].current_password}
+            />
+          </Form.Item>
+        </Col>
+        <Col span={24}>
+          <Form.Item
+            label={language[chooseLanguage].new_password}
+            name="user_new_pw"
+            rules={[
+              {
+                required: true,
+                message: `${language[chooseLanguage].please_enter_your_new_password}`,
+              },
+            ]}
+            className="modal-infor-form-item"
+          >
+            <Input.Password
+              size="large"
+              placeholder={language[chooseLanguage].new_password}
               onChange={handleCheckLogicChangePW}
               maxLength={255}
             />
@@ -277,7 +287,7 @@ const SetPassword = ({ isOpenModalInfor, onFinish, setIsOpenModalInfor }) => {
         </Col>
         <Col span={24}>
           <Form.Item
-            label="Nhập lại mật khẩu"
+            label={language[chooseLanguage].confirm_new_password}
             name="user_new_pw_check"
             className="modal-infor-form-item"
             dependencies={["user_new_pw"]}
@@ -285,7 +295,7 @@ const SetPassword = ({ isOpenModalInfor, onFinish, setIsOpenModalInfor }) => {
             rules={[
               {
                 required: true,
-                message: "Vui lòng nhập mật khẩu mới!",
+                message: `${language[chooseLanguage].please_re_enter_your_new_password}`,
               },
               ({ getFieldValue }) => ({
                 validator(_, value) {
@@ -293,38 +303,45 @@ const SetPassword = ({ isOpenModalInfor, onFinish, setIsOpenModalInfor }) => {
                     return Promise.resolve();
                   }
                   return Promise.reject(
-                    new Error("Hai mật khẩu bạn đã nhập không khớp!")
+                    new Error(
+                      language[
+                        chooseLanguage
+                      ].confirmation_password_does_not_match
+                    )
                   );
                 },
               }),
             ]}
           >
-            <Input.Password size="large" placeholder="Nhập lại mật khẩu" />
+            <Input.Password
+              size="large"
+              placeholder={language[chooseLanguage].confirm_new_password}
+            />
           </Form.Item>
         </Col>
         <Col span={24} style={{ display: "inline-grid" }}>
           <span data-length-string={lengthString} className="value-check-case">
-            * Nhập tối thiểu 8 ký tự
+            * {language[chooseLanguage].a_minimum_of_8_characters}
           </span>
           <span data-upper-case={upperCase} className="value-check-case">
-            * Nhập tối thiểu 1 ký tự viết hoa
+            * {language[chooseLanguage].at_least_1_upper_letter}
           </span>
           <span data-lower-case={lowerCase} className="value-check-case">
-            * Nhập tối thiểu 1 ký tự viết thường
+            * {language[chooseLanguage].at_least_1_lower_letter}
           </span>
           <span data-number={number} className="value-check-case">
-            * Nhập tối thiểu 1 ký tự số
+            * {language[chooseLanguage].at_least_1_digit}
           </span>
           <span
             data-special-characters={specialCharacters}
             className="value-check-case"
           >
-            * Nhập tối thiểu 1 ký tự đặc biệt !@#$%^&*()
+            * {language[chooseLanguage].at_least_1_digit_special_character}
           </span>
         </Col>
         <Col span={24} className="col-btn-changePW">
           <Button onClick={onCancel} htmlType="button">
-            CANCEL
+            {language[chooseLanguage].cancel}
           </Button>
           <Button
             // className="btnSubmitModel"
@@ -334,7 +351,7 @@ const SetPassword = ({ isOpenModalInfor, onFinish, setIsOpenModalInfor }) => {
 
             // loading={loadings}
           >
-            SAVE
+            {language[chooseLanguage].save}
           </Button>
         </Col>
       </Row>

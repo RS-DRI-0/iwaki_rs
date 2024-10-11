@@ -193,12 +193,18 @@ const HeaderManager = ({
             }}
           >
             <MenuItem
-              style={{ width: "100%", fontFamily: "Lato sans-serif", background: "#fff", borderBottom: "1px solid #0000004a" }}
+              style={{
+                width: "100%",
+                fontFamily: "Lato sans-serif",
+                background: "#fff",
+                borderBottom: "1px solid #0000004a",
+                fontSize: 12,
+              }}
               className={"menu-user"}
               onClick={handleClickOpenModalInfor}
             >
               <UserOutlined style={{ marginRight: "5%" }} />
-              View Account
+              {language[chooseLanguage].change_password}
             </MenuItem>
             <MenuItem
               style={{ width: "100%", fontFamily: "Lato sans-serif" }}
@@ -211,13 +217,14 @@ const HeaderManager = ({
           </Menu>
         </Col>
       </Row>
-      {isOpenModalInfor &&
+      {isOpenModalInfor && (
         <ModalInfor
           isOpenModalInfor={isOpenModalInfor}
           handleCloseModalInfor={handleCloseModalInfor}
           setIsOpenModalInfor={setIsOpenModalInfor}
+          chooseLanguage={chooseLanguage}
         />
-      }
+      )}
     </div>
   );
 };

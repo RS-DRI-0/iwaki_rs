@@ -115,7 +115,21 @@
         "notification_date": "Tìm kiếm trong vòng 30 ngày trước",
         "ok_for_capture": "OK",
 
-        "completion_date": "Completion Date"
+        "completion_date": "Completion Date",
+
+        "change_password": "Thay đổi mật khẩu",
+        "current_password": "Mật khẩu hiện tại",
+        "new_password": "Mật khẩu mới",
+        "confirm_new_password": "Xác nhận mật khẩu mới",
+        "a_minimum_of_8_characters": "Ít nhất 8 ký tự",
+        "at_least_1_upper_letter": "Ít nhất 1 chữ in hoa",
+        "at_least_1_lower_letter": "Ít nhất 1 chữ thường",
+        "at_least_1_digit": "Ít nhất 1 số",
+        "at_least_1_digit_special_character": "Ít nhất 1 ký tự đặc biệt !@#$%^&*()",
+        "please_enter_your_current_password": "Vui lòng nhập mật khẩu cũ!",
+        "please_enter_your_new_password": "Vui lòng nhập mật khẩu mới!",
+        "please_re_enter_your_new_password": "Vui lòng nhập lại mật khẩu mới!",
+        "confirmation_password_does_not_match": "Hai mật khẩu bạn đã nhập không khớp!"
     },
     "english": {
         "machine_code": "Select Machine Code",
@@ -236,7 +250,21 @@
 
         "notification_date": "Search within the past 30 days.",
         "ok_for_capture": "OK",
-        "completion_date": "Completion Date"
+        "completion_date": "Completion Date",
+
+        "change_password": "Change Password",
+        "current_password": "Current password",
+        "new_password": "New password",
+        "confirm_new_password": "Confirm new password",
+        "a_minimum_of_8_characters": "A minimum of 8 characters",
+        "at_least_1_upper_letter": "At least 1 uppercase letter",
+        "at_least_1_lower_letter": "At least 1 lowercase letter",
+        "at_least_1_digit": "At least 1 digit",
+        "at_least_1_digit_special_character": "At least 1 special character !@#$%^&*()",
+        "please_enter_your_current_password": "Please enter your current password!",
+        "please_enter_your_new_password": "Please enter your new password!",
+        "please_re_enter_your_new_password": "Please re-enter your new password!",
+        "confirmation_password_does_not_match": "Confirmation password does not match!"
     },
     "japanese": {
         "machine_code": "ポンプの受注番号を選択",
@@ -358,6 +386,20 @@
 
          "ok_for_capture": "選択完了",
 
-         "completion_date": "Completion Date"
+         "completion_date": "Completion Date",
+
+         "change_password": "パスワードの変更",
+         "current_password": "現在のパスワード",
+         "new_password": "新しいパスワード",
+         "confirm_new_password": "新しいパスワードの確認",
+         "a_minimum_of_8_characters": "最低8文字",
+         "at_least_1_upper_letter": "少なくとも1つの大文字",
+         "at_least_1_lower_letter": "少なくとも1つの小文字",
+         "at_least_1_digit": "少なくとも1つの数字",
+         "at_least_1_digit_special_character": "少なくとも1つの特殊文字 !@#$%^&*()",
+         "please_enter_your_current_password": "現在のパスワードを入力してください！",
+         "please_enter_your_new_password": "新しいパスワードを入力してください！",
+         "please_re_enter_your_new_password": "新しいパスワードを再入力してください！",
+         "confirmation_password_does_not_match": "確認用パスワードが一致しません。"
     }
 }

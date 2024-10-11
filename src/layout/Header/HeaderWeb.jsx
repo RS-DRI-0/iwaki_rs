@@ -138,6 +138,8 @@ const HeaderWeb = () => {
     setIsAnchorEl(null);
   };
 
+  const chooseLanguage = "vietnamese";
+
   return (
     <Box
       display="flex"
@@ -228,6 +230,7 @@ const HeaderWeb = () => {
         isOpenModalInfor={isOpenModalInfor}
         handleCloseModalInfor={handleCloseModalInfor}
         setIsOpenModalInfor = {setIsOpenModalInfor}
+        chooseLanguage={chooseLanguage}
       />
     </Box>
   );

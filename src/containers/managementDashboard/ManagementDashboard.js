@@ -180,6 +180,18 @@ const ManagementDashboard = ({
       dataIndex: "upload_usname",
       key: "upload_usname",
       align: "center",
+      render: (text) => (
+        <div
+          style={{
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+          title={text} // Tooltip on hover to show full text
+        >
+          {text}
+        </div>
+      ),
     },
     {
       title: fileLanguage[chooseLanguage].upload_time,
@@ -541,7 +553,7 @@ const ManagementDashboard = ({
               checkClickSearch === true ? valueSearch : listPackageAll
             }
             scroll={{
-              y: screenHeight - 700,
+              y: screenHeight - 680,
             }}
             size="small"
             className="management-dashboard-table"

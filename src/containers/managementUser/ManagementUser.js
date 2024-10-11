@@ -44,10 +44,8 @@ const ManagementUserIndex = ({
           style={{ display: "flex", justifyContent: "center" }}
         >
           <div style={{ width: "70%" }}>
-            <Row className="row-page-admin-user">
-              <Col span={10}>
-                <h1>USER MANAGEMENT</h1>
-              </Col>
+            <Row className="row-page-admin-user" style={{ marginTop: "4%" }}>
+              <Col span={10}>{/* <h1>USER MANAGEMENT</h1> */}</Col>
               <Col span={14} className="header-page-admin-user-col-14">
                 <Input
                   size="large"
