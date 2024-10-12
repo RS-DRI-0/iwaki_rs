@@ -85,7 +85,15 @@ export const authLogin = (username, password, loading) => {
         } else if (res.data.user_role_title === "LASTCHECK") {
           window.location = "/last_check";
         } else if (res.data.user_role_title === "ADMIN") {
-          window.location = "/user";
+          const userId = JSON.parse(
+            sessionStorage.getItem("info_user")
+          ).user_id;
+
+          sessionStorage.clear();
+          localStorage.clear();
+          window.location = "/login";
+          cookies.remove(`token_iwaki_${userId}`);
+          cookies.remove(`refresh_iwaki_${userId}`);
         } else if (res.data.user_role_title === "APP_MANAGER") {
           window.location = "/management";
         } else if (res.data.user_role_title === "CLF") {
@@ -96,7 +104,7 @@ export const authLogin = (username, password, loading) => {
         loading(false);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         loading(false);
         dispatch(authFail(err.response.data.message));
       });

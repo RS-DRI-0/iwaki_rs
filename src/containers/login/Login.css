@@ -86,7 +86,7 @@ button.btnSignIn {
   height: 48px;
   gap: 0px;
   border-radius: 14px;
-  background: #0c4da2;
+  background: #0c4da2 !important ;
   padding: 12px;
 }
 span.spanSignIn {
