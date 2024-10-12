@@ -141,9 +141,9 @@ img.imageSourceChecksheet {
   object-fit: contain;
   border-radius: 8px;
 }
-.ModalViewImageSelect > .ant-modal-content {
-  border-radius: 0px;
-  padding: 0px;
+.ModalViewImageSelect.ant-modal .ant-modal-content {
+  border-radius: 0;
+  padding: 0;
 }
 button.buttonStarCheck {
   background: #231b9a;
@@ -194,7 +194,7 @@ span.textButtonDelete {
   color: #ffffff;
 }
 span.spanTitleHeader {
-  font-family: ""Lato", sans-serif", sans-serif;
+  font-family: "" Lato ", sans-serif", sans-serif;
   font-size: 16px;
   font-weight: 600;
   line-height: 14.04px;
@@ -205,7 +205,7 @@ span.buttonChoose {
   display: flex;
   justify-content: end;
 
-  font-family: ""Lato", sans-serif", sans-serif;
+  font-family: "" Lato ", sans-serif", sans-serif;
   font-size: 14px;
   font-weight: 600;
   line-height: 22px;
@@ -246,7 +246,7 @@ span.buttonChoose {
   background-color: #0c4da2;
 }
 .ButtonDeleteAllYes span {
-  font-family: ""Lato", sans-serif", sans-serif;
+  font-family: "" Lato ", sans-serif", sans-serif;
   font-size: 16px;
   font-weight: 700;
   line-height: 19.2px;
@@ -261,7 +261,7 @@ span.buttonChoose {
   background-color: #ffffff;
 }
 .ButtonDeleteAllNo span {
-  font-family: ""Lato", sans-serif", sans-serif;
+  font-family: "" Lato ", sans-serif", sans-serif;
   font-size: 16px;
   font-weight: 700;
   line-height: 19.2px;
@@ -290,7 +290,7 @@ span.buttonChoose {
   background-color: #0c4da2;
 }
 .TitleUpdateModalButton span {
-  font-family: ""Lato", sans-serif", sans-serif;
+  font-family: "" Lato ", sans-serif", sans-serif;
   font-size: 16px;
   font-weight: 700;
   line-height: 19.2px;
@@ -470,7 +470,7 @@ img.button-delete {
   background-color: #0c4da2;
 }
 .btnOkConfirmUpload span {
-  font-family: ""Lato", sans-serif", sans-serif;
+  font-family: "" Lato ", sans-serif", sans-serif;
   font-size: 16px;
   font-weight: 700;
   line-height: 19.2px;
@@ -485,7 +485,7 @@ img.button-delete {
   background-color: #ffffff;
 }
 .btnCancelConfirmUpload span {
-  font-family: ""Lato", sans-serif", sans-serif;
+  font-family: "" Lato ", sans-serif", sans-serif;
   font-size: 16px;
   font-weight: 700;
   line-height: 19.2px;
