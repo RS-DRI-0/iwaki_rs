@@ -28,7 +28,7 @@ const authAxiosTest = () => {
             error.response.status === 500 ||
             error.response.status === 403
           ) {
-            reject(error.response); // trả kết quả đúng ở catch 
+            reject(error.response); // trả kết quả đúng ở catch
             // reject(new Error(error.response));
           } else if (error.response.status === 401 && error.config) {
             oroginReq._retry = true;
@@ -58,6 +58,12 @@ const authAxiosTest = () => {
                 });
               resolve(res);
             }
+          } else if (error.response.status === 422) {
+            sessionStorage.clear();
+            localStorage.clear();
+            window.location = "/login";
+            cookies.remove(`token_iwaki_${userId}`);
+            cookies.remove(`refresh_iwaki_${userId}`);
           }
         } catch (e) {
           localStorage.setItem("error_s", "1");

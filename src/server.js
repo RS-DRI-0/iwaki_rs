@@ -6,13 +6,11 @@ export const localhost = "http://192.168.30.26:5010";
 // export const localhost = "https://iwaki-test1.dri.io.vn/api";
 // export const localhost = "https://truongtx.dri.io.vn/api";
 
-
 // export const localhost = "https://dev-op-iwaki.rainscales.com/api";
 // export const localhost = "https://dev-iwaki.rainscales.com/api";
 // export const localhost = "https://op-iwaki.rainscales.com/api";
 // export const localhost = "https://uat-op-iwaki.rainscales.com/api";
 // export const localhost = "https://uat-iwaki.rainscales.com/api";
-
 
 // export const localhost = 'https://truongtx.dominatech.xyz/api'
 // export const localhost = 'https://iwaki-test.dominatech.xyz/api' //5001
