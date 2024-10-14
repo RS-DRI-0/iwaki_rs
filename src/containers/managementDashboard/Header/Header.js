@@ -16,7 +16,7 @@ const Header = ({
   chooseLanguage,
   handleChangeSelectLanguage,
   onClickMenuDashboard,
-  valueKeyMenu
+  valueKeyMenu,
 }) => {
   const [isAnchorEl, setIsAnchorEl] = useState(null);
   const open = Boolean(isAnchorEl);
@@ -40,6 +40,8 @@ const Header = ({
 
   const role_title = sessionStorage.getItem("Role_Title");
 
+  const screenWidth = window.innerWidth;
+  const checkScreenWidth1024 = screenWidth < 1440;
   return (
     <Box
       display="flex"
@@ -68,7 +70,7 @@ const Header = ({
           </Box>
         </Col>
 
-        <Col span={16}>
+        <Col span={12}>
           <Menu
             mode="horizontal"
             style={{
@@ -87,7 +89,7 @@ const Header = ({
           </Menu>
         </Col>
         {/* ICONS */}
-        <Col span={6}>
+        <Col span={10}>
           <Box display="flex" sx={{ float: "right", paddingRight: "24px" }}>
             <Button
               variant="outlined"
@@ -105,8 +107,9 @@ const Header = ({
                   )}
                 </Avatar>
               }
-              className="btnInfoUser"
+              className="btnInfoUserAdmin"
               style={{ height: "70%", float: "right" }}
+              data-screen-1440={checkScreenWidth1024}
             >
               {JSON.parse(sessionStorage.getItem("user_success"))}
             </Button>
@@ -161,6 +164,8 @@ const Header = ({
 Header.propTypes = {
   chooseLanguage: PropTypes.any,
   handleChangeSelectLanguage: PropTypes.func,
+  onClickMenuDashboard: PropTypes.any,
+  valueKeyMenu: PropTypes.any,
 };
 
 export default Header;

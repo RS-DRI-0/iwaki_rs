@@ -92,7 +92,7 @@ const ModalCheckSheets = ({
   };
 
   const screenWidth = window.innerWidth;
-  const checkWidthScreen = screenWidth <= 1480 ? "70%" : "50%";
+  const checkWidthScreen = screenWidth <= 1480 ? "90%" : "50%";
 
   return (
     <Modal

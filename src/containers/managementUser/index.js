@@ -17,10 +17,11 @@ import SuccessIcon from "../../images/SuccessNotiIcon.svg";
 import ErrorIcon from "../../images/ErrorNotifiIcon.svg";
 import { authAxios } from "../../api/axiosClient";
 import fileLanguage from "../../language.json";
+import PropTypes from "prop-types";
 
 const { confirm } = Modal;
 
-const ManagementUser = ({chooseLanguage}) => {
+const ManagementUser = ({ chooseLanguage }) => {
   const [listInforUserAll, setListInforUserAll] = useState([]);
   const [listInforUserFilter, setListInforUserFilter] = useState([]);
 
@@ -394,6 +395,10 @@ const ManagementUser = ({chooseLanguage}) => {
       />
     </>
   );
+};
+
+ManagementUser.propTypes = {
+  chooseLanguage: PropTypes.any,
 };
 
 export default ManagementUser;
