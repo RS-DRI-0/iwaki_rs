@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { IconButton } from "@mui/material";
-import { Button, Col, Form, Input, Modal, Row, Select, TreeSelect } from "antd";
+import { Button, Col, Form, Input, Modal, Row, TreeSelect } from "antd";
 import CancelIcon from "@mui/icons-material/Cancel";
 import PropTypes from "prop-types";
 import fileLanguage from "../../language.json";
@@ -196,6 +196,7 @@ const EditUser = ({
                 float: "right",
                 marginTop: "1%",
                 fontWeight: "bold",
+                background: "#053457",
               }}
               type="primary"
               htmlType="submit"
@@ -215,6 +216,7 @@ EditUser.propTypes = {
   showDrawerEditUser: PropTypes.func,
   openDrawerEditUser: PropTypes.bool,
   valueEdit: PropTypes.any,
+  chooseLanguage: PropTypes.any,
 };
 
 export default EditUser;

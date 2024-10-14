@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Button } from "@mui/material";
-import { Col, Input, Row, Table, Tabs } from "antd";
+import { Col, Input, Row, Table } from "antd";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import PropTypes from "prop-types";
 import fileLanguage from "../../language.json";
@@ -18,22 +18,10 @@ const ManagementUserIndex = ({
   valueSearch,
   checkValueSearch,
   activeKey,
-  chooseLanguage
+  chooseLanguage,
 }) => {
   const screenHeight = window.innerHeight;
   const screenWidth = window.innerWidth;
-
-  const [valueColTabsUser, setValueColTabsUser] = useState([]);
-
-  useEffect(() => {
-    if (screenWidth > 1650) {
-      setValueColTabsUser([2, 22]);
-    } else if (screenWidth > 1024) {
-      setValueColTabsUser([3, 21]);
-    } else if (screenWidth <= 1024) {
-      setValueColTabsUser([5, 19]);
-    }
-  }, [screenWidth]);
 
   const checkListInforUserFilter =
     listInforUserFilter.length !== 0 ? listInforUserFilter : listInforUserAll;
@@ -45,7 +33,9 @@ const ManagementUserIndex = ({
           className="header-page-admin-user"
           style={{ display: "flex", justifyContent: "center" }}
         >
-          <div style={{ width: "70%" }}>
+          <div
+            style={screenWidth <= 1280 ? { width: "100%" } : { width: "70%" }}
+          >
             <Row className="row-page-admin-user" style={{ marginTop: "4%" }}>
               <Col span={10}>{/* <h1>USER MANAGEMENT</h1> */}</Col>
               <Col span={14} className="header-page-admin-user-col-14">
@@ -74,22 +64,9 @@ const ManagementUserIndex = ({
           className="row-page-admin-user"
           style={{ display: "flex", justifyContent: "center" }}
         >
-          {/* <Col span={valueColTabsUser[0]}>
-            <Tabs
-              activeKey={activeKey}
-              onChange={onChangeTabsTable}
-              className="tabs-page-admin-user"
-              tabPosition={"left"}
-            >
-              {items.map((item) => (
-                <Tabs.TabPane tab={item.label} key={item.key}>
-                  {item.label}
-                </Tabs.TabPane>
-              ))}
-            </Tabs>
-          </Col> */}
-          {/* <Col span={valueColTabsUser[1]}> */}
-          <div style={{ width: "70%" }}>
+          <div
+            style={screenWidth <= 1280 ? { width: "100%" } : { width: "70%" }}
+          >
             <Table
               columns={columns}
               dataSource={
@@ -110,8 +87,6 @@ const ManagementUserIndex = ({
               }
             />
           </div>
-
-          {/* </Col> */}
         </Row>
       </Col>
     </Row>
@@ -131,6 +106,7 @@ ManagementUserIndex.propTypes = {
   valueSearch: PropTypes.array,
   checkValueSearch: PropTypes.string,
   activeKey: PropTypes.string,
+  chooseLanguage: PropTypes.any,
 };
 
 export default ManagementUserIndex;

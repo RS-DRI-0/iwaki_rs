@@ -30,22 +30,38 @@
 }
 
 .value-check-case {
-  color: #F50100;
+  color: #f50100;
   font-size: 12px;
 
   &[data-length-string="true"] {
-    color: #0FA958;
+    color: #0fa958;
   }
   &[data-upper-case="true"] {
-    color: #0FA958;
+    color: #0fa958;
   }
   &[data-lower-case="true"] {
-    color: #0FA958;
+    color: #0fa958;
   }
   &[data-number="true"] {
-    color: #0FA958;
+    color: #0fa958;
   }
   &[data-special-characters="true"] {
-    color: #0FA958;
+    color: #0fa958;
+  }
+}
+
+.btnInfoUserAdmin {
+  border-radius: 5px !important;
+  border: 1px solid var(--primary-1, #058df4) !important;
+  background: #fff !important;
+  color: var(--text-title-2, #394b76) !important;
+  text-align: center !important;
+  font-size: 14px !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  line-height: 160% !important; /* 22.4px */
+
+  &[data-screen-1440="true"] {
+    font-size: 9px !important;
   }
 }

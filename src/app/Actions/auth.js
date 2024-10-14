@@ -76,30 +76,103 @@ export const authLogin = (username, password, loading) => {
           dispatch(authFail(res.data.message));
         }
 
+        const screenWidth = window.innerWidth;
+
         if (res.data.user_role_title === "STAFF") {
           window.location = "/";
         } else if (res.data.user_role_title === "ENTRY") {
-          window.location = "/entry";
+          if (screenWidth < 930) {
+            const userId = JSON.parse(
+              sessionStorage.getItem("info_user")
+            ).user_id;
+
+            sessionStorage.clear();
+            localStorage.clear();
+            cookies.remove(`token_iwaki_${userId}`);
+            cookies.remove(`refresh_iwaki_${userId}`);
+            window.location = "/login";
+          } else {
+            window.location = "/entry";
+          }
         } else if (res.data.user_role_title === "CHECK") {
-          window.location = "/check";
+          if (screenWidth < 930) {
+            const userId = JSON.parse(
+              sessionStorage.getItem("info_user")
+            ).user_id;
+
+            sessionStorage.clear();
+            localStorage.clear();
+            cookies.remove(`token_iwaki_${userId}`);
+            cookies.remove(`refresh_iwaki_${userId}`);
+            window.location = "/login";
+          } else {
+            window.location = "/check";
+          }
         } else if (res.data.user_role_title === "LASTCHECK") {
-          window.location = "/last_check";
+          if (screenWidth < 930) {
+            const userId = JSON.parse(
+              sessionStorage.getItem("info_user")
+            ).user_id;
+
+            sessionStorage.clear();
+            localStorage.clear();
+            cookies.remove(`token_iwaki_${userId}`);
+            cookies.remove(`refresh_iwaki_${userId}`);
+            window.location = "/login";
+          } else {
+            window.location = "/last_check";
+          }
         } else if (res.data.user_role_title === "ADMIN") {
           const userId = JSON.parse(
             sessionStorage.getItem("info_user")
           ).user_id;
-
           sessionStorage.clear();
           localStorage.clear();
-          window.location = "/login";
           cookies.remove(`token_iwaki_${userId}`);
           cookies.remove(`refresh_iwaki_${userId}`);
+          window.location = "/login";
         } else if (res.data.user_role_title === "APP_MANAGER") {
-          window.location = "/management";
+          if (screenWidth < 930) {
+            const userId = JSON.parse(
+              sessionStorage.getItem("info_user")
+            ).user_id;
+
+            sessionStorage.clear();
+            localStorage.clear();
+            cookies.remove(`token_iwaki_${userId}`);
+            cookies.remove(`refresh_iwaki_${userId}`);
+            window.location = "/login";
+          } else {
+            window.location = "/management";
+          }
         } else if (res.data.user_role_title === "CLF") {
-          window.location = "/entry_classification";
+          if (screenWidth < 930) {
+            const userId = JSON.parse(
+              sessionStorage.getItem("info_user")
+            ).user_id;
+
+            sessionStorage.clear();
+            localStorage.clear();
+            cookies.remove(`token_iwaki_${userId}`);
+            cookies.remove(`refresh_iwaki_${userId}`);
+            window.location = "/login";
+          } else {
+            window.location = "/entry_classification";
+          }
         } else if (res.data.user_role_title === "CHECK_CLF") {
-          window.location = "/check_classification";
+          if (screenWidth < 930) {
+            const userId = JSON.parse(
+              sessionStorage.getItem("info_user")
+            ).user_id;
+
+            sessionStorage.clear();
+            localStorage.clear();
+            cookies.remove(`token_iwaki_${userId}`);
+            cookies.remove(`refresh_iwaki_${userId}`);
+            window.location = "/login";
+          } else {
+            window.location = "/check_classification";
+          }
         }
         loading(false);
       })

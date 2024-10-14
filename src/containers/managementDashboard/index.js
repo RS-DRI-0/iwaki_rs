@@ -53,7 +53,6 @@ const ManagementDashboardIndex = () => {
       : "japanese"
   );
   const [valueKeyMenu, setValueKeyMenu] = useState("1");
-  console.log(chooseLanguage);
   const inforUser = JSON.parse(sessionStorage.getItem("info_user"));
 
   const handleClickOpenModalChecksheets = () => {
