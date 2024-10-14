@@ -22,3 +22,21 @@
 .table-row-dark {
   background-color: #e0e0e0; /* Màu tối cho dòng lẻ */
 }
+
+// custom scrollbar
+.ant-table-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.ant-table-body::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+.ant-table-body::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: #c1c1c1;
+}
+
+.ant-table-wrapper .ant-table {
+  scrollbar-color: unset;
+}

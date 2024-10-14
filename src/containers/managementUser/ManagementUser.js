@@ -4,6 +4,7 @@ import { Col, Input, Row, Table } from "antd";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import PropTypes from "prop-types";
 import fileLanguage from "../../language.json";
+import "./style.scss";
 
 const ManagementUserIndex = ({
   columns,
