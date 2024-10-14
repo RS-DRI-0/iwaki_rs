@@ -43,7 +43,7 @@
     font-size: 14px;
     font-weight: 600;
   }
-  
+
   &[data-total-color-processing="true"] {
     color: #626262;
   }
@@ -175,4 +175,6 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedPr
 .management-dashboard-mobile-col {
   background: #fff;
   width: 80%;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
