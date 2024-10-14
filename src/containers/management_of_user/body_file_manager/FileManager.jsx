@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./ModalFileManager.css";
-import { Button, Col, Row, Pagination, Flex, FloatButton } from "antd";
+import { Button, Col, Row, Pagination, FloatButton } from "antd";
 import dayjs from "dayjs";
 import { localhost } from "../../../server";
 import language from "../../../language.json";
@@ -27,41 +27,11 @@ import IconHistory from "../../../images/file_manager/historyIcon.svg";
 
 import ModalViewDetail from "./modal/ModalViewDetail";
 import { authAxios } from "../../../api/axiosClient";
-import { CommentOutlined, CustomerServiceOutlined, DownOutlined, HistoryOutlined, LeftOutlined, RightOutlined, SettingOutlined, UpOutlined } from "@ant-design/icons";
+import { LeftOutlined } from "@ant-design/icons";
 import ModalShowHistory from "./modal/ModalShowHistory";
 import { templateNodata } from "../../../Function";
 import PropTypes from "prop-types";
-const BOX_SIZE = 100;
-const BUTTON_SIZE = 40;
-const wrapperStyle = {
-  width: '100%',
-  height: '100vh',
-  overflow: 'hidden',
-  position: 'relative',
-};
-const boxStyle = {
-  width: BOX_SIZE,
-  height: BOX_SIZE,
-  position: 'relative',
-};
-const insetInlineEnd = [
-  (BOX_SIZE - BUTTON_SIZE) / 2,
-  -(BUTTON_SIZE / 2),
-  (BOX_SIZE - BUTTON_SIZE) / 2,
-  BOX_SIZE - BUTTON_SIZE / 2,
-];
-const bottom = [
-  BOX_SIZE - BUTTON_SIZE / 2,
-  (BOX_SIZE - BUTTON_SIZE) / 2,
-  -BUTTON_SIZE / 2,
-  (BOX_SIZE - BUTTON_SIZE) / 2,
-];
-const icons = [
-  <UpOutlined key="up" />,
-  <RightOutlined key="right" />,
-  <DownOutlined key="down" />,
-  <LeftOutlined key="left" />,
-];
+
 const FileManager = ({
   chooseLanguage,
   setCheckNoti,
@@ -326,7 +296,7 @@ const FileManager = ({
               position: "sticky"
             }}
             key = {'left'}
-            // open={onShowOption}
+            open={onShowOption}
             icon={<LeftOutlined key="left" />}
             onClick={() => setOnShowOption(prev => !prev)}
           >
@@ -369,7 +339,6 @@ const FileManager = ({
           dataSource.length > 0 ? (
             <>
               <div className="container-list-package">
-
                 {dataSource.map((item, index) => (
                   <Row className="bg-thumbnail-list-file" key={item.pack_id} >
                     <div className="content-type-pump">
@@ -378,7 +347,7 @@ const FileManager = ({
                     <Row style={{ width: "100%", paddingTop: 5 }}>
                       <Col span={8} style={{ position: "relative" }}>
 
-                        <button aria-label="btn-detail" className="thumbNail-manager-app" onClick={() => showModalDetail(item)} style={{ background: "none", padding: 0, border: 0 }}>
+                        <button aria-label="btn-detail" className="thumbNail-manager-app" onClick={() => showModalDetail(item)}>
                           <img
                             src={`data:image/webp;base64,${item.thumb_base64}`}
                             alt=""
@@ -498,7 +467,7 @@ const FileManager = ({
                         <Row className="container-check-cusStatus">
                           <Col span={8}>
                             <Button
-                              style={{ color: "#394B76", fontSize: 17 }}
+                              className="btn-notOK"
                               onClick={() => UpdateCusStatus(item, "0")}
                             >
                               {language[chooseLanguage].not_ok}
@@ -506,7 +475,7 @@ const FileManager = ({
                           </Col>
                           <Col span={8}>
                             <Button
-                              style={{ color: "#fff", background: "#0C4DA2", fontSize: 17  }}
+                             className="btn-ok"
                               onClick={() => UpdateCusStatus(item, "1")}
                             >
                               {language[chooseLanguage].ok}

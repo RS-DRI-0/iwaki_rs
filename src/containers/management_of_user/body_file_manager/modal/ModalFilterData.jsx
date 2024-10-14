@@ -123,8 +123,7 @@ const ModalFilterData = (
         onFinish={onFinish}
       >
         <div style={{ border: "1px solid #94A3B8", marginTop: "10%" }}>
-          <div
-            style={{ padding: "6% 10% 10%", display: "grid", rowGap: "2ch" }}
+          <div style={{ padding: "6% 10% 10%", display: "grid", rowGap: "2ch" }}
           >
             <Col span={24}>
               <Form.Item
@@ -204,16 +203,15 @@ const ModalFilterData = (
         </div>
         <Row className="btn-filter-data">
           <Col span={24}>
-            <Button onClick={handleCancel} style={{ color: "#394B76" }}>
+            <Button onClick={handleCancel} id="btn-cancel">
               {language[chooseLanguage].cancel}
             </Button>
           </Col>
           <Col span={24}>
             <Button
-              style={{ color: "#fff", background: "#0C4DA2" }}
               htmlType="submit"
+              id="btn-submit"
             >
-              {" "}
               {language[chooseLanguage].ok}
             </Button>
           </Col>

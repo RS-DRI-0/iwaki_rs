@@ -79,9 +79,9 @@ const ModalViewImageHistory = ({ open, setIsOpenViewImage, dataDetail }) => {
         setIsOpenViewImage(false)
     }
     return (
-        <Modal className='modal-view-image-history' open={open} onCancel={handleCancel} footer={false} closable={false} style={{ top: 10 }}>
+        <Modal className='modal-view-image-history' open={open} onCancel={handleCancel} footer={false} closable={false}>
             <Row>
-                <Row style={{ width: "100%", paddingTop: 6 }}>
+                <Row className='row-rotate-img' >
                     <Col
                         span={20}
                         style={{
@@ -103,7 +103,8 @@ const ModalViewImageHistory = ({ open, setIsOpenViewImage, dataDetail }) => {
                         ></Button>
                     </Col>
                     <Col span={4} style={{ textAlign: "-webkit-right" }}>
-                        <Button className='btn-view-detail' style={{ height: 30 }} onClick={handleCancel}>
+                        <Button className='btn-view-detail' onClick={handleCancel}>
+                        {/* style={{ height: 30 }} */}
                             <CloseOutlined />
                         </Button>
                     </Col>
