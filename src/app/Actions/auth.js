@@ -132,19 +132,7 @@ export const authLogin = (username, password, loading) => {
           cookies.remove(`refresh_iwaki_${userId}`);
           window.location = "/login";
         } else if (res.data.user_role_title === "APP_MANAGER") {
-          if (screenWidth < 930) {
-            const userId = JSON.parse(
-              sessionStorage.getItem("info_user")
-            ).user_id;
-
-            sessionStorage.clear();
-            localStorage.clear();
-            cookies.remove(`token_iwaki_${userId}`);
-            cookies.remove(`refresh_iwaki_${userId}`);
-            window.location = "/login";
-          } else {
-            window.location = "/management";
-          }
+          window.location = "/management";
         } else if (res.data.user_role_title === "CLF") {
           if (screenWidth < 930) {
             const userId = JSON.parse(

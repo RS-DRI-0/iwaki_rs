@@ -65,3 +65,42 @@
     font-size: 9px !important;
   }
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.menu-admin-mobile {
+  padding: 10px 0;
+}
+
+.menu-admin-mobile.ant-menu-light {
+  background: #868585 !important;
+}
+
+.menu-admin-mobile.ant-menu-light .ant-menu-item {
+  color: #fff !important;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.menu-admin-mobile.ant-menu-light .ant-menu-item-selected {
+  background-color: transparent;
+}
+
+.menu-admin-mobile li.ant-menu-item.ant-menu-item-only-child {
+  border-bottom: 1px solid #fff;
+}
+
+.menu-admin-mobile.ant-menu .ant-menu-item {
+  border-radius: 0px;
+}
+
+.menu-admin-mobile.border-top {
+  border-top: 1px solid #fff;
+}

@@ -64,10 +64,10 @@ const AddUser = ({
     }
     return Promise.resolve(); // Success
   };
-
+  const screenWidth = window.innerWidth;
   return (
     <Modal
-      width="40%"
+      width={screenWidth < 1440 ? "70%" : "40%"}
       className="ModalViewImage"
       open={openDrawerAddUser}
       closable={false}

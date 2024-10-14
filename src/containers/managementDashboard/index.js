@@ -10,6 +10,8 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import ManagementUser from "../managementUser";
+import HeaderMobile from "./Header/HeaderMobile";
+import ManagementDashboardMobile from "./ManagementDashboardMobile";
 
 const ManagementDashboardIndex = () => {
   const currentDate = dayjs();
@@ -54,6 +56,7 @@ const ManagementDashboardIndex = () => {
   );
   const [valueKeyMenu, setValueKeyMenu] = useState("1");
   const inforUser = JSON.parse(sessionStorage.getItem("info_user"));
+  const [showOverlay, setShowOverlay] = useState(false);
 
   const handleClickOpenModalChecksheets = () => {
     setIsOpenModalChecksheets((prevState) => !prevState);
@@ -97,6 +100,8 @@ const ManagementDashboardIndex = () => {
         user_role: inforUser.user_role,
         date_time:
           isValueDatePickerManagement === undefined
+            ? currentDate.format("YYMMDD")
+            : valueKeyMenu === "2"
             ? currentDate.format("YYMMDD")
             : isValueDatePickerManagement,
         is_multi: pumbModel.is_multi,
@@ -333,8 +338,9 @@ const ManagementDashboardIndex = () => {
         is_multi: isMulti,
         value: pumbId,
       };
-      fetchListDashBoard(data);
       fetchListPackageAll(data);
+
+      fetchListDashBoard(data);
     }
   }, [listPumb]);
 
@@ -404,7 +410,19 @@ const ManagementDashboardIndex = () => {
   const onClickMenuDashboard = (value) => {
     setValueKeyMenu(value.key);
     sessionStorage.setItem("id_menu", value.key);
+    setShowOverlay(false);
+    const isMulti = listPumb[0].is_multi;
+    const pumbId = listPumb[0].pumb_id;
+
+    const data = {
+      is_multi: dataPumb === undefined ? isMulti : dataPumb.is_multi,
+      value: dataPumb === undefined ? pumbId : dataPumb.value,
+    };
+
+    fetchListPackageAll(data);
   };
+
+  const screenWidth = window.innerWidth;
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -415,58 +433,82 @@ const ManagementDashboardIndex = () => {
           style={{ display: "flex", flexDirection: "column", height: "100vh" }}
         >
           <main className="content1" style={{ flex: "1" }}>
-            <Header
-              chooseLanguage={chooseLanguage}
-              handleChangeSelectLanguage={handleChangeSelectLanguage}
-              onClickMenuDashboard={onClickMenuDashboard}
-              valueKeyMenu={valueKeyMenu}
-            />
+            {screenWidth <= 768 ? (
+              <HeaderMobile
+                chooseLanguage={chooseLanguage}
+                handleChangeSelectLanguage={handleChangeSelectLanguage}
+                onClickMenuDashboard={onClickMenuDashboard}
+                valueKeyMenu={valueKeyMenu}
+                setShowOverlay={setShowOverlay}
+                showOverlay={showOverlay}
+              />
+            ) : (
+              <Header
+                chooseLanguage={chooseLanguage}
+                handleChangeSelectLanguage={handleChangeSelectLanguage}
+                onClickMenuDashboard={onClickMenuDashboard}
+                valueKeyMenu={valueKeyMenu}
+              />
+            )}
+
             <div className="container-fluid" style={{ maxWidth: "100%" }}>
               {valueKeyMenu === "1" ? (
-                <ManagementDashboard
-                  isOpenModalChecksheets={isOpenModalChecksheets}
-                  handleClickOpenModalChecksheets={
-                    handleClickOpenModalChecksheets
-                  }
-                  isOpenModalDailyLC={isOpenModalDailyLC}
-                  handleClickOpenModalDailyLC={handleClickOpenModalDailyLC}
-                  isOpenModalDailyAverage={isOpenModalDailyAverage}
-                  handleClickOpenModalDailyAverage={
-                    handleClickOpenModalDailyAverage
-                  }
-                  isOpenTable={isOpenTable}
-                  listPackageAll={listPackageAll}
-                  isValueDashBoard={isValueDashBoard}
-                  isValueCheckSheets={isValueCheckSheets}
-                  isValueDailyNotqualified={isValueDailyNotqualified}
-                  isValueDailyNG={isValueDailyNG}
-                  isValueDailyAll={isValueDailyAll}
-                  isValueDailyAverage={isValueDailyAverage}
-                  handleClickButtonOpenTable={handleClickButtonOpenTable}
-                  handleDatePickerModalCheckSheet={
-                    handleDatePickerModalCheckSheet
-                  }
-                  handleDatePickerModalDaily={handleDatePickerModalDaily}
-                  handleDatePickerModalDailyAverage={
-                    handleDatePickerModalDailyAverage
-                  }
-                  handleDatePickerManagement={handleDatePickerManagement}
-                  handleSearchTableManagemant={handleSearchTableManagemant}
-                  valueSearch={valueSearch}
-                  checkValueSearch={checkValueSearch}
-                  handleChangeResult={handleChangeResult}
-                  handleClickSearch={handleClickSearch}
-                  handleChangeStatus={handleChangeStatus}
-                  checkClickSearch={checkClickSearch}
-                  checkValueStatus={checkValueStatus}
-                  checkValueResult={checkValueResult}
-                  isValueAverageTimeLc={isValueAverageTimeLc}
-                  handleClearDataSearch={handleClearDataSearch}
-                  listPumb={listPumb}
-                  chooseModel={chooseModel}
-                  datePickerValue={datePickerValue}
-                  chooseLanguage={chooseLanguage}
-                />
+                <>
+                  {screenWidth <= 768 ? (
+                    <ManagementDashboardMobile
+                      listPumb={listPumb}
+                      chooseModel={chooseModel}
+                      handleDatePickerManagement={handleDatePickerManagement}
+                      isValueDashBoard={isValueDashBoard}
+                      chooseLanguage={chooseLanguage}
+                    />
+                  ) : (
+                    <ManagementDashboard
+                      isOpenModalChecksheets={isOpenModalChecksheets}
+                      handleClickOpenModalChecksheets={
+                        handleClickOpenModalChecksheets
+                      }
+                      isOpenModalDailyLC={isOpenModalDailyLC}
+                      handleClickOpenModalDailyLC={handleClickOpenModalDailyLC}
+                      isOpenModalDailyAverage={isOpenModalDailyAverage}
+                      handleClickOpenModalDailyAverage={
+                        handleClickOpenModalDailyAverage
+                      }
+                      isOpenTable={isOpenTable}
+                      listPackageAll={listPackageAll}
+                      isValueDashBoard={isValueDashBoard}
+                      isValueCheckSheets={isValueCheckSheets}
+                      isValueDailyNotqualified={isValueDailyNotqualified}
+                      isValueDailyNG={isValueDailyNG}
+                      isValueDailyAll={isValueDailyAll}
+                      isValueDailyAverage={isValueDailyAverage}
+                      handleClickButtonOpenTable={handleClickButtonOpenTable}
+                      handleDatePickerModalCheckSheet={
+                        handleDatePickerModalCheckSheet
+                      }
+                      handleDatePickerModalDaily={handleDatePickerModalDaily}
+                      handleDatePickerModalDailyAverage={
+                        handleDatePickerModalDailyAverage
+                      }
+                      handleDatePickerManagement={handleDatePickerManagement}
+                      handleSearchTableManagemant={handleSearchTableManagemant}
+                      valueSearch={valueSearch}
+                      checkValueSearch={checkValueSearch}
+                      handleChangeResult={handleChangeResult}
+                      handleClickSearch={handleClickSearch}
+                      handleChangeStatus={handleChangeStatus}
+                      checkClickSearch={checkClickSearch}
+                      checkValueStatus={checkValueStatus}
+                      checkValueResult={checkValueResult}
+                      isValueAverageTimeLc={isValueAverageTimeLc}
+                      handleClearDataSearch={handleClearDataSearch}
+                      listPumb={listPumb}
+                      chooseModel={chooseModel}
+                      datePickerValue={datePickerValue}
+                      chooseLanguage={chooseLanguage}
+                    />
+                  )}
+                </>
               ) : (
                 <ManagementUser chooseLanguage={chooseLanguage} />
               )}

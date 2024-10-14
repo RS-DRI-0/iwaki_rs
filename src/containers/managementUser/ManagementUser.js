@@ -26,7 +26,6 @@ const ManagementUserIndex = ({
 
   const checkListInforUserFilter =
     listInforUserFilter.length !== 0 ? listInforUserFilter : listInforUserAll;
-
   return (
     <Row style={{ width: "100%", margin: "auto" }}>
       <Col span={24}>
@@ -42,7 +41,7 @@ const ManagementUserIndex = ({
               <Col span={14} className="header-page-admin-user-col-14">
                 <Input
                   size="large"
-                  style={{ width: "20%", marginRight: 10 }}
+                  style={{ width: "30%", marginRight: 10 }}
                   placeholder={fileLanguage[chooseLanguage].search}
                   value={checkValueSearch}
                   onChange={handleSearchUser}

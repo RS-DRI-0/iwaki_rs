@@ -51,9 +51,11 @@ const ManagementUser = ({ chooseLanguage }) => {
     confirm({
       title:
         index.is_active === 1
-          ? "Bạn có muốn mở khóa người dùng?"
-          : "Bạn có muốn khóa người dùng?",
+          ? fileLanguage[chooseLanguage].do_you_want_to_unlock_the_user
+          : fileLanguage[chooseLanguage].do_you_want_to_lock_the_user,
       icon: <ExclamationCircleFilled />,
+      okText: fileLanguage[chooseLanguage].save,
+      cancelText: fileLanguage[chooseLanguage].cancel,
       onOk() {
         setOpenConfirmDelete(false);
         authAxios()
@@ -72,6 +74,12 @@ const ManagementUser = ({ chooseLanguage }) => {
       },
       onCancel() {
         setOpenConfirmDelete(false);
+      },
+      okButtonProps: {
+        style: {
+          backgroundColor: "#053457", // Change 'your-color' to your desired color
+          color: "#fff", // Change text color if needed
+        },
       },
     });
   };
@@ -314,7 +322,14 @@ const ManagementUser = ({ chooseLanguage }) => {
         openNotificationSweetAlertAdmin(SuccessIcon, res.data.message);
       })
       .catch((err) => {
-        openNotificationSweetAlertAdmin(ErrorIcon, err.data.message);
+        if (err.data.message === "User đã tồn tại!") {
+          openNotificationSweetAlertAdmin(
+            ErrorIcon,
+            fileLanguage[chooseLanguage].user_already_exists
+          );
+        } else {
+          openNotificationSweetAlertAdmin(ErrorIcon, err.data.message);
+        }
       });
   };
 
