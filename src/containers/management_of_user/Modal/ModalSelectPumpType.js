@@ -17,7 +17,118 @@ const ModalSelectPumpType = ({
   const chooseLanguage = sessionStorage.getItem("choosedLanguage");
   const [items, setItems] = useState([]);
   const inforUser = JSON.parse(sessionStorage.getItem("info_user"));
-
+  // const listPumb = [
+  //   {
+  //     is_master: "1",
+  //     is_multi: "0",
+  //     lv1_fields: "01,02,03,04,05,06,07,08,09,10,14,15",
+  //     lv1_others: "0",
+  //     lv3_fields: "17,18,19,23",
+  //     lv3_others: "0",
+  //     pumb_id: "1",
+  //     pumb_model: "LK"
+  //   },
+  //   {
+  //     is_master: "1",
+  //     is_multi: "0",
+  //     lv1_fields: "01,02,03,04,05,06,07,08,09,10,14,15",
+  //     lv1_others: "0",
+  //     lv3_fields: "17,18,19,23",
+  //     lv3_others: "0",
+  //     pumb_id: "1",
+  //     pumb_model: "LK"
+  //   },
+  //   {
+  //     is_master: "1",
+  //     is_multi: "0",
+  //     lv1_fields: "01,02,03,04,05,06,07,08,09,10,14,15",
+  //     lv1_others: "0",
+  //     lv3_fields: "17,18,19,23",
+  //     lv3_others: "0",
+  //     pumb_id: "1",
+  //     pumb_model: "LK"
+  //   },
+  //   {
+  //     is_master: "1",
+  //     is_multi: "0",
+  //     lv1_fields: "01,02,03,04,05,06,07,08,09,10,14,15",
+  //     lv1_others: "0",
+  //     lv3_fields: "17,18,19,23",
+  //     lv3_others: "0",
+  //     pumb_id: "1",
+  //     pumb_model: "LK"
+  //   },
+  //   {
+  //     is_master: "1",
+  //     is_multi: "0",
+  //     lv1_fields: "01,02,03,04,05,06,07,08,09,10,14,15",
+  //     lv1_others: "0",
+  //     lv3_fields: "17,18,19,23",
+  //     lv3_others: "0",
+  //     pumb_id: "1",
+  //     pumb_model: "LK"
+  //   },
+  //   {
+  //     is_master: "1",
+  //     is_multi: "0",
+  //     lv1_fields: "01,02,03,04,05,06,07,08,09,10,14,15",
+  //     lv1_others: "0",
+  //     lv3_fields: "17,18,19,23",
+  //     lv3_others: "0",
+  //     pumb_id: "1",
+  //     pumb_model: "LK"
+  //   },
+  //   {
+  //     is_master: "1",
+  //     is_multi: "0",
+  //     lv1_fields: "01,02,03,04,05,06,07,08,09,10,14,15",
+  //     lv1_others: "0",
+  //     lv3_fields: "17,18,19,23",
+  //     lv3_others: "0",
+  //     pumb_id: "1",
+  //     pumb_model: "LK"
+  //   },
+  //   {
+  //     is_master: "1",
+  //     is_multi: "0",
+  //     lv1_fields: "01,02,03,04,05,06,07,08,09,10,14,15",
+  //     lv1_others: "0",
+  //     lv3_fields: "17,18,19,23",
+  //     lv3_others: "0",
+  //     pumb_id: "1",
+  //     pumb_model: "LK"
+  //   },
+  //   {
+  //     is_master: "1",
+  //     is_multi: "0",
+  //     lv1_fields: "01,02,03,04,05,06,07,08,09,10,14,15",
+  //     lv1_others: "0",
+  //     lv3_fields: "17,18,19,23",
+  //     lv3_others: "0",
+  //     pumb_id: "1",
+  //     pumb_model: "LK"
+  //   },
+  //   {
+  //     is_master: "1",
+  //     is_multi: "0",
+  //     lv1_fields: "01,02,03,04,05,06,07,08,09,10,14,15",
+  //     lv1_others: "0",
+  //     lv3_fields: "17,18,19,23",
+  //     lv3_others: "0",
+  //     pumb_id: "1",
+  //     pumb_model: "LK"
+  //   },
+  //   {
+  //     is_master: "1",
+  //     is_multi: "0",
+  //     lv1_fields: "01,02,03,04,05,06,07,08,09,10,14,15",
+  //     lv1_others: "0",
+  //     lv3_fields: "17,18,19,23",
+  //     lv3_others: "0",
+  //     pumb_id: "1",
+  //     pumb_model: "LK"
+  //   },
+  // ]
   const checkMachineBeforeChangeCamera = async () => {
     const callMachine = sessionStorage.getItem("OptionMachine");
     if (callMachine === null || callMachine === undefined) {
@@ -44,6 +155,7 @@ const ModalSelectPumpType = ({
         }
       )
       .then((res) => {
+        console.log(res.data.list_pumb)
         setItems(res.data.list_pumb);
       })
       .catch((err) => {
@@ -60,7 +172,8 @@ const ModalSelectPumpType = ({
       // width="328px"
       open={showModalSelectPumpType}
       footer={null}
-      centered
+      // centered
+      style={{top: 60}}
       // title="Select the pump type code"
       className="container-modal-view-detail ModalConfirm"
     // onCancel={handleCancelModalSelectPumpType}
