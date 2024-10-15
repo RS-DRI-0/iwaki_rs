@@ -428,7 +428,12 @@ const ManagementDashboardIndex = () => {
   const screenWidth = window.innerWidth;
 
   useEffect(() => {
-    if (showOverlay) {
+    if (
+      showOverlay ||
+      isOpenModalChecksheets ||
+      isOpenModalDailyLC ||
+      isOpenModalDailyAverage
+    ) {
       // Disable scroll
       document.body.style.overflow = "hidden";
     } else {
@@ -440,7 +445,12 @@ const ManagementDashboardIndex = () => {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [showOverlay]);
+  }, [
+    showOverlay,
+    isOpenModalChecksheets,
+    isOpenModalDailyLC,
+    isOpenModalDailyAverage,
+  ]);
 
   const [orientation, setOrientation] = useState(
     window.innerWidth > window.innerHeight ? "landscape" : "portrait"

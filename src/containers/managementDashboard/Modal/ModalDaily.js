@@ -169,7 +169,7 @@ const ModalDaily = ({
   };
 
   const screenWidth = window.innerWidth;
-  const checkWidthScreen = screenWidth <= 1480 ? "90%" : "50%";
+  const checkWidthScreen = screenWidth <= 1024 ? "90%" : "50%";
 
   return (
     <Modal

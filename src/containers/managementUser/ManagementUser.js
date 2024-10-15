@@ -76,6 +76,7 @@ const ManagementUserIndex = ({
               }
               onChange={handleTableChange}
               scroll={{
+                x: 800,
                 y: screenHeight - 295,
               }}
               pagination={page}

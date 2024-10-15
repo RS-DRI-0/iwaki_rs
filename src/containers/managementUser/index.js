@@ -105,7 +105,7 @@ const ManagementUser = ({ chooseLanguage }) => {
       // dataIndex: "no",
       key: "stt",
       align: "center",
-      width: 70,
+      width: 100,
       render: (value, item, index) =>
         ((rowsPerPage.current || 1) - 1) * rowsPerPage.pageSize + index + 1,
     },

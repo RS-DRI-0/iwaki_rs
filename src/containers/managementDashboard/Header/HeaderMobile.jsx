@@ -111,6 +111,7 @@ const HeaderMobile = ({
 
       {showOverlay && (
         <div
+          onClick={handleOverlayClick}
           style={{
             position: "fixed",
             top: 0,
@@ -125,7 +126,7 @@ const HeaderMobile = ({
         >
           <Row style={{ height: "100%" }}>
             <Col
-              span={8}
+              span={10}
               style={{ background: "#868585", position: "relative" }}
             >
               <Row>
@@ -171,7 +172,7 @@ const HeaderMobile = ({
                 </Menu.Item>
               </Menu>
             </Col>
-            <Col span={16}></Col>
+            <Col span={14}></Col>
           </Row>
         </div>
       )}
