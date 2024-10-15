@@ -101,8 +101,6 @@ const ManagementDashboardIndex = () => {
         date_time:
           isValueDatePickerManagement === undefined
             ? currentDate.format("YYMMDD")
-            : valueKeyMenu === "2"
-            ? currentDate.format("YYMMDD")
             : isValueDatePickerManagement,
         is_multi: pumbModel.is_multi,
         pump_id: pumbModel.value,
@@ -139,6 +137,7 @@ const ManagementDashboardIndex = () => {
         },
       })
       .then((res) => {
+        console.log(res.data);
         setIsValueDashBoard(res.data);
         setIsValueDashBoardOld(res.data);
       })
@@ -418,11 +417,55 @@ const ManagementDashboardIndex = () => {
       is_multi: dataPumb === undefined ? isMulti : dataPumb.is_multi,
       value: dataPumb === undefined ? pumbId : dataPumb.value,
     };
+    const currentDate = dayjs();
+    const yymm = currentDate.format("YYMMDD");
+    setIsValueDatePickerManagement(yymm);
 
     fetchListPackageAll(data);
+    fetchListDashBoard(data);
   };
 
   const screenWidth = window.innerWidth;
+
+  useEffect(() => {
+    if (showOverlay) {
+      // Disable scroll
+      document.body.style.overflow = "hidden";
+    } else {
+      // Enable scroll
+      document.body.style.overflow = "auto";
+    }
+
+    // Cleanup function to re-enable scroll when component is unmounted or overlay is closed
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [showOverlay]);
+
+  const [orientation, setOrientation] = useState(
+    window.innerWidth > window.innerHeight ? "landscape" : "portrait"
+  );
+
+  const handleResize = () => {
+    if (window.innerWidth > window.innerHeight) {
+      setOrientation("landscape");
+    } else {
+      setOrientation("portrait");
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // useEffect(() => {
+  //   alert(screenWidth);
+  // }, [orientation]);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -433,7 +476,7 @@ const ManagementDashboardIndex = () => {
           style={{ display: "flex", flexDirection: "column", height: "100vh" }}
         >
           <main className="content1" style={{ flex: "1" }}>
-            {screenWidth <= 768 ? (
+            {screenWidth <= 1000 ? (
               <HeaderMobile
                 chooseLanguage={chooseLanguage}
                 handleChangeSelectLanguage={handleChangeSelectLanguage}
@@ -454,12 +497,49 @@ const ManagementDashboardIndex = () => {
             <div className="container-fluid" style={{ maxWidth: "100%" }}>
               {valueKeyMenu === "1" ? (
                 <>
-                  {screenWidth <= 768 ? (
+                  {screenWidth <= 1000 ? (
                     <ManagementDashboardMobile
+                      isOpenModalChecksheets={isOpenModalChecksheets}
+                      handleClickOpenModalChecksheets={
+                        handleClickOpenModalChecksheets
+                      }
+                      isOpenModalDailyLC={isOpenModalDailyLC}
+                      handleClickOpenModalDailyLC={handleClickOpenModalDailyLC}
+                      isOpenModalDailyAverage={isOpenModalDailyAverage}
+                      handleClickOpenModalDailyAverage={
+                        handleClickOpenModalDailyAverage
+                      }
+                      isOpenTable={isOpenTable}
+                      listPackageAll={listPackageAll}
+                      isValueDashBoard={isValueDashBoard}
+                      isValueCheckSheets={isValueCheckSheets}
+                      isValueDailyNotqualified={isValueDailyNotqualified}
+                      isValueDailyNG={isValueDailyNG}
+                      isValueDailyAll={isValueDailyAll}
+                      isValueDailyAverage={isValueDailyAverage}
+                      handleClickButtonOpenTable={handleClickButtonOpenTable}
+                      handleDatePickerModalCheckSheet={
+                        handleDatePickerModalCheckSheet
+                      }
+                      handleDatePickerModalDaily={handleDatePickerModalDaily}
+                      handleDatePickerModalDailyAverage={
+                        handleDatePickerModalDailyAverage
+                      }
+                      handleDatePickerManagement={handleDatePickerManagement}
+                      handleSearchTableManagemant={handleSearchTableManagemant}
+                      valueSearch={valueSearch}
+                      checkValueSearch={checkValueSearch}
+                      handleChangeResult={handleChangeResult}
+                      handleClickSearch={handleClickSearch}
+                      handleChangeStatus={handleChangeStatus}
+                      checkClickSearch={checkClickSearch}
+                      checkValueStatus={checkValueStatus}
+                      checkValueResult={checkValueResult}
+                      isValueAverageTimeLc={isValueAverageTimeLc}
+                      handleClearDataSearch={handleClearDataSearch}
                       listPumb={listPumb}
                       chooseModel={chooseModel}
-                      handleDatePickerManagement={handleDatePickerManagement}
-                      isValueDashBoard={isValueDashBoard}
+                      datePickerValue={datePickerValue}
                       chooseLanguage={chooseLanguage}
                     />
                   ) : (

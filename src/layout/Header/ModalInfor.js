@@ -101,9 +101,6 @@ const ModalInfor = ({
     }
   }, [screenWidth]);
 
-  const onCancel = () => {
-    setIsOpenModalInfor(false);
-  };
   console.log(screenWidth);
   return (
     <Modal

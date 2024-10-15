@@ -92,6 +92,16 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedPr
   }
 }
 
+.management-dashboard-span-ratio-mobile {
+  font-weight: 500;
+  font-size: 20px;
+  color: #fff;
+
+  &[data-check-percent="true"] {
+    font-size: 30px;
+  }
+}
+
 .management-dashboard-div-ratio {
   color: #f60505;
   display: flex;
