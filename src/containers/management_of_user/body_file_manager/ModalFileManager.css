@@ -224,7 +224,6 @@ img.logoIwakiManager {
   border: 0px;
   padding: 0px;
   position: absolute;
-  /* width: 90%; */
   height: 100%;
   border-radius: 16px;
 }
@@ -580,6 +579,14 @@ img.logoIwakiManager {
   border-radius: 12px;
 }
 
+.btn-filter-data #btn-cancel {
+  color: #394b76;
+}
+.btn-filter-data #btn-submit {
+  color: #fff;
+  background-color: #0c4da2;
+}
+
 .container-check-cusStatus {
   display: flex;
   column-gap: 2ch;
@@ -590,11 +597,21 @@ img.logoIwakiManager {
   width: 100%;
   border-radius: 12px;
   font-weight: 700;
+  align-items: unset;
+  font-size: 17px;
+}
+
+.container-check-cusStatus .btn-notOK {
+  color: #394b76;
+}
+
+.container-check-cusStatus .btn-ok {
+  color: #fff;
+  background-color: #0c4da2;
 }
 
 .pagination-file-manager {
   display: flex;
-  /* align-items: center; */
   justify-content: space-between;
   padding-top: 4%;
   color: #394b76;
@@ -675,21 +692,26 @@ img.logoIwakiManager {
   margin-top: 4%;
 }
 
-.ant-modal.modal-history .ant-modal-content {
-  padding: 20px 18px 10px;
+.modal-view-image-history {
+  top: 10px;
 }
+.row-rotate-img {
+  width: 100%;
+  padding-top: 6px;
+}
+
+.row-rotate-img .btn-view-detail{
+  height: 30px;
+}
+
 .ant-modal.modal-view-image-history .ant-modal-content {
   padding: 8px 18px 2px;
 }
 
 .modal-history .row-title-history {
   width: 100%;
-  /* display: flex;
-  align-items: center; */
 }
 .modal-history .title-history {
-  /* display: flex;
-  align-items: center; */
   justify-content: center;
   font-size: 18px;
   font-weight: bold;
