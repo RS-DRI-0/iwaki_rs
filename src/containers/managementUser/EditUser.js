@@ -77,9 +77,11 @@ const EditUser = ({
     return Promise.resolve(); // Success
   };
 
+  const screenWidth = window.innerWidth;
+
   return (
     <Modal
-      width="40%"
+      width={screenWidth < 1440 ? "70%" : "40%"}
       className="ModalViewImage"
       open={openDrawerEditUser}
       closable={false}
@@ -190,20 +192,22 @@ const EditUser = ({
             </Form.Item>
           </Col>
           <Col span={24}>
-            <Button
-              id="btn-submit"
-              style={{
-                float: "right",
-                marginTop: "1%",
-                fontWeight: "bold",
-                background: "#053457",
-              }}
-              type="primary"
-              htmlType="submit"
-              disabled={isActive}
-            >
-              {fileLanguage[chooseLanguage].save}
-            </Button>
+            {!isActive && (
+              <Button
+                id="btn-submit"
+                style={{
+                  float: "right",
+                  marginTop: "1%",
+                  fontWeight: "bold",
+                  background: "#053457",
+                }}
+                type="primary"
+                htmlType="submit"
+                disabled={isActive}
+              >
+                {fileLanguage[chooseLanguage].save}
+              </Button>
+            )}
           </Col>
         </Row>
       </Form>

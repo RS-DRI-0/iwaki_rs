@@ -198,7 +198,11 @@ const ModalDaily = ({
           />
         </Col>
         <Col span={24}>
-          <Bar data={data} options={options} plugins={[addTextPlugin]} />
+          <div style={{ width: "100%", overflowX: "auto" }}>
+            <div style={{ width: "912px" }}>
+              <Bar data={data} options={options} plugins={[addTextPlugin]} />
+            </div>
+          </div>
         </Col>
         <Col span={24} className="management-dashboard-modal-col-daily">
           <div

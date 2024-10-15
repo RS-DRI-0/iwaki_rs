@@ -130,7 +130,11 @@ const ModalCheckSheets = ({
           />
         </Col>
         <Col span={24}>
-          <Bar data={data} options={options} />
+          <div style={{ width: "100%", overflowX: "auto" }}>
+            <div style={{ width: "912px" }}>
+              <Bar data={data} options={options} />
+            </div>
+          </div>
         </Col>
       </Row>
     </Modal>

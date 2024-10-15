@@ -13,7 +13,6 @@ import ReactLoading from "react-loading";
 import ButtonViewInforUser from "./button/ButtonViewInforUser";
 import WarningIcon from "../../images/WarningNotiIcon.svg";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
-import { check_classification } from "./data";
 import ModalQA from "./modal/ModalQA";
 import ModalQATotal from "./modal/ModalQATotal";
 import {

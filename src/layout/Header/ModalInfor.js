@@ -72,7 +72,14 @@ const ModalInfor = ({
           logout_new();
         })
         .catch((err) => {
-          openNotificationSweetAlertAdmin(ErrorIcon, err.data.message);
+          if (err.data.message === "Mật khẩu cũ không đúng!") {
+            openNotificationSweetAlertAdmin(
+              ErrorIcon,
+              language[chooseLanguage].the_old_pw_is_incorrect
+            );
+          } else {
+            openNotificationSweetAlertAdmin(ErrorIcon, err.data.message);
+          }
         });
     }
   };
@@ -94,9 +101,6 @@ const ModalInfor = ({
     }
   }, [screenWidth]);
 
-  const onCancel = () => {
-    setIsOpenModalInfor(false);
-  };
   console.log(screenWidth);
   return (
     <Modal

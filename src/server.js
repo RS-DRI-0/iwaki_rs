@@ -1,5 +1,5 @@
 // export const localhost = "http://42.113.15.62:5001";
-
+// export const localhost = "http://117.2.155.191:5010";
 export const localhost = "http://192.168.30.26:5010"; //iwaki
 // export const localhost = "http://192.168.30.26:5009"; //op
 
