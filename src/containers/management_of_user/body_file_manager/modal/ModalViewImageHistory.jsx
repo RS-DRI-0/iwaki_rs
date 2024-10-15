@@ -81,7 +81,7 @@ const ModalViewImageHistory = ({ open, setIsOpenViewImage, dataDetail }) => {
     return (
         <Modal className='modal-view-image-history' open={open} onCancel={handleCancel} footer={false} closable={false}>
             <Row>
-                <Row className='row-rotate-img' >
+                <Row className='row-rotate-img'>
                     <Col
                         span={20}
                         style={{
