@@ -27,32 +27,44 @@
   width: max-content;
 }
 
-.modal-submit-lc {
-  & .row-content-modal-submit-lc {
-    padding: 0% 0% 5%;
-    display: grid;
-    justify-content: center;
-    align-items: center;
+.row-content-modal-submit-lc {
+  padding: 0% 0% 5%;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
 
-    & .text-content-modal-submit-lc {
-      font-size: 18px;
-      font-weight: 500;
-      color: #25355b;
-      text-align: center;
-    }
-  }
-  & .row-btn-modal-submit-lc {
-    display: flex;
-    justify-content: center;
-    column-gap: 2ch;
+.text-content-modal-submit-lc {
+  font-size: 18px;
+  font-weight: 500;
+  color: #25355b;
+  text-align: center;
+}
 
-    & .btn-modal-submit-lc {
-      width: 40%;
-      font-weight: 600;
-    }
-  }
+.btn-modal-submit-lc {
+  width: 40%;
+  font-weight: 600;
+}
+
+.row-btn-modal-submit-lc {
+  display: flex;
+  justify-content: center;
+  column-gap: 2ch;
 }
 
 .ant-tooltip-inner {
   width: max-content;
+}
+
+.highlight-text-status {
+  font-weight: 600;
+  font-size: 24px;
+}
+.btn-production::after {
+  content: "Production Instructions"
+}
+@media only screen and (max-width: 1600px) {
+  .btn-production::after {
+    content: "P. Instructions"
+  }
 }

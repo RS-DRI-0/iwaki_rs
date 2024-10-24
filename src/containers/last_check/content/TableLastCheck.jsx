@@ -1,6 +1,7 @@
 import { Form, Input, Table } from 'antd';
 import { memo, useEffect } from 'react'
 import PropTypes from "prop-types";
+import useZoomLevel from '../../custom_hook/useZoomLevel';
 
 const TableLastCheck = ({
     dataLastCheck,
@@ -13,6 +14,8 @@ const TableLastCheck = ({
     dataGridLastCheck
 }) => {
     const listKeyShortcuts = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"];
+    const zoomLevel = useZoomLevel();
+
     const columns = [
         {
             title: '#',
@@ -57,19 +60,17 @@ const TableLastCheck = ({
             align: "center",
             // ellipsis: true,
             width: 100,
-            render: (text, record, index) =>
-                formInsert(index, text, 'Name_plate', record)
+            render: (text, record, index) => formInsert(index, text, 'Name_plate', record)
 
         },
         {
-            title: 'Production Instructions',
+            title: zoomLevel > 100 ? 'P. Instructions' : 'Production Instructions',
             dataIndex: 'Production_Instructions',
             key: 'Production_Instructions',
             align: "center",
             // ellipsis: true,
             width: 100,
-            render: (text, record, index) =>
-                formInsert(index, text, 'Production_Instructions', record)
+            render: (text, record, index) => formInsert(index, text, 'Production_Instructions', record)
 
         },
         {
@@ -79,9 +80,7 @@ const TableLastCheck = ({
             align: "center",
             // ellipsis: true,
             width: 100,
-            render: (text, record, index) =>
-                formInsert(index, text, 'Tem', record)
-
+            render: (text, record, index) => formInsert(index, text, 'Tem', record)
         },
         {
             title: 'Master',
@@ -107,8 +106,9 @@ const TableLastCheck = ({
         const listColumns = ["checksheet", "Production_Instructions", "Name_plate", "Tem"]
         let checkDisabled = false
         let isCheckReadOnly;
+        
         if (listColumns.includes(dataIndex)) {
-            if (record[`mark_` + dataIndex] === "None") {
+            if (record[`mark_` + dataIndex].toLowerCase() === "none") {
                 checkDisabled = true
             }
         }
@@ -132,6 +132,7 @@ const TableLastCheck = ({
                 type="text"
                 name="input1"
                 id={dataIndex + index}
+
                 value={text}
                 disabled={checkDisabled}
                 readOnly={isCheckReadOnly}
@@ -302,6 +303,7 @@ const TableLastCheck = ({
                 scroll={{
                     y: isHaveGrid ? "40vh" : "70vh",
                 }}
+                key={"table-lc"}
                 rowClassName={(record, index) => {
                     if (dataGridLastCheck.length === 0) {
                         if (record.Result === "✖") {
@@ -325,7 +327,7 @@ const TableLastCheck = ({
 }
 
 TableLastCheck.propTypes = {
-    dataLastCheck: PropTypes.arrayOf(PropTypes.string),
+    dataLastCheck: PropTypes.any,
     loadingTable: PropTypes.bool,
     form: PropTypes.shape({
         getFieldsValue: PropTypes.func,

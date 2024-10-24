@@ -78,7 +78,7 @@ const ModalShowHistory = ({ open, setIsOpenModalHistory, chooseLanguage }) => {
                                 listHistory.map(item => (
                                     <Row key={item.id} style={{ padding: "3% 6%", background: "rgb(209 228 248 / 40%)", borderRadius: 14 }}>
                                         <Col span={20} style={{ display: "grid" }}>
-                                            <span style={{ color: "rgb(33,38,67)", fontWeight: "bold", fontSize: 16 }}>{item.pack_name}</span>
+                                            <span style={{ color: "rgb(33,38,67)", fontWeight: "bold", fontSize: 14 }}>{item.pack_name}</span>
                                             <Row>
                                                 <Col span={16}>
                                                     <span style={{ color: "rgb(109,121,203)", fontSize: 12 }}>{item.upload_date}</span>

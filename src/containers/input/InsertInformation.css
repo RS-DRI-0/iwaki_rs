@@ -3,8 +3,7 @@
 }
 
 .ant-table-thead .ant-table-cell {
-  background-color: #0c4da2 !important;
-  color: #ffffff !important;
+  background-color: #231b9a0d !important;
 }
 
 .load-image-desktop {
@@ -33,11 +32,18 @@
   padding-top: 2%;
 
   & img {
-    width: 75px;
-    height: 75px;
+    /* width: 75px;
+    height: 75px; */
+    width: 4.5rem;
+    height: 4.5rem;
     border-radius: 15px;
     cursor: pointer;
     margin: 0px 10px;
+  }
+
+  .swiper-wrapper {
+    display: flex;
+    padding-top: 2%;
   }
 }
 
@@ -84,7 +90,7 @@
 
 .swiper-slide {
   flex-shrink: 0;
-  width: 100%;
+  width: fit-content !important;
   height: 10vh;
   position: relative;
   transition-property: transform;

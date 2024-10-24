@@ -57,7 +57,7 @@ const LastCheck = () => {
 
   const [isCheckShowDataMaster, setIsCheckShowDataMaster] = useState(false)
   const [time, setTime] = useState(0);
-
+  const [valueIsMaster, setValueIsMaster] = useState("")
 
   const listRuleCompare = [
     {
@@ -388,7 +388,6 @@ const LastCheck = () => {
       return dataLastCheck[arr_key[1]][arr_key[2]] = dataFormInput[item]
     });
 
-    console.log(dataPumb)
     authAxios()
       .post(`${localhost}/submit_lc`, {
         lc_id: parseInt(inforUser.user_id),
@@ -443,6 +442,7 @@ const LastCheck = () => {
     if (dataDetail !== undefined) {
       returnPackage(dataDetail.pack_id, dataDetail.op_table);
     }
+    setValueIsMaster(data.is_master)
     setPumpId(value)
     setDataPumb(data);
     // setIsCheckLogic(false)
@@ -504,7 +504,7 @@ const LastCheck = () => {
           <Col span={4}>
             <Select
               size={"middle"}
-              id="code_city"
+              id="code_pump"
               className="SelectTTDN"
               style={{ textAlign: "left", width: "100%" }}
               optionFilterProp="children"
@@ -575,6 +575,7 @@ const LastCheck = () => {
                 dataDetail={dataDetail}
                 isCheckShowDataMaster={isCheckShowDataMaster}
                 setIsCheckShowDataMaster={setIsCheckShowDataMaster}
+                valueIsMaster={valueIsMaster}
               />
             </>
           }
@@ -623,7 +624,6 @@ const LastCheck = () => {
             dataDetail={dataDetail}
             isCheckShowDataMaster={isCheckShowDataMaster}
             dataPumb={dataPumb}
-
             dataLastCheck={dataLastCheck}
             setListNotQualified={setListNotQualified}
             form={form}

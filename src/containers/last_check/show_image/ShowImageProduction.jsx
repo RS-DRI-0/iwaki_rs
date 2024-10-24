@@ -267,27 +267,28 @@ const ShowImageProduction = ({ setIsOpenViewOrder, isOpenViewOrder, dataDetail }
                 )}
                 <div className="thumbnail-class-desktop" style={{ padding: "1% 2% 0% 2%" }}>
                     <Swiper
-                        slidesPerView={window.visualViewport.width * 0.0035}
+                        slidesPerView={window.visualViewport.width * 0.003}
                         // spaceBetween={50}
-                        navigation={{
-                            clickable: true,
-                        }}
+                        // navigation={{
+                        //     clickable: true,
+                        // }}
                         centerInsufficientSlides={true}
                         modules={[Navigation]}
-                        style={{ width: "100%" }}
+                        style={{ width: "100%", display: "flex", columnGap: "2ch" }}
                         className="mySwiper"
                     >
                         {thumbnailURL.map((item, index) => (
-                            <SwiperSlide key={item} style={{ height: "9vh", display: "flex", justifyContent: "center" }}>
-                                <button onClick={() => changeMainImage(index)} style={{ padding: 0, border: 0, background: "none" }}>
+                            <SwiperSlide key={item}>
+                                {/* <button onClick={() => changeMainImage(index)} style={{ padding: 0, border: 0, background: "none" }}> */}
                                     <img
                                         style={{
                                             border: index === indexImage ? "2px solid red" : null,
                                         }}
                                         src={item}
                                         alt=""
+                                        onClick={() => changeMainImage(index)}
                                     ></img>
-                                </button>
+                                {/* </button> */}
                             </SwiperSlide>
                         ))}
                     </Swiper>

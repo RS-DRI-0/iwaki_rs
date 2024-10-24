@@ -1,0 +1,23 @@
+.btn-view-detail {
+  padding: 0px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: unset;
+  background: #f8fafc;
+}
+
+.title-data-master {
+  font-weight: 600;
+  color: rgb(37, 53, 91);
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.icon-cancel {
+  display: flex;
+  justify-content: flex-end;
+}
+

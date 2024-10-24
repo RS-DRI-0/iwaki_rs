@@ -320,6 +320,7 @@ const InsertInformation = ({
                         scroll={{
                           y: dynamicHeightInput,
                         }}
+                        className="table-insert-infor"
                       ></Table>
                     </Col>
                     <Col span={6} offset={1} style={{ marginTop: 30 }}>

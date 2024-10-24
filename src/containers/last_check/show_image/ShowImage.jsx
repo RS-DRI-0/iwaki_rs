@@ -18,6 +18,8 @@ import PropTypes from "prop-types";
 import { Navigation } from "swiper/modules";
 import { localhost } from '../../../server'
 import { authAxios } from '../../../api/axiosClient'
+import { useSelector } from 'react-redux'
+import useZoomLevel from '../../custom_hook/useZoomLevel'
 
 const ShowImage = ({ dataDetail, dataLastCheck, pumpId }) => {
     const [isOpenViewOrder, setIsOpenViewOrder] = useState(false)
@@ -31,7 +33,7 @@ const ShowImage = ({ dataDetail, dataLastCheck, pumpId }) => {
     const [lockBtnNextPage, setLockBtnNextPage] = useState(false);
     const [lockBtnPreviousPage, setLockBtnPreviousPage] = useState(true);
     const [contentMfg, setContentMfg] = useState("")
-
+    const zoomLevel = useZoomLevel();
     const positionZoom = window.visualViewport.width * 0.25
 
     const listKeyShortcuts = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"];
@@ -203,17 +205,17 @@ const ShowImage = ({ dataDetail, dataLastCheck, pumpId }) => {
     return (
         <Col span={7} className="col-show-image" style={{ padding: "0.5% 0% 0% 1%", rowGap: "1ch" }}>
             <Row style={{ paddingBottom: "1.5%" }}>
-                <Col span={14} style={{ fontSize: 12 }}>
+                <Col span={zoomLevel > 100 ? 24 : 14}  style={{ fontSize: 12 }}>
                     <span style={{ fontWeight: 600, color: "#25355B" }}>Package Name: </span><span>{dataDetail !== undefined ? dataDetail.pack_name : ""}</span>
                 </Col>
-                <Col span={10} style={{ fontSize: 12 }}>
+                <Col span={zoomLevel > 100 ? 24 : 10} style={{ fontSize: 12 }}>
                     <span style={{ fontWeight: 600, color: "#25355B" }}>MFG No.: </span><span>{contentMfg.toLocaleUpperCase()}</span>
                 </Col>
             </Row>
             {thumbnailURL.length > 0 &&
                 <Row style={{ paddingBottom: "1.5%" }}>
                     <Col span={8}>
-                        <Button onClick={showViewOrder}>Production Instructions</Button>
+                        <Button className='btn-production' onClick={showViewOrder}></Button>
                     </Col>
                     <Col
                         span={8}
@@ -310,7 +312,6 @@ const ShowImage = ({ dataDetail, dataLastCheck, pumpId }) => {
                                         justifyContent: "center",
                                     }}
                                 >
-
                                     <img
                                         src={mainImageURL}
                                         className="image-entry"
@@ -351,29 +352,31 @@ const ShowImage = ({ dataDetail, dataLastCheck, pumpId }) => {
                         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
                     </div>
                 )}
+
                 <div className="thumbnail-class-desktop" style={{ padding: "1%" }}>
                     <Swiper
-                        slidesPerView={window.visualViewport.width * 0.0035}
+                        slidesPerView={window.visualViewport.width * 0.003}
                         // spaceBetween={50}
-                        navigation={{
-                            clickable: true,
-                        }}
+                        // navigation={{
+                        //     clickable: true,
+                        // }}
                         centerInsufficientSlides={true}
                         modules={[Navigation]}
                         style={{ width: "100%" }}
                         className="mySwiper"
                     >
                         {thumbnailURL.map((item, index) => (
-                            <SwiperSlide key={item} style={{ height: "9vh", display: "flex", justifyContent: "center" }}>
-                                <button onClick={() => changeMainImage(index)} style={{ padding: 0, border: 0, background: "none" }}>
-                                    <img
-                                        style={{
-                                            border: index === indexImage ? "2px solid red" : null,
-                                        }}
-                                        src={item}
-                                        alt=""
-                                    ></img>
-                                </button>
+                            <SwiperSlide key={item}>
+                                {/* <button onClick={() => changeMainImage(index)} style={{ padding: 0, border: 0, background: "none" }}> */}
+                                <img
+                                    style={{
+                                        border: index === indexImage ? "2px solid red" : null,
+                                    }}
+                                    src={item}
+                                    alt=""
+                                    onClick={() => changeMainImage(index)}
+                                ></img>
+                                {/* </button> */}
                             </SwiperSlide>
                         ))}
                     </Swiper>

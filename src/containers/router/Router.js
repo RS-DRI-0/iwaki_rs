@@ -29,6 +29,8 @@ import Entry_Classification from "../entry_classification";
 import Check_Classification from "../check_classification";
 import PropTypes from "prop-types";
 import ContainerFileManager from "../management_of_user/ContainerFileManager";
+import CheckRule from "../check_rule/CheckRule";
+import ContainerRule from "../check_rule/ContainerRule";
 
 const cookies = new Cookies();
 
@@ -210,10 +212,10 @@ function Main() {
         />
 
         <RouteWithLayout
-          component={ManagementUser}
+          component={CheckRule}
           exact
           layout={CustomLayoutAdmin}
-          path="/user"
+          path="/check_rule"
           isPrivate={true}
           lsPermissions={lsPermissions}
           permission={["ADMIN"]}

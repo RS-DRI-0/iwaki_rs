@@ -166,7 +166,7 @@ const HeaderWeb = () => {
             borderRadius="3px"
             sx={{ justifyContent: "flex-start", paddingLeft: "24px" }}
           >
-            <img src={LogoRS} alt="" key={'logo'}></img>
+            <img style={{width: "20%", height: "6vh"}} src={LogoRS} alt="" key={'logo'}></img>
           </Box>
         </Col>
 
@@ -226,12 +226,14 @@ const HeaderWeb = () => {
           </Box>
         </Col>
       </Row>
-      <ModalInfor
-        isOpenModalInfor={isOpenModalInfor}
-        handleCloseModalInfor={handleCloseModalInfor}
-        setIsOpenModalInfor = {setIsOpenModalInfor}
-        chooseLanguage={chooseLanguage}
-      />
+      {isOpenModalInfor &&
+        <ModalInfor
+          isOpenModalInfor={isOpenModalInfor}
+          handleCloseModalInfor={handleCloseModalInfor}
+          setIsOpenModalInfor={setIsOpenModalInfor}
+          chooseLanguage={chooseLanguage}
+        />
+      }
     </Box>
   );
 };

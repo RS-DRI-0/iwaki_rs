@@ -2,7 +2,7 @@ import { CloseOutlined } from '@ant-design/icons'
 import { Button, Col, Form, Input, Modal, Row, Table } from 'antd'
 import PropTypes from "prop-types";
 import "./DataMaster.css"
-const ModalDataMaster = (
+const ModalDataMasterSecond = (
     { isOpenModalDataMaster,
         setIsOpenModalDataMaster,
         dataLastCheck,
@@ -11,11 +11,11 @@ const ModalDataMaster = (
         listDataMaster
     }) => {
     const [form] = Form.useForm();
-    const dataMaster = ["1", "2", "3", "4", "5", "6", "7", "8"]
-    const example = ["2", "LK", "F", "55", "VC", "H", "02", "F"]
+    const dataMaster = ["1", "2", "3", "4", "5"]
+    const example = ["2", "LK", "F", "55", "VC"]
     const columns = [
         {
-            title: 'No.',
+            title: 'STT',
             dataIndex: 'no',
             key: 'no',
             align: "center",
@@ -23,7 +23,7 @@ const ModalDataMaster = (
         },
 
         {
-            title: 'Result',
+            title: 'Thứ tự chữ cái',
             dataIndex: 'm11',
             key: 'm11',
             align: "center",
@@ -31,7 +31,7 @@ const ModalDataMaster = (
         },
 
         {
-            title: 'Đầu bơm',
+            title: 'Tên',
             dataIndex: 'm1',
             key: 'm1',
             align: "center",
@@ -39,71 +39,26 @@ const ModalDataMaster = (
         },
 
         {
-            title: 'Tên seri',
+            title: 'Mô tả',
             dataIndex: 'm23',
             key: 'm23',
             align: "center",
             width: 80,
         },
         {
-            title: 'Bộ dẫn động',
+            title: 'Cột bên Master',
             dataIndex: 'm4',
             key: 'm4',
             align: "center",
             width: 100,
         },
         {
-            title: 'Kích thước màn bơm / Tỷ số hộp giảm tốc',
+            title: 'VD',
             dataIndex: 'm5',
             key: 'm5',
             align: "center",
             width: 100,
         },
-        {
-            title: 'Vật liệu phần bị ướt',
-            dataIndex: 'm67',
-            key: 'm67',
-            align: "center",
-            width: 100,
-
-        },
-        {
-            title: 'Loại kết nối',
-            dataIndex: 'm8',
-            key: 'm8',
-            align: "center",
-
-            width: 100,
-        },
-        {
-            title: 'Công suất động cơ',
-            dataIndex: 'm9',
-            key: 'm9',
-            align: "center",
-            width: 100,
-        },
-        {
-            title: 'Biến tầng',
-            dataIndex: 'm10',
-            key: 'm10',
-            align: "center",
-            width: 100,
-        },
-        {
-            title: 'Servo',
-            dataIndex: 'other_1',
-            key: 'other_1',
-            align: "center",
-            width: 100,
-        },
-        {
-            title: 'Loại bơm đặc biệt/ Tiêu chuẩn',
-            dataIndex: 'other_2',
-            key: 'other_2',
-            align: "center",
-            width: 80,
-        },
-
     ];
 
     const handleCancel = () => {
@@ -112,7 +67,7 @@ const ModalDataMaster = (
 
     return (
 
-        <Modal open={isOpenModalDataMaster} onCancel={handleCancel} closeIcon={false} footer={false} width={"80%"} style={{ top: 30 }}>
+        <Modal open={isOpenModalDataMaster} onCancel={handleCancel} closeIcon={false} footer={false} width={"60%"} style={{ top: 30 }}>
             <Row>
                 <Col span={8}></Col>
                 <Col span={8} className='element-center'>
@@ -129,13 +84,13 @@ const ModalDataMaster = (
             <Form form={form} onFinish={onFinish} style={{ marginTop: "1%" }}>
                 <Row>
                     {dataMaster.map((item, index) =>
-                        <Col key={item} span={3} style={{ display: "grid" }}>
+                        <Col key={item} span={4} offset={index !== 0 ? 1 : null} style={{ display: "grid" }}>
                             <Form.Item
                                 name={`input_${item}`}
                                 label={""}
                                 key={item}
                             >
-                                <Input placeholder={`vd: ${example[index]}`} style={{ width: "90%" }}></Input>
+                                <Input placeholder={`vd: ${example[index]}`} style={{ width: "100%" }}></Input>
                             </Form.Item>
                         </Col>
                     )}
@@ -149,8 +104,8 @@ const ModalDataMaster = (
                     scroll={{
                         y: "55vh"
                     }}
-                    bordered
                     loading={loadingTable}
+                    bordered
                 ></Table>
 
                 <Row style={{ marginTop: "2%", display: "flex", justifyContent: "flex-end" }}>
@@ -163,11 +118,10 @@ const ModalDataMaster = (
     )
 }
 
-ModalDataMaster.propTypes = {
+ModalDataMasterSecond.propTypes = {
     dataLastCheck: PropTypes.arrayOf(
         PropTypes.shape({
             checksheet: PropTypes.string
-
         })
     ),
     listDataMaster: PropTypes.arrayOf(PropTypes.string),
@@ -178,4 +132,4 @@ ModalDataMaster.propTypes = {
 
 }
 
-export default ModalDataMaster
+export default ModalDataMasterSecond
