@@ -336,18 +336,19 @@ const ImageCheck = ({ dataDetail, loadingTable }) => {
                 justifyContent: "center",
               }}
             >
-              <button
+              {/* <button
                 onClick={() => changeMainImage(index)}
                 style={{ border: 0, background: "none" }}
-              >
+              > */}
                 <img
                   style={{
                     border: index === indexImage ? "2px solid red" : null,
                   }}
                   src={item}
                   alt=""
+                  onClick={() => changeMainImage(index)}
                 ></img>
-              </button>
+              {/* </button> */}
             </SwiperSlide>
           ))}
         </Swiper>

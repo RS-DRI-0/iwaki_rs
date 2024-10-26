@@ -101,7 +101,6 @@ const ModalInfor = ({
     }
   }, [screenWidth]);
 
-  console.log(screenWidth);
   return (
     <Modal
       className="modal-changePW"

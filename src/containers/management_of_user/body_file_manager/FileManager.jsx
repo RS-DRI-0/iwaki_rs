@@ -295,15 +295,15 @@ const FileManager = ({
             style={{
               position: "sticky"
             }}
-            key = {'left'}
+            key={'left'}
             open={onShowOption}
             icon={<LeftOutlined key="left" />}
             onClick={() => setOnShowOption(prev => !prev)}
           >
-            <FloatButton onClick={sortData} icon={<img style={{paddingTop: 2}} src={!valueIsSort ? IconDecreasing : IconAscending} alt=""></img>} />
-            <FloatButton onClick={showModalHistory} icon={<img style={{paddingTop: 2}} src={IconHistory} alt=""></img>} />
-            <FloatButton onClick={() => setOpenModalFilter(true)} icon={<img style={{paddingTop: 2}} src={iconSearch} alt=""></img>} />
-            <FloatButton onClick={clearFilter} icon={<img style={{paddingTop: 2}} src={IconDeleteFilter} alt=""></img>} />
+            <FloatButton onClick={sortData} icon={<img style={{ paddingTop: 2 }} src={!valueIsSort ? IconDecreasing : IconAscending} alt=""></img>} />
+            <FloatButton onClick={showModalHistory} icon={<img style={{ paddingTop: 2 }} src={IconHistory} alt=""></img>} />
+            <FloatButton onClick={() => setOpenModalFilter(true)} icon={<img style={{ paddingTop: 2 }} src={iconSearch} alt=""></img>} />
+            <FloatButton onClick={clearFilter} icon={<img style={{ paddingTop: 2 }} src={IconDeleteFilter} alt=""></img>} />
           </FloatButton.Group>
           {/* </Col> */}
           {/* <Col
@@ -374,7 +374,7 @@ const FileManager = ({
                               style={{
                                 display: "flex",
                                 alignItems: "center",
-                                columnGap:  item.is_wait_order === "1" && item.qa_all === "0" && item.cus_status === "-1" && item.is_checksheet !== 3 && '0.5ch'
+                                columnGap: item.is_wait_order === "1" && item.qa_all === "0" && item.cus_status === "-1" && item.is_checksheet !== 3 && '0.5ch'
                               }}
                             >
                               <span>
@@ -400,7 +400,7 @@ const FileManager = ({
                               </span>
                             </Col>
                           </Row>
-                          <Row style={{display: "flex", columnGap: "1ch"}}>
+                          <Row style={{ display: "flex", columnGap: "1ch" }}>
                             {/* <Col span={8}>
                               <span
                                 style={{
@@ -413,24 +413,34 @@ const FileManager = ({
                               </span>
                             </Col> */}
                             {/* <Col span={14}> */}
-                              {textStatus(item.check_status, item)}
+                            {textStatus(item.check_status, item)}
                             {/* </Col>
                             <Col span={10}> */}
-                              {Number(item.qa_timeout) === 1 ?
-                                <span className="text-timeOut"><img src={IconTimeout} alt=""></img>{language[chooseLanguage].time_out}</span>
-                                : null}
+                            {Number(item.qa_timeout) === 1 ?
+                              <span className="text-timeOut"><img src={IconTimeout} alt=""></img>{language[chooseLanguage].time_out}</span>
+                              : null}
                             {/* </Col> */}
 
 
                           </Row>
                           <Row className="row-time-handle">
-                            <Col span={18}>
+                            <Col span={16} style={{ display: "flex", alignItems: "center", columnGap: "0.5ch" }}>
                               <span>
-                                <img src={IconTimeHandle} alt=""></img>&nbsp;{dayjs(item.upload_date).format("HH:mm:ss")} ~ {item.submit_date.toLowerCase() !== "none" ? dayjs(item.submit_date).format("HH:mm:ss") : "N/A"}
+                                <img src={IconTimeHandle} alt=""></img>
+                              </span>
+                              <span>
+                                {dayjs(item.upload_date).format("HH:mm:ss")} ~ {item.submit_date.toLowerCase() !== "none" ? dayjs(item.submit_date).format("HH:mm:ss") : "N/A"}
                               </span>
                             </Col>
-                            <Col span={5} offset={1}>
-                              <span><img src={IconLocation} alt=""></img>&nbsp;{item.vl_scan_no}</span>
+                            <Col span={7} offset={1} style={{ display: "flex", alignItems: "center", columnGap: "0.5ch" }}>
+
+                              <span>
+                                <img src={IconLocation} alt=""></img>
+                              </span>
+
+                              <span className="content-vl-no">
+                                {item.vl_scan_no}
+                              </span>
                             </Col>
 
                           </Row>
@@ -475,7 +485,7 @@ const FileManager = ({
                           </Col>
                           <Col span={8}>
                             <Button
-                             className="btn-ok"
+                              className="btn-ok"
                               onClick={() => UpdateCusStatus(item, "1")}
                             >
                               {language[chooseLanguage].ok}

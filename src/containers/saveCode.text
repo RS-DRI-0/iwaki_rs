@@ -1,0 +1,86 @@
+          <Row style={{ display: "grid", rowGap: "2ch" }}>
+                            {conditions.map((condition, index) => (
+                                <>
+                                    {index < listTextAndOr.length + 1 &&
+                                        <>
+                                            <Row style={{ display: "flex", backgroundColor: "#90EE90", padding: "1.5%", borderRadius: 16 }}>
+                                                <Col span={6} style={{ display: "flex" }}>
+                                                    {showGroup(condition, index, 1)}
+                                                    <Select
+                                                        value={condition.connect1}
+                                                        onChange={(val) => handleConditionChange(index, 'connect1', val)}
+                                                        style={{ width: "25%", margin: "4% 2%" }}
+                                                        allowClear
+                                                    >
+                                                        <Option value="and">AND</Option>
+                                                        <Option value="or">OR</Option>
+                                                    </Select>
+                                                </Col>
+
+                                                {condition.connect1 !== "" &&
+                                                    <Col span={6} style={{ display: "flex" }}>
+                                                        {showGroup(condition, index, 2)}
+
+                                                        <Select
+                                                            value={condition.connect2}
+                                                            onChange={(val) => handleConditionChange(index, 'connect2', val)}
+                                                            style={{ width: "25%", margin: "4% 2%" }}
+                                                            allowClear
+                                                        >
+                                                            <Option value="and">AND</Option>
+                                                            <Option value="or">OR</Option>
+                                                        </Select>
+                                                    </Col>
+                                                }
+
+                                                {condition.connect2 !== "" &&
+                                                    <Col span={6} style={{ display: "flex" }}>
+                                                        {showGroup(condition, index, 3)}
+
+                                                        <Select
+                                                            value={condition.connect3}
+                                                            onChange={(val) => handleConditionChange(index, 'connect3', val)}
+                                                            style={{ width: "25%", margin: "4% 2%" }}
+                                                            allowClear
+                                                        >
+                                                            <Option value="and">AND</Option>
+                                                            <Option value="or">OR</Option>
+                                                        </Select>
+                                                    </Col>
+
+                                                }
+                                                {condition.connect3 !== "" &&
+                                                    <Col span={6} style={{ display: "flex" }}>
+                                                        {showGroup(condition, index, 4)}
+                                                    </Col>
+
+                                                }
+                                            </Row>
+                                            {index < conditions.length - 1 &&
+                                                <Select
+                                                    value={listTextAndOr[index]}
+                                                    onChange={(value) => changeTextAndOr(value, index)}
+                                                    style={{ width: 80 }}
+                                                    // optionFilterProp="children"
+                                                    allowClear={true}
+                                                >
+                                                    <Option value="and">AND</Option>
+                                                    <Option value="or">OR</Option>
+                                                </Select>
+                                            }
+                                        </>
+                                    }
+                                    {/* {index < conditions.length - 1 &&
+                                            <Select
+                                                value={listTextAndOr[index]}
+                                                onChange={(value) => changeTextAndOr(value, index)}
+                                                style={{ width: 80 }}
+                                                // optionFilterProp="children"
+                                                allowClear={true}
+                                            >
+                                                <Option value="and">AND</Option>
+                                                <Option value="or">OR</Option>
+                                            </Select>} */}
+                                </>
+                            ))}
+                        </Row>

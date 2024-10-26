@@ -115,6 +115,49 @@ const ShowImageProduction = ({ setIsOpenViewOrder, isOpenViewOrder, dataDetail }
         setIsOpenViewOrder(false)
     }
 
+    useEffect(() => {
+        if (loadingImage === true) {
+            try {
+                document.addEventListener("keydown", function (event) {
+                    const arrNum = ["5", "6", "7", "8", "9"];
+                    try {
+                        if (event.ctrlKey) {
+                            if (event.key === "0") {
+                                document.getElementById("reset-zoom-pro").click();
+                                event.preventDefault();
+                                return;
+                            } else if (event.key === "1") {
+                                console.log(2)
+                                document.getElementById("zoom-in1-pro").click();
+                                event.preventDefault();
+                                return;
+                            } else if (event.key === "2") {
+                                document.getElementById("zoom-in2-pro").click();
+                                event.preventDefault();
+                                return;
+                            } else if (event.key === "3") {
+                                document.getElementById("zoom-in3-pro").click();
+                                event.preventDefault();
+                                return;
+                            } else if (event.key === "4") {
+                                document.getElementById("zoom-in4-pro").click();
+                                event.preventDefault();
+                                return;
+                            } else if (arrNum.includes(event.key)) {
+                                event.preventDefault();
+                                return;
+                            }
+                        }
+                    }catch {
+                    }
+                   
+                });
+            } catch {
+                console.log("Lỗi");
+            }
+        }
+    }, [loadingImage]);
+
     return (
 
         <Drawer
@@ -191,27 +234,27 @@ const ShowImageProduction = ({ setIsOpenViewOrder, isOpenViewOrder, dataDetail }
                         {({ zoomIn, zoomOut, resetTransform, setTransform }) => (
                             <>
                                 <Button
-                                    id="reset-zoom"
+                                    id="reset-zoom-pro"
                                     onClick={() => resetTransform()}
                                     style={{ display: "none" }}
                                 ></Button>
                                 <Button
-                                    id="zoom-in1"
+                                    id="zoom-in1-pro"
                                     onClick={() => setTransform(0, 0, 1.7)}
                                     style={{ display: "none" }}
                                 ></Button>
                                 <Button
-                                    id="zoom-in2"
+                                    id="zoom-in2-pro"
                                     onClick={() => setTransform(-positionZoom, 0, 1.7)}
                                     style={{ display: "none" }}
                                 ></Button>
                                 <Button
-                                    id="zoom-in3"
+                                    id="zoom-in3-pro"
                                     onClick={() => setTransform(0, -positionZoom, 1.7)}
                                     style={{ display: "none" }}
                                 ></Button>
                                 <Button
-                                    id="zoom-in4"
+                                    id="zoom-in4-pro"
                                     onClick={() =>
                                         setTransform(-positionZoom, -positionZoom, 1.7)
                                     }
@@ -267,27 +310,28 @@ const ShowImageProduction = ({ setIsOpenViewOrder, isOpenViewOrder, dataDetail }
                 )}
                 <div className="thumbnail-class-desktop" style={{ padding: "1% 2% 0% 2%" }}>
                     <Swiper
-                        slidesPerView={window.visualViewport.width * 0.0035}
+                        slidesPerView={window.visualViewport.width * 0.003}
                         // spaceBetween={50}
-                        navigation={{
-                            clickable: true,
-                        }}
+                        // navigation={{
+                        //     clickable: true,
+                        // }}
                         centerInsufficientSlides={true}
                         modules={[Navigation]}
-                        style={{ width: "100%" }}
+                        style={{ width: "100%", display: "flex", columnGap: "2ch" }}
                         className="mySwiper"
                     >
                         {thumbnailURL.map((item, index) => (
-                            <SwiperSlide key={item} style={{ height: "9vh", display: "flex", justifyContent: "center" }}>
-                                <button onClick={() => changeMainImage(index)} style={{ padding: 0, border: 0, background: "none" }}>
-                                    <img
-                                        style={{
-                                            border: index === indexImage ? "2px solid red" : null,
-                                        }}
-                                        src={item}
-                                        alt=""
-                                    ></img>
-                                </button>
+                            <SwiperSlide key={item}>
+                                {/* <button onClick={() => changeMainImage(index)} style={{ padding: 0, border: 0, background: "none" }}> */}
+                                <img
+                                    style={{
+                                        border: index === indexImage ? "2px solid red" : null,
+                                    }}
+                                    src={item}
+                                    alt=""
+                                    onClick={() => changeMainImage(index)}
+                                ></img>
+                                {/* </button> */}
                             </SwiperSlide>
                         ))}
                     </Swiper>

@@ -28,7 +28,6 @@ const NotificationSuccess = () => {
   const inforUser = JSON.parse(sessionStorage.getItem("info_user"));
   const [messageApi, contextHolder] = message.useMessage();
   const [listNotifi, setListNotifi] = useState([])
-  const [lengthListNotifi, setLengthListnotifi] = useState(0)
 
   const closeMessage = () => {
 
@@ -61,7 +60,6 @@ const NotificationSuccess = () => {
   }
 
   const functionNotifi = (mfgNo, pumbName, scanNo, prioriti, vlStatus) => {
-
 
     const myButton = document.getElementById('playButton')
     myButton.onclick = functionSound()
@@ -115,6 +113,7 @@ const NotificationSuccess = () => {
       ),
       key: "updatable",
       duration: 4.5,
+
       // duration: 5000,
       // style: {
       //   width: "380px"

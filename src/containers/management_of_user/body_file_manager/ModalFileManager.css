@@ -245,14 +245,16 @@ img.logoIwakiManager {
 .bg-thumbnail-list-file .content-type-pump {
   position: absolute;
   top: -10px;
-  left: 7%;
+  left: 5%;
   background: #0c4da2;
   color: #ffffff;
   font-weight: bold;
-  width: 70px;
+  min-width: 70px;
   font-size: 13px;
   text-align: center;
   border-radius: 4px;
+  width: fit-content;
+  padding: 0% 2%;
 }
 
 .form-file-manager .ant-form-item-label {
@@ -521,17 +523,6 @@ img.logoIwakiManager {
   font-size: 14px;
 }
 
-.btn-view-detail {
-  padding: 0px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: unset;
-  background: #f8fafc;
-}
-
 .container-footer-view-detail {
   display: flex;
   width: 100%;
@@ -651,7 +642,6 @@ img.logoIwakiManager {
   border-right: unset;
   border-left: unset;
   margin-top: 1%;
-  /* width: 90%; */
 }
 
 .title-page-manager {
@@ -700,7 +690,7 @@ img.logoIwakiManager {
   padding-top: 6px;
 }
 
-.row-rotate-img .btn-view-detail{
+.row-rotate-img .btn-view-detail {
   height: 30px;
 }
 
@@ -738,7 +728,7 @@ img.logoIwakiManager {
 }
 
 .row-time-handle .ant-col > span {
-  display: flex;
+  /* display: flex; */
   font-size: 13px;
   align-items: center;
 }
@@ -767,4 +757,11 @@ img.logoIwakiManager {
 .ant-float-btn-circle .ant-float-btn-body:active {
   background-color: rgba(236, 239, 240, 0.842);
   box-shadow: rgba(3, 101, 214, 0.11) 0px 0px 0px 3px;
+}
+
+.content-vl-no {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

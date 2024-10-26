@@ -6,6 +6,7 @@ import { localhost } from '../../../server'
 import { SaveOutlined } from '@ant-design/icons'
 import { authAxios } from '../../../api/axiosClient'
 import PropTypes from "prop-types";
+import ModalDataMasterSecond from '../modal/ModalDataMasterSecond'
 
 const RowButton = (
     {
@@ -30,10 +31,12 @@ const RowButton = (
         setListLogicMulti,
         listLogicMulti,
         isCheckShowDataMaster,
-        setIsCheckShowDataMaster
+        setIsCheckShowDataMaster,
+        valueIsMaster
     }) => {
     const [isOpenModalCheckLogic, setIsOpenModalCheckLogic] = useState(false)
     const [isOpenModalDataMaster, setIsOpenModalDataMaster] = useState(false)
+    const [isOpenModalDataMasterSecond, setIsOpenModalDataMasterSecond] = useState(false)
     const [listDataMaster, setListDataMaster] = useState([])
     const [loadingTable, setLoadingTable] = useState(false)
     const inforUser = JSON.parse(sessionStorage.getItem("info_user"));
@@ -50,10 +53,14 @@ const RowButton = (
     }
 
     const showModalSetDataMaster = () => {
-        setIsOpenModalDataMaster(true)
+        if (valueIsMaster === "1") {
+            setIsOpenModalDataMaster(true)
+        } else if (valueIsMaster === "2") {
+            setIsOpenModalDataMasterSecond(true)
+        }
     }
 
-    const isPumpHaveMaster = parseInt(dataPumb.is_master) === 1
+    const isPumpHaveMaster = parseInt(dataPumb.is_master) !== 0
 
     const functionSetArrData = (data, arrData) => {
         data.forEach(item => {
@@ -78,7 +85,8 @@ const RowButton = (
                 is_qualified: item.is_qualified,
                 no_compair: item.no_compair,
                 vl_grid: item.vl_grid,
-                vl_grid_compair: item.vl_grid_compair
+                vl_grid_compair: item.vl_grid_compair,
+                raw_value: item.raw_value
             })
         })
     }
@@ -108,12 +116,12 @@ const RowButton = (
         await someAsyncFunction()
         const dataForm = form.getFieldValue()
         let arrData = []
-
+        const checkTypePump = Number(dataPumb.is_master) === 2
         funcDataCheckLogic(listDataDefault, dataForm, false)
 
         functionSetArrData(listDataDefault, arrData)
         let newArr = []
-        for (let i = 1; i < 9; i++) {
+        for (let i = 1; i < (checkTypePump ? 6 : 9); i++) {
             if (values[`input_${i}`] === undefined) {
                 newArr.push("")
             } else {
@@ -123,17 +131,27 @@ const RowButton = (
         const dataNo40 = arrData.filter(item => parseInt(item.No) === 40)
         const FormData = require("form-data");
         let data = new FormData();
+        
+
         data.append("lst_master", newArr);
         data.append("pump_id", dataPumb.value);
         data.append("no40_vl", dataNo40[0].checksheet);
         data.append("user_role", inforUser.user_role);
+
+
+        let dataMaster2 = new FormData();
+        dataMaster2.append("lst_master", newArr);
+        dataMaster2.append("user_role", inforUser.user_role);
+
+        const apiMaster = checkTypePump ? "view_master_2" : "view_master"
+        const dataSubmit = checkTypePump ? dataMaster2 : data
         authAxios()
-            .post(`${localhost}/view_master`, data).then(res => {
+            .post(`${localhost}/${apiMaster}`, dataSubmit).then(res => {
                 let listIndexHaveMaster = []
                 for (let i = 0; i < arrData.length; i++) {
                     for (const element of res.data.lst_master) {
                         if (arrData[i].No === element.no) {
-                            arrData[i] = { ...arrData[i], Master: element.m11 }
+                            arrData[i] = { ...arrData[i], Master: checkTypePump ? element.Value : element.m11 }
                             listIndexHaveMaster.push(i)
                             break;
                         }
@@ -154,7 +172,6 @@ const RowButton = (
             }).catch(err => {
                 setLoadingMainTable(false)
                 setLoadingTable(false)
-                console.log(err)
             })
     }
 
@@ -446,12 +463,23 @@ const RowButton = (
                     setListNotQualified={setListNotQualified}
                     setDataLastCheck={setDataLastCheck}
                     dataDetail={dataDetail}
+                    dataPumb = {dataPumb}
                 />
             }
-            {isOpenModalDataMaster &&
+            {isOpenModalDataMaster && valueIsMaster === "1" &&
                 <ModalDataMaster
                     isOpenModalDataMaster={isOpenModalDataMaster}
                     setIsOpenModalDataMaster={setIsOpenModalDataMaster}
+                    dataLastCheck={dataLastCheck}
+                    onFinish={onFinish}
+                    loadingTable={loadingTable}
+                    listDataMaster={listDataMaster}
+                />
+            }
+            {isOpenModalDataMasterSecond && valueIsMaster === "2" &&
+                <ModalDataMasterSecond
+                    isOpenModalDataMaster={isOpenModalDataMasterSecond}
+                    setIsOpenModalDataMaster={setIsOpenModalDataMasterSecond}
                     dataLastCheck={dataLastCheck}
                     onFinish={onFinish}
                     loadingTable={loadingTable}
@@ -463,7 +491,7 @@ const RowButton = (
 }
 
 RowButton.propTypes = {
-    dataLastCheck: PropTypes.arrayOf(PropTypes.string),
+    dataLastCheck: PropTypes.any,
     pumpId: PropTypes.string,
     setListNoCheckLogic: PropTypes.func,
     dataDetail: PropTypes.shape({
@@ -485,13 +513,6 @@ RowButton.propTypes = {
     setIsSortData: PropTypes.func,
     isSortData: PropTypes.bool,
     newDataTable: PropTypes.array,
-    listNotQualified: PropTypes.arrayOf(
-        PropTypes.shape({
-            No: PropTypes.number
-        })
-    ),
-    listNoException: PropTypes.arrayOf(PropTypes.number).isRequired,
-
     setLoadingMainTable: PropTypes.func,
     setListIndexLogicGrid: PropTypes.func,
     formGrid: PropTypes.shape({

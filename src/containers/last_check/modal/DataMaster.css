@@ -1,0 +1,51 @@
+.btn-view-detail {
+  padding: 0px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: unset;
+  background: #f8fafc;
+}
+
+.title-data-master {
+  font-weight: 600;
+  color: rgb(37, 53, 91);
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.icon-cancel {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.container-rule20 {
+  padding: 1% 2%;
+  width: 100%;
+}
+
+.container-rule20 .ant-form-item {
+  margin-bottom: 0px;
+}
+
+.box-checkLogic-master2 {
+  border-radius: 16px;
+  border: 2px solid black;
+}
+
+.table-checkLogic .ant-table-thead th, .table-checkLogic-example .ant-table-thead th {
+  text-align: center !important;
+}
+.table-checkLogic-example .ant-table-thead th {
+  background-color: #6cac6fa6 !important;
+}
+.content-report::first-letter {
+  text-transform: uppercase;
+}
+.content-report::before {
+  content: "• ";
+  font-size: 20px;
+  vertical-align: middle;
+}

@@ -54,7 +54,6 @@ const ButtonSubmitLC = ({
         };
 
     }, [isOpenModalSubmit]);
-
     return (
         <>
             <Row style={{ position: "absolute", bottom: 5, paddingTop: "1.5%", right: 0, paddingRight: "1.5%" }}>

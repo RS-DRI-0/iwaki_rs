@@ -13,7 +13,6 @@ const CustomLayoutFC = ({ children }) => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app" style={{ display: "flex", height: "100vh" }}>
-
           <main className="content1">
             {/* <NotificationSuccess /> */}
             <HeaderWeb/>
