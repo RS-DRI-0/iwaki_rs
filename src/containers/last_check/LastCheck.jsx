@@ -205,6 +205,7 @@ const LastCheck = () => {
               no_compair: element.no_compair,
               vl_grid: element.vl_grid,
               vl_grid_compair: element.vl_grid_compair,
+              raw_value: element.raw_value
             })
           }
 

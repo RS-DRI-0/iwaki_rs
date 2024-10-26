@@ -30,7 +30,6 @@ import Check_Classification from "../check_classification";
 import PropTypes from "prop-types";
 import ContainerFileManager from "../management_of_user/ContainerFileManager";
 import CheckRule from "../check_rule/CheckRule";
-import ContainerRule from "../check_rule/ContainerRule";
 
 const cookies = new Cookies();
 

@@ -85,7 +85,8 @@ const RowButton = (
                 is_qualified: item.is_qualified,
                 no_compair: item.no_compair,
                 vl_grid: item.vl_grid,
-                vl_grid_compair: item.vl_grid_compair
+                vl_grid_compair: item.vl_grid_compair,
+                raw_value: item.raw_value
             })
         })
     }
@@ -120,7 +121,7 @@ const RowButton = (
 
         functionSetArrData(listDataDefault, arrData)
         let newArr = []
-        for (let i = 1; i < checkTypePump ? 5 : 9; i++) {
+        for (let i = 1; i < (checkTypePump ? 6 : 9); i++) {
             if (values[`input_${i}`] === undefined) {
                 newArr.push("")
             } else {
@@ -130,7 +131,7 @@ const RowButton = (
         const dataNo40 = arrData.filter(item => parseInt(item.No) === 40)
         const FormData = require("form-data");
         let data = new FormData();
-        let dataMaster2 = new FormData();
+        
 
         data.append("lst_master", newArr);
         data.append("pump_id", dataPumb.value);
@@ -138,40 +139,40 @@ const RowButton = (
         data.append("user_role", inforUser.user_role);
 
 
+        let dataMaster2 = new FormData();
         dataMaster2.append("lst_master", newArr);
         dataMaster2.append("user_role", inforUser.user_role);
 
-
         const apiMaster = checkTypePump ? "view_master_2" : "view_master"
         const dataSubmit = checkTypePump ? dataMaster2 : data
-        // authAxios()
-        //     .post(`${localhost}/${apiMaster}`, dataSubmit).then(res => {
-        //         let listIndexHaveMaster = []
-        //         for (let i = 0; i < arrData.length; i++) {
-        //             for (const element of res.data.lst_master) {
-        //                 if (arrData[i].No === element.no) {
-        //                     arrData[i] = { ...arrData[i], Master: element.m11 }
-        //                     listIndexHaveMaster.push(i)
-        //                     break;
-        //                 }
-        //             }
-        //         }
+        authAxios()
+            .post(`${localhost}/${apiMaster}`, dataSubmit).then(res => {
+                let listIndexHaveMaster = []
+                for (let i = 0; i < arrData.length; i++) {
+                    for (const element of res.data.lst_master) {
+                        if (arrData[i].No === element.no) {
+                            arrData[i] = { ...arrData[i], Master: checkTypePump ? element.Value : element.m11 }
+                            listIndexHaveMaster.push(i)
+                            break;
+                        }
+                    }
+                }
 
-        //         listIndexHaveMaster.forEach(item => {
-        //             form.setFieldValue(`data_add__${item}__Master`, arrData[item].Master)
-        //         })
-        //         setListDataMaster(res.data.lst_master)
-        //         saveData()
+                listIndexHaveMaster.forEach(item => {
+                    form.setFieldValue(`data_add__${item}__Master`, arrData[item].Master)
+                })
+                setListDataMaster(res.data.lst_master)
+                saveData()
 
-        //         setIsCheckShowDataMaster(true)
-        //         setIsCheckLogic(false)
-        //         setLoadingMainTable(false)
-        //         setIsSortData(false)
-        //         setLoadingTable(false)
-        //     }).catch(err => {
-        //         setLoadingMainTable(false)
-        //         setLoadingTable(false)
-        //     })
+                setIsCheckShowDataMaster(true)
+                setIsCheckLogic(false)
+                setLoadingMainTable(false)
+                setIsSortData(false)
+                setLoadingTable(false)
+            }).catch(err => {
+                setLoadingMainTable(false)
+                setLoadingTable(false)
+            })
     }
 
     const addDataEqual = (listArrHaveContent, dataCheckSheet) => {
@@ -462,6 +463,7 @@ const RowButton = (
                     setListNotQualified={setListNotQualified}
                     setDataLastCheck={setDataLastCheck}
                     dataDetail={dataDetail}
+                    dataPumb = {dataPumb}
                 />
             }
             {isOpenModalDataMaster && valueIsMaster === "1" &&
@@ -484,8 +486,6 @@ const RowButton = (
                     listDataMaster={listDataMaster}
                 />
             }
-
-
         </>
     )
 }

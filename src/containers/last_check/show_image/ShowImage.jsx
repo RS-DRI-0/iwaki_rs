@@ -239,9 +239,6 @@ const ShowImage = ({ dataDetail, dataLastCheck, pumpId }) => {
                             onClick={() => setRotate(rotate + 90)}
                         ></Button>
                     </Col>
-                    <Col span={8}>
-
-                    </Col>
                 </Row>
             }
 

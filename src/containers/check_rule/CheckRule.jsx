@@ -270,7 +270,7 @@ const CheckRule = () => {
                 // ]);
                 // setAction({ no: "", operator: '>=', value: "", connect: "", noChild: "", operatorChild: '>=', valueChild: "" });
                 // form.resetFields()
-                
+
                 if (!isOpenTable) {
                     clearCondition()
                 }
@@ -294,7 +294,7 @@ const CheckRule = () => {
             newList.splice(index, newListCondition.length - (index + 1))
 
             for (let i = newListCondition.length; i > index + 1; i--) {
-                newListCondition[i - 1] = defaultConditions[0]
+                newListCondition[i - 1] = defaultConditions[i - 1]
             }
             setConditions(newListCondition)
 
@@ -508,6 +508,7 @@ const CheckRule = () => {
             showError()
         }
     }, [dataNotification]);
+
     useEffect(() => {
         form.setFieldsValue({
             no1: 10,
@@ -612,7 +613,31 @@ const CheckRule = () => {
             })
 
             setListTextAndOr(listConnect)
-            setDataRaw(value.rawData)
+            const listIndex = []
+            const listLetter = value.rawData.split("")
+            listLetter.forEach((item, index) => {
+                if (item === ")") {
+                    listIndex.push(index + 1)
+                }
+            })
+            const newChar = "\n"
+            let newString = "";
+
+            if (listIndex.length === 1) {
+                newString += `${value.rawData.slice(0, listIndex[0])}`
+            } else {
+                listIndex.forEach((item, index) => {
+                    if (index === 0) {
+                        newString += `${value.rawData.slice(0, listIndex[0])}${newChar}`
+                    } else if (index === listIndex.length - 1) {
+                        newString += `${value.rawData.slice(listIndex[index - 1] + 1, listIndex[index] + 1)}`
+                    } else {
+                        newString += `${value.rawData.slice(listIndex[index - 1] + 1, listIndex[index] + 1)}${newChar}`
+                    }
+                })
+            }
+
+            setDataRaw(newString)
         } else {
             clearCondition()
         }
@@ -621,7 +646,7 @@ const CheckRule = () => {
         <div className='container-create-rule' style={{ display: "flex" }}>
             <div className='body-create-rule' style={{ width: "100%" }}>
                 <Form form={form} className='form-create-rule' onFinish={onFinish}>
-                    {/* <h2 style={{ textAlign: "center", textTransform: "uppercase" }}>Tạo quy tắc</h2> */}
+                    <h2 style={{ textAlign: "center", textTransform: "uppercase", marginTop: 0 }}>Bảng tạo qui tắc rule 18</h2>
 
                     <Row>
                         <Col span={8} style={{ display: "flex", columnGap: "2ch" }}>

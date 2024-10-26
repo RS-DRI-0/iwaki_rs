@@ -12,10 +12,10 @@ const ModalDataMasterSecond = (
     }) => {
     const [form] = Form.useForm();
     const dataMaster = ["1", "2", "3", "4", "5"]
-    const example = ["2", "LK", "F", "55", "VC"]
+    const example = ["MDH", "", "400", "CV", ""]
     const columns = [
         {
-            title: 'STT',
+            title: 'No',
             dataIndex: 'no',
             key: 'no',
             align: "center",
@@ -23,37 +23,37 @@ const ModalDataMasterSecond = (
         },
 
         {
-            title: 'Thứ tự chữ cái',
-            dataIndex: 'm11',
-            key: 'm11',
+            title: 'Tên Seri',
+            dataIndex: 'm1',
+            key: 'm1',
             align: "center",
             width: 100,
         },
 
         {
-            title: 'Tên',
-            dataIndex: 'm1',
-            key: 'm1',
+            title: 'Bộ dẫn động',
+            dataIndex: 'm2',
+            key: 'm2',
             align: "center",
             width: 80,
         },
 
         {
-            title: 'Mô tả',
-            dataIndex: 'm23',
-            key: 'm23',
+            title: 'Kích thước màn bơm',
+            dataIndex: 'm3',
+            key: 'm3',
             align: "center",
             width: 80,
         },
         {
-            title: 'Cột bên Master',
+            title: 'Thành phần',
             dataIndex: 'm4',
             key: 'm4',
             align: "center",
             width: 100,
         },
         {
-            title: 'VD',
+            title: 'Mặt bích',
             dataIndex: 'm5',
             key: 'm5',
             align: "center",

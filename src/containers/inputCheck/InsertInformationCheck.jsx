@@ -378,12 +378,12 @@ const InsertInformationCheck = () => {
             onMouseDown={(e) =>
               e.button === 2
                 ? ExChangeValueGrid(
-                    index,
-                    valueCheck,
-                    dataValueResult,
-                    record,
-                    indexCol
-                  )
+                  index,
+                  valueCheck,
+                  dataValueResult,
+                  record,
+                  indexCol
+                )
                 : setIndexGrid("")
             }
             style={{
@@ -416,16 +416,16 @@ const InsertInformationCheck = () => {
   }, [listDataGrid]);
 
   const showHotKey = (index, dataIndex) => {
-    setCurrentFieldName(`input__${index}__${dataIndex}`);
-    if (listHotKeys[index] !== "") {
-      if (listHotKeys[index].includes("\r\n")) {
-        setHotKey(listHotKeys[index].split("\r\n"));
-      } else {
-        setHotKey(listHotKeys[index].split("\n"));
-      }
-    } else {
-      setHotKey(["Không có phím tắt"]);
-    }
+    // setCurrentFieldName(`input__${index}__${dataIndex}`);
+    // if (listHotKeys[index] !== "") {
+    //   if (listHotKeys[index].includes("\r\n")) {
+    //     setHotKey(listHotKeys[index].split("\r\n"));
+    //   } else {
+    //     setHotKey(listHotKeys[index].split("\n"));
+    //   }
+    // } else {
+    //   setHotKey(["Không có phím tắt"]);
+    // }
   };
 
   const BackTrack = (str1, str2, i, j) => {
@@ -1004,6 +1004,22 @@ const InsertInformationCheck = () => {
           openNotificationSweetAlert(WarningIcon, res.data.message);
         }
 
+        // setDataQAuser1(res.data.e1_qa);
+        // setDataQAuser2(res.data.e2_qa);
+
+        // setDataInputUser1(res.data.Input_e1);
+        // setDataCloneInput(res.data.Input_e1);
+        // setDataInputUser2(res.data.Input_e2);
+
+        // setDataGridOld1(res.data.Grid_e1);
+        // setDataGridOld2(res.data.Grid_e2);
+
+        // setDataInputOld1(res.data.Input_e1);
+        // setDataInputOld2(res.data.Input_e2);
+
+        // setDataUserID1(res.data.e1_user);
+        // setDataUserID2(res.data.e2_user);
+
         setDataQAuser1(res.data.e1_qa);
         setDataQAuser2(res.data.e2_qa);
 
@@ -1240,7 +1256,7 @@ const InsertInformationCheck = () => {
       data.append("user_role", inforUser.user_role);
       authAxios()
         .post(`${localhost}/return_pack_check`, data)
-        .then((res) => {})
+        .then((res) => { })
         .catch((err) => {
           console.log(err);
         });
@@ -1322,7 +1338,7 @@ const InsertInformationCheck = () => {
 
         authAxios()
           .post(`${localhost}/return_pack_check`, data)
-          .then((res) => {})
+          .then((res) => { })
           .catch((err) => {
             console.log(err);
           });
@@ -1463,6 +1479,9 @@ const InsertInformationCheck = () => {
 
   useEffect(() => {
     const handleContextQA = (event) => {
+      console.log(dataQAuser2)
+      console.log(dataQAuser1)
+
       setDataQAuser1(dataQAuser2);
       setDataQAuser2(dataQAuser1);
       event.preventDefault();
@@ -1559,7 +1578,7 @@ const InsertInformationCheck = () => {
                       minRows: 1,
                       maxRows: 2,
                     }}
-                    value={dataQAuser1}
+                    value={dataQAuser1 !== "" ? dataQAuser1 : " "}
                   ></Input.TextArea>
                 </Tooltip>
               </Col>

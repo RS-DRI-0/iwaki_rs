@@ -41,7 +41,7 @@ export default function ForgotPassword() {
       className="layoutForgotPassword"
       style={{ height: "100svh", maxHeight: "100svh" }}
     >
-      <FormRequestPassword submitRequestLink={submitRequestLink} /> :{" "}
+      <FormRequestPassword submitRequestLink={submitRequestLink} />
       {/* <FormVerifyPassword /> */}
     </Layout>
   );

@@ -10,7 +10,7 @@ export const dataLKInput = {
   e1_date: "2024-06-14 08:35:38.920000",
   e2_date: "2024-06-14 08:36:27.533000",
   e1_qa: "",
-  e2_qa: "",
+  e2_qa: "2",
   is_qa: null,
   image_exits: "5",
   Input_e1: [
@@ -359,7 +359,7 @@ export const dataLK = {
   e1_date: "2024-06-14 08:35:48.383000",
   e2_date: "2024-06-14 08:36:34.400000",
   e1_qa: "",
-  e2_qa: "",
+  e2_qa: "5",
   is_qa: null,
   image_exits: "5",
   Input_e1: [
