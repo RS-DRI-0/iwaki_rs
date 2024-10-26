@@ -48,7 +48,6 @@ const RowButton = (
         if (parseInt(dataPumb.is_master) === 0) {
             checkLogicGrid()
         }
-
         setIsOpenModalCheckLogic(true)
     }
 

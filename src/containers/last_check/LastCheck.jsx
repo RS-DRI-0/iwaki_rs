@@ -446,7 +446,7 @@ const LastCheck = () => {
     setValueIsMaster(data.is_master)
     setPumpId(value)
     setDataPumb(data);
-    // setIsCheckLogic(false)
+    setIsCheckShowDataMaster(false)
     functionResetData()
     fetchDataInsert(data);
   };
