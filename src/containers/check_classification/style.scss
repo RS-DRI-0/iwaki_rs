@@ -1,6 +1,7 @@
 .check_classification_container-fluid {
   overflow-y: scroll;
   height: 80vh;
+  padding-top: 2.2%;
 }
 
 .check_classification_container {
@@ -32,4 +33,25 @@
 
 .check_classification_card.ant-card .ant-card-body {
   padding: 12px;
+}
+
+.thumbnail-class-desktop-clf {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & img {
+    /* width: 75px;
+    height: 75px; */
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 15px;
+    cursor: pointer;
+    margin: 0px 10px;
+  }
+
+  .swiper-wrapper {
+    display: flex;
+    padding-top: 2%;
+  }
 }

@@ -1168,7 +1168,7 @@ const Check_Classification = () => {
                     ? renderImage()
                     : renderLoadingState()}
                 </div>
-                <div className="thumbnail-class-desktop">
+                <div className="thumbnail-class-desktop-clf">
                   {checkChooseModel === false ? (
                     <Swiper
                       slidesPerView={window.visualViewport.width * 0.0035}
@@ -1351,6 +1351,8 @@ const Check_Classification = () => {
                   display: "flex",
                   justifyContent: "center",
                   marginTop: 15,
+                  paddingLeft: 20,
+                  paddingRight: 60,
                 }}
               >
                 <Col span={4}>☑: Mặt sau</Col>
