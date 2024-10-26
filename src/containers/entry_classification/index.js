@@ -91,13 +91,6 @@ const Entry_Classification = () => {
             value_id: index + 1,
           });
         });
-        // entry_classification.lst_thum_base64.forEach((base64, index) => {
-        //   arrData.push({
-        //     id: index + 1,
-        //     img_base64: `data:image/webp;base64,${base64}`,
-        //     value_id: index + 1,
-        //   });
-        // });
 
         if (res.status === 201) {
           openNotificationSweetAlert(WarningIcon, res.data.message);
@@ -980,6 +973,7 @@ const Entry_Classification = () => {
                 display: "flex",
                 justifyContent: "center",
                 marginTop: 15,
+                paddingRight: 60,
               }}
             >
               <Col span={4}>☑: Mặt sau</Col>
