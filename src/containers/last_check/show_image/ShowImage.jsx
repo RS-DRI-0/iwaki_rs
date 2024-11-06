@@ -71,10 +71,10 @@ const ShowImage = ({ dataDetail, dataLastCheck, pumpId }) => {
                 .then((res) => {
                     let arrData = [];
                     res.data.lst_thum_base64.forEach(item => {
-                        arrData.push(`data:image/webp;base64,${item}`);
+                        arrData.push(`data:image/jpeg;base64,${item}`);
                     })
                     setThumbnailURL(arrData);
-                    setMainImageURL(`data:image/webp;base64,${res.data.img_base64}`);
+                    setMainImageURL(`data:image/jpeg;base64,${res.data.img_base64}`);
                     setLoadingImage(false);
 
                     setIndexImage(index)

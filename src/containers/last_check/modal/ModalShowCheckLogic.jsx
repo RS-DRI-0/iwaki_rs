@@ -1,5 +1,5 @@
 import { Button, Col, Form, Input, Modal, Row, Table } from 'antd'
-import { memo, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { localhost } from '../../../server'
 import { authAxios } from '../../../api/axiosClient'
 import "./DataMaster.css"
@@ -13,6 +13,7 @@ const ModalShowCheckLogic = ({
   dataLastCheck,
   pumpId,
   setListNoCheckLogic,
+  setListCheckRuleWarning,
   form,
   isSortData,
   newDataTable,
@@ -20,14 +21,18 @@ const ModalShowCheckLogic = ({
   setDataLastCheck,
   setListNotQualified,
   dataDetail,
-  dataPumb
+  dataPumb,
+  listNoCheckLogic
+
 }) => {
   const [dataCheckLogicListReport, setDataCheckLogicListReport] = useState([])
   const [listInput, setListInput] = useState([])
   const [listCircle, setListCircle] = useState([])
   // const [dataCheckLogicListReport, setDataCheckLogicListReport] = useState()
   const inforUser = JSON.parse(sessionStorage.getItem("info_user"));
-  const [countInput, setCountInput] = useState(0)
+  const [listIndexInput, setListIndexInput] = useState([])
+  const [listReport, setListReport] = useState([])
+  const [listNoOther, setListNoOther] = useState([])
 
   const handleCancel = () => {
     setIsOpenModalCheckLogic(false)
@@ -80,15 +85,44 @@ const ModalShowCheckLogic = ({
         vl_checksheet: dataChecksheet
       })
       .then((res) => {
-        const listNo = res.data.lst_report.map(item => item.No)
+        let listNoWarning = []
+        let newDataLastCheck = [...dataLastCheck]
+        res.data.lst_report.forEach(item => {
+          if (res.data.lst_rule_warning.includes(item.rule)) {
+            listNoWarning.push(item.No)
+          }
+        })
+        const listNo = res.data.lst_report.filter(item => !listNoWarning.includes(item.No)).map(item => item.No)
+
+        const listNoCheckLogicOld = [...listNoCheckLogic]
+
+        // Tìm No không xuất hiện ở listNO mới
+        const elementNotExist = listNoCheckLogicOld.filter(item => !listNo.includes(item));
+
+        newDataLastCheck.forEach(item => {
+          if (listNo.includes(item.No)) {
+            item.Result = "✖"
+          } else if (elementNotExist.includes(item.No)) {
+            item.Result = "✔"
+          }
+        })
+
+        setListCheckRuleWarning(listNoWarning)
         setListNoCheckLogic(listNo)
         setIsOpenModalCheckLogic(true)
         setDataCheckLogicListReport(res.data.lst_report)
-        console.log(res.data)
-        
+
         if (Object.keys(res.data.lst_circle).length > 0) {
-          setListInput(res.data.lst_circle.rs_12.split("|"))
+          let listIndex = []
+          res.data.lst_circle.round_2.split("|").forEach((item, index) => {
+            if (item == 0) {
+              listIndex.push(index)
+            }
+          })
+          setListInput(listIndex)
+          setListIndexInput(listIndex)
         }
+
         setListCircle(res.data.lst_circle)
         // setCountInput(Number(res.data.lst_circle[0].input_count))
         setListLogicMulti(res.data.lst_logic_multi)
@@ -96,6 +130,22 @@ const ModalShowCheckLogic = ({
         if (dataDetail.grid.length > 0) {
           functionCheckLogicMaster(listNo)
         }
+        let newArrOther = []
+        if (res.data.lst_other.length > 0) {
+          res.data.lst_other.forEach(item => {
+            newArrOther.push(item.content)
+          })
+          let listNoOther = res.data.lst_other.map(item => item.No)
+          newDataLastCheck.forEach(item => {
+            if (listNoOther.includes(item.No)) {
+              item.Result = "✖"
+            }
+          })
+          setListNoOther(listNoOther)
+        }
+        setListReport(newArrOther)
+        setDataLastCheck(newDataLastCheck)
+
       }).catch(err => {
         console.log(err)
       })
@@ -155,7 +205,7 @@ const ModalShowCheckLogic = ({
     <>
       {
         checkMaster2 ?
-          <Modal open={isOpenModalCheckLogic} onCancel={handleCancel} footer={false} style={{ padding: "2%", top: 15 }} width={"80%"} closeIcon={false}>
+          <Modal className='modal-checkLogic-master2' open={isOpenModalCheckLogic} onCancel={handleCancel} footer={false} width={"80%"} closeIcon={false}>
             <CheckLogicForMaster2
               columns={columns}
               dataCheckLogicListReport={dataCheckLogicListReport}
@@ -163,7 +213,12 @@ const ModalShowCheckLogic = ({
               handleCancel={handleCancel}
               listInput={listInput}
               dataLastCheck={dataLastCheck}
-              listCircle= {listCircle}
+              listCircle={listCircle}
+              listIndexInput={listIndexInput}
+              listReport={listReport}
+              setListReport={setListReport}
+              listNoOther={listNoOther}
+              setDataLastCheck={setDataLastCheck}
             />
           </Modal>
           :
@@ -192,10 +247,19 @@ const CheckLogicForMaster2 = ({
   handleCancel,
   listInput,
   dataLastCheck,
-  listCircle
+  listCircle,
+  listIndexInput,
+  listReport,
+  setListReport,
+  listNoOther,
+  setDataLastCheck
 }) => {
   const [form] = Form.useForm();
-  const [listReport, setListReport] = useState([])
+  const [dataMaster, setDataMaster] = useState([])
+  const [dataError, setDataError] = useState([])
+  const dataColumnMaster = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+  const dataColumnExample = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+  const valueExample = ["実性能", "MX", "F", "400", "AV", "(IE3)", "日東", "0.4", "50", "5", "200"]
 
   const dataExample = [
     {
@@ -213,7 +277,7 @@ const CheckLogicForMaster2 = ({
     },
     {
       col1: "実性能",
-      col2: "MDH",
+      col2: "MX",
       col3: "F",
       col4: "401",
       col5: "",
@@ -226,136 +290,94 @@ const CheckLogicForMaster2 = ({
     },
   ]
 
+  const columnsMaster = [
+
+    ...dataColumnMaster.map((item, index) => ({
+      title: item,
+      dataIndex: index,
+      key: item,
+      align: "left",
+      // ellipsis: true,
+      // width: 20
+    }))
+  ];
   const columnsExample = [
-    {
-      title: '1',
-      dataIndex: 'col1',
-      key: 'col1',
+    ...dataColumnExample.map((item, index) => ({
+      title: item,
+      dataIndex: 'col' + item,
+      key: item,
       align: "left",
       ellipsis: true,
-
-    },
-
-    {
-      title: '2',
-      dataIndex: 'col2',
-      key: 'col2',
-      align: "left",
-      ellipsis: true,
-
-    },
-    {
-      title: '3',
-      dataIndex: 'col3',
-      key: 'col3',
-      align: "left",
-      ellipsis: true,
-
-    },
-
-    {
-      title: '4',
-      dataIndex: 'col4',
-      key: 'col4',
-      align: "left",
-      ellipsis: true,
-
-    },
-    {
-      title: '5',
-      dataIndex: 'col5',
-      key: 'col5',
-      align: "left",
-      ellipsis: true,
-
-    },
-
-    {
-      title: '6',
-      dataIndex: 'col6',
-      key: 'col6',
-      align: "left",
-      ellipsis: true,
-
-    },
-    {
-      title: '7',
-      dataIndex: 'col7',
-      key: 'col7',
-      align: "left",
-      ellipsis: true,
-
-    },
-
-    {
-      title: '8',
-      dataIndex: 'col8',
-      key: 'col8',
-      align: "left",
-      ellipsis: true,
-
-    },
-
-    {
-      title: '9',
-      dataIndex: 'col9',
-      key: 'col9',
-      align: "left",
-      ellipsis: true,
-
-    },
-    {
-      title: '10',
-      dataIndex: 'col10',
-      key: 'col10',
-      align: "left",
-      ellipsis: true,
-
-    },
-
-    {
-      title: '11',
-      dataIndex: 'col11',
-      key: 'col11',
-      align: "left",
-      ellipsis: true,
-    },
+    }))
   ];
 
   const onFinish = (value) => {
     authAxios()
       .post(`${localhost}/check_logic_20`, {
-        // results: isSortData ? newDataTable : dataLastCheck,
-        // pump_id: pumpId,
-        // user_role: inforUser.user_role,
-        // vl_checksheet: dataChecksheet
         results: dataLastCheck,
         lst_ct: Object.values(value),
         lst_circle: listCircle
       })
       .then((res) => {
-        form.resetFields()
+        // form.resetFields()
         let listData = []
-        if(res.data.vlue_round.length > 0){
+        let newDataLastCheck = [...dataLastCheck]
+        if (res.data.vlue_round.length > 0) {
           listData.push(res.data.vlue_round[0].content)
         }
 
-        if(res.data.lst_report.length > 0) {
+        if (res.data.lst_report.length > 0) {
           res.data.lst_report.forEach(item => {
             listData.push(item.content)
           })
         }
+        const dataRowTemp = {}
+        if (res.data.row_temp.length > 0) {
+          Object.keys(res.data.row_temp).forEach((item, index) => {
+            dataRowTemp[item] = res.data.row_temp[index]
+          })
+          setDataMaster([dataRowTemp])
+          newDataLastCheck.forEach(item => {
+            if (listNoOther.includes(item.No)) {
+              item.Result = "✔"
+            }
+          })
+        } else {
+          setDataMaster([])
+          newDataLastCheck.forEach(item => {
+            if (listNoOther.includes(item.No)) {
+              item.Result = "✖"
+            }
+          })
+        }
+        setDataLastCheck(newDataLastCheck)
         setListReport(listData)
-        console.log(res)
       }).catch(err => {
         console.log(err)
       })
   }
 
+  const showDataRule = (val) => {
+    if (val.vl_data === "") {
+      setDataError([])
+    } else {
+      setDataError(val.vl_data.split("\r\n"))
+    }
+  }
+
+  useEffect(() => {
+    if (listInput.length > 0) {
+      for (let i = 0; i < listInput.length; i++) {
+        form.setFieldValue(`input_${i}`, "")
+      }
+    }
+  }, [listInput]);
+
+
 
   return (
     <Row>
-      <Col span={6}>
+      <Col span={9} className='col-table-check-logic'>
         <Table
           size="small"
           columns={columns}
@@ -363,22 +385,32 @@ const CheckLogicForMaster2 = ({
           dataSource={dataCheckLogicListReport}
           pagination={false}
           scroll={{
-            y: "60vh",
+            y: "75vh",
           }}
-          style={{ overflow: "auto", width: "100%" }}
+          onRow={(record) => ({
+            onClick: () => showDataRule(record),
+          })}
+          rowClassName={'row-table-check-logic'}
           bordered
           className='table-checkLogic'
         ></Table>
       </Col>
-      <Col span={18} style={{ height: "80vh", paddingLeft: "2%" }}>
-        <Row className='box-checkLogic-master2' style={{ height: "20%",overflow: "scroll", overflowX: "hidden"}}>
-          <div className='container-rule20' style={{display: "grid"}}>
-            {listReport.map((item, index) => (
-              <span className='content-report' style={{fontSize: 14, fontWeight: 600}} key={index}>{item}</span>
-            ))}
+      <Col span={15} style={{ height: "80vh", paddingLeft: "2%" }}>
+        <Row className='box-checkLogic-master2 list-error'>
+          <div className='container-rule20' style={{ display: "grid" }}>
+            {/* {listReport.map((item, index) => (
+              <span className='content-report' style={{ fontSize: 14, fontWeight: 600 }} key={index}>{item}</span>
+            ))} */}
+            {dataError.length === 0 ?
+              <span className='content-empty'>Nội dung lỗi</span>
+              :
+              dataError.map((item, index) => (
+                <span key={index} className={'content-report'}>{item}</span>
+              ))
+            }
           </div>
         </Row>
-        <Row className='box-checkLogic-master2' style={{ height: "80%", marginTop: "2%" }}>
+        <Row className='box-checkLogic-master2' style={{ height: "85%", marginTop: "2%", border: "2px solid rgb(239, 71, 101)", padding: "1%" }}>
           <div className='container-rule20'>
             <Form
               form={form}
@@ -394,49 +426,50 @@ const CheckLogicForMaster2 = ({
                   // dataSource={dataInputUser1}
                   dataSource={dataExample}
                   pagination={false}
-                  style={{ overflow: "auto", width: "100%" }}
+                  style={{ overflow: "auto", width: "100%", opacity: 0.6 }}
                   bordered
                   className='table-checkLogic-example'
                 ></Table>
               </div>
-              <div style={{ columnGap: "2ch", display: "flex", paddingTop: "1%" }}>
+              <div className='row-input-check-circle2'>
                 {listInput.map((item, index) => (
-                  <Form.Item style={{ width: (100 / listInput.length) + "%" }} name={`input_${index}`} key={index}>
+                  <Form.Item style={{ width: (100 / listInput.length) + "%" }} label={listIndexInput[index] + 1 + " ( " + valueExample[listIndexInput[index]] + " ) "} name={`input_${index}`} key={index}>
                     <Input></Input>
                   </Form.Item>
                 ))}
               </div>
 
-
               <Row style={{ paddingTop: "1%", justifyContent: "flex-end" }}>
-                <Button htmlType='submit'>Lấy dữ liệu</Button>
+                <Button disabled = {listCircle.length === 0} htmlType='submit' className='button-check-circle-2'>Check vòng 2</Button>
               </Row>
             </Form>
+
             <Table
               size="small"
-              columns={columnsExample}
+              columns={columnsMaster}
               // dataSource={dataInputUser1}
-              dataSource={dataExample}
+              dataSource={dataMaster}
               pagination={false}
-              style={{ overflow: "auto", width: "100%", paddingTop: "1%" }}
+              style={{ overflow: "auto", width: "100%", paddingTop: "1%", marginBottom: "2%" }}
               bordered
               className='table-checkLogic-example'
             ></Table>
-            <Table
-              size="small"
-              columns={columnsExample}
-              // dataSource={dataInputUser1}
-              dataSource={dataExample}
-              pagination={false}
-              style={{ overflow: "auto", width: "100%", paddingTop: "1%" }}
-              bordered
-              className='table-checkLogic'
 
-            ></Table>
+
+            <Row className='box-checkLogic-master2' style={{ height: "38%", padding: "1%", border: "2px solid rgb(239, 71, 101)" }}>
+              <div className='content-wrong-rule'>
+                {listReport.length === 0 ?
+                  <span className='content-empty'>Nội dung sai qui tắc</span>
+                  :
+                  listReport.map((item, index) => (
+                    <span className='content-report' style={{ fontWeight: 600 }} key={index}>{item}</span>
+                  ))
+                }
+              </div>
+            </Row>
           </div>
         </Row>
       </Col>
-
     </Row>
   )
 }
@@ -456,6 +489,7 @@ ModalShowCheckLogic.propTypes = {
   ).isRequired,
   pumpId: PropTypes.string,
   setListNoCheckLogic: PropTypes.func,
+  setListCheckRuleWarning: PropTypes.func,
   form: PropTypes.shape({
     getFieldsValue: PropTypes.func,
     setFieldValue: PropTypes.func,

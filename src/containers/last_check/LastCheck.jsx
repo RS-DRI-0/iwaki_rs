@@ -21,6 +21,8 @@ import ButtonSubmitLC from "./content/ButtonSubmitLC";
 import TableGridLastCheck from "./content/TableGridLastCheck";
 import { authAxios } from "../../api/axiosClient";
 
+// import mockDataLK from "./mockDataLK.json"
+
 const LastCheck = () => {
   const [form] = Form.useForm();
   const [formGrid] = Form.useForm();
@@ -35,6 +37,7 @@ const LastCheck = () => {
   const [dataPumb, setDataPumb] = useState();
 
   const [listNoCheckLogic, setListNoCheckLogic] = useState([])
+  const [listCheckRuleWarning, setListCheckRuleWarning] = useState([])
   const [listLogicMulti, setListLogicMulti] = useState([])
 
   const [dataLastCheck, setDataLastCheck] = useState([])
@@ -116,6 +119,7 @@ const LastCheck = () => {
 
     setDataLastCheck([])
     setListNoCheckLogic([])
+    setListCheckRuleWarning([])
     setIsCheckLogic(false)
     setIsOpenModalSubmit(false)
     setNewDataTable([])
@@ -180,7 +184,6 @@ const LastCheck = () => {
       .post(`${localhost}/get_lc_info`, data)
       .then((res) => {
         setStartTime(Date.now())
-
         if (res.status === 200) {
           form.resetFields()
           formGrid.resetFields()
@@ -388,7 +391,7 @@ const LastCheck = () => {
       let arr_key = item.split("__");
       return dataLastCheck[arr_key[1]][arr_key[2]] = dataFormInput[item]
     });
-
+    let listNewNotQualified = dataLastCheck.filter(item => item.Result === "✖")
     authAxios()
       .post(`${localhost}/submit_lc`, {
         lc_id: parseInt(inforUser.user_id),
@@ -404,8 +407,8 @@ const LastCheck = () => {
         order_id: dataDetail.order_id,
         is_order: dataDetail.is_order,
         pump_id: dataPumb.value,
-        is_qualified: listNotQualified.length > 0 ? 1 : 0,
-        lst_not_qualified: listNotQualified,
+        is_qualified: listNewNotQualified.length > 0 ? 1 : 0,
+        lst_not_qualified: listNewNotQualified,
         results: dataLastCheck,
         grid: arrGridSubmit,
         is_checksheet: dataDetail.is_checksheet,
@@ -425,6 +428,7 @@ const LastCheck = () => {
         setDataGridLastCheck([])
         setListNotQualified([])
         setListNoCheckLogic([])
+        setListCheckRuleWarning([])
         setIsCheckLogic(false)
         setIsOpenModalSubmit(false)
         setNewDataTable([])
@@ -553,8 +557,10 @@ const LastCheck = () => {
 
               <RowButton
                 dataLastCheck={dataLastCheck}
+                listNoCheckLogic={listNoCheckLogic}
                 pumpId={pumpId}
                 setListNoCheckLogic={setListNoCheckLogic}
+                setListCheckRuleWarning={setListCheckRuleWarning}
                 setDataLastCheck={setDataLastCheck}
                 listDataDefault={listDataDefault}
                 dataPumb={dataPumb}
@@ -590,6 +596,7 @@ const LastCheck = () => {
             dataLastCheck={!isSortData ? dataLastCheck : newDataTable}
             loadingTable={loadingTable}
             listNoCheckLogic={listNoCheckLogic}
+            listCheckRuleWarning={listCheckRuleWarning}
             form={form}
             isHaveGrid={isHaveGrid}
             setIsCheckLogic={setIsCheckLogic}
@@ -619,6 +626,7 @@ const LastCheck = () => {
             loadingBtnSubmit={loadingBtnSubmit}
             isCheckLogic={isCheckLogic}
             listNoCheckLogic={listNoCheckLogic}
+            listCheckRuleWarning={listCheckRuleWarning}
             listNotQualified={listNotQualified}
             dataQA={isOpenModalSubmit ? document.getElementById("textQA").value : dataQA}
             dataGridLastCheck={dataGridLastCheck}

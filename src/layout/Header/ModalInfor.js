@@ -20,8 +20,8 @@ const ModalInfor = ({
   chooseLanguage,
 }) => {
   const userMSNV = JSON.parse(sessionStorage.getItem("info_user")).user_msnv;
-
   const [isKeyTab, setIsKeyTab] = useState("1");
+
   const items = [
     {
       key: "1",
@@ -120,14 +120,17 @@ const ModalInfor = ({
           </IconButton>
         </Col> */}
         <Col
-          span={valueColTabsUserCol[0]}
+          // span={valueColTabsUserCol[0]}
+          span={24}
           style={{ display: "flex", justifyContent: "center" }}
+          
         >
           <Tabs
             defaultActiveKey="1"
             items={items}
             onChange={onChangeTabsTable}
-            tabPosition={valueColTabsUser}
+            // tabPosition={valueColTabsUser}
+            tabPosition={"top"}
           />
         </Col>
         {/* <Col span={valueColTabsUserCol[1]} > */}

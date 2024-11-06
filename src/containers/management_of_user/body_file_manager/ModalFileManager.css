@@ -121,7 +121,7 @@ img.logoIwakiManager {
 
 .thumbnail-class .swiper-slide img {
   display: block;
-  width: -webkit-fill-available;
+  width: 4rem;
   height: 4rem;
   object-fit: fill;
 }

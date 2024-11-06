@@ -213,7 +213,7 @@ function Main() {
         <RouteWithLayout
           component={CheckRule}
           exact
-          layout={CustomLayoutAdmin}
+          layout={CustomLayout}
           path="/check_rule"
           isPrivate={true}
           lsPermissions={lsPermissions}

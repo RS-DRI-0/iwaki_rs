@@ -2,11 +2,11 @@ import { Form, Input, Table } from 'antd';
 import { memo, useEffect } from 'react'
 import PropTypes from "prop-types";
 import useZoomLevel from '../../custom_hook/useZoomLevel';
-
 const TableLastCheck = ({
     dataLastCheck,
     loadingTable,
     listNoCheckLogic,
+    listCheckRuleWarning,
     form,
     isHaveGrid,
     setIsCheckLogic,
@@ -97,7 +97,7 @@ const TableLastCheck = ({
             key: 'Result',
             align: "center",
             ellipsis: true,
-            width: 30,
+            width: 50,
             render: (text, record, index) => formInsert(index, text, 'Result', record)
         },
     ];
@@ -306,9 +306,10 @@ const TableLastCheck = ({
                 key={"table-lc"}
                 rowClassName={(record, index) => {
                     if (dataGridLastCheck.length === 0) {
-                        if (record.Result === "✖") {
+                        if (record.Result === "✖" || listNoCheckLogic.includes(record.No)) {
+                        // if (record.Result === "✖") {
                             return "bg-not-qualified";
-                        } else if (listNoCheckLogic.includes(record.No)) {
+                        } else if (listCheckRuleWarning.includes(record.No)) {
                             return "bg-checkLogic";
                         } else {
                             return null;
@@ -328,6 +329,7 @@ const TableLastCheck = ({
 
 TableLastCheck.propTypes = {
     dataLastCheck: PropTypes.any,
+    listCheckRuleWarning: PropTypes.any,
     loadingTable: PropTypes.bool,
     form: PropTypes.shape({
         getFieldsValue: PropTypes.func,

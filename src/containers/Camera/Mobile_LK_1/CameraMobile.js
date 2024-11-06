@@ -37,7 +37,7 @@ const ToastCameraNotFound = Swal.mixin({
   timer: 3000,
   timerProgressBar: true,
   willClose: () => {
-    window.location.href = "/";
+    // window.location.href = "/";
   },
   customClass: {
     popup: "my-custom-popup",
@@ -787,18 +787,37 @@ const MobileWebCam2 = () => {
       const isJPG = file.type === "image/jpg";
       const isJPEG = file.type === "image/jpeg";
       const isTIF = file.type === "image/tif";
-
-      if (!isPNG && !isJPG && !isJPEG && !isTIF) {
+      const isTIFF = file.type === "image/tiff";
+      if (!isPNG && !isJPG && !isJPEG && !isTIF && !isTIFF) {
         message.error(`${file.name} is not a Image file`);
       } else {
-        return isPNG || isJPEG || isJPG || isTIF;
+        return isPNG || isJPEG || isJPG || isTIF || isTIFF;
       }
     },
     onChange(info) {
       const newFile = info.file.originFileObj;
       const reader = new FileReader();
+
       reader.onload = (e) => {
         const imageBase64 = e.target.result;
+        // if (newFile.type === 'image/tiff') {
+        //   const tiff = new TIFF({ buffer: imageBase64 });
+        //   const canvas = tiff.toCanvas(); // Convert TIFF to a canvas
+
+        //   // Create a new image from the canvas
+        //   const img = new Image();
+        //   img.src = canvas.toDataURL('image/png'); // Or 'image/jpeg' for JPEG
+
+        //   img.onload = function () {
+        //     // Show the converted image on the page
+        //     document.getElementById('output-img').src = img.src;
+
+        //     // If you need Base64 for further use, you can extract it here
+        //     const base64String = img.src;
+        //     console.log('Base64 Image (PNG):', base64String);
+        //   };
+        // }
+
         const checkFileSize =
           parseInt(imageBase64.replace(/=/g, "").length * 0.75) / 1024 / 1024;
         let scaleFactor = 1;
@@ -820,7 +839,6 @@ const MobileWebCam2 = () => {
         loadImage(imageBase64).then((img) => {
           const canvas = document.createElement("canvas");
           const ctx = canvas.getContext("2d");
-
           const newWidth = img.width * scaleFactor;
           const newHeight = img.height * scaleFactor;
 
@@ -875,6 +893,8 @@ const MobileWebCam2 = () => {
           };
 
           setImageList((prevImageList) => [...prevImageList, imageInfo]);
+        }).catch(err => {
+          message.error(`${info.file.name} ${fileLanguage[chooseLanguage].error_image}`);
         });
       };
       reader.readAsDataURL(newFile);

@@ -416,16 +416,16 @@ const InsertInformationCheck = () => {
   }, [listDataGrid]);
 
   const showHotKey = (index, dataIndex) => {
-    // setCurrentFieldName(`input__${index}__${dataIndex}`);
-    // if (listHotKeys[index] !== "") {
-    //   if (listHotKeys[index].includes("\r\n")) {
-    //     setHotKey(listHotKeys[index].split("\r\n"));
-    //   } else {
-    //     setHotKey(listHotKeys[index].split("\n"));
-    //   }
-    // } else {
-    //   setHotKey(["Không có phím tắt"]);
-    // }
+    setCurrentFieldName(`input__${index}__${dataIndex}`);
+    if (listHotKeys[index] !== "") {
+      if (listHotKeys[index].includes("\r\n")) {
+        setHotKey(listHotKeys[index].split("\r\n"));
+      } else {
+        setHotKey(listHotKeys[index].split("\n"));
+      }
+    } else {
+      setHotKey(["Không có phím tắt"]);
+    }
   };
 
   const BackTrack = (str1, str2, i, j) => {
@@ -622,7 +622,8 @@ const InsertInformationCheck = () => {
               }
               return data;
             });
-
+            console.log(updatedDataUser1)
+            console.log(updatedDataUser2)
             form.resetFields();
             setDataInputUser1(updatedDataUser1);
             setDataCloneInput(updatedDataUser1);
@@ -1004,22 +1005,6 @@ const InsertInformationCheck = () => {
           openNotificationSweetAlert(WarningIcon, res.data.message);
         }
 
-        // setDataQAuser1(res.data.e1_qa);
-        // setDataQAuser2(res.data.e2_qa);
-
-        // setDataInputUser1(res.data.Input_e1);
-        // setDataCloneInput(res.data.Input_e1);
-        // setDataInputUser2(res.data.Input_e2);
-
-        // setDataGridOld1(res.data.Grid_e1);
-        // setDataGridOld2(res.data.Grid_e2);
-
-        // setDataInputOld1(res.data.Input_e1);
-        // setDataInputOld2(res.data.Input_e2);
-
-        // setDataUserID1(res.data.e1_user);
-        // setDataUserID2(res.data.e2_user);
-
         setDataQAuser1(res.data.e1_qa);
         setDataQAuser2(res.data.e2_qa);
 
@@ -1188,26 +1173,22 @@ const InsertInformationCheck = () => {
       if (e.code === "ArrowDown") {
         if (indexCol === listCheckColor.length - 1) {
           return;
-        } else {
-          if (inputRows.length > 1 && indexColumn + 2 <= inputRows.length) {
-            input = document.getElementById(
-              nameColumn + "__" + (indexColumn + 1) + "__" + index
-            );
-            e.preventDefault();
-            input.focus();
-          }
+        } else if (inputRows.length > 1 && indexColumn + 2 <= inputRows.length) {
+          input = document.getElementById(
+            nameColumn + "__" + (indexColumn + 1) + "__" + index
+          );
+          e.preventDefault();
+          input.focus();
         }
       } else if (e.code === "ArrowUp") {
         if (indexCol === 0) {
           return;
-        } else {
-          if (indexColumn >= 1) {
-            input = document.getElementById(
-              nameColumn + "__" + (indexColumn - 1) + "__" + index
-            );
-            e.preventDefault();
-            input.focus();
-          }
+        } else if (indexColumn >= 1) {
+          input = document.getElementById(
+            nameColumn + "__" + (indexColumn - 1) + "__" + index
+          );
+          e.preventDefault();
+          input.focus();
         }
       }
     } else if (e.code === "ArrowUp") {
@@ -1474,24 +1455,19 @@ const InsertInformationCheck = () => {
   };
 
   const handleDataQA = (data) => {
-    setDataChange(data.target.value);
+    // setDataChange(data.target.value);
+
+    setDataQAuser1(dataQAuser2);
+    setDataQAuser2(dataQAuser1);
   };
 
-  useEffect(() => {
-    const handleContextQA = (event) => {
-      console.log(dataQAuser2)
-      console.log(dataQAuser1)
 
-      setDataQAuser1(dataQAuser2);
-      setDataQAuser2(dataQAuser1);
-      event.preventDefault();
-    };
-    document.addEventListener("contextmenu", handleContextQA);
-    return () => {
-      document.removeEventListener("contextmenu", handleContextQA);
-    };
-    // }
-  }, [dataChange]);
+  // useEffect(() => {
+
+  //   setDataQAuser1(dataQAuser2);
+  //   setDataQAuser2(dataQAuser1);
+
+  // }, [dataChange]);
 
   const handleChangeDataQA = (e) => {
     setDataQAuser1(e.target.value);
@@ -1523,7 +1499,7 @@ const InsertInformationCheck = () => {
   return (
     <Row>
       <ImageCheck dataDetail={dataDetail} loadingTable={loadingTable} />
-      <Col span={15} style={{ height: "92vh", padding: "0.5% 1%" }}>
+      <Col span={16} style={{ height: "92vh", padding: "0.5% 1%" }}>
         <Row>
           <Col span={6}>
             <Select
@@ -1569,7 +1545,7 @@ const InsertInformationCheck = () => {
                     }}
                     placeholder="Q/A"
                     onChange={(e) => handleChangeDataQA(e)}
-                    onBlur={() => setDataChange("")}
+                    // onBlur={() => setDataChange("")}
                     onMouseDown={(e) =>
                       e.button === 2 ? handleDataQA(e) : null
                     }
@@ -1611,7 +1587,8 @@ const InsertInformationCheck = () => {
                       pagination={false}
                       loading={loadingTable}
                       scroll={{
-                        y: dynamicHeightInput,
+                        // y: dynamicHeightInput,
+                        y: dataGridUser1.length > 0 ? "30vh" : "65vh"
                       }}
                     ></Table>
                   </Form>

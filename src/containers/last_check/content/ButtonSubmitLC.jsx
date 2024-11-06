@@ -11,6 +11,7 @@ const ButtonSubmitLC = ({
     isCheckLogic,
     dataQA,
     listNoCheckLogic,
+    listCheckRuleWarning,
     dataGridLastCheck,
     dataDetail,
     dataLastCheck,
@@ -56,7 +57,7 @@ const ButtonSubmitLC = ({
     }, [isOpenModalSubmit]);
     return (
         <>
-            <Row style={{ position: "absolute", bottom: 5, paddingTop: "1.5%", right: 0, paddingRight: "1.5%" }}>
+            <Row style={{ position: "absolute", paddingTop: "1.5%", right: 0, paddingRight: "1.5%" }}>
                 <Col
                     span={10}
                     style={{
@@ -95,6 +96,7 @@ const ButtonSubmitLC = ({
                     listNotQualified={listNotQualified}
                     dataQA={dataQA}
                     listNoCheckLogic={listNoCheckLogic}
+                    listCheckRuleWarning={listCheckRuleWarning}
                     dataGridLastCheck={dataGridLastCheck}
                 />
             }
@@ -110,6 +112,7 @@ ButtonSubmitLC.propTypes = {
     isCheckLogic: PropTypes.bool,
     dataQA: PropTypes.string,
     listNoCheckLogic: PropTypes.array,
+    listCheckRuleWarning: PropTypes.array,
     dataGridLastCheck: PropTypes.array,
     dataLastCheck: PropTypes.array,
     setDataLastCheck: PropTypes.func,

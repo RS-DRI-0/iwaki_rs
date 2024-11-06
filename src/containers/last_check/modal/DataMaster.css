@@ -22,8 +22,12 @@
 }
 
 .container-rule20 {
-  padding: 1% 2%;
+  padding: 1%;
   width: 100%;
+  height: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .container-rule20 .ant-form-item {
@@ -35,11 +39,32 @@
   border: 2px solid black;
 }
 
-.table-checkLogic .ant-table-thead th, .table-checkLogic-example .ant-table-thead th {
+.box-checkLogic-master2.list-error {
+  height: 20%;
+  padding: 1%;
+}
+
+.table-checkLogic {
+  padding: 1%;
+}
+.table-checkLogic .ant-table-body{
+  overflow-y: auto !important;
+}
+
+.table-checkLogic .ant-table-thead th,
+.table-checkLogic-example .ant-table-thead th {
   text-align: center !important;
 }
 .table-checkLogic-example .ant-table-thead th {
   background-color: #6cac6fa6 !important;
+}
+.table-checkLogic-example td {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.table-checkLogic-example .ant-empty-normal {
+  margin-block: 0px;
 }
 .content-report::first-letter {
   text-transform: uppercase;
@@ -48,4 +73,72 @@
   content: "• ";
   font-size: 20px;
   vertical-align: middle;
+}
+.button-check-circle-2 {
+  border-radius: 8px;
+  border: 2px solid rgb(239, 71, 101); /* Đặt border để có kích thước */
+  color: black;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.box-checkLogic-master2::-webkit-scrollbar {
+  /* display: none; */
+  margin-right: 10px;
+}
+.box-checkLogic-master2::-webkit-scrollbar-track {
+  /* display: none; */
+  margin-right: 10px;
+}
+
+.content-empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  opacity: 0.5;
+}
+
+.row-table-check-logic {
+  cursor: pointer;
+}
+
+.modal-checkLogic-master2 {
+  padding: 2%;
+  top: 0%;
+}
+
+.modal-checkLogic-master2 .ant-modal-content {
+  height: 90vh;
+}
+
+.content-wrong-rule {
+  height: 100%;
+  display: grid;
+  width: 100%;
+  overflow: scroll;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+.row-input-check-circle2 {
+  column-gap: 2ch;
+  display: flex;
+  padding-top: 1%;
+}
+
+.col-table-check-logic {
+  width: 100%;
+  border: 2px solid black;
+  border-radius: 16px;
+  height: 86vh;
+}
+
+.ant-modal.modal-checkLogic-master2 * {
+  font-size: 14px;
+}
+
+@media only screen and (max-width: 1600px) {
+  .ant-modal.modal-checkLogic-master2 * {
+    font-size: 12px !important;
+  }
 }

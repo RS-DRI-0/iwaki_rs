@@ -242,7 +242,7 @@ const PageNotification = ({
                 <Row style={{ width: "100%", paddingTop: 5 }}>
                   <Col span={8} style={{ position: "relative" }}>
                     <img
-                      src={`data:image/webp;base64,${item.thumb_base64}`}
+                      src={`data:image/jpeg;base64,${item.thumb_base64}`}
                       alt=""
                       className="img-list-package"
                     ></img>
@@ -294,7 +294,7 @@ const PageNotification = ({
                         </Col>
                       </Row>
                       <Row className="row-time-handle">
-                          <span><img src={IconLocation} alt=""></img>&nbsp;{item.vl_scan_no}</span>
+                          <span style={{display: "flex", alignItems: "center"}}><img src={IconLocation} alt=""></img>&nbsp;{item.vl_scan_no}</span>
                       </Row>
                     </div>
                   </Col>

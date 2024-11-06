@@ -5,11 +5,11 @@ import IconDeleteFilter from "../../../images/file_manager/IconDeleteFilter.svg"
 
 const ClearDataSearch = ({ handleClearDataSearch }) => {
   return (
-    <Tooltip title="Clear">
+    // <Tooltip title="Clear">
       <IconButton onClick={handleClearDataSearch}>
         <img alt="" src={IconDeleteFilter} />
       </IconButton>
-    </Tooltip>
+    // </Tooltip>
   );
 };
 

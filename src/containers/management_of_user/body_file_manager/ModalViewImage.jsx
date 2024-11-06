@@ -34,10 +34,10 @@ const ModalViewImage = ({ open, setIsOpenDetail, dataDetail }) => {
   const convertToImage = (value) => {
     let arrData = [];
     for (const element of value.lst_thum_base64) {
-      arrData.push(`data:image/webp;base64,${element}`);
+      arrData.push(`data:image/jpeg;base64,${element}`);
     }
     setThumbnailURL(arrData);
-    setMainImageURL(`data:image/webp;base64,${value.img_base64}`);
+    setMainImageURL(`data:image/jpeg;base64,${value.img_base64}`);
     setLoadingImage(false);
   };
 

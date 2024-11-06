@@ -349,7 +349,7 @@ const FileManager = ({
 
                         <button aria-label="btn-detail" className="thumbNail-manager-app" onClick={() => showModalDetail(item)}>
                           <img
-                            src={`data:image/webp;base64,${item.thumb_base64}`}
+                            src={`data:image/jpeg;base64,${item.thumb_base64}`}
                             alt=""
                           ></img>
                         </button>

@@ -5,11 +5,11 @@ import { Avatar, Col, Menu, Row, Select } from "antd";
 import logoIwaki from "../../images/LogoIwaki.svg";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MenuMui from "@mui/material/Menu";
-import ModalInfor from "./ModalInfor";
 import "./style.scss";
 import Cookies from "universal-cookie";
 import { UserOutlined } from "@ant-design/icons";
 import { optionLanguage } from "../../data";
+import ModalInfor from "../Header/ModalInfor";
 
 const cookies = new Cookies();
 const HeaderAdmin = () => {

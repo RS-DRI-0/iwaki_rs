@@ -182,7 +182,7 @@ const Check_Classification = () => {
 
           return {
             id: index + 1,
-            img_base64: `data:image/webp;base64,${file}`,
+            img_base64: `data:image/jpeg;base64,${file}`,
             Input_e1: entry_e1_value,
             Input_e2: entry_e2_value,
             color: color,
@@ -827,11 +827,11 @@ const Check_Classification = () => {
     let arrData = [];
 
     for (const base64 of value.lst_thum_base64) {
-      arrData.push(`data:image/webp;base64,${base64}`);
+      arrData.push(`data:image/jpeg;base64,${base64}`);
     }
 
     setThumbnailURL(arrData);
-    setMainImageURL(`data:image/webp;base64,${value.img_base64}`);
+    setMainImageURL(`data:image/jpeg;base64,${value.img_base64}`);
     setLoadingImage(false);
   };
 

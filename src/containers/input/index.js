@@ -62,11 +62,11 @@ const InsertInformationIndex = () => {
     let arrData = [];
 
     for (const base64 of value.lst_thum_base64) {
-      arrData.push(`data:image/webp;base64,${base64}`);
+      arrData.push(`data:image/jpeg;base64,${base64}`);
     }
 
     setThumbnailURL(arrData);
-    setMainImageURL(`data:image/webp;base64,${value.img_base64}`);
+    setMainImageURL(`data:image/jpeg;base64,${value.img_base64}`);
     setLoadingImage(false);
   };
 

@@ -1,30 +1,32 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Select, Button, Form, Input, Row, Col, Table, notification, message } from 'antd';
+import { Select, Form, Input, Row, Col, Table, notification } from 'antd';
 import "./CheckRule.css"
 import { authAxios } from '../../api/axiosClient';
 import { localhost } from '../../server';
+import { openNotificationSweetAlert } from '../../Function';
 const { Option } = Select;
 
 const CheckRule = () => {
     const defaultConditions = [
-        { no1: "", operator1: '', value1: "", poi1: "", in1: "", find_oper1: "", connect1: "", no2: "", operator2: '', value2: "", poi2: "", in2: "", find_oper2: "", connect2: "", no3: "", operator3: '', value3: "", poi3: "", in3: "", find_oper3: "", connect3: "", no4: "", operator4: '', value4: "", poi4: "", in4: "", find_oper4: "" },
-        { no1: "", operator1: '', value1: "", poi1: "", in1: "", find_oper1: "", connect1: "", no2: "", operator2: '', value2: "", poi2: "", in2: "", find_oper2: "", connect2: "", no3: "", operator3: '', value3: "", poi3: "", in3: "", find_oper3: "", connect3: "", no4: "", operator4: '', value4: "", poi4: "", in4: "", find_oper4: "" },
-        { no1: "", operator1: '', value1: "", poi1: "", in1: "", find_oper1: "", connect1: "", no2: "", operator2: '', value2: "", poi2: "", in2: "", find_oper2: "", connect2: "", no3: "", operator3: '', value3: "", poi3: "", in3: "", find_oper3: "", connect3: "", no4: "", operator4: '', value4: "", poi4: "", in4: "", find_oper4: "" },
-        { no1: "", operator1: '', value1: "", poi1: "", in1: "", find_oper1: "", connect1: "", no2: "", operator2: '', value2: "", poi2: "", in2: "", find_oper2: "", connect2: "", no3: "", operator3: '', value3: "", poi3: "", in3: "", find_oper3: "", connect3: "", no4: "", operator4: '', value4: "", poi4: "", in4: "", find_oper4: "" }
+        { no1: "", operator1: '', value1: "", poi1: "", find_oper1: "", in1: "", check1: "", connect1: "", no2: "", operator2: '', value2: "", poi2: "", find_oper2: "", in2: "", check2: "", connect2: "", no3: "", operator3: '', value3: "", poi3: "", find_oper3: "", in3: "", check3: "", connect3: "", no4: "", operator4: '', value4: "", poi4: "", find_oper4: "", in4: "", check4: "" },
+        { no1: "", operator1: '', value1: "", poi1: "", find_oper1: "", in1: "", check1: "", connect1: "", no2: "", operator2: '', value2: "", poi2: "", find_oper2: "", in2: "", check2: "", connect2: "", no3: "", operator3: '', value3: "", poi3: "", find_oper3: "", in3: "", check3: "", connect3: "", no4: "", operator4: '', value4: "", poi4: "", find_oper4: "", in4: "", check4: "" },
+        { no1: "", operator1: '', value1: "", poi1: "", find_oper1: "", in1: "", check1: "", connect1: "", no2: "", operator2: '', value2: "", poi2: "", find_oper2: "", in2: "", check2: "", connect2: "", no3: "", operator3: '', value3: "", poi3: "", find_oper3: "", in3: "", check3: "", connect3: "", no4: "", operator4: '', value4: "", poi4: "", find_oper4: "", in4: "", check4: "" },
+        { no1: "", operator1: '', value1: "", poi1: "", find_oper1: "", in1: "", check1: "", connect1: "", no2: "", operator2: '', value2: "", poi2: "", find_oper2: "", in2: "", check2: "", connect2: "", no3: "", operator3: '', value3: "", poi3: "", find_oper3: "", in3: "", check3: "", connect3: "", no4: "", operator4: '', value4: "", poi4: "", find_oper4: "", in4: "", check4: "" }
 
     ]
     const conditionCheckAction = ["", null, undefined]
     const [form] = Form.useForm();
     const listIndex = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     const [conditions, setConditions] = useState(defaultConditions);
-    const [action, setAction] = useState({ no: "", operator: '>=', value: "", connect: "", noChild: "", operatorChild: '>=', valueChild: "" });
     const [listTextAndOr, setListTextAndOr] = useState([])
     const [dataNotification, setDataNotification] = useState({ message: "", status: "" })
     const [listPumb, setListPumb] = useState([]);
     const [listField, setListField] = useState([]);
     const [isOpenTable, setIsOpenTable] = useState(false)
     const [dataRaw, setDataRaw] = useState("")
+    const [pumpId, setPumpId] = useState()
     const inforUser = JSON.parse(sessionStorage.getItem("info_user"));
+    const columnTryIt = ["No1", "No2", "No3", "No4", "No5", "No6", "No7", "No8"]
 
     const dataRule = [
         {
@@ -40,79 +42,15 @@ const CheckRule = () => {
     ]
 
     const columns = [
-        {
-            title: "No1",
-            dataIndex: "no1",
-            key: "no1",
+        ...columnTryIt.map(item => ({
+            title: item,
+            dataIndex: item,
+            key: item,
             // ellipsis: true,
             // width: "40%"
             ellipsis: true,
-            render: (text, record) => <Form.Item name={"no1"}><Input style={{ width: "100%" }}></Input></Form.Item>
-        },
-        {
-            title: "No2",
-            dataIndex: "no2",
-            key: "no2",
-            // ellipsis: true,
-            // width: "40%"
-            ellipsis: true,
-            render: (text, record) => <Form.Item name={"no2"}><Input style={{ width: "100%" }}></Input></Form.Item>
-        },
-        {
-            title: "No3",
-            dataIndex: "no3",
-            key: "no3",
-            // ellipsis: true,
-            // width: "40%"
-            ellipsis: true,
-            render: (text, record) => <Form.Item name={"no3"}><Input style={{ width: "100%" }}></Input></Form.Item>
-        },
-        {
-            title: "No4",
-            dataIndex: "no4",
-            key: "no4",
-            // ellipsis: true,
-            // width: "40%"
-            ellipsis: true,
-            render: (text, record) => <Form.Item name={"no4"}><Input style={{ width: "100%" }}></Input></Form.Item>
-
-        },
-        {
-            title: "No5",
-            dataIndex: "no5",
-            key: "no5",
-            // ellipsis: true,
-            // width: "40%"
-            ellipsis: true,
-            render: (text, record) => <Form.Item name={"no5"}><Input style={{ width: "100%" }}></Input></Form.Item>
-        },
-        {
-            title: "No6",
-            dataIndex: "no6",
-            key: "no6",
-            // ellipsis: true,
-            // width: "40%"
-            ellipsis: true,
-            render: (text, record) => <Form.Item name={"no6"}><Input style={{ width: "100%" }}></Input></Form.Item>
-        },
-        {
-            title: "No7",
-            dataIndex: "no7",
-            key: "no7",
-            // ellipsis: true,
-            // width: "40%"
-            ellipsis: true,
-            render: (text, record) => <Form.Item name={"no7"}><Input style={{ width: "100%" }}></Input></Form.Item>
-        },
-        {
-            title: "No8",
-            dataIndex: "no8",
-            key: "no8",
-            // ellipsis: true,
-            // width: "40%"
-            ellipsis: true,
-            render: (text, record) => <Form.Item name={"no8"}><Input style={{ width: "100%" }}></Input></Form.Item>
-        },
+            render: () => <Form.Item name={item}><Input style={{ width: "100%" }}></Input></Form.Item>
+        }))
     ];
 
     const clearCondition = () => {
@@ -123,17 +61,21 @@ const CheckRule = () => {
 
     const handleConditionChange = useCallback((index, key, val) => {
         const newConditions = [...conditions];
-
         try {
             if (key.includes("operator")) {
+                if (val !== "find in" && val !== "find check") {
+                    newConditions[index]["find_oper" + key[key.length - 1]] = ""
+                }
                 if (val !== "index of") {
                     newConditions[index]["poi" + key[key.length - 1]] = ""
                 }
-                if (val !== "find") {
+                if (val !== "find in") {
                     newConditions[index]["in" + key[key.length - 1]] = ""
                 }
+                if (val !== "find check") {
+                    newConditions[index]["check" + key[key.length - 1]] = ""
+                }
             }
-
             newConditions[index][key] = val.target.value;
         } catch {
             if (val === undefined) {
@@ -144,9 +86,10 @@ const CheckRule = () => {
                             newConditions[index]["operator" + i] = ""
                             newConditions[index]["value" + i] = ""
                             newConditions[index]["poi" + i] = ""
-                            newConditions[index]["in" + i] = ""
-                            newConditions[index]["connect" + i] = ""
                             newConditions[index]["find_oper" + i] = ""
+                            newConditions[index]["in" + i] = ""
+                            newConditions[index]["check" + i] = ""
+                            newConditions[index]["connect" + i] = ""
                         }
                     }
                     // Xóa tát cả các dữ liệu ở sau
@@ -163,55 +106,87 @@ const CheckRule = () => {
         setConditions(newConditions);
     }, [conditions]);
 
-    const handleActionChange = useCallback((key, val) => {
-        const newAction = { ...action };
-        try {
-            newAction[key] = val.target.value;
-        } catch {
-            newAction[key] = val;
-        }
-        setAction(newAction);
-    }, [action]);
+    const sortObjectByLastChar = (item) => {
+        // const obj = Object.keys(item)[indexItem]
+        return Object.keys(item)
+            .sort((a, b) => {
+                const lastCharA = a[a.length - 1];
+                const lastCharB = b[b.length - 1];
+                return lastCharA.localeCompare(lastCharB);
+            })
+            .reduce((sortedObj, key) => {
+                sortedObj[key] = item[key];
+                return sortedObj;
+            }, {});
+    };
+
+    const handleContentSubmit = (item) => {
+        const values = Object.values(item)
+        const listKey = Object.keys(item)
+        const result = values.map((value, indexItem) => {
+            // Không + giá trị của connected vào chuỗi
+
+            // console.log(Object.keys(item)[indexItem])
+            if (Object.keys(item)[indexItem] !== "connected") {
+                if (value === "find in" || value === "find check") {
+                    if (value === "find in") {
+                        values[indexItem + 2] = "in"
+                    } else {
+                        values[indexItem + 2] = "check"
+                    }
+                    value = "find " + values[indexItem + 3]
+                    values[indexItem + 3] = ""
+
+                } else
+                    if (value === "index of") {
+                        values[indexItem + 2] = "poi " + values[indexItem + 2]
+                    }
+                return value;
+            }
+        }).join(' ');
+        return result
+    }
 
     const handleSubmit = (value) => {
         let dataSubmit = ''
+        console.log(listTextAndOr)
         conditions.forEach((item, index) => {
             if (index === 0) {
-                const values = Object.values(item != "" ? item : null)
-                const result = values.map((value, indexItem) => {
-                    // Không + giá trị của connected vào chuỗi
+                // handleContentSubmit(item)
+                // const values = Object.values(item)
+                // const listKey = Object.keys(item)
+                // const result = values.map((value, indexItem) => {
+                //     // Không + giá trị của connected vào chuỗi
 
-                    if (Object.keys(item)[indexItem] !== "connected") {
-                        if (value === "find") {
-                            values[indexItem + 2] = "in"
-                            value = "find " + values[indexItem + 4]
-                            values[indexItem + 4] = ""
-                        } else
-                            if (value === "index of") {
-                                values[indexItem + 2] = "poi " + values[indexItem + 2]
-                            }
-                        return value;
-                    }
+                //     // console.log(Object.keys(item)[indexItem])
+                //     if (Object.keys(item)[indexItem] !== "connected") {
+                //         if (value === "find in" || value === "find check") {
+                //             if (value === "find in") {
+                //                 values[indexItem + 2] = "in"
+                //             } else {
+                //                 const index = listKey[indexItem + 3][listKey[indexItem + 3].length - 1]
+                //                 values[indexItem + 2] = "check"
+                //                 values[indexItem + 3] = item["check" + index]
+                //                 values[29] = ""
+                //                 values[30] = ""
+                //                 values[31] = ""
+                //                 values[32] = ""
+                //             }
+                //             value = "find " + values[indexItem + 4]
+                //             values[indexItem + 4] = ""
 
-                }).join(' ');
-                dataSubmit += '( ' + result + ') '
+                //         } else
+                //             if (value === "index of") {
+                //                 values[indexItem + 2] = "poi " + values[indexItem + 2]
+                //             }
+                //         return value;
+                //     }
+                // }).join(' ');
+                dataSubmit += '( ' + handleContentSubmit(item) + ') '
             } else if (index !== 0) {
+                console.log(!conditionCheckAction.includes(listTextAndOr[index - 1]))
                 if (!conditionCheckAction.includes(listTextAndOr[index - 1])) {
-                    const values = Object.values(item != "" ? item : null)
-                    const result = values.map((value, indexItem) => {
-                        if (Object.keys(item)[indexItem] !== "connected") {
-                            if (value === "find") {
-                                values[indexItem + 2] = "in"
-                                value = "find " + values[indexItem + 4]
-                                values[indexItem + 4] = ""
-                            } else
-                                if (value === "index of") {
-                                    values[indexItem + 2] = "poi " + values[indexItem + 2]
-                                }
-                            return value;
-                        }
-                    }).join(' ');
-                    dataSubmit += (item.no1 !== "" && item.no2 !== "") ? listTextAndOr[index - 1] + ' ( ' + result + ') ' : ""
+                    dataSubmit += (item.no1 !== "") ? listTextAndOr[index - 1] + ' ( ' + handleContentSubmit(item) + ') ' : ""
                 }
             }
         })
@@ -227,11 +202,40 @@ const CheckRule = () => {
             group4: { ...conditions[3], connected: "" },
         }
 
+        // let newArr1 = Object.values(dataGr.group1)
+        // let newArr2 = Object.values(dataGr.group2)
+        // let newArr3 = Object.values(dataGr.group3)
+        // let newArr4 = Object.values(dataGr.group4)
+
+        // for (let i = 0; i < newArr1.length; i++) {
+        //     if (newArr1[i] === "find check" || newArr1[i] === "find in") {
+        //         newArr1[i] = "find"
+        //     }
+        // }
+        // for (let i = 0; i < newArr2.length; i++) {
+        //     if (newArr2[i] === "find check" || newArr2[i] === "find in") {
+        //         newArr2[i] = "find"
+        //     }
+        // }
+        // for (let i = 0; i < newArr3.length; i++) {
+        //     if (newArr3[i] === "find check" || newArr3[i] === "find in") {
+        //         newArr3[i] = "find"
+        //     }
+        // }
+        // for (let i = 0; i < newArr4.length; i++) {
+        //     if (newArr4[i] === "find check" || newArr4[i] === "find in") {
+        //         newArr4[i] = "find"
+        //     }
+        // }
+
+        // const newDataGr = { newArr1, newArr2, newArr3, newArr4 }
+
         let dataJson = [
             {
                 rule: dataGr
             }
         ]
+
         const dataResult = isOpenTable ? {
             rule: dataGr,
             mockValue: value
@@ -242,25 +246,10 @@ const CheckRule = () => {
             raw_data: dataSubmit.replace(/\s+/g, ' '),
             json_data: dataJson
         }
-
-
-
+        console.log(dataSubmit.replace(/\s+/g, ' '))
         const api = isOpenTable ? "get_logic_rule" : "update_logic_temp_data"
         authAxios()
-            .post(`${localhost}/${api}`, dataResult
-
-                // user_role: inforUser.user_role,
-                // pumb_id: form.getFieldValue("pump_id"),
-                // field_id: form.getFieldValue("field_name"),
-                // raw_data: dataSubmit.replace(/\s+/g, ' '),
-                // json_data: dataJson
-
-                // headers: {
-                //     "Content-Type": "application/json"
-                // }
-            ).then(res => {
-                // setMessageNotifi(res.data.message)
-
+            .post(`${localhost}/${api}`, dataResult).then(res => {
                 showMessageNotification(res.data, "success")
                 // openNotification(res.data.message, "success")
                 // setConditions([
@@ -270,12 +259,17 @@ const CheckRule = () => {
                 // ]);
                 // setAction({ no: "", operator: '>=', value: "", connect: "", noChild: "", operatorChild: '>=', valueChild: "" });
                 // form.resetFields()
-
+                form.setFieldValue("field_name", "")
+                // openNotificationSweetAlert()
+                setDataRaw("")
+                // fetchListPumb()
+                fetchLogicTempData(pumpId)
                 if (!isOpenTable) {
                     clearCondition()
                 }
 
             }).catch(err => {
+                // openNotificationSweetAlert()
                 showMessageNotification(err.data, "error")
                 // openNotification(err.data.message, "error")
                 // setMessageNotifi(err.data.message)
@@ -303,63 +297,25 @@ const CheckRule = () => {
         setListTextAndOr(newList)
     }
 
-    // const showResultCreateRule = () => {
-    //     let dataRule = ''
-
-    //     conditions.forEach((item, index) => {
-    //         if (item.no1 !== "" && item.value1 !== "") {
-    //             dataRule += `if ${item.no1} ${item.operator1} ${item.value1} `
-    //             if (item.operator === "index of") {
-    //                 dataRule += `Poi ${item.poi1} `
-    //             }
-    //             if (!conditionCheckAction.includes(item.connect) && item.noChild !== "" && item.valueChild !== "") {
-    //                 dataRule += `${item.connect} ${item.noChild} ${item.operatorChild} ${item.valueChild} `
-    //                 if (item.operatorChild === "index of") {
-    //                     dataRule += `Poi ${item.poiChild} `
-    //                 }
-    //             }
-    //             if (index < conditions.length - 1) {
-    //                 if (conditions[index + 1].no !== "" && conditions[index + 1].value !== "") {
-    //                     dataRule += `${index < listTextAndOr.length ? listTextAndOr[index] : ""} `
-    //                 }
-    //             } else if (conditions[index].no !== "" && conditions[index].value !== "") {
-    //                 dataRule += `${index < listTextAndOr.length ? listTextAndOr[index] : ""} `
-    //             }
-    //         }
-    //     })
-
-    //     let contentThen = `Then ${action.no} ${action.operator} ${action.value} `
-    //     let checkDataChildOfThen = action.noChild !== "" || action.valueChild !== ""
-    //     if (!conditionCheckAction.includes(action.connect) && checkDataChildOfThen) {
-    //         contentThen += `${action.connect} ${action.noChild} ${action.operatorChild} ${action.valueChild} `
-    //     }
-
-    //     return (
-    //         <span>{dataRule} {contentThen}</span>
-    //     )
-    // }
-
     const onFinish = (value) => {
         handleSubmit(value)
     }
 
     const showGroup = (condition, index, position) => {
-        let listElement = ["no", "operator", "value", "poi", "in", "find_oper"]
-
         return (
             <div style={{ background: "rgb(145 209 177 / 81%)", display: "grid", padding: "4%", width: "100%", rowGap: "0.5ch", borderRadius: 8 }}>
                 <div style={{ alignContent: "center" }}>
                     <Input
-                        value={condition[listElement[0] + position]}
-                        onChange={(val) => handleConditionChange(index, listElement[0] + position, val)}
+                        value={condition["no" + position]}
+                        onChange={(val) => handleConditionChange(index, "no" + position, val)}
                         placeholder='No.'
-                        style={{ width: "25%" }}
+                        style={{ width: "20%" }}
                     />
-                    <div style={{ width: "45%", display: "contents" }}>
+                    <div style={{ width: "50%", display: "contents" }}>
                         <Select
-                            value={condition[listElement[1] + position]}
-                            onChange={(val) => handleConditionChange(index, listElement[1] + position, val)}
-                            style={{ width: condition[listElement[1] + position] === "find" ? "22.5%" : "45%", padding: "0% 2%" }}
+                            value={condition["operator" + position]}
+                            onChange={(val) => handleConditionChange(index, "operator" + position, val)}
+                            style={{ width: condition["operator" + position].includes("find") ? "30%" : "50%", padding: "0% 2%" }}
                         >
                             <Option value=">=">&ge;</Option>
                             <Option value="<=">&le;</Option>
@@ -368,14 +324,15 @@ const CheckRule = () => {
                             <Option value="==">=</Option>
                             <Option value="!=">{"<>"}</Option>
                             <Option value="index of">Index of</Option>
-                            <Option value="find">Find</Option>
+                            <Option value="find in">Find In</Option>
+                            <Option value="find check">Find Check</Option>
                             <Option value="contains">Contains</Option>
                         </Select>
-                        {condition[listElement[1] + position] === "find" &&
+                        {condition["operator" + position].includes("find") &&
                             <Select
-                                value={condition[listElement[5] + position]}
-                                onChange={(val) => handleConditionChange(index, listElement[5] + position, val)}
-                                style={{ width: "22.5%", padding: "0% 2%" }}
+                                value={condition["find_oper" + position]}
+                                onChange={(val) => handleConditionChange(index, "find_oper" + position, val)}
+                                style={{ width: "20%", padding: "0% 2%" }}
                             >
                                 <Option value=">=">&ge;</Option>
                                 <Option value="<=">&le;</Option>
@@ -388,18 +345,18 @@ const CheckRule = () => {
                     </div>
 
                     <Input
-                        value={condition[listElement[2] + position]}
-                        placeholder={condition[listElement[1]] !== "index of" ? 'Value ' : "No."}
-                        onChange={(val) => handleConditionChange(index, listElement[2] + position, val)}
+                        value={condition["value" + position]}
+                        placeholder={condition["operator"] !== "index of" ? 'Value ' : "No."}
+                        onChange={(val) => handleConditionChange(index, "value" + position, val)}
                         style={{ width: "30%" }}
                     />
                 </div>
-                {condition[listElement[1] + position] === "index of" &&
+                {condition["operator" + position] === "index of" &&
                     <span style={{ marginLeft: "auto" }}>
                         <span style={{ marginRight: '6px' }}>Poi:</span>
                         <Select
-                            value={condition[listElement[3] + position]}
-                            onChange={(val) => handleConditionChange(index, listElement[3] + position, val)}
+                            value={condition["poi" + position]}
+                            onChange={(val) => handleConditionChange(index, "poi" + position, val)}
                             style={{ textAlign: "end", width: "60px" }}
                         >
                             {listIndex.map(item => (
@@ -408,60 +365,27 @@ const CheckRule = () => {
                         </Select>
                     </span>
                 }
-                {condition[listElement[1] + position] === "find" &&
+                {condition["operator" + position] === "find in" &&
                     <label style={{ marginLeft: "auto", display: "flex", alignItems: "center", width: "30%" }}>
                         <span style={{ marginRight: '6px' }}>In:</span>
                         <Input
-                            value={condition[listElement[4] + position]}
-                            onChange={(val) => handleConditionChange(index, listElement[4] + position, val)}
+                            value={condition["in" + position]}
+                            onChange={(val) => handleConditionChange(index, "in" + position, val)}
+                        />
+                    </label>
+                }
+                {condition["operator" + position] === "find check" &&
+                    <label style={{ marginLeft: "auto", display: "flex", alignItems: "center", width: "35%" }}>
+                        <span style={{ marginRight: '6px' }}>Check:</span>
+                        <Input
+                            value={condition["check" + position]}
+                            onChange={(val) => handleConditionChange(index, "check" + position, val)}
                         />
                     </label>
                 }
             </div>
         )
     }
-
-    // const showGroupThen = (type) => {
-    //     let listElement = []
-    //     if (type === 'child') {
-    //         listElement = ["noChild", "operatorChild", "valueChild"]
-    //     } else {
-    //         listElement = ["no", "operator", "value"]
-    //     }
-
-    //     return (
-    //         <Row style={{ display: "contents" }}>
-    //             <div style={{ width: "15%" }}>
-    //                 <Input
-    //                     value={action[listElement[0]]}
-    //                     onChange={(val) => handleActionChange(listElement[0], val)}
-    //                     placeholder='No.'
-    //                 />
-    //             </div>
-    //             <Select
-    //                 style={{ width: "10%" }}
-    //                 value={action[listElement[1]]}
-    //                 onChange={(val) => handleActionChange(listElement[1], val)}
-    //             >
-    //                 <Option value=">=">&ge;</Option>
-    //                 <Option value="<=">&le;</Option>
-    //                 <Option value=">">&gt;</Option>
-    //                 <Option value="<">&lt;</Option>
-    //                 <Option value="==">=</Option>
-    //                 <Option value="!=">{"<>"}</Option>
-    //                 <Option value="find">Find</Option>
-    //             </Select>
-
-    //             <div style={{ width: "20%" }}>
-    //                 <Input
-    //                     value={action[listElement[2]]}
-    //                     placeholder='Value'
-    //                     onChange={(val) => handleActionChange(listElement[2], val)}
-    //                 />
-    //             </div>
-    //         </Row>
-    //     )
-    // }
 
     const openNotification = (data, type) => {
         notification[type]({
@@ -511,14 +435,14 @@ const CheckRule = () => {
 
     useEffect(() => {
         form.setFieldsValue({
-            no1: 10,
-            no2: 20,
-            no3: "10-0-10",
-            no4: 40,
-            no5: 50,
-            no6: "30-20-10-0-10",
-            no7: 80,
-            no8: 10,
+            No1: 10,
+            No2: 20,
+            No3: "10-0-10",
+            No4: 40,
+            No5: 50,
+            No6: "30-20-10-0-10",
+            No7: 80,
+            No8: 10,
         })
         const handleKeyPress = (event) => {
             if (event.key === "Enter") {
@@ -558,8 +482,8 @@ const CheckRule = () => {
     const chooseModel = (value, data) => {
         form.setFieldValue("field_name", "")
         clearCondition()
+        setPumpId(value)
         fetchLogicTempData(value)
-
     };
 
     const fetchListPumb = () => {
@@ -591,18 +515,16 @@ const CheckRule = () => {
         setIsOpenTable(prev => !prev)
     }
 
-    useEffect(() => {
-        // let dataGet = [DataTest[0].rule.group1, DataTest[0].rule.group2,DataTest[0].rule.group3]
-        // setConditions(dataGet)
-        // setListTextAndOr([DataTest[0].rule.group1.connected, DataTest[0].rule.group2.connected])
-        // setAction(DataTest[1].result)
-    }, []);
     const chooseField = (e, value) => {
         if (value.jsonData !== "") {
             let data = value.jsonData
             const newStr = data.replace(/'/g, '"');
+
             const obj = JSON.parse(newStr);
+
             let dataGet = [obj.rule.group1, obj.rule.group2, obj.rule.group3, obj.rule.group4]
+
+
 
             setConditions(dataGet)
             let listConnect = []
@@ -636,7 +558,6 @@ const CheckRule = () => {
                     }
                 })
             }
-
             setDataRaw(newString)
         } else {
             clearCondition()
@@ -696,10 +617,6 @@ const CheckRule = () => {
                     </Row>
 
                     <div style={{ display: "grid", rowGap: "2ch" }}>
-                        {/* <Row style={{ display: "flex", width: "100%" }}> */}
-                        {/* <Col span={2}>
-                                {<p style={{ margin: 0 }}>Nếu: </p>}
-                            </Col> */}
                         <Row style={{ display: "grid", rowGap: "2ch" }}>
                             {conditions.map((condition, index) => (
                                 <>
@@ -707,10 +624,10 @@ const CheckRule = () => {
                                         <>
 
                                             <div style={{ display: "flex", backgroundColor: "#ffffffcc", padding: "1.2%", borderRadius: 16 }}>
-                                                <div style={{ width: "19%", display: "flex" }}>
+                                                <div style={{ width: "20.5%", display: "flex" }}>
                                                     {showGroup(condition, index, 1)}
                                                 </div>
-                                                <div style={{ width: "8%", display: "flex", alignItems: "center" }}>
+                                                <div style={{ width: "6%", display: "flex", alignItems: "center" }}>
                                                     <Select
                                                         value={condition.connect1}
                                                         onChange={(val) => handleConditionChange(index, 'connect1', val)}
@@ -728,10 +645,10 @@ const CheckRule = () => {
 
                                                 {condition.connect1 !== "" &&
                                                     <>
-                                                        <div style={{ width: "19%", display: "flex" }}>
+                                                        <div style={{ width: "20.5%", display: "flex" }}>
                                                             {showGroup(condition, index, 2)}
                                                         </div>
-                                                        <div style={{ width: "8%", display: "flex", alignItems: "center" }}>
+                                                        <div style={{ width: "6%", display: "flex", alignItems: "center" }}>
                                                             <Select
                                                                 value={condition.connect2}
                                                                 onChange={(val) => handleConditionChange(index, 'connect2', val)}
@@ -750,10 +667,10 @@ const CheckRule = () => {
 
                                                 {condition.connect2 !== "" &&
                                                     <>
-                                                        <div style={{ width: "19%", display: "flex" }}>
+                                                        <div style={{ width: "20.5%", display: "flex" }}>
                                                             {showGroup(condition, index, 3)}
                                                         </div>
-                                                        <div style={{ width: "8%", display: "flex", alignItems: "center" }}>
+                                                        <div style={{ width: "6%", display: "flex", alignItems: "center" }}>
                                                             <Select
                                                                 value={condition.connect3}
                                                                 onChange={(val) => handleConditionChange(index, 'connect3', val)}
@@ -771,7 +688,7 @@ const CheckRule = () => {
 
                                                 }
                                                 {condition.connect3 !== "" &&
-                                                    <div style={{ width: "19%", display: "flex" }}>
+                                                    <div style={{ width: "20.5%", display: "flex" }}>
                                                         {showGroup(condition, index, 4)}
                                                     </div>
                                                 }
@@ -782,7 +699,7 @@ const CheckRule = () => {
                                                 <Select
                                                     value={listTextAndOr[index]}
                                                     onChange={(value) => changeTextAndOr(value, index)}
-                                                    style={{ width: 80, border: "2px solid rgba(0, 0, 0, 0.34)", borderRadius: 8 }}
+                                                    style={{ width: 80, border: "2px solid rgb(145 209 177 / 81%)", borderRadius: 8 }}
 
                                                     // optionFilterProp="children"
                                                     allowClear={true}
@@ -793,48 +710,9 @@ const CheckRule = () => {
                                             }
                                         </>
                                     }
-                                    {/* {index < conditions.length - 1 &&
-                                            <Select
-                                                value={listTextAndOr[index]}
-                                                onChange={(value) => changeTextAndOr(value, index)}
-                                                style={{ width: 80 }}
-                                                // optionFilterProp="children"
-                                                allowClear={true}
-                                            >
-                                                <Option value="and">AND</Option>
-                                                <Option value="or">OR</Option>
-                                            </Select>} */}
                                 </>
                             ))}
                         </Row>
-                        {/* </Row> */}
-
-                        {/* <Row>
-                            <Col span={2}>
-                                Thì:
-                            </Col>
-                            <Col span={22}>
-                                <div style={{ columnGap: "0.5ch", display: "flex" }}>
-                                    {showGroupThen("")}
-
-                                    <Select
-                                        value={action.connect}
-                                        onChange={(val) => handleActionChange('connect', val)}
-                                        style={{ width: "15%" }}
-                                    >
-                                        <Option value="and">AND</Option>
-                                        <Option value="or">OR</Option>
-                                    </Select>
-
-                                    {showGroupThen("child")}
-                                </div>
-                            </Col>
-                        </Row> */}
-                        {/* 
-                        <p style={{ display: "flex", alignItems: "center" }}>
-                            {showResultCreateRule()}
-                        </p> */}
-
                         {!conditionCheckAction.includes(dataNotification.message) ? showError() : null}
                     </div>
 
@@ -853,11 +731,9 @@ const CheckRule = () => {
                             pagination={false}
                         />
                     }
-
-                    {/* <Button htmlType='submit' style={{ textTransform: "uppercase", fontWeight: 600 }}>lưu quy tắc</Button> */}
                 </Form>
-            </div >
-        </div >
+            </div>
+        </div>
     );
 }
 

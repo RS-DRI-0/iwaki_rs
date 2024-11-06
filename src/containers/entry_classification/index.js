@@ -87,7 +87,7 @@ const Entry_Classification = () => {
         res.data.lst_thum_base64.forEach((base64, index) => {
           arrData.push({
             id: index + 1,
-            img_base64: `data:image/webp;base64,${base64}`,
+            img_base64: `data:image/jpeg;base64,${base64}`,
             value_id: index + 1,
           });
         });
@@ -467,11 +467,11 @@ const Entry_Classification = () => {
     let arrData = [];
 
     for (const base64 of value.lst_thum_base64) {
-      arrData.push(`data:image/webp;base64,${base64}`);
+      arrData.push(`data:image/jpeg;base64,${base64}`);
     }
 
     setThumbnailURL(arrData);
-    setMainImageURL(`data:image/webp;base64,${value.img_base64}`);
+    setMainImageURL(`data:image/jpeg;base64,${value.img_base64}`);
     setLoadingImage(false);
   };
 

@@ -167,7 +167,7 @@ const ModalShowImageSelect = ({
               {...uploadProps}
               fileList={[]}
               listType="picture"
-              accept=".png,.jpg,.jpeg,.tif"
+              accept=".png,.jpg,.jpeg,.tif,.tiff"
               customRequest={customUpload}
             >
               <img src={iconAddItem} className="buttonImport" alt="" />
