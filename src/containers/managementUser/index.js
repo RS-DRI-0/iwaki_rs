@@ -113,16 +113,18 @@ const ManagementUser = ({ chooseLanguage }) => {
       title: "ID",
       dataIndex: "user_msnv",
       key: "user_msnv",
-      render: (text) => (
+      render: (value, item, index) => (
         <div
           style={{
             whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",
           }}
-          title={text} // Tooltip on hover to show full text
+          title={value} // Tooltip on hover to show full text
         >
-          {text}
+          {`${String(
+            ((rowsPerPage.current || 1) - 1) * rowsPerPage.pageSize + index + 1
+          ).padStart(4, "0")}_${value}`}
         </div>
       ),
     },
