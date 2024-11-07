@@ -16,7 +16,10 @@ const ButtonSubmitLC = ({
     dataDetail,
     dataLastCheck,
     setDataLastCheck,
-    form
+    form,
+    setListReport,
+    listReport,
+    dataPumb
 }) => {
     const [listNotQualified, setListNotQualified] = useState([])
     const showModalSubmit = () => {
@@ -57,18 +60,31 @@ const ButtonSubmitLC = ({
     }, [isOpenModalSubmit]);
     return (
         <>
-            <Row style={{ position: "absolute", paddingTop: "1.5%", right: 0, paddingRight: "1.5%" }}>
+            <Row style={{ position: "absolute", paddingTop: "1.5%", right: 0, paddingRight: "1.5%", width: "100%" }}>
                 <Col
-                    span={10}
+                    span={18}
                     style={{
                         display: "flex",
-                        paddingLeft: "5%",
+                        paddingLeft: "2%",
                         columnGap: "5ch",
                         alignItems: "center",
                     }}
                 >
+                    {Number(dataPumb.is_master) === 2 &&
+                        <Row className='show-content-check-rule20'>
+                            <div className='content-wrong-rule' style={{fontSize: 12}}>
+                                {listReport.length === 0 ?
+                                    <span className='content-empty'>Nội dung sai qui tắc</span>
+                                    :
+                                    listReport.map((item, index) => (
+                                        <span className='content-report' style={{ fontWeight: 600 }} key={index}>{item}</span>
+                                    ))
+                                }
+                            </div>
+                        </Row>
+                    }
                 </Col>
-                <Col span={13} offset={1} style={{
+                <Col span={5} offset={1} style={{
                     display: "flex",
                     columnGap: "2ch",
                     justifyContent: "flex-end"

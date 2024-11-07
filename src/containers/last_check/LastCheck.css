@@ -61,10 +61,20 @@
   font-size: 24px;
 }
 .btn-production::after {
-  content: "Production Instructions"
+  content: "Production Instructions";
 }
 @media only screen and (max-width: 1600px) {
   .btn-production::after {
-    content: "P. Instructions"
+    content: "P. Instructions";
   }
+}
+
+.show-content-check-rule20 {
+  border-radius: 16px;
+  height: 8vh;
+  padding: 1%;
+  border: 1px solid rgb(239, 71, 101);
+  width: 100%;
+  box-shadow: rgb(239 71 101 / 0%) 0px 1px 4px 2px,
+    rgb(239 71 101 / 35%) 0px 2px 6px 2px;
 }
