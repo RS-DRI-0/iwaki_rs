@@ -490,6 +490,7 @@ const MobileWebCam2 = () => {
 
   const multiUploadImage = () => {
     setShowModalUploadImageCapture(false);
+    setCheckFlash(false);
     const startTimeClick = Date.now();
 
     try {
