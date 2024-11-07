@@ -80,6 +80,7 @@ const MobileWebCam2 = () => {
   const [currentCheckSheet, setCurrentCheckSheet] = React.useState(0);
   const [isModalOpenImageCapture, setIsModalOpenImageCapture] = useState(false);
   const [flashOn, setFlashOn] = useState(false);
+  const [checkFlash, setCheckFlash] = useState(false);
   const [showModalUploadImageCapture, setShowModalUploadImageCapture] =
     useState(false);
   const [showModalConfirmLessThan5Images, setShowModalConfirmLessThan5Images] =
@@ -164,6 +165,9 @@ const MobileWebCam2 = () => {
             setFacingMode(newFacingMode);
           }
         });
+        if (checkFlash === true) {
+          handleFlashToggle();
+        }
       }
     } catch (err) {
       ToastCameraNotFound.fire({
@@ -194,6 +198,9 @@ const MobileWebCam2 = () => {
 
   useEffect(() => {
     if (isModalImageVisible === true || isModalOpenImageCapture === true) {
+      if (checkFlash === true) {
+        handleFlashToggle();
+      }
       stopCamera();
       setValueStartCamera(0);
     } else {
@@ -413,7 +420,7 @@ const MobileWebCam2 = () => {
 
       authAxios()
         .post(`${localhost}/log_cap_err`, data)
-        .then((res) => { })
+        .then((res) => {})
         .catch((err) => {
           console.log(err);
         });
@@ -494,8 +501,8 @@ const MobileWebCam2 = () => {
         return (
           previousValue +
           parseInt(image.imageBase64.replace(/=/g, "").length * 0.75) /
-          1024 /
-          1024
+            1024 /
+            1024
         );
       }, 0);
       if (totalSize <= 50) {
@@ -528,7 +535,7 @@ const MobileWebCam2 = () => {
                 listImageBase64.push(item.imageBase64);
                 arrNameImage.push(item.imageName);
               });
-              sessionStorage.setItem("check_upload", true)
+              sessionStorage.setItem("check_upload", true);
 
               authAxios()
                 .post(`${localhost}/upload_file`, {
@@ -548,8 +555,8 @@ const MobileWebCam2 = () => {
                     items2.is_multi === "0"
                       ? "0"
                       : valueCheckBoxRadio === 1
-                        ? "1"
-                        : "0",
+                      ? "1"
+                      : "0",
                   vl_model_name:
                     isDataQRCode !== ""
                       ? isDataQRCode.split('","')[1].replace('"', "").trim()
@@ -595,7 +602,7 @@ const MobileWebCam2 = () => {
                     setIsDataQRCode("");
                     clearTimeout(timeoutID);
                     const durationInSecondsTimeDiff = timeDiff / 1000;
-                    sessionStorage.setItem("check_upload", false)
+                    sessionStorage.setItem("check_upload", false);
 
                     PostTimeUploadFile(
                       totalSizeOrigin,
@@ -607,7 +614,7 @@ const MobileWebCam2 = () => {
                   }
                 })
                 .catch((err) => {
-                  sessionStorage.setItem("check_upload", false)
+                  sessionStorage.setItem("check_upload", false);
                   if (err.response.status === 504) {
                     if (checkOpenNotifi === false) {
                       clearTimeout(timeoutID);
@@ -657,7 +664,7 @@ const MobileWebCam2 = () => {
     );
     authAxios()
       .post(`${localhost}/upload_details`, data)
-      .then((res) => { })
+      .then((res) => {})
       .catch((err) => {
         console.log(err);
       });
@@ -836,66 +843,71 @@ const MobileWebCam2 = () => {
           quality = 0.8;
         }
 
-        loadImage(imageBase64).then((img) => {
-          const canvas = document.createElement("canvas");
-          const ctx = canvas.getContext("2d");
-          const newWidth = img.width * scaleFactor;
-          const newHeight = img.height * scaleFactor;
+        loadImage(imageBase64)
+          .then((img) => {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+            const newWidth = img.width * scaleFactor;
+            const newHeight = img.height * scaleFactor;
 
-          canvas.width = newWidth;
-          canvas.height = newHeight;
+            canvas.width = newWidth;
+            canvas.height = newHeight;
 
-          ctx.drawImage(img, 0, 0, newWidth, newHeight);
-          const imageData = ctx.getImageData(0, 0, newWidth, newHeight);
-          const qrCode = jsQR(
-            imageData.data,
-            imageData.width,
-            imageData.height
-          );
+            ctx.drawImage(img, 0, 0, newWidth, newHeight);
+            const imageData = ctx.getImageData(0, 0, newWidth, newHeight);
+            const qrCode = jsQR(
+              imageData.data,
+              imageData.width,
+              imageData.height
+            );
 
-          if (isDataQRCode === "") {
-            if (qrCode !== null) {
-              if (qrCode.data.split('","').length === 6) {
-                setIsDataQRCode(qrCode.data);
+            if (isDataQRCode === "") {
+              if (qrCode !== null) {
+                if (qrCode.data.split('","').length === 6) {
+                  setIsDataQRCode(qrCode.data);
+                }
               }
             }
-          }
-          const resizedImageBase64 = canvas.toDataURL("image/jpeg", quality);
+            const resizedImageBase64 = canvas.toDataURL("image/jpeg", quality);
 
-          const now = new Date();
+            const now = new Date();
 
-          const day = now.getDate() < 10 ? `0${now.getDate()}` : now.getDate();
-          const month =
-            now.getMonth() + 1 < 10
-              ? `0${now.getMonth() + 1}`
-              : now.getMonth() + 1;
-          const year = String(now.getFullYear()).slice(-2);
-          const hours =
-            now.getHours() < 10 ? `0${now.getHours()}` : now.getHours();
-          const minutes =
-            now.getMinutes() < 10 ? `0${now.getMinutes()}` : now.getMinutes();
-          const seconds =
-            now.getSeconds() < 10 ? `0${now.getSeconds()}` : now.getSeconds();
-          const milliseconds = now.getMilliseconds();
+            const day =
+              now.getDate() < 10 ? `0${now.getDate()}` : now.getDate();
+            const month =
+              now.getMonth() + 1 < 10
+                ? `0${now.getMonth() + 1}`
+                : now.getMonth() + 1;
+            const year = String(now.getFullYear()).slice(-2);
+            const hours =
+              now.getHours() < 10 ? `0${now.getHours()}` : now.getHours();
+            const minutes =
+              now.getMinutes() < 10 ? `0${now.getMinutes()}` : now.getMinutes();
+            const seconds =
+              now.getSeconds() < 10 ? `0${now.getSeconds()}` : now.getSeconds();
+            const milliseconds = now.getMilliseconds();
 
-          const formattedDateTime = `${year}${month}${day}_${hours}${minutes}${seconds}${milliseconds}`;
-          const userId = sessionStorage.getItem("userId");
-          const pumpType = JSON.parse(
-            sessionStorage.getItem("OptionMachine")
-          ).pumb_model;
-          const nameFile = `${formattedDateTime}_${pumpType}_${userId}.JPG`;
-          const imageInfo = {
-            imageName: nameFile,
-            imageType: newFile.type,
-            imageBase64: resizedImageBase64,
-            imageCheck: false,
-            imageOriginDataFile: checkFileSize,
-          };
+            const formattedDateTime = `${year}${month}${day}_${hours}${minutes}${seconds}${milliseconds}`;
+            const userId = sessionStorage.getItem("userId");
+            const pumpType = JSON.parse(
+              sessionStorage.getItem("OptionMachine")
+            ).pumb_model;
+            const nameFile = `${formattedDateTime}_${pumpType}_${userId}.JPG`;
+            const imageInfo = {
+              imageName: nameFile,
+              imageType: newFile.type,
+              imageBase64: resizedImageBase64,
+              imageCheck: false,
+              imageOriginDataFile: checkFileSize,
+            };
 
-          setImageList((prevImageList) => [...prevImageList, imageInfo]);
-        }).catch(err => {
-          message.error(`${info.file.name} ${fileLanguage[chooseLanguage].error_image}`);
-        });
+            setImageList((prevImageList) => [...prevImageList, imageInfo]);
+          })
+          .catch((err) => {
+            message.error(
+              `${info.file.name} ${fileLanguage[chooseLanguage].error_image}`
+            );
+          });
       };
       reader.readAsDataURL(newFile);
     },
@@ -1015,7 +1027,7 @@ const MobileWebCam2 = () => {
     setShowModalUploadImageCapture(true);
   };
 
-  const customUpload = () => { };
+  const customUpload = () => {};
 
   const handleOkImageCapture = () => {
     setIsModalOpenImageCapture(false);
@@ -1058,7 +1070,6 @@ const MobileWebCam2 = () => {
 
       const capabilities = track.getCapabilities();
       setFlashOn((prevState) => !prevState);
-
       if (capabilities.torch) {
         try {
           await track.applyConstraints({
@@ -1401,6 +1412,15 @@ const MobileWebCam2 = () => {
     });
   };
 
+  const handleCheckToggle = () => {
+    setCheckFlash((prevState) => !prevState);
+  };
+
+  const handleFlashToggleCheck = () => {
+    handleFlashToggle();
+    handleCheckToggle();
+  };
+
   return (
     <>
       {isModalImageVisible ? (
@@ -1437,7 +1457,7 @@ const MobileWebCam2 = () => {
                   style={{ display: "flex", justifyContent: "flex-end" }}
                 >
                   {navigator.platform !== "iPhone" && (
-                    <IconButton onClick={handleFlashToggle}>
+                    <IconButton onClick={handleFlashToggleCheck}>
                       {flashOn ? (
                         <FlashOn style={{ color: "#fff" }} />
                       ) : (
