@@ -22,8 +22,9 @@ const ModalShowCheckLogic = ({
   setListNotQualified,
   dataDetail,
   dataPumb,
-  listNoCheckLogic
-
+  listNoCheckLogic,
+  setListReport,
+  listReport
 }) => {
   const [dataCheckLogicListReport, setDataCheckLogicListReport] = useState([])
   const [listInput, setListInput] = useState([])
@@ -31,7 +32,7 @@ const ModalShowCheckLogic = ({
   // const [dataCheckLogicListReport, setDataCheckLogicListReport] = useState()
   const inforUser = JSON.parse(sessionStorage.getItem("info_user"));
   const [listIndexInput, setListIndexInput] = useState([])
-  const [listReport, setListReport] = useState([])
+  // const [listReport, setListReport] = useState([])
   const [listNoOther, setListNoOther] = useState([])
 
   const handleCancel = () => {
@@ -135,17 +136,16 @@ const ModalShowCheckLogic = ({
           res.data.lst_other.forEach(item => {
             newArrOther.push(item.content)
           })
-          let listNoOther = res.data.lst_other.map(item => item.No)
-          newDataLastCheck.forEach(item => {
-            if (listNoOther.includes(item.No)) {
-              item.Result = "✖"
-            }
-          })
-          setListNoOther(listNoOther)
+          // let listNoOther = res.data.lst_other.map(item => item.No)
+          // newDataLastCheck.forEach(item => {
+          //   if (listNoOther.includes(item.No)) {
+          //     item.Result = "✖"
+          //   }
+          // })
+          // setListNoOther(listNoOther)
         }
         setListReport(newArrOther)
         setDataLastCheck(newDataLastCheck)
-
       }).catch(err => {
         console.log(err)
       })
@@ -330,6 +330,13 @@ const CheckLogicForMaster2 = ({
           res.data.lst_report.forEach(item => {
             listData.push(item.content)
           })
+
+          let listNoCheckRule20 = res.data.lst_report.map(item => item.No)
+          newDataLastCheck.forEach(item => {
+            if (listNoCheckRule20.includes(item.No)) {
+              item.Result = "✖"
+            }
+          })
         }
         const dataRowTemp = {}
         if (res.data.row_temp.length > 0) {
@@ -337,19 +344,20 @@ const CheckLogicForMaster2 = ({
             dataRowTemp[item] = res.data.row_temp[index]
           })
           setDataMaster([dataRowTemp])
-          newDataLastCheck.forEach(item => {
-            if (listNoOther.includes(item.No)) {
-              item.Result = "✔"
-            }
-          })
+          // newDataLastCheck.forEach(item => {
+          //   if (listNoOther.includes(item.No)) {
+          //     item.Result = "✔"
+          //   }
+          // })
         } else {
           setDataMaster([])
-          newDataLastCheck.forEach(item => {
-            if (listNoOther.includes(item.No)) {
-              item.Result = "✖"
-            }
-          })
+          // newDataLastCheck.forEach(item => {
+          //   if (listNoOther.includes(item.No)) {
+          //     item.Result = "✖"
+          //   }
+          // })
         }
+
         setDataLastCheck(newDataLastCheck)
         setListReport(listData)
       }).catch(err => {
@@ -373,8 +381,6 @@ const CheckLogicForMaster2 = ({
     }
   }, [listInput]);
 
-
-
   return (
     <Row>
       <Col span={9} className='col-table-check-logic'>
@@ -396,7 +402,7 @@ const CheckLogicForMaster2 = ({
         ></Table>
       </Col>
       <Col span={15} style={{ height: "80vh", paddingLeft: "2%" }}>
-        <Row className='box-checkLogic-master2 list-error'>
+        <Row className='box-checkLogic-master2 list-error' style={{ boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 4px 2px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px" }}>
           <div className='container-rule20' style={{ display: "grid" }}>
             {/* {listReport.map((item, index) => (
               <span className='content-report' style={{ fontSize: 14, fontWeight: 600 }} key={index}>{item}</span>
@@ -410,14 +416,17 @@ const CheckLogicForMaster2 = ({
             }
           </div>
         </Row>
-        <Row className='box-checkLogic-master2' style={{ height: "85%", marginTop: "2%", border: "2px solid rgb(239, 71, 101)", padding: "1%" }}>
-          <div className='container-rule20'>
+        <Row className='box-checkLogic-master2' style={{ height: "85%", marginTop: "2%", border: "1px solid rgb(239, 71, 101)", padding: "1%", boxShadow: "rgb(239 71 101 / 0%) 0px 1px 4px 2px, rgb(239 71 101 / 35%) 0px 2px 6px 2px" }}>
+          <div className='container-rule20' style={{ paddingTop: "0%" }}>
             <Form
               form={form}
               layout='vertical'
               onFinish={onFinish}
             >
-              <div >
+              <Row style={{ justifyContent: "center" }}>
+                <span className='title-data-master'>{dataLastCheck[1].checksheet || ""}</span>
+              </Row>
+              <div>
                 <span>Example:</span>
 
                 <Table
@@ -440,7 +449,7 @@ const CheckLogicForMaster2 = ({
               </div>
 
               <Row style={{ paddingTop: "1%", justifyContent: "flex-end" }}>
-                <Button disabled = {listCircle.length === 0} htmlType='submit' className='button-check-circle-2'>Check vòng 2</Button>
+                <Button disabled={listCircle.length === 0} htmlType='submit' className='button-check-circle-2'>Check vòng 2</Button>
               </Row>
             </Form>
 
@@ -455,8 +464,7 @@ const CheckLogicForMaster2 = ({
               className='table-checkLogic-example'
             ></Table>
 
-
-            <Row className='box-checkLogic-master2' style={{ height: "38%", padding: "1%", border: "2px solid rgb(239, 71, 101)" }}>
+            <Row className='box-checkLogic-master2' style={{ height: "35%", padding: "1%", border: "1px solid rgb(239, 71, 101)", boxShadow: "rgb(239 71 101 / 0%) 0px 1px 4px 2px, rgb(239 71 101 / 35%) 0px 2px 6px 2px" }}>
               <div className='content-wrong-rule'>
                 {listReport.length === 0 ?
                   <span className='content-empty'>Nội dung sai qui tắc</span>

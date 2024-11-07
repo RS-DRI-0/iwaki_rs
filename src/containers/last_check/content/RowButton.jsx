@@ -33,7 +33,9 @@ const RowButton = (
         listLogicMulti,
         isCheckShowDataMaster,
         setIsCheckShowDataMaster,
-        valueIsMaster
+        valueIsMaster,
+        setListReport,
+        listReport
     }) => {
     const [isOpenModalCheckLogic, setIsOpenModalCheckLogic] = useState(false)
     const [isOpenModalDataMaster, setIsOpenModalDataMaster] = useState(false)
@@ -122,7 +124,7 @@ const RowButton = (
 
         functionSetArrData(listDataDefault, arrData)
         let newArr = []
-        for (let i = 1; i < (checkTypePump ? 6 : 9); i++) {
+        for (let i = 1; i < (checkTypePump ? 6 : 11); i++) {
             if (values[`input_${i}`] === undefined) {
                 newArr.push("")
             } else {
@@ -600,6 +602,8 @@ const RowButton = (
                     dataDetail={dataDetail}
                     dataPumb={dataPumb}
                     listNoCheckLogic={listNoCheckLogic}
+                    setListReport={setListReport}
+                    listReport={listReport}
                 />
             }
             {isOpenModalDataMaster && valueIsMaster === "1" &&

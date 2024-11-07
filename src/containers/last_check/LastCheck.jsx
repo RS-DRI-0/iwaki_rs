@@ -61,6 +61,8 @@ const LastCheck = () => {
   const [isCheckShowDataMaster, setIsCheckShowDataMaster] = useState(false)
   const [time, setTime] = useState(0);
   const [valueIsMaster, setValueIsMaster] = useState("")
+  const [listReport, setListReport] = useState([])
+
 
   const listRuleCompare = [
     {
@@ -583,6 +585,8 @@ const LastCheck = () => {
                 isCheckShowDataMaster={isCheckShowDataMaster}
                 setIsCheckShowDataMaster={setIsCheckShowDataMaster}
                 valueIsMaster={valueIsMaster}
+                setListReport={setListReport}
+                listReport={listReport}
               />
             </>
           }
@@ -603,7 +607,6 @@ const LastCheck = () => {
             dataGridLastCheck={dataGridLastCheck}
             dataPumb={dataPumb}
           />
-
         </div>
 
         {dataGridLastCheck.length > 0 &&
@@ -637,6 +640,8 @@ const LastCheck = () => {
             setListNotQualified={setListNotQualified}
             form={form}
             setDataLastCheck={setDataLastCheck}
+            setListReport={setListReport}
+            listReport={listReport}
           />
         }
       </Col>
