@@ -350,9 +350,7 @@ const ModalQATotal = ({
 
   const handleSubmitQA = () => {
     if (errorInputotherzero) {
-      console.log("hello");
     } else if (!errorInputValue) {
-      console.log("hello");
     } else if (inputValue.length !== 0) {
       sessionStorage.setItem(
         "ValueSubmitInput",

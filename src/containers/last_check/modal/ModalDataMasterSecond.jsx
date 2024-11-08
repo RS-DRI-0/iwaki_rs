@@ -23,6 +23,13 @@ const ModalDataMasterSecond = (
         },
 
         {
+            title: 'Result',
+            dataIndex: 'Value',
+            key: 'Value',
+            align: "center",
+            width: 80,
+        },
+        {
             title: 'Tên Seri',
             dataIndex: 'm1',
             key: 'm1',

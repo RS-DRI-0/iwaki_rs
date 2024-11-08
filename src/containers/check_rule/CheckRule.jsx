@@ -184,7 +184,6 @@ const CheckRule = () => {
                 // }).join(' ');
                 dataSubmit += '( ' + handleContentSubmit(item) + ') '
             } else if (index !== 0) {
-                console.log(!conditionCheckAction.includes(listTextAndOr[index - 1]))
                 if (!conditionCheckAction.includes(listTextAndOr[index - 1])) {
                     dataSubmit += (item.no1 !== "") ? listTextAndOr[index - 1] + ' ( ' + handleContentSubmit(item) + ') ' : ""
                 }
@@ -246,7 +245,6 @@ const CheckRule = () => {
             raw_data: dataSubmit.replace(/\s+/g, ' '),
             json_data: dataJson
         }
-        console.log(dataSubmit.replace(/\s+/g, ' '))
         const api = isOpenTable ? "get_logic_rule" : "update_logic_temp_data"
         authAxios()
             .post(`${localhost}/${api}`, dataResult).then(res => {

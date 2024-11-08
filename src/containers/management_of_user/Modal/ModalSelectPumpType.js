@@ -155,7 +155,6 @@ const ModalSelectPumpType = ({
         }
       )
       .then((res) => {
-        console.log(res.data.list_pumb)
         setItems(res.data.list_pumb);
       })
       .catch((err) => {

@@ -148,7 +148,6 @@ const Entry_Classification = () => {
   const returnPackage = (packageID, packageInfo) => {
     const FormData = require("form-data");
     let data = new FormData();
-    console.log(packageID);
     const listCheckValue = [undefined, null, ""];
     if (!listCheckValue.includes(packageID)) {
       //  const data = JSON.parse(dataReturn)
@@ -169,7 +168,6 @@ const Entry_Classification = () => {
   };
 
   const chooseModel = (value, data) => {
-    console.log(data);
     if (dataDetail !== undefined) {
       returnPackage(dataDetail.clf_id, dataDetail.clf_table);
     }
@@ -223,7 +221,6 @@ const Entry_Classification = () => {
 
     const endTime = Date.now();
     const duration = endTime - startTime;
-    console.log(dataPumb.is_multi);
     setLoadingBtnSubmit(true);
     authAxios()
       .post(`${localhost}/submit_entry_clf`, {

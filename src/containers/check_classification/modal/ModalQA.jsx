@@ -254,13 +254,9 @@ const ModalQA = ({
   const onSubmitQA = (e) => {
     let valueToUse = "";
     if (errorInputotherzero) {
-      console.log("hello");
     } else if (!errorInputValue) {
-      console.log("hello");
     } else if (inputValue.length !== 0 && inputValueOther.length !== 0) {
-      console.log("hello");
     } else if (inputValue.length === 0 && inputValueOther.length === 0) {
-      console.log("hello");
     } else {
       if (inputValue.length !== 0) {
         valueToUse = `QA_${inputValue}`;
@@ -404,8 +400,6 @@ const ModalQA = ({
     (valueAtIndex.is_qa_e1 === "0" &&
       valueAtIndex.is_qa_e2 === "1" &&
       valueAtIndex.qa_e1.startsWith("OTHER_"));
-
-  console.log(showQAInput);
 
   return (
     <Modal

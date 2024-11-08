@@ -230,7 +230,6 @@ const Check_Classification = () => {
     const clf_id = sessionStorage.getItem("clf_id");
     const clf_table = sessionStorage.getItem("clf_table");
     if (clf_id !== "" && clf_table !== "") {
-      console.log(clf_id, clf_table);
       data.append("clf_id", clf_id);
       data.append("clf_table", clf_table);
       data.append("user_pair", parseInt(inforUser.user_pair));
@@ -618,7 +617,6 @@ const Check_Classification = () => {
           }
         }
       }
-      console.log(updatedData);
       setValueBase64(updatedData);
     }
   };

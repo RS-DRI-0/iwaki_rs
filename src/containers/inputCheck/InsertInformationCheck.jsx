@@ -622,8 +622,6 @@ const InsertInformationCheck = () => {
               }
               return data;
             });
-            console.log(updatedDataUser1)
-            console.log(updatedDataUser2)
             form.resetFields();
             setDataInputUser1(updatedDataUser1);
             setDataCloneInput(updatedDataUser1);
@@ -1381,7 +1379,6 @@ const InsertInformationCheck = () => {
 
     const newDataGrid = dataGridUser1.map((item) => {
       let result = item.result.split("†"); // Clone the result array
-      // console.log(result.split("†"), isLengthIndexCol);
       if (isLengthIndexCol > result.length) {
         while (result.length < isLengthIndexCol) {
           result.push(""); // Add empty strings until the desired length is reached

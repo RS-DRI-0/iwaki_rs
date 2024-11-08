@@ -11,7 +11,6 @@ import fileLanguage from "../../language.json";
 import ModalSelectPumpType from "./Modal/ModalSelectPumpType.js";
 import PropTypes from "prop-types";
 
-
 const FooterFileManager = ({ listStatus }) => {
   const [showModalSelectPumpType, setShowModalSelectPumpType] = useState(false);
   const [rotatePhone, setRotatePhone] = useState(false);

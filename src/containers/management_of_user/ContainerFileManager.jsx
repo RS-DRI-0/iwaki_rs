@@ -5,13 +5,8 @@ import FooterFileManager from "./FooterFileManager";
 import PageNotification from "./page_notification/PageNotification";
 import { authAxios } from "../../api/axiosClient";
 import { localhost } from "../../server";
-import PriorityIcon from "../../images/file_manager/PriorityIcon.svg";
-import IconStatusQualified from "../../images/file_manager/IconStatusQualifiedFooter.svg";
-import IconPumbType from "../../images/file_manager/IconPumbType.svg";
-import IconNameOrder from "../../images/file_manager/IconNameOrder.svg";
 import dayjs from "dayjs";
-import { Col, Form, message, notification, Row } from "antd";
-import { CloseOutlined } from "@ant-design/icons";
+import { Form } from "antd";
 
 const ContainerFileManager = () => {
   const [chooseLanguage, setChooseLanguage] = useState(
@@ -25,7 +20,7 @@ const ContainerFileManager = () => {
   const [dataNotification, setDataNotification] = useState([]);
   const [countNotification, setCountNotification] = useState("");
   const [dataSource, setDataSource] = useState([]);
-  const [valueIsSort, setValueIsSort] = useState(false)
+  const [valueIsSort, setValueIsSort] = useState(true)
   const [pager, setPager] = useState({
     pageSize: 5,
     count: 0,
@@ -51,7 +46,7 @@ const ContainerFileManager = () => {
 
     data.append("pack_id", "");
     data.append("tb_package", "");
-    
+
     authAxios()
       .post(`${localhost}/list_file`, data)
       .then((res) => {
@@ -138,8 +133,8 @@ const ContainerFileManager = () => {
             setDataNotification={setDataNotification}
             setCheckNoti={setCheckNoti}
             loadingPage={loadingPage}
-            setValueIsSort = {setValueIsSort}
-            valueIsSort = {valueIsSort}
+            setValueIsSort={setValueIsSort}
+            valueIsSort={valueIsSort}
             inforUser={inforUser}
             pager={pager}
             setPager={setPager}

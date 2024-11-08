@@ -127,7 +127,6 @@ const ShowImageProduction = ({ setIsOpenViewOrder, isOpenViewOrder, dataDetail }
                                 event.preventDefault();
                                 return;
                             } else if (event.key === "1") {
-                                console.log(2)
                                 document.getElementById("zoom-in1-pro").click();
                                 event.preventDefault();
                                 return;

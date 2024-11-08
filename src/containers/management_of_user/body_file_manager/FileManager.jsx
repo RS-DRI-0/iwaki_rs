@@ -305,34 +305,6 @@ const FileManager = ({
             <FloatButton onClick={() => setOpenModalFilter(true)} icon={<img style={{ paddingTop: 2 }} src={iconSearch} alt=""></img>} />
             <FloatButton onClick={clearFilter} icon={<img style={{ paddingTop: 2 }} src={IconDeleteFilter} alt=""></img>} />
           </FloatButton.Group>
-          {/* </Col> */}
-          {/* <Col
-            span={9}
-            className="col-btn-manager"
-          > */}
-          {/* <Button style={{ padding: "4px" }} onClick={sortData} aria-label="search">
-              <img src={IconDecreasing} alt=""></img>
-            </Button>
-            <Button
-              className="btn-history"
-              onClick={showModalHistory}
-              aria-label="history"
-            >
-              <HistoryOutlined style={{ fontSize: 21, color: 'rgb(57, 75, 118)' }} />
-            </Button>
-            <Button
-              style={{ padding: "4px" }}
-              onClick={() => setOpenModalFilter(true)}
-              aria-label="filter"
-            >
-              <img src={iconSearch} alt=""></img>
-            </Button>
-            <Button style={{ padding: "4px" }} onClick={clearFilter} aria-label="search">
-              <img src={IconDeleteFilter} alt=""></img>
-            </Button> */}
-
-
-          {/* </Col> */}
         </Row>
 
         {!loadingPage ? (
@@ -401,26 +373,12 @@ const FileManager = ({
                             </Col>
                           </Row>
                           <Row style={{ display: "flex", columnGap: "1ch" }}>
-                            {/* <Col span={8}>
-                              <span
-                                style={{
-                                  paddingLeft: "1.5%",
-                                  color: "#64748B",
-                                  fontWeight: 400,
-                                }}
-                              >
-                                {dayjs(item.upload_date).format("HH:mm:ss")}
-                              </span>
-                            </Col> */}
-                            {/* <Col span={14}> */}
+
                             {textStatus(item.check_status, item)}
-                            {/* </Col>
-                            <Col span={10}> */}
+
                             {Number(item.qa_timeout) === 1 ?
                               <span className="text-timeOut"><img src={IconTimeout} alt=""></img>{language[chooseLanguage].time_out}</span>
                               : null}
-                            {/* </Col> */}
-
 
                           </Row>
                           <Row className="row-time-handle">
@@ -447,30 +405,6 @@ const FileManager = ({
                         </div>
                       </Col>
                     </Row>
-
-                    {/* <Row style={{ width: "100%" }}>
-                      <Col
-                        span={6}
-                        style={{ display: "flex", alignItems: "center" }}
-                      >
-                        <img src={IconPumbType} alt=""></img>&nbsp;
-                        {item.pumb_name}
-                      </Col>
-                      <Col
-                        span={13}
-                        style={{ display: "flex", alignItems: "center" }}
-                      >
-                        <img src={IconNameOrder} alt=""></img>&nbsp;
-                        {item.vl_model_name.toUpperCase()}
-                      </Col>
-                      <Col
-                        span={5}
-                        style={{ display: "flex", alignItems: "center" }}
-                      >
-                        <img src={IconLocation} alt=""></img>&nbsp;
-                        {item.vl_scan_no}
-                      </Col>
-                    </Row> */}
 
                     {
                       item.pack_status === "1" ? (

@@ -317,14 +317,6 @@ const StatusFieldLK = ({
 }) => {
 
   const returnDataQA = () => {
-    // console.log(dataDetail)
-    // if (dataQA.includes("002")) {
-    //   return language[chooseLanguage].code_002
-    // } else if (dataQA.includes("003")) {
-    //   return language[chooseLanguage].code_003
-    // } else {
-    //   return dataQA
-    // }
     const data = dataDetail.lst_data[0]
     if (dataDetail.qa_all === "0") {
       if (data.qa_content.includes("002")) {
@@ -336,7 +328,6 @@ const StatusFieldLK = ({
       }
     } else if (data.lst_qa_content.length > 0) {
       if (data.lst_qa_content.length === 1) {
-        console.log(data.lst_qa_content[0])
         return data.lst_qa_content[0][chooseLanguage]
       } else {
         let newData = data.lst_qa_content.map(item => item[chooseLanguage]).join(",")
@@ -454,7 +445,6 @@ const StatusFieldMDG = ({
       listDataMDG.sort((a, b) => Number(b.is_warning) - Number(a.is_warning))
       let newItem = []
       let newListDatMDG = []
-      console.log(listDataMDG)
       for (const element of listDataMDG) {
         if (element.lst_qa_content.length > 0) {
           element.lst_qa_content.forEach((item, index) => {
@@ -490,8 +480,6 @@ const StatusFieldMDG = ({
           })
         }
       }
-
-      console.log(newListDatMDG)
 
       newListDatMDG.forEach((item, index) =>
         newItem.push({
@@ -532,7 +520,6 @@ const BoxPackage = ({ data, chooseLanguage, showData, dataDetail }) => {
   const [newData, setNewData] = useState([])
 
   const returnDataQA = () => {
-    console.log(data)
     if (dataDetail.qa_all === "0") {
       if (data.qa_content !== "") {
         if (data.qa_content.includes("002")) {
@@ -562,7 +549,6 @@ const BoxPackage = ({ data, chooseLanguage, showData, dataDetail }) => {
 
   useEffect(() => {
     let arr = []
-    console.log(data)
     data.not_qualified.forEach((item, index) => {
       arr.push({ ...item, id: index })
     })

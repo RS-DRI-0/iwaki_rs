@@ -142,7 +142,6 @@ const ModalQaImage = ({
   };
 
   const chooseContentQA = (value) => {
-    console.log(value);
     setDataQA(value);
     setDataOtherContent(null);
   };
