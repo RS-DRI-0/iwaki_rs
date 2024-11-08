@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./ModalFileManager.css";
-import { Button, Col, Row, Pagination, FloatButton } from "antd";
+import { Button, Col, Row, Pagination, FloatButton, Select } from "antd";
 import dayjs from "dayjs";
 import { localhost } from "../../../server";
 import language from "../../../language.json";
@@ -441,7 +441,19 @@ const FileManager = ({
                   showSizeChanger
                   pageSizeOptions={[5, 10, 15, 20]}
                   locale={{ items_per_page: "" }}
+                  
                 />
+                {/* <Select
+                  value={pager.pageSize}
+                  onChange={handleChangePagination}
+                  showSearch={false} // Tắt tính năng tìm kiếm
+                  style={{ width: 120, marginTop: 16 }}
+                >
+                  <Select.Option value={10}>10</Select.Option>
+                  <Select.Option value={20}>20</Select.Option>
+                  <Select.Option value={50}>50</Select.Option>
+                  <Select.Option value={100}>100</Select.Option>
+                </Select> */}
                 <span>{pager.count}</span>
                 <img src={IconTotalFile} alt=""></img>
               </div>
