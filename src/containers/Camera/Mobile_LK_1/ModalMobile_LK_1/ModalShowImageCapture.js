@@ -69,7 +69,7 @@ const ModalShowImageCapture = ({
                   className="modal-show-image-capture-badge"
                 >
                   <button
-                    onClick={showModal}
+                    onClick={() => showModal(false)}
                     style={{
                       background: "none",
                       border: "none",
@@ -94,7 +94,7 @@ const ModalShowImageCapture = ({
                 <FontAwesomeIcon
                   icon={faImage}
                   style={{ fontSize: 40, color: "#fff" }}
-                  onClick={showModal}
+                  onClick={() => showModal(false)}
                 />
               )}
             </Col>

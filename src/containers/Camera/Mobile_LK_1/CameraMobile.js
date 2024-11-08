@@ -296,11 +296,13 @@ const MobileWebCam2 = () => {
     }
   };
 
-  const showModal = () => {
+  const showModal = (value) => {
     setIsModalImageVisible(true);
     setIsModalOpenImageCapture(false);
-    if (checkFlash === true) {
-      handleFlashToggle();
+    if (value === true) {
+      if (checkFlash === true) {
+        handleFlashToggle();
+      }
     }
   };
 
@@ -1507,7 +1509,7 @@ const MobileWebCam2 = () => {
                         className="modal-show-image-capture-badge"
                       >
                         <button
-                          onClick={showModal}
+                          onClick={() => showModal(true)}
                           style={{
                             background: "none",
                             border: "none",
@@ -1532,7 +1534,7 @@ const MobileWebCam2 = () => {
                       <FontAwesomeIcon
                         icon={faImage}
                         style={{ fontSize: 40, color: "#fff" }}
-                        onClick={showModal}
+                        onClick={() => showModal(true)}
                       />
                     )}
                   </>
