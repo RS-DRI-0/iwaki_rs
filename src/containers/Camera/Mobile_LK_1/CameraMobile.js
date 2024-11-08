@@ -299,6 +299,9 @@ const MobileWebCam2 = () => {
   const showModal = () => {
     setIsModalImageVisible(true);
     setIsModalOpenImageCapture(false);
+    if (checkFlash === true) {
+      handleFlashToggle();
+    }
   };
 
   const soundNotification = (sound) => {
