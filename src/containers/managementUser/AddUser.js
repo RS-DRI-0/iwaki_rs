@@ -10,12 +10,13 @@ const AddUser = ({
   showDrawerAddUser,
   openDrawerAddUser,
   chooseLanguage,
+  setValueSelect,
 }) => {
   const [form] = Form.useForm();
 
   const treeData = [
     {
-      value: "STAFF+1+0+0",
+      value: "STAFF",
       title: <span style={{ fontWeight: 800 }}>STAFF</span>,
     },
   ];
@@ -25,7 +26,11 @@ const AddUser = ({
     showDrawerAddUser(false);
   };
 
-  const onChange = (newValue) => {};
+  const onChange = (newValue) => {
+    if (newValue === "STAFF") {
+      setValueSelect("STAFF+1+1+0");
+    }
+  };
 
   const handleKeyPress = (event) => {
     const forbiddenChars = [
@@ -201,6 +206,7 @@ AddUser.propTypes = {
   showDrawerAddUser: PropTypes.func,
   openDrawerAddUser: PropTypes.bool,
   chooseLanguage: PropTypes.any,
+  setValueSelect: PropTypes.any,
 };
 
 export default AddUser;

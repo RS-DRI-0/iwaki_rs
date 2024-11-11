@@ -11,12 +11,13 @@ const EditUser = ({
   openDrawerEditUser,
   valueEdit,
   chooseLanguage,
+  setValueSelect,
 }) => {
   const [form] = Form.useForm();
   const [isActive, setIsActive] = useState(false);
   const treeData = [
     {
-      value: "STAFF+1+0+0",
+      value: "STAFF",
       title: <span style={{ fontWeight: 800 }}>STAFF</span>,
     },
   ];
@@ -61,7 +62,7 @@ const EditUser = ({
         user_center: valueEdit.user_center,
         user_fullname: valueEdit.user_fullname,
         user_msnv: valueEdit.user_msnv,
-        user_role_title: test,
+        user_role_title: valueEdit.user_role_title,
         Id: valueEdit.Id,
         user_name: valueEdit.user_name,
       });
@@ -78,6 +79,12 @@ const EditUser = ({
   };
 
   const screenWidth = window.innerWidth;
+
+  const onChange = (newValue) => {
+    if (newValue === "STAFF") {
+      setValueSelect("STAFF+1+1+0");
+    }
+  };
 
   return (
     <Modal
@@ -188,6 +195,7 @@ const EditUser = ({
                 treeDefaultExpandAll
                 treeData={treeData}
                 disabled={isActive}
+                onChange={onChange}
               />
             </Form.Item>
           </Col>
@@ -221,6 +229,7 @@ EditUser.propTypes = {
   openDrawerEditUser: PropTypes.bool,
   valueEdit: PropTypes.any,
   chooseLanguage: PropTypes.any,
+  setValueSelect: PropTypes.any,
 };
 
 export default EditUser;

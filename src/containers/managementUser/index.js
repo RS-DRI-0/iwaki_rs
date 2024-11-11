@@ -38,6 +38,7 @@ const ManagementUser = ({ chooseLanguage }) => {
   const [valueSearch, setValueSearch] = useState([]);
   const [keyTabsTable, setKeyTabsTable] = useState(undefined);
   const [activeKey, setActiveKey] = useState("STAFF");
+  const [valueSelect, setValueSelect] = useState("");
   const inforUser = JSON.parse(sessionStorage.getItem("info_user"));
 
   const handleClickEdit = (index) => {
@@ -306,7 +307,7 @@ const ManagementUser = ({ chooseLanguage }) => {
   };
 
   const onFinishAdd = (values) => {
-    const splitString = values.user_role_title.split("+");
+    const splitString = valueSelect.split("+");
 
     authAxios()
       .post(`${localhost}/create_user`, {
@@ -401,6 +402,7 @@ const ManagementUser = ({ chooseLanguage }) => {
         showDrawerAddUser={showDrawerAddUser}
         openDrawerAddUser={openDrawerAddUser}
         chooseLanguage={chooseLanguage}
+        setValueSelect={setValueSelect}
       />
 
       <EditUser
@@ -409,6 +411,7 @@ const ManagementUser = ({ chooseLanguage }) => {
         openDrawerEditUser={openDrawerEditUser}
         valueEdit={valueEdit}
         chooseLanguage={chooseLanguage}
+        setValueSelect={setValueSelect}
       />
     </>
   );
