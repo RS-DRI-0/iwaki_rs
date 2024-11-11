@@ -171,6 +171,8 @@ const FileManager = ({
   };
 
   const handleChangePagination = (page, pageSize) => {
+    console.log(page)
+    console.log(pageSize)
     const data = {
       ...fieldFilter,
       page_index: page,
@@ -276,6 +278,18 @@ const FileManager = ({
     fetchListData(fieldFilter, !valueIsSort ? 1 : 0)
     setValueIsSort(prev => !prev)
   }
+
+  useEffect(() => {
+    // Tìm input trong .ant-select-selector và đặt readonly
+    const timeoutId = setTimeout(() => {
+      const inputElement = document.querySelector('.pagination-search-page .ant-select-selector input');
+      if (inputElement) {
+        inputElement.readOnly = true;
+      }
+    }, 1000);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
 
   return (
     <div
@@ -434,6 +448,7 @@ const FileManager = ({
               <div className="pagination-file-manager">
                 <Pagination
                   simple
+                  className="pagination-search-page"
                   current={pager.current}
                   defaultPageSize={pager.pageSize}
                   total={pager.count}
@@ -441,7 +456,26 @@ const FileManager = ({
                   showSizeChanger
                   pageSizeOptions={[5, 10, 15, 20]}
                   locale={{ items_per_page: "" }}
-                  
+                // itemRender={(current, type, originalElement) => {
+                //   console.log(originalElement)
+                //   if (type === 'pageSize') {
+                //     return (
+                //       <Select
+                //         value={pager.pageSize}
+                //         onChange={handleChangePagination}
+                //         showSearch={false} // Tắt tìm kiếm trong dropdown
+                //         style={{ width: 120 }}
+
+                //       >
+                //         <Select.Option value={10}>10</Select.Option>
+                //         <Select.Option value={20}>20</Select.Option>
+                //         <Select.Option value={50}>50</Select.Option>
+                //         <Select.Option value={100}>100</Select.Option>
+                //       </Select>
+                //     );
+                //   }
+                //   return originalElement;
+                // }}
                 />
                 {/* <Select
                   value={pager.pageSize}
@@ -449,10 +483,10 @@ const FileManager = ({
                   showSearch={false} // Tắt tính năng tìm kiếm
                   style={{ width: 120, marginTop: 16 }}
                 >
+                  <Select.Option value={5}>5</Select.Option>
                   <Select.Option value={10}>10</Select.Option>
+                  <Select.Option value={15}>15</Select.Option>
                   <Select.Option value={20}>20</Select.Option>
-                  <Select.Option value={50}>50</Select.Option>
-                  <Select.Option value={100}>100</Select.Option>
                 </Select> */}
                 <span>{pager.count}</span>
                 <img src={IconTotalFile} alt=""></img>
