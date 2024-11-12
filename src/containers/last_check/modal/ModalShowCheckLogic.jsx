@@ -144,6 +144,7 @@ const ModalShowCheckLogic = ({
           // })
           // setListNoOther(listNoOther)
         }
+
         setListReport(newArrOther)
         setDataLastCheck(newDataLastCheck)
       }).catch(err => {
@@ -358,6 +359,7 @@ const CheckLogicForMaster2 = ({
           // })
         }
 
+
         setDataLastCheck(newDataLastCheck)
         setListReport(listData)
       }).catch(err => {
@@ -449,7 +451,7 @@ const CheckLogicForMaster2 = ({
               </div>
 
               <Row style={{ paddingTop: "1%", justifyContent: "flex-end" }}>
-                <Button disabled={listCircle.length === 0} htmlType='submit' className='button-check-circle-2'>Check vòng 2</Button>
+                <Button disabled={Object.keys(listCircle).length === 0} htmlType='submit' className='button-check-circle-2'>Check vòng 2</Button>
               </Row>
             </Form>
 

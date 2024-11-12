@@ -7,7 +7,9 @@ import { SaveOutlined } from '@ant-design/icons'
 import { authAxios } from '../../../api/axiosClient'
 import PropTypes from "prop-types";
 import ModalDataMasterSecond from '../modal/ModalDataMasterSecond'
-// import mockDataMasterLK from "../res.data.lst_master.json"
+// import mockDataMasterLK from "../mockDataMasterLK.json"
+import mockDataMasterMDH from "../mockDataMasterMDH.json"
+
 const RowButton = (
     { listNoCheckLogic,
         dataLastCheck,
@@ -153,22 +155,40 @@ const RowButton = (
                 let listIndexHaveMaster = []
                 for (let i = 0; i < arrData.length; i++) {
                     for (const element of res.data.lst_master) {
+
                         if (arrData[i].No === element.no) {
                             if (element.Value === undefined) {
                                 if (arrData[i].checksheet === "") {
                                     arrData[i] = { ...arrData[i], Master: element.m11 }
                                     listIndexHaveMaster.push(i)
-                                    break;
+                                    break
                                 }
-                                else if (arrData[i].checksheet === element.m11) {
-                                    arrData[i] = { ...arrData[i], Master: arrData[i].checksheet }
+                                else if (arrData[i].checksheet !== "") {
+                                    if (arrData[i].checksheet === element.m11) {
+                                        arrData[i] = { ...arrData[i], Master: arrData[i].checksheet }
+                                        listIndexHaveMaster.push(i)
+                                        break;
+                                    } else {
+                                        arrData[i] = { ...arrData[i], Master: element.m11 }
+                                        listIndexHaveMaster.push(i)
+                                    }
+                                }
+                            } else if (element.Value !== undefined) {
+                                if (arrData[i].checksheet === "") {
+                                    arrData[i] = { ...arrData[i], Master: element.Value }
                                     listIndexHaveMaster.push(i)
-                                    break;
+                                    break
                                 }
-                            } else {
-                                arrData[i] = { ...arrData[i], Master: element.Value }
-                                listIndexHaveMaster.push(i)
-                                break;
+                                else if (arrData[i].checksheet !== "") {
+                                    if (arrData[i].checksheet === element.Value) {
+                                        arrData[i] = { ...arrData[i], Master: arrData[i].checksheet }
+                                        listIndexHaveMaster.push(i)
+                                        break;
+                                    } else {
+                                        arrData[i] = { ...arrData[i], Master: element.Value }
+                                        listIndexHaveMaster.push(i)
+                                    }
+                                }
                             }
                         }
                     }
@@ -300,7 +320,6 @@ const RowButton = (
         setDataLastCheck(newArrData)
     }
 
-
     const addDataEqual = (listArrHaveContent, dataCheckSheet) => {
         // Đúng
         listArrHaveContent.push(dataCheckSheet)
@@ -422,7 +441,9 @@ const RowButton = (
     }
 
     const functionSetCheckResult = (element, newArrData, listArrHaveContent) => {
+        console.log(listArrHaveContent)
         if (parseInt(element.No) !== 31) {
+            console.log(element)
             if (parseInt(element.is_qualified) === 0) {
                 functionPushData(newArrData, element, "✔")
             }
@@ -434,6 +455,8 @@ const RowButton = (
             }
             else {
                 const compareData = listArrHaveContent.every(value => value === listArrHaveContent[0])
+                console.log(listArrHaveContent)
+                console.log(compareData)
                 functionCheckConditionCompare(compareData, newArrData, element)
             }
         } else {
@@ -461,6 +484,7 @@ const RowButton = (
                 functionChecktilde(element, listArrHaveContent)
             }
             else {
+                console.log(listArrHaveContent)
                 functionAddAllDataCol(element, listArrHaveContent)
             }
 

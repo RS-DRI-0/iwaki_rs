@@ -61,7 +61,6 @@ const PageNotification = ({
   useEffect(() => {
     window.addEventListener("popstate", function (event) {
       // Xử lý sự kiện khi người dùng nhấn nút "back" ở đây
-      console.log("Nút back được nhấn!");
     });
     showData()
   }, []);
@@ -165,10 +164,10 @@ const PageNotification = ({
     data.append("pump_id", "");
     data.append("is_search", "2");
     data.append("pack_status", "");
+    data.append("is_sort", 1);
 
     data.append("pack_id", value.pack_id);
     data.append("tb_package", value.tb_package);
-    // data.append("is_sort", 0);
 
     authAxios()
       .post(`${localhost}/list_file`, data)
@@ -199,8 +198,6 @@ const PageNotification = ({
       ></div>
     );
   };
-
-
 
   return (
     <div style={{ display: "grid", padding: "0% 5%" }}>
