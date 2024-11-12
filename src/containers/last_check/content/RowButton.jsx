@@ -355,7 +355,6 @@ const RowButton = (
         } else {
             functionAddDataOftilede(listArrHaveContent, item)
         }
-
     }
 
     // function check ~ 
@@ -441,7 +440,6 @@ const RowButton = (
     }
 
     const functionSetCheckResult = (element, newArrData, listArrHaveContent) => {
-        console.log(listArrHaveContent)
         if (parseInt(element.No) !== 31) {
             console.log(element)
             if (parseInt(element.is_qualified) === 0) {
