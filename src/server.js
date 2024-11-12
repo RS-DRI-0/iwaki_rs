@@ -2,9 +2,13 @@
 // export const localhost = "http://42.113.15.62:5001";
 // export const localhost = "http://192.168.30.26:5010"; //app
 
+
+// export const localhost = "http://192.168.30.26:5010"; //op
+
+// export const localhost = "http://192.168.30.26:5012"; //app
 // export const localhost = "http://192.168.30.26:5009"; //op
 
-export const localhost = "http://192.168.30.26:5012"; //app
+// export const localhost = "http://192.168.30.26:5012"; //app
 // export const localhost = "http://192.168.30.26:5011"; //op
 
 // export const localhost = "https://iwaki.rainscales.com/api";     //5000 // Build xong nhớ copy lại src
@@ -16,7 +20,7 @@ export const localhost = "http://192.168.30.26:5012"; //app
 // export const localhost = "https://test-iwaki.dri.io.vn/api";
 //
 // export const localhost = "https://dev-op-iwaki.rainscales.com/api";
-// export const localhost = "https://dev-iwaki.rainscales.com/api";
+export const localhost = "https://dev-iwaki.rainscales.com/api";
 // export const localhost = "https://op-iwaki.rainscales.com/api";
 // export const localhost = "https://uat-op-iwaki.rainscales.com/api";
 // export const localhost = "https://uat-iwaki.rainscales.com/api";

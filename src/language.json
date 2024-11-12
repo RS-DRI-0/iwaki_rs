@@ -142,8 +142,10 @@
         "do_you_want_to_unlock_the_user": "Bạn có muốn mở khóa người dùng?",
         "user_already_exists": "User đã tồn tại!",
         "the_old_pw_is_incorrect": "Mật khẩu cũ không đúng!",
-        "error_image": "error image"
-
+        "error_image": "error image",
+        "user_added_successfully":"Thêm User thành công",
+        "user_edited_successfully":"Chỉnh sửa User thành công",
+        "user_processed_successfully":"Xử lý User thành công"
     },
     "english": {
         "machine_code": "Select Machine Code",
@@ -288,8 +290,10 @@
         "do_you_want_to_unlock_the_user": "Do you want to unlock the user?",
         "user_already_exists": "User already exists!",
         "the_old_pw_is_incorrect": "The old password is incorrect!",
-        "error_image": "error image"
-
+        "error_image": "error image",
+        "user_added_successfully":"User added successfully",
+        "user_edited_successfully":"User edited successfully",
+        "user_processed_successfully":"User processed successfully"
     },
     "japanese": {
         "machine_code": "ポンプの受注番号を選択",
@@ -434,6 +438,9 @@
         "do_you_want_to_unlock_the_user": "ユーザーをロック解除しますか？",
         "user_already_exists": "ユーザーは既に存在します!",
         "the_old_pw_is_incorrect": "古いパスワードが間違っています！",
-        "error_image": "エラー画像"
+        "error_image": "エラー画像",
+        "user_added_successfully":"ユーザーの追加が成功しました",
+        "user_edited_successfully":"ユーザーの編集が成功しました",
+        "user_processed_successfully":"ユーザーの処理が成功しました"
     }
 }
