@@ -96,7 +96,10 @@ const ManagementUser = ({ chooseLanguage }) => {
       })
       .then((res) => {
         fetchListUserAll();
-        openNotificationSweetAlertAdmin(SuccessIcon, res.data.message);
+        openNotificationSweetAlertAdmin(
+          SuccessIcon,
+          fileLanguage[chooseLanguage].reset_to_the_default_password
+        );
       })
       .catch((err) => {
         openNotificationSweetAlertAdmin(ErrorIcon, err.data.message);
