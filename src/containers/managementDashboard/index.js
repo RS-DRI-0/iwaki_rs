@@ -137,7 +137,6 @@ const ManagementDashboardIndex = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setIsValueDashBoard(res.data);
         setIsValueDashBoardOld(res.data);
       })

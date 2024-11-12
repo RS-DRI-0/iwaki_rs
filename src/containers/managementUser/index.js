@@ -67,7 +67,10 @@ const ManagementUser = ({ chooseLanguage }) => {
           })
           .then((res) => {
             fetchListUserAllDelete();
-            openNotificationSweetAlertAdmin(SuccessIcon, res.data.message);
+            openNotificationSweetAlertAdmin(
+              SuccessIcon,
+              fileLanguage[chooseLanguage].user_processed_successfully
+            );
           })
           .catch((err) => {
             openNotificationSweetAlertAdmin(ErrorIcon, err.data.message);
@@ -284,22 +287,26 @@ const ManagementUser = ({ chooseLanguage }) => {
   };
 
   const onFinishEdit = (values) => {
-    const splitString = values.user_role_title.split("+");
+    const splitString = valueSelect.split("+");
     authAxios()
       .post(`${localhost}/edit_user`, {
         user_id: valueEdit.Id,
         user_msnv: values.user_msnv.trim(),
-        user_role_title: splitString[0],
-        user_role: splitString[1],
+        user_role_title:
+          valueSelect === "" ? valueEdit.user_role_title : splitString[0],
+        user_role: valueSelect === "" ? valueEdit.user_role : splitString[1],
         current_role: inforUser.user_role,
-        user_lvl: splitString[2],
-        user_pair: splitString[3],
+        user_lvl: valueSelect === "" ? valueEdit.user_lvl : splitString[2],
+        user_pair: valueSelect === "" ? valueEdit.user_pair : splitString[3],
         user_name: values.user_name.trim(),
       })
       .then((res) => {
         fetchListUserAllDelete();
         setOpenDrawerEditUser(false);
-        openNotificationSweetAlertAdmin(SuccessIcon, res.data.message);
+        openNotificationSweetAlertAdmin(
+          SuccessIcon,
+          fileLanguage[chooseLanguage].user_edited_successfully
+        );
       })
       .catch((err) => {
         openNotificationSweetAlertAdmin(ErrorIcon, err.response.data.message);
@@ -322,7 +329,10 @@ const ManagementUser = ({ chooseLanguage }) => {
       .then((res) => {
         fetchListUserAllDelete();
         setOpenDrawerAddUser(false);
-        openNotificationSweetAlertAdmin(SuccessIcon, res.data.message);
+        openNotificationSweetAlertAdmin(
+          SuccessIcon,
+          fileLanguage[chooseLanguage].user_added_successfully
+        );
       })
       .catch((err) => {
         if (err.data.message === "User đã tồn tại!") {
