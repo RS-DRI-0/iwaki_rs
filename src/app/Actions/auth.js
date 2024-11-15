@@ -52,8 +52,8 @@ export const authLogin = (username, password, loading) => {
     dispatch(authStart());
     axios
       .post(loginURL, {
-        user_name: username,
-        user_pw: password,
+        user_name: username.trim(),
+        user_pw: password.trim(),
       })
       .then((res) => {
         // localStorage.setItem("check", JSON.parse(res))
@@ -131,7 +131,6 @@ export const authLogin = (username, password, loading) => {
           // cookies.remove(`token_iwaki_${userId}`);
           // cookies.remove(`refresh_iwaki_${userId}`);
           window.location = "/check_rule";
-
         } else if (res.data.user_role_title === "APP_MANAGER") {
           if (screenWidth < 450) {
             const userId = JSON.parse(
