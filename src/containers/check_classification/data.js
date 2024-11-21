@@ -17,6 +17,8 @@ export const check_classification = {
   e2_date: "2024-08-22 10:44:08.373000",
   is_qa_e1: "0",
   is_qa_e2: "1",
+  e1_other: "1",
+  e2_other: "1",
   Input_e1: ["QA_2", "OTHER_Truong123"],
   Input_e2: ["OTHER_Truongggg"],
   path_files: [

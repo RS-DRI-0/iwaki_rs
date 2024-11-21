@@ -157,3 +157,7 @@ span {
 .ant-message .ant-message-notice-wrapper .ant-message-custom-content {
   display: block;
 }
+
+.btn-radio-clf .ant-radio-inner  {
+  border: 1px solid black;
+}

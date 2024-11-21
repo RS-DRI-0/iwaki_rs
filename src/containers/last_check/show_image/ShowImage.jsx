@@ -155,7 +155,6 @@ const ShowImage = ({ dataDetail, dataLastCheck, pumpId }) => {
                             return;
                         }
                     }
-
                 });
             } catch {
                 console.log("Lỗi");

@@ -1,4 +1,4 @@
-import { Button, Card, Col, Row, Select, Empty } from "antd";
+import { Button, Card, Col, Row, Select, Empty, Radio } from "antd";
 import "./style.scss";
 import { useEffect, useState } from "react";
 import ShowModalDetailEntry from "./modal";
@@ -28,6 +28,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
+// import { res.data } from "./data";
 
 export const Prop = styled("h3")`
 f5 f4-ns mb0 white`;
@@ -63,6 +64,8 @@ const Check_Classification = () => {
   const [loadingTable, setLoadingTable] = useState(true);
   const [indexImage, setIndexImage] = useState(0);
   const [checkChooseModel, setCheckChooseModel] = useState(false);
+  const [onTickException, setOnTickException] = useState(false)
+
 
   const [loadingImage, setLoadingImage] = useState(true);
 
@@ -195,6 +198,8 @@ const Check_Classification = () => {
         });
 
         setValueBase64(mergedList);
+        setOnTickException(Number(res.data.e1_other) === 1)
+
         // }
       })
       .catch((err) => {
@@ -236,7 +241,7 @@ const Check_Classification = () => {
       data.append("user_role", inforUser.user_role);
       authAxios()
         .post(`${localhost}/return_pack_check_clf`, data)
-        .then((res) => {})
+        .then((res) => { })
         .catch((err) => {
           console.log(err);
         });
@@ -303,14 +308,14 @@ const Check_Classification = () => {
         item.Input_e1 === "☑"
           ? "S"
           : item.Input_e1 === "QA"
-          ? item.qa_e1
-          : item.Input_e1,
+            ? item.qa_e1
+            : item.Input_e1,
       Input_e2:
         item.Input_e2 === "☑"
           ? "S"
           : item.Input_e2 === "QA"
-          ? item.qa_e2
-          : item.Input_e2,
+            ? item.qa_e2
+            : item.Input_e2,
     }));
 
     const concatenatedValues = updatedDataList
@@ -377,16 +382,19 @@ const Check_Classification = () => {
         user_Id: parseInt(inforUser.user_id),
         user_pair: parseInt(inforUser.user_pair),
 
+        c_other: onTickException ? 1 : 0,
+        group_pass : dataPumb.lst_pass_group,
+
         jp_time_ymd: dataDetail.jp_time_ymd,
         qa_all: valueSubmitInput === null ? 0 : 1,
         qa_result:
           dataPumb.value === "1"
             ? ""
             : dataPumb.value === "3"
-            ? valueSubmitInput === null
-              ? ""
-              : valueSubmitInput
-            : "",
+              ? valueSubmitInput === null
+                ? ""
+                : valueSubmitInput
+              : "",
         str_result:
           dataPumb.value === "1"
             ? valueSubmitInput === null
@@ -562,7 +570,7 @@ const Check_Classification = () => {
               ...updatedData[_index], // Keep other properties unchanged
               check_QA:
                 updatedData[_index].is_qa_e1 === "0" &&
-                updatedData[_index].is_qa_e2 === "0"
+                  updatedData[_index].is_qa_e2 === "0"
                   ? false
                   : true, // Set check_QA to false
               qa_e1: "",
@@ -577,7 +585,7 @@ const Check_Classification = () => {
               ...updatedData[_index], // Keep other properties unchanged
               check_QA:
                 updatedData[_index].is_qa_e1 === "0" &&
-                updatedData[_index].is_qa_e2 === "0"
+                  updatedData[_index].is_qa_e2 === "0"
                   ? false
                   : true, // Set check_QA to false
               qa_e2: "",
@@ -592,7 +600,7 @@ const Check_Classification = () => {
               ...updatedData[_index], // Keep other properties unchanged
               check_QA:
                 updatedData[_index].is_qa_e1 === "0" &&
-                updatedData[_index].is_qa_e2 === "0"
+                  updatedData[_index].is_qa_e2 === "0"
                   ? false
                   : true, // Set check_QA to false
               qa_e1: "",
@@ -609,7 +617,7 @@ const Check_Classification = () => {
               ...updatedData[_index], // Keep other properties unchanged
               check_QA:
                 updatedData[_index].is_qa_e1 === "0" &&
-                updatedData[_index].is_qa_e2 === "0"
+                  updatedData[_index].is_qa_e2 === "0"
                   ? false
                   : true, // Set check_QA to false
               qa_e1: "",
@@ -714,7 +722,7 @@ const Check_Classification = () => {
         ...updatedData[isIndexQA], // Keep other properties unchanged
         check_QA:
           updatedData[isIndexQA].is_qa_e1 === "0" &&
-          updatedData[isIndexQA].is_qa_e2 === "0"
+            updatedData[isIndexQA].is_qa_e2 === "0"
             ? false
             : true, // Set check_QA to false
       };
@@ -752,6 +760,10 @@ const Check_Classification = () => {
           event.preventDefault();
           document.getElementById("btn-show-qa").click();
         }
+        if (event.ctrlKey && event.code === "Space") {
+          event.preventDefault();
+          changeValueRadio()
+        }
       };
 
       document.addEventListener("keydown", handleKeyPress);
@@ -761,6 +773,10 @@ const Check_Classification = () => {
       };
     }
   }, [valueBase64, isOpenModalQATotal, isOpenModalQA]);
+
+  const changeValueRadio = () => {
+    setOnTickException(prev => !prev)
+  }
 
   const fetchListQaValue = () => {
     authAxios()
@@ -1057,6 +1073,14 @@ const Check_Classification = () => {
     }
   }, [indexImage]);
 
+  const checkColorException = () => { 
+    if((Number(dataDetail.e1_other) !== Number(dataDetail.e2_other))) {
+      return "red"
+    } else {
+      return "black"
+    }
+  }
+
   return (
     <>
       {loadingBtnSubmit && (
@@ -1095,6 +1119,7 @@ const Check_Classification = () => {
               lv1_fields={item.lv1_fields}
               lv3_fields={item.lv3_fields}
               pumb_model={item.pumb_model}
+              lst_pass_group = {item.lst_pass_group}
             >
               {item.pumb_model}
             </Select.Option>
@@ -1370,11 +1395,19 @@ const Check_Classification = () => {
                   margin: "auto",
                   display: "flex",
                   justifyContent: "end",
-                  marginTop: 10,
+                  // marginTop: 10,
                   paddingRight: 10,
                   columnGap: "2ch",
                 }}
               >
+                <div style={{ display: "grid", width: "25rem" }}>
+                  <div style={{ display: "flex", paddingLeft: "27px", alignItems: "center" }}>
+                    <Radio className="btn-radio-clf" style={{ textAlign: "center" }} checked={onTickException} onClick={changeValueRadio}></Radio>
+                    <span style={{ paddingLeft: "1%", fontSize: 16, fontWeight: 600, color: checkColorException()}}>Tồn tại group ngoại lệ (Có phiếu Servo,...)</span>
+                  </div>
+                  <span style={{ fontSize: 12 }}>(Ctrl + space)</span>
+                </div>
+
                 <Button
                   id="btn-show-qa"
                   onClick={showModalQA}

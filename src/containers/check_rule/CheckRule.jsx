@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Select, Form, Input, Row, Col, Table, notification } from 'antd';
+import { Select, Form, Input, Row, Col, Table, notification, Tooltip, Button } from 'antd';
 import "./CheckRule.css"
 import { authAxios } from '../../api/axiosClient';
 import { localhost } from '../../server';
 import { openNotificationSweetAlert } from '../../Function';
-const { Option } = Select;
+import WarningIcon from "../../images/file_manager/IconStatusImgNotGoodFooter.svg"
+import { ExclamationOutlined } from '@ant-design/icons';
 
+const { Option } = Select;
 const CheckRule = () => {
     const defaultConditions = [
         { no1: "", operator1: '', value1: "", poi1: "", find_oper1: "", in1: "", check1: "", connect1: "", no2: "", operator2: '', value2: "", poi2: "", find_oper2: "", in2: "", check2: "", connect2: "", no3: "", operator3: '', value3: "", poi3: "", find_oper3: "", in3: "", check3: "", connect3: "", no4: "", operator4: '', value4: "", poi4: "", find_oper4: "", in4: "", check4: "" },
@@ -25,7 +27,9 @@ const CheckRule = () => {
     const [isOpenTable, setIsOpenTable] = useState(false)
     const [dataRaw, setDataRaw] = useState("")
     const [pumpId, setPumpId] = useState()
+    const [valueNoPump, setValueNoPump] = useState("")
     const inforUser = JSON.parse(sessionStorage.getItem("info_user"));
+
     const columnTryIt = ["No1", "No2", "No3", "No4", "No5", "No6", "No7", "No8"]
 
     const dataRule = [
@@ -299,10 +303,25 @@ const CheckRule = () => {
         handleSubmit(value)
     }
 
+    const showNoteRule = (condition, position) => {
+        if (condition["operator" + position] === "find check") {
+            return `Tìm No${condition["no" + position]} trong ${condition["value" + position]}, 
+            tại vị trí của No${valueNoPump} ${condition["find_oper" + position]} ${condition["check" + position]}
+            (ở đây No${valueNoPump} là No được khai báo) `
+        } else if (condition["operator" + position] === "find in") {
+            return `Tìm No${condition["no" + position]} trong ${condition["value" + position]}, 
+            tại vị trí của No${condition["in" + position]} ${condition["find_oper" + position]}  No${valueNoPump} 
+            (ở đây No${valueNoPump} là No được khai báo) `
+        } else {
+            return ` Kiểm tra No${condition["no" + position]} nằm ở vị trí ${condition["poi" + position]} của ${condition["value" + position]}`
+        }
+    }
+
     const showGroup = (condition, index, position) => {
+        const listConditionShowNote = ["index of", "find in", "find check"]
         return (
             <div style={{ background: "rgb(145 209 177 / 81%)", display: "grid", padding: "4%", width: "100%", rowGap: "0.5ch", borderRadius: 8 }}>
-                <div style={{ alignContent: "center" }}>
+                <div style={{ alignContent: "center", position: "relative" }}>
                     <Input
                         value={condition["no" + position]}
                         onChange={(val) => handleConditionChange(index, "no" + position, val)}
@@ -348,6 +367,11 @@ const CheckRule = () => {
                         onChange={(val) => handleConditionChange(index, "value" + position, val)}
                         style={{ width: "30%" }}
                     />
+                    {listConditionShowNote.includes(condition["operator" + position]) &&
+                        <Tooltip placement="bottom" title={() => showNoteRule(condition, position)} arrow={false}>
+                            <ExclamationOutlined className='icon-note' />
+                        </Tooltip>
+                    }
                 </div>
                 {condition["operator" + position] === "index of" &&
                     <span style={{ marginLeft: "auto" }}>
@@ -381,6 +405,7 @@ const CheckRule = () => {
                         />
                     </label>
                 }
+
             </div>
         )
     }
@@ -405,7 +430,6 @@ const CheckRule = () => {
         } else {
             setDataNotification({ message: data.message, status: status })
         }
-
     }
 
     const showError = () => {
@@ -556,6 +580,7 @@ const CheckRule = () => {
                     }
                 })
             }
+            setValueNoPump(value.noPump)
             setDataRaw(newString)
         } else {
             clearCondition()
@@ -597,7 +622,7 @@ const CheckRule = () => {
                                     onChange={chooseField}
                                 >
                                     {listField.map((item) => (
-                                        <Select.Option key={item.field_id} value={item.field_id} jsonData={item.json_data} rawData={item.raw_data}>
+                                        <Select.Option key={item.field_id} value={item.field_id} jsonData={item.json_data} rawData={item.raw_data} noPump={item.no}>
                                             {item.no}
                                         </Select.Option>
                                     ))}

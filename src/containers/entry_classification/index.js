@@ -1,4 +1,4 @@
-import { Button, Card, Col, Row, Select, Empty } from "antd";
+import { Button, Card, Col, Row, Select, Empty, Radio } from "antd";
 import "./style.scss";
 import React, { useEffect, useState } from "react";
 import ShowModalDetailEntry from "./modal";
@@ -61,6 +61,7 @@ const Entry_Classification = () => {
   const [loadingTable, setLoadingTable] = useState(true);
   const [indexImage, setIndexImage] = useState(0);
   const [checkChooseModel, setCheckChooseModel] = useState(false);
+  const [onTickException, setOnTickException] = useState(false)
 
   const [loadingImage, setLoadingImage] = useState(true);
 
@@ -160,7 +161,7 @@ const Entry_Classification = () => {
       data.append("user_role", inforUser.user_role);
       authAxios()
         .post(`${localhost}/return_pack_entry_clf`, data)
-        .then((res) => {})
+        .then((res) => { })
         .catch((err) => {
           console.log(err);
         });
@@ -173,7 +174,6 @@ const Entry_Classification = () => {
     }
     const filterPumb = listPumb.filter((e) => e.pumb_id === data.key);
     sessionStorage.setItem("OptionMachine", JSON.stringify(filterPumb));
-
     setDataPumb(data);
     setPumbIsMulti(data.is_multi);
     fetchDataInsert(data.value);
@@ -258,6 +258,9 @@ const Entry_Classification = () => {
         qa_all: 0,
         qa_result: "",
         jp_time_ymd: dataDetail.jp_time_ymd,
+
+        e_other: onTickException ? 1 : 0,
+        group_pass: dataPumb.lst_pass_group,
       })
       .then((res) => {
         setLoadingBtnSubmit(false);
@@ -433,6 +436,7 @@ const Entry_Classification = () => {
   useEffect(() => {
     if (valueBase64.length !== 0) {
       const handleKeyPress = (event) => {
+        console.log(event)
         if (event.key === "F1") {
           event.preventDefault();
           KeyPressF1();
@@ -443,6 +447,10 @@ const Entry_Classification = () => {
         if (event.key === "F2") {
           event.preventDefault();
           document.getElementById("btn-show-qa").click();
+        }
+        if (event.ctrlKey && event.code === "Space") {
+          event.preventDefault();
+          changeValueRadio()
         }
       };
 
@@ -696,6 +704,10 @@ const Entry_Classification = () => {
     }
   }, [indexImage]);
 
+  const changeValueRadio = () => {
+    setOnTickException(prev => !prev)
+  }
+
   return (
     <>
       {loadingBtnSubmit && (
@@ -715,7 +727,7 @@ const Entry_Classification = () => {
           optionFilterProp="children"
           placeholder="Chọn mã máy"
           onChange={chooseModel}
-          // defaultValue={valueListPumb.pumb_model}
+        // defaultValue={valueListPumb.pumb_model}
         >
           {listPumb.map((item, index) => (
             <Select.Option
@@ -725,6 +737,7 @@ const Entry_Classification = () => {
               lv1_fields={item.lv1_fields}
               lv3_fields={item.lv3_fields}
               pumb_model={item.pumb_model}
+              lst_pass_group={item.lst_pass_group}
             >
               {item.pumb_model}
             </Select.Option>
@@ -851,7 +864,7 @@ const Entry_Classification = () => {
                                 ></img>
                               </button>
                             }
-                            // onClick={() => handleClickCard(_index)}
+                          // onClick={() => handleClickCard(_index)}
                           >
                             {Number(pumbIsMulti) === 1 && (
                               <>
@@ -962,7 +975,7 @@ const Entry_Classification = () => {
 
           <Row style={{ padding: "0% 1%" }}>
             <Col
-              span={12}
+              span={10}
               style={{
                 fontWeight: 600,
                 fontSize: 18,
@@ -990,11 +1003,19 @@ const Entry_Classification = () => {
                 margin: "auto",
                 display: "flex",
                 justifyContent: "end",
-                marginTop: 10,
+                // marginTop: 10,
                 paddingRight: 10,
                 columnGap: "2ch",
               }}
             >
+              <div style={{ display: "grid", width: "25rem" }}>
+                <div style={{ display: "flex", paddingLeft: "27px", alignItems: "center" }}>
+                  <Radio className="btn-radio-clf" style={{ textAlign: "center"}} checked={onTickException} onClick={changeValueRadio}></Radio>
+                  <span style={{ paddingLeft: "1%", fontSize: 16, fontWeight: 600}}>Tồn tại group ngoại lệ (Có phiếu Servo,...)</span>
+                </div>
+                <span style={{ fontSize: 12 }}>(Ctrl + space)</span>
+              </div>
+
               <Button
                 id="btn-show-qa"
                 onClick={showModalQA}
