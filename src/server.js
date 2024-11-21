@@ -35,4 +35,3 @@ export const localhost = "http://192.168.30.26:5009"; //op
 // export const localhost = 'https://scan-test.dominatech.xyz/api' //5009
 // export const localhost = 'https://tailnt.dominatech.xyz/api'
 // export const localhost = "http://192.168.20.190:8888";
-// export const localhost = "https://longlh.dominatech.xyz/api";

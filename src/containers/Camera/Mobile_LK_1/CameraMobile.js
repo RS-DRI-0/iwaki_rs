@@ -27,6 +27,8 @@ import iconLoading from "../../../images/iconLoading.svg";
 import iconSwitchCamera from "../../../images/iconSwitchCamera.svg";
 import iconCaptureImage from "../../../images/iconCaptureImage.svg";
 import { authAxios } from "../../../api/axiosClient";
+import { isChrome, isFirefox, isSafari, isEdge } from "react-device-detect";
+import bowser from "bowser";
 
 const MySwal = withReactContent(Swal);
 
@@ -322,8 +324,64 @@ const MobileWebCam2 = () => {
     myaudio.play();
   };
 
+  const getScreenResolution = () => {
+    const width = window.innerWidth; // Lấy chiều rộng của cửa sổ trình duyệt
+    const height = window.innerHeight; // Lấy chiều cao của màn hình
+
+    return { width, height };
+  };
+
+  const getDeviceDetails = (userAgent) => {
+    let deviceModel = "Unknown Device";
+    let osVersion = "Unknown Version";
+
+    if (/iPhone/.test(userAgent)) {
+      deviceModel = "iPhone";
+      const match = userAgent.match(/OS (\d+_\d+(_\d+)?)/);
+      if (match) {
+        osVersion = match[1].replace(/_/g, "."); // Chuyển "16_0_1" thành "16.0.1"
+      }
+    } else if (/iPad/.test(userAgent)) {
+      deviceModel = "iPad";
+      const match = userAgent.match(/OS (\d+_\d+(_\d+)?)/);
+      if (match) {
+        osVersion = match[1].replace(/_/g, ".");
+      }
+    } else if (/Android/.test(userAgent)) {
+      deviceModel = "Android";
+      const match = userAgent.match(/Android (\d+(\.\d+)?)/);
+      if (match) {
+        osVersion = match[1]; // Ví dụ: "11.0"
+      }
+    } else if (/Windows/.test(userAgent)) {
+      deviceModel = "Windows PC";
+      const match = userAgent.match(/Windows NT (\d+\.\d+)/);
+      if (match) {
+        osVersion = match[1]; // Ví dụ: "10.0"
+      }
+    } else if (/Mac/.test(userAgent)) {
+      deviceModel = "Mac";
+      const match = userAgent.match(/Mac OS X (\d+_\d+(_\d+)?)/);
+      if (match) {
+        osVersion = match[1].replace(/_/g, "."); // Chuyển "12_5_1" thành "12.5.1"
+      }
+    }
+
+    return { deviceModel, osVersion };
+  };
+
   const captureImage = () => {
     try {
+      const screenResolution = getScreenResolution();
+
+      const userAgent = navigator.userAgent;
+
+      const browser = bowser.getParser(window.navigator.userAgent);
+      const browserVersion = browser.getBrowserVersion();
+
+      const deviceDetails = getDeviceDetails(userAgent);
+      let browserName = browser.getBrowserName();
+
       if (isSwitchingCamera) {
         return;
       }
@@ -398,8 +456,47 @@ const MobileWebCam2 = () => {
           canvas.width = newWidth;
           canvas.height = newHeight;
 
-          ctx.drawImage(img, 0, 0, newWidth, newHeight);
+          const padding = 10;
 
+          ctx.drawImage(img, 0, 0, newWidth, newHeight);
+          ctx.save();
+          ctx.font = "bold 50px Arial";
+          ctx.fillStyle = "red";
+          ctx.textAlign = "left";
+          ctx.textBaseline = "bottom";
+          const x = 10; // Khoảng cách từ trái canvas
+          const y = canvas.height - 10;
+          const textDeviceDetails = ctx.measureText(
+            deviceDetails.deviceModel + " " + deviceDetails.osVersion
+          ).width;
+
+          ctx.fillText(
+            deviceDetails.deviceModel + " " + deviceDetails.osVersion,
+            // newWidth - textDeviceDetails - padding,
+            // newHeight - padding - 100,
+            x,
+            y - 100
+          );
+
+          const textBrowser = ctx.measureText(
+            browserName + " " + browserVersion
+          ).width;
+
+          ctx.fillText(browserName + " " + browserVersion, x, y - 50);
+
+          const textScreenResolution = ctx.measureText(
+            `w:${screenResolution.width}px` +
+              "-" +
+              `h:${screenResolution.height}px`
+          ).width;
+
+          ctx.fillText(
+            `w:${screenResolution.width}px` +
+              "-" +
+              `h:${screenResolution.height}px`,
+            x,
+            y
+          );
           ctx.restore();
 
           const resizedImageBase64 = canvas.toDataURL("image/jpeg", quality);
