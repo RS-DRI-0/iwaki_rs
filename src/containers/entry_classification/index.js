@@ -260,14 +260,14 @@ const Entry_Classification = () => {
         jp_time_ymd: dataDetail.jp_time_ymd,
 
         e_other: onTickException ? 1 : 0,
-        group_pass: dataPumb.lst_pass_group,
+        group_pass: dataPumb.group_pass,
       })
       .then((res) => {
         setLoadingBtnSubmit(false);
         setStartTime(0);
         setValueBase64([]);
         openNotificationSweetAlert(SuccessIcon, res.data.message);
-
+        setOnTickException(false)
         fetchDataInsert(dataPumb.value);
       })
       .catch((err) => {
@@ -436,7 +436,6 @@ const Entry_Classification = () => {
   useEffect(() => {
     if (valueBase64.length !== 0) {
       const handleKeyPress = (event) => {
-        console.log(event)
         if (event.key === "F1") {
           event.preventDefault();
           KeyPressF1();
@@ -737,7 +736,7 @@ const Entry_Classification = () => {
               lv1_fields={item.lv1_fields}
               lv3_fields={item.lv3_fields}
               pumb_model={item.pumb_model}
-              lst_pass_group={item.lst_pass_group}
+              group_pass={item.group_pass}
             >
               {item.pumb_model}
             </Select.Option>
@@ -1010,8 +1009,8 @@ const Entry_Classification = () => {
             >
               <div style={{ display: "grid", width: "25rem" }}>
                 <div style={{ display: "flex", paddingLeft: "27px", alignItems: "center" }}>
-                  <Radio className="btn-radio-clf" style={{ textAlign: "center"}} checked={onTickException} onClick={changeValueRadio}></Radio>
-                  <span style={{ paddingLeft: "1%", fontSize: 16, fontWeight: 600}}>Tồn tại group ngoại lệ (Có phiếu Servo,...)</span>
+                  <Radio className="btn-radio-clf" style={{ textAlign: "center" }} checked={onTickException} onClick={changeValueRadio}></Radio>
+                  <span style={{ paddingLeft: "1%", fontSize: 16, fontWeight: 600 }}>Tồn tại group ngoại lệ (Có phiếu Servo,...)</span>
                 </div>
                 <span style={{ fontSize: 12 }}>(Ctrl + space)</span>
               </div>
@@ -1069,6 +1068,8 @@ const Entry_Classification = () => {
           setStartTime={setStartTime}
           setValueBase64={setValueBase64}
           fetchDataInsert={fetchDataInsert}
+          onTickException={onTickException}
+          setOnTickException={setOnTickException}
         />
       )}
       {isOpenModalQaImage && (

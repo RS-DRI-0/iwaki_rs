@@ -3,12 +3,12 @@
 // export const localhost = "http://192.168.30.26:5010"; //app
 
 
-export const localhost = "http://192.168.30.26:5009"; //op
+// export const localhost = "http://192.168.30.26:5009"; //op
 
 // export const localhost = "https://test-op-iwaki.dri.io.vn/api"; // 5011
 // export const localhost = "https://test-iwaki.dri.io.vn/api"; // 5012
 //
-// export const localhost = "https://dev-op-iwaki.rainscales.com/api"; //5009
+export const localhost = "https://dev-op-iwaki.rainscales.com/api"; //5009
 // export const localhost = "https://dev-iwaki.rainscales.com/api"; // 5010
 
 // export const localhost = "https://uat-op-iwaki.rainscales.com/api"; // 5004

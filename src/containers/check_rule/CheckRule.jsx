@@ -153,7 +153,6 @@ const CheckRule = () => {
 
     const handleSubmit = (value) => {
         let dataSubmit = ''
-        console.log(listTextAndOr)
         conditions.forEach((item, index) => {
             if (index === 0) {
                 // handleContentSubmit(item)

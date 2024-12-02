@@ -28,6 +28,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
+import ModalSubmitHaveQA from "./modal/ModalSubmitHaveQA";
 // import { res.data } from "./data";
 
 export const Prop = styled("h3")`
@@ -65,7 +66,7 @@ const Check_Classification = () => {
   const [indexImage, setIndexImage] = useState(0);
   const [checkChooseModel, setCheckChooseModel] = useState(false);
   const [onTickException, setOnTickException] = useState(false)
-
+  const [isOpenModalSubmit, setIsOpenModalSubmit] = useState(false)
 
   const [loadingImage, setLoadingImage] = useState(true);
 
@@ -274,6 +275,8 @@ const Check_Classification = () => {
   };
 
   const onFinish = () => {
+
+
     let countNumbers = 0;
     let countCheckMark = 0;
     let countP = 0;
@@ -383,7 +386,7 @@ const Check_Classification = () => {
         user_pair: parseInt(inforUser.user_pair),
 
         c_other: onTickException ? 1 : 0,
-        group_pass : dataPumb.lst_pass_group,
+        group_pass: dataPumb.group_pass,
 
         jp_time_ymd: dataDetail.jp_time_ymd,
         qa_all: valueSubmitInput === null ? 0 : 1,
@@ -408,8 +411,10 @@ const Check_Classification = () => {
         sessionStorage.removeItem("ValueSubmitInput");
         setStartTime(0);
         setValueBase64([]);
+        setOnTickException(false)
         openNotificationSweetAlert(SuccessIcon, res.data.message);
         fetchDataInsert(dataPumb.value);
+        setIsOpenModalSubmit(false)
       })
       .catch((err) => {
         sessionStorage.removeItem("ValueSubmitInput");
@@ -1073,11 +1078,19 @@ const Check_Classification = () => {
     }
   }, [indexImage]);
 
-  const checkColorException = () => { 
-    if((Number(dataDetail.e1_other) !== Number(dataDetail.e2_other))) {
+  const checkColorException = () => {
+    if ((Number(dataDetail.e1_other) !== Number(dataDetail.e2_other))) {
       return "red"
     } else {
       return "black"
+    }
+  }
+
+  const onSubmit = () => {
+    if ((Number(dataDetail.e1_other) !== Number(dataDetail.e2_other))) {
+      setIsOpenModalSubmit(true)
+    } else {
+      onFinish()
     }
   }
 
@@ -1119,7 +1132,7 @@ const Check_Classification = () => {
               lv1_fields={item.lv1_fields}
               lv3_fields={item.lv3_fields}
               pumb_model={item.pumb_model}
-              lst_pass_group = {item.lst_pass_group}
+              group_pass={item.group_pass}
             >
               {item.pumb_model}
             </Select.Option>
@@ -1257,7 +1270,7 @@ const Check_Classification = () => {
                             data-check_qa={item.check_QA}
                             onClick={() => handleClickCard(_index)}
                           >
-                            {dataPumb.key !== "1" && (
+                            {Number(dataPumb.is_multi) === 1 && (
                               <>
                                 <span
                                   style={{
@@ -1403,7 +1416,7 @@ const Check_Classification = () => {
                 <div style={{ display: "grid", width: "25rem" }}>
                   <div style={{ display: "flex", paddingLeft: "27px", alignItems: "center" }}>
                     <Radio className="btn-radio-clf" style={{ textAlign: "center" }} checked={onTickException} onClick={changeValueRadio}></Radio>
-                    <span style={{ paddingLeft: "1%", fontSize: 16, fontWeight: 600, color: checkColorException()}}>Tồn tại group ngoại lệ (Có phiếu Servo,...)</span>
+                    <span style={{ paddingLeft: "1%", fontSize: 16, fontWeight: 600, color: checkColorException() }}>Tồn tại group ngoại lệ (Có phiếu Servo,...)</span>
                   </div>
                   <span style={{ fontSize: 12 }}>(Ctrl + space)</span>
                 </div>
@@ -1420,7 +1433,7 @@ const Check_Classification = () => {
                 >
                   QA (F2)
                 </Button>
-                <Button id="btn-submit" type="primary" onClick={onFinish}>
+                <Button id="btn-submit" type="primary" onClick={onSubmit}>
                   SUBMIT F1
                 </Button>
               </Col>
@@ -1465,6 +1478,13 @@ const Check_Classification = () => {
           valueBase64={valueBase64}
           isIndexQA={isIndexQA}
           inforUser={inforUser}
+        />
+      )}
+      {isOpenModalSubmit && (
+        <ModalSubmitHaveQA
+          isOpenModalSubmit={isOpenModalSubmit}
+          setIsOpenModalSubmit={setIsOpenModalSubmit}
+          onFinish={onFinish}
         />
       )}
     </>

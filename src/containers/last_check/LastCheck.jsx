@@ -259,6 +259,7 @@ const LastCheck = () => {
         }
         sessionStorage.setItem("current_pack", JSON.stringify(res.data))
         setLoadingTable(false);
+        setListReport([])
       })
       .catch((err) => {
         openNotificationSweetAlert(ErrorIcon, err.response.data.message);
@@ -434,6 +435,7 @@ const LastCheck = () => {
         setIsCheckLogic(false)
         setIsOpenModalSubmit(false)
         setNewDataTable([])
+        setListReport([])
         setIsSortData(false)
         fetchDataInsert(dataPumb);
         setTime(0)

@@ -39,7 +39,7 @@ const ToastCameraNotFound = Swal.mixin({
   timer: 3000,
   timerProgressBar: true,
   willClose: () => {
-    window.location.href = "/";
+    // window.location.href = "/";
   },
   customClass: {
     popup: "my-custom-popup",

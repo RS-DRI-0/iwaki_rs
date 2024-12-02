@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Arrow from "../../images/ArrowIconLogin.svg";
 import "./Login.css";
 import { Redirect } from "react-router-dom";
@@ -69,6 +69,7 @@ class Login extends React.Component {
 
   constructor(props) {
     super(props);
+    this.inputRef = React.createRef();
     this.state = {
       username: getCookie("i_u") || "", // Lấy giá trị từ localStorage
       password: getCookie("i_p") || "",
@@ -77,6 +78,13 @@ class Login extends React.Component {
         "Your password is not strong enough. Use at least 8 characters",
       // Các trạng thái khác của component
     };
+  }
+
+  componentDidMount() {
+    // Focus vào input sau khi component được mount
+    if (this.inputRef.current) {
+      this.inputRef.current.focus();
+    }
   }
 
   render() {
@@ -146,6 +154,7 @@ class Login extends React.Component {
                 prefix={<img src={userIcon} alt="" />}
                 placeholder="Username"
                 autoComplete="off"
+                ref={this.inputRef} // Gắn ref vào input
               />
             </Form.Item>
             <Form.Item

@@ -106,7 +106,7 @@ const TableLastCheck = ({
         const listColumns = ["checksheet", "Production_Instructions", "Name_plate", "Tem"]
         let checkDisabled = false
         let isCheckReadOnly;
-        
+
         if (listColumns.includes(dataIndex)) {
             if (record[`mark_` + dataIndex].toLowerCase() === "none") {
                 checkDisabled = true
@@ -307,7 +307,7 @@ const TableLastCheck = ({
                 rowClassName={(record, index) => {
                     if (dataGridLastCheck.length === 0) {
                         if (record.Result === "✖" || listNoCheckLogic.includes(record.No)) {
-                        // if (record.Result === "✖") {
+                            // if (record.Result === "✖") {
                             return "bg-not-qualified";
                         } else if (listCheckRuleWarning.includes(record.No)) {
                             return "bg-checkLogic";
@@ -317,6 +317,8 @@ const TableLastCheck = ({
                     } else if (dataGridLastCheck.length !== 0) {
                         if (record.Result === "✖") {
                             return "bg-not-qualified";
+                        } else if (listCheckRuleWarning.includes(record.No)) {
+                            return "bg-checkLogic";
                         } else {
                             return null;
                         }

@@ -17,6 +17,8 @@ const ModalQA = ({
   setStartTime,
   setValueBase64,
   fetchDataInsert,
+  onTickException,
+  setOnTickException
 }) => {
   const [dataSource, setDataSource] = useState([]);
   const [dataSourceLength, setDataSourceLength] = useState([]);
@@ -183,6 +185,9 @@ const ModalQA = ({
         qa_all: 1,
         qa_result: "",
         jp_time_ymd: dataDetail.jp_time_ymd,
+
+        e_other: onTickException ? 1 : 0,
+        group_pass: dataPumb.group_pass,
       })
       .then((res) => {
         setLoadingBtnSubmit(false);
@@ -190,6 +195,7 @@ const ModalQA = ({
         setValueBase64([]);
         openNotificationSweetAlert(SuccessIcon, res.data.message);
         handleCancel();
+        setOnTickException(false)
         fetchDataInsert(dataPumb.value);
       })
       .catch((err) => {
@@ -226,9 +232,9 @@ const ModalQA = ({
             dataSource={dataSource.firstPart}
             pagination={false}
             bordered
-            // scroll={{
-            //   y: "57vh",
-            // }}
+          // scroll={{
+          //   y: "57vh",
+          // }}
           ></Table>
           <div style={{ width: "4%" }}></div>
           <Table
@@ -238,9 +244,9 @@ const ModalQA = ({
             dataSource={dataSource.secondPart}
             pagination={false}
             bordered
-            // scroll={{
-            //   y: "57vh",
-            // }}
+          // scroll={{
+          //   y: "57vh",
+          // }}
           ></Table>
         </Col>
         <Col span={7} style={{ paddingLeft: "2%" }}>
@@ -257,7 +263,7 @@ const ModalQA = ({
                 allowClear
                 onChange={chooseContentQA}
                 value={dataQA}
-                // defaultValue={valueListPumb.pumb_model}
+              // defaultValue={valueListPumb.pumb_model}
               >
                 {dataSourceLength.map((item, index) => (
                   <Select.Option key={item.qa_stt} value={item.qa_stt}>

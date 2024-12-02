@@ -171,8 +171,6 @@ const FileManager = ({
   };
 
   const handleChangePagination = (page, pageSize) => {
-    console.log(page)
-    console.log(pageSize)
     const data = {
       ...fieldFilter,
       page_index: page,

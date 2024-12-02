@@ -441,7 +441,6 @@ const RowButton = (
 
     const functionSetCheckResult = (element, newArrData, listArrHaveContent) => {
         if (parseInt(element.No) !== 31) {
-            console.log(element)
             if (parseInt(element.is_qualified) === 0) {
                 functionPushData(newArrData, element, "✔")
             }
@@ -453,8 +452,6 @@ const RowButton = (
             }
             else {
                 const compareData = listArrHaveContent.every(value => value === listArrHaveContent[0])
-                console.log(listArrHaveContent)
-                console.log(compareData)
                 functionCheckConditionCompare(compareData, newArrData, element)
             }
         } else {
@@ -482,7 +479,6 @@ const RowButton = (
                 functionChecktilde(element, listArrHaveContent)
             }
             else {
-                console.log(listArrHaveContent)
                 functionAddAllDataCol(element, listArrHaveContent)
             }
 

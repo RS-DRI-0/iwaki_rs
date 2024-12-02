@@ -457,7 +457,7 @@ const InsertInformationIndex = () => {
             setLockBtnNextPage(false);
             setLockBtnPreviousPage(true);
           }
-
+          fetchListImage(0, res.data, true);
           setLoadingTable(false);
           setDataDetail(res.data);
           setCheckBtnRotate(false);
@@ -501,7 +501,6 @@ const InsertInformationIndex = () => {
         setListHotKeys(newArr);
 
         form.resetFields();
-        fetchListImage(0, res.data, true);
 
         setListDataInput(arrDataInput);
         setListDataGrid(arrDataGrid);
