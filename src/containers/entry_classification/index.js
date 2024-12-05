@@ -61,7 +61,7 @@ const Entry_Classification = () => {
   const [loadingTable, setLoadingTable] = useState(true);
   const [indexImage, setIndexImage] = useState(0);
   const [checkChooseModel, setCheckChooseModel] = useState(false);
-  const [onTickException, setOnTickException] = useState(false)
+  const [onTickException, setOnTickException] = useState(false);
 
   const [loadingImage, setLoadingImage] = useState(true);
 
@@ -161,7 +161,7 @@ const Entry_Classification = () => {
       data.append("user_role", inforUser.user_role);
       authAxios()
         .post(`${localhost}/return_pack_entry_clf`, data)
-        .then((res) => { })
+        .then((res) => {})
         .catch((err) => {
           console.log(err);
         });
@@ -267,7 +267,7 @@ const Entry_Classification = () => {
         setStartTime(0);
         setValueBase64([]);
         openNotificationSweetAlert(SuccessIcon, res.data.message);
-        setOnTickException(false)
+        setOnTickException(false);
         fetchDataInsert(dataPumb.value);
       })
       .catch((err) => {
@@ -419,8 +419,6 @@ const Entry_Classification = () => {
             newDataResult[i].value_id = updatedData[i].value_id;
           }
         }
-      } else {
-        newDataResult[_index].value_id = value;
       }
     }
   };
@@ -449,7 +447,7 @@ const Entry_Classification = () => {
         }
         if (event.ctrlKey && event.code === "Space") {
           event.preventDefault();
-          changeValueRadio()
+          changeValueRadio();
         }
       };
 
@@ -704,8 +702,8 @@ const Entry_Classification = () => {
   }, [indexImage]);
 
   const changeValueRadio = () => {
-    setOnTickException(prev => !prev)
-  }
+    setOnTickException((prev) => !prev);
+  };
 
   return (
     <>
@@ -726,7 +724,7 @@ const Entry_Classification = () => {
           optionFilterProp="children"
           placeholder="Chọn mã máy"
           onChange={chooseModel}
-        // defaultValue={valueListPumb.pumb_model}
+          // defaultValue={valueListPumb.pumb_model}
         >
           {listPumb.map((item, index) => (
             <Select.Option
@@ -863,7 +861,7 @@ const Entry_Classification = () => {
                                 ></img>
                               </button>
                             }
-                          // onClick={() => handleClickCard(_index)}
+                            // onClick={() => handleClickCard(_index)}
                           >
                             {Number(pumbIsMulti) === 1 && (
                               <>
@@ -1008,9 +1006,24 @@ const Entry_Classification = () => {
               }}
             >
               <div style={{ display: "grid", width: "25rem" }}>
-                <div style={{ display: "flex", paddingLeft: "27px", alignItems: "center" }}>
-                  <Radio className="btn-radio-clf" style={{ textAlign: "center" }} checked={onTickException} onClick={changeValueRadio}></Radio>
-                  <span style={{ paddingLeft: "1%", fontSize: 16, fontWeight: 600 }}>Tồn tại group ngoại lệ (Có phiếu Servo,...)</span>
+                <div
+                  style={{
+                    display: "flex",
+                    paddingLeft: "27px",
+                    alignItems: "center",
+                  }}
+                >
+                  <Radio
+                    className="btn-radio-clf"
+                    style={{ textAlign: "center" }}
+                    checked={onTickException}
+                    onClick={changeValueRadio}
+                  ></Radio>
+                  <span
+                    style={{ paddingLeft: "1%", fontSize: 16, fontWeight: 600 }}
+                  >
+                    Tồn tại group ngoại lệ (Có phiếu Servo,...)
+                  </span>
                 </div>
                 <span style={{ fontSize: 12 }}>(Ctrl + space)</span>
               </div>
