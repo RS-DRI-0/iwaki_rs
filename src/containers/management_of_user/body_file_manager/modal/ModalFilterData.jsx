@@ -141,7 +141,6 @@ const ModalFilterData = (
 
               </Form.Item>
               <span style={{fontSize: 10, color: "#1d63b4"}}>{contentNotiDate}</span>
-              {/* <span id="content"></span> */}
             </Col>
 
             <Col span={24}>

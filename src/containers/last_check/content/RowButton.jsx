@@ -45,7 +45,6 @@ const RowButton = (
     const [listDataMaster, setListDataMaster] = useState([])
     const [loadingTable, setLoadingTable] = useState(false)
     const inforUser = JSON.parse(sessionStorage.getItem("info_user"));
-    // const [dataCheckLogicListReport, setDataCheckLogicListReport] = useState()
 
     const checkLogicData = () => {
 
@@ -201,9 +200,6 @@ const RowButton = (
                 setListDataMaster(res.data.lst_master)
                 saveData()
 
-                // if (listNoCheckLogic.length === 0) {
-
-                // }
                 setLoadingMainTable(false)
                 setIsCheckShowDataMaster(true)
                 setIsCheckLogic(false)
@@ -213,111 +209,6 @@ const RowButton = (
                 setLoadingMainTable(false)
                 setLoadingTable(false)
             })
-    }
-
-    const fetchDataCheckLogic = (newDataLastCheck) => {
-        const dataChecksheet = {}
-        newDataLastCheck.forEach(item => {
-            dataChecksheet[item.No] = item.checksheet
-        })
-        authAxios()
-            .post(`${localhost}/check_logic`, {
-                results: newDataLastCheck,
-                pump_id: pumpId,
-                user_role: inforUser.user_role,
-                vl_checksheet: dataChecksheet
-            })
-            .then((res) => {
-                let listNoWarning = []
-                res.data.lst_report.forEach(item => {
-                    if (res.data.lst_rule_warning.includes(item.rule)) {
-                        listNoWarning.push(item.No)
-                    }
-                })
-                const listNo = res.data.lst_report.filter(item => !listNoWarning.includes(item.No)).map(item => item.No)
-                const listNoCheckLogicOld = [...listNoCheckLogic]
-
-                // Tìm No không xuất hiện ở listNO mới
-
-                const elementNotExist = listNoCheckLogicOld.filter(item => !listNo.includes(item));
-                newDataLastCheck.forEach(item => {
-                    if (listNo.includes(item.No)) {
-                        item.Result = "✖"
-                    } else if (elementNotExist.includes(item.No)) {
-                        item.Result = "✔"
-                    }
-                })
-
-                setListCheckRuleWarning(listNoWarning)
-                setListNoCheckLogic(listNo)
-                // setDataCheckLogicListReport(res.data.lst_report)
-
-                // if (Object.keys(res.data.lst_circle).length > 0) {
-                //     let listIndex = []
-                //     res.data.lst_circle.round_2.split("|").forEach((item, index) => {
-                //         if (item == 0) {
-                //             listIndex.push(index)
-                //         }
-                //     })
-                //     setListInput(listIndex)
-                //     setListIndexInput(listIndex)
-                // }
-
-                // setListCircle(res.data.lst_circle)
-                setListLogicMulti(res.data.lst_logic_multi)
-                setIsCheckLogic(true)
-                if (dataDetail.grid.length > 0) {
-                    functionCheckLogicMaster(listNo)
-                }
-                setDataLastCheck(newDataLastCheck)
-                setLoadingMainTable(false)
-            }).catch(err => {
-                console.log(err)
-            })
-    }
-
-    const functionCheckLogicMaster = (listNo) => {
-        let arrIndex = []
-        let newArrData = dataLastCheck
-        const dataForm = form.getFieldsValue()
-
-        if (listNo.length > 0) {
-            for (let i = 0; i < dataLastCheck.length; i++) {
-                for (const element of listNo) {
-                    if (dataLastCheck[i].No === element) {
-                        arrIndex.push({
-                            index: i,
-                            result: "✖"
-                        })
-                        break;
-                    } else {
-                        arrIndex.push({
-                            index: i,
-                            result: dataLastCheck[i].check_result
-                        })
-                    }
-                }
-            }
-        } else {
-            for (let i = 0; i < dataLastCheck.length; i++) {
-                arrIndex.push({
-                    index: i,
-                    result: dataLastCheck[i].check_result
-                })
-            }
-        }
-        arrIndex.forEach(item => {
-            newArrData[item.index].Result = item.result
-        })
-
-        Object.keys(dataForm).map(item => {
-            let arr_key = item.split("__");
-            return form.setFieldValue(item, newArrData[arr_key[1]][arr_key[2]])
-        });
-
-        let dataNotQualified = newArrData.filter(item => item.Result === "✖")
-        setListNotQualified(dataNotQualified)
-        setDataLastCheck(newArrData)
     }
 
     const addDataEqual = (listArrHaveContent, dataCheckSheet) => {

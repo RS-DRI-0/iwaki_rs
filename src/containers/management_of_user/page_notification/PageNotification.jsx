@@ -5,22 +5,16 @@ import dayjs from "dayjs";
 import { localhost } from "../../../server";
 import language from "../../../language.json";
 import IconStatusQualified from "../../../images/file_manager/IconStatusQualified.svg";
-import IconTimeout from "../../../images/file_manager/timeOutIcon.svg";
 import IconStatusNotQualified from "../../../images/file_manager/IconStatusNotQualified.svg";
 import IconStatusImgNotGood from "../../../images/file_manager/IconStatusImgNotGood.svg";
 import IconStatusProcessing from "../../../images/file_manager/IconStatusProcessing.svg";
 import IconLocation from "../../../images/file_manager/IconLocation.svg";
-
 import ArrowBackIcon from "../../../images/arrow/ArrowBack.svg";
-
-import IconPumbType from "../../../images/file_manager/IconPumbType.svg";
 import NoDataIcon from "../../../images/file_manager/NoDataIcon.svg";
 import { authAxios } from "../../../api/axiosClient";
 import LoadingIcon from "../../../images/iconLoading.svg";
-
 import PropTypes from "prop-types";
 import { templateNodata } from "../../../Function";
-
 
 const PageNotification = ({
   setCheckNoti,
@@ -276,18 +270,8 @@ const PageNotification = ({
                           display: "flex",
                         }}
                       >
-                        {/* <Col
-                          span={8}
-                          style={{ display: "flex", alignItems: "flex-start" }}
-                        >
-                          <img src={IconPumbType} alt=""></img>&nbsp;
-                          {item.pumb_name}
-                        </Col> */}
                         <Col span={24} style={{ display: "grid", rowGap: "0.5ch" }}>
                           {textStatus(item.check_status, item)}
-                          {/* {Number(item.qa_timeout) === 1 ?
-                            <span style={{ color: "red", fontWeight: "bold", fontSize: 10, display: "flex", alignItems: "center", columnGap: "0.5ch" }}><img src={IconTimeout} alt=""></img>{language[chooseLanguage].time_out}</span>
-                            : null} */}
                         </Col>
                       </Row>
                       <Row className="row-time-handle">

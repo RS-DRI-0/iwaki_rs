@@ -17,7 +17,6 @@ const ButtonSubmitLC = ({
     dataLastCheck,
     setDataLastCheck,
     form,
-    setListReport,
     listReport,
     dataPumb
 }) => {
@@ -70,7 +69,7 @@ const ButtonSubmitLC = ({
                         alignItems: "center",
                     }}
                 >
-                    {Number(dataPumb.is_master) === 2 &&
+                    {Number(dataPumb.is_master) !== 2 &&
                         <Row className='show-content-check-rule20'>
                             <div className='content-wrong-rule' style={{fontSize: 12}}>
                                 {listReport.length === 0 ?
