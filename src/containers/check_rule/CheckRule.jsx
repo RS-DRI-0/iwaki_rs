@@ -1,10 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Select, Form, Input, Row, Col, Table, notification, Tooltip, Button } from 'antd';
+import { Select, Form, Input, Row, Col, Table, Tooltip, Popconfirm } from 'antd';
 import "./CheckRule.css"
 import { authAxios } from '../../api/axiosClient';
 import { localhost } from '../../server';
-import { openNotificationSweetAlert } from '../../Function';
-import WarningIcon from "../../images/file_manager/IconStatusImgNotGoodFooter.svg"
 import { ExclamationOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
@@ -14,7 +12,6 @@ const CheckRule = () => {
         { no1: "", operator1: '', value1: "", poi1: "", find_oper1: "", in1: "", check1: "", connect1: "", no2: "", operator2: '', value2: "", poi2: "", find_oper2: "", in2: "", check2: "", connect2: "", no3: "", operator3: '', value3: "", poi3: "", find_oper3: "", in3: "", check3: "", connect3: "", no4: "", operator4: '', value4: "", poi4: "", find_oper4: "", in4: "", check4: "" },
         { no1: "", operator1: '', value1: "", poi1: "", find_oper1: "", in1: "", check1: "", connect1: "", no2: "", operator2: '', value2: "", poi2: "", find_oper2: "", in2: "", check2: "", connect2: "", no3: "", operator3: '', value3: "", poi3: "", find_oper3: "", in3: "", check3: "", connect3: "", no4: "", operator4: '', value4: "", poi4: "", find_oper4: "", in4: "", check4: "" },
         { no1: "", operator1: '', value1: "", poi1: "", find_oper1: "", in1: "", check1: "", connect1: "", no2: "", operator2: '', value2: "", poi2: "", find_oper2: "", in2: "", check2: "", connect2: "", no3: "", operator3: '', value3: "", poi3: "", find_oper3: "", in3: "", check3: "", connect3: "", no4: "", operator4: '', value4: "", poi4: "", find_oper4: "", in4: "", check4: "" }
-
     ]
     const conditionCheckAction = ["", null, undefined]
     const [form] = Form.useForm();
@@ -50,8 +47,6 @@ const CheckRule = () => {
             title: item,
             dataIndex: item,
             key: item,
-            // ellipsis: true,
-            // width: "40%"
             ellipsis: true,
             render: () => <Form.Item name={item}><Input style={{ width: "100%" }}></Input></Form.Item>
         }))
@@ -63,22 +58,26 @@ const CheckRule = () => {
         setDataRaw("")
     }
 
+    const handleDataOperator = (newConditions, val, index, key) => {
+        if (val !== "find in" && val !== "find check") {
+            newConditions[index]["find_oper" + key[key.length - 1]] = ""
+        }
+        if (val !== "index of") {
+            newConditions[index]["poi" + key[key.length - 1]] = ""
+        }
+        if (val !== "find in") {
+            newConditions[index]["in" + key[key.length - 1]] = ""
+        }
+        if (val !== "find check") {
+            newConditions[index]["check" + key[key.length - 1]] = ""
+        }
+    }
+
     const handleConditionChange = useCallback((index, key, val) => {
         const newConditions = [...conditions];
         try {
             if (key.includes("operator")) {
-                if (val !== "find in" && val !== "find check") {
-                    newConditions[index]["find_oper" + key[key.length - 1]] = ""
-                }
-                if (val !== "index of") {
-                    newConditions[index]["poi" + key[key.length - 1]] = ""
-                }
-                if (val !== "find in") {
-                    newConditions[index]["in" + key[key.length - 1]] = ""
-                }
-                if (val !== "find check") {
-                    newConditions[index]["check" + key[key.length - 1]] = ""
-                }
+                handleDataOperator(newConditions, val, index, key)
             }
             newConditions[index][key] = val.target.value;
         } catch {
@@ -105,32 +104,14 @@ const CheckRule = () => {
             } else {
                 newConditions[index][key] = val;
             }
-
         }
         setConditions(newConditions);
     }, [conditions]);
 
-    const sortObjectByLastChar = (item) => {
-        // const obj = Object.keys(item)[indexItem]
-        return Object.keys(item)
-            .sort((a, b) => {
-                const lastCharA = a[a.length - 1];
-                const lastCharB = b[b.length - 1];
-                return lastCharA.localeCompare(lastCharB);
-            })
-            .reduce((sortedObj, key) => {
-                sortedObj[key] = item[key];
-                return sortedObj;
-            }, {});
-    };
-
     const handleContentSubmit = (item) => {
         const values = Object.values(item)
-        const listKey = Object.keys(item)
         const result = values.map((value, indexItem) => {
             // Không + giá trị của connected vào chuỗi
-
-            // console.log(Object.keys(item)[indexItem])
             if (Object.keys(item)[indexItem] !== "connected") {
                 if (value === "find in" || value === "find check") {
                     if (value === "find in") {
@@ -140,59 +121,17 @@ const CheckRule = () => {
                     }
                     value = "find " + values[indexItem + 3]
                     values[indexItem + 3] = ""
-
                 } else
                     if (value === "index of") {
                         values[indexItem + 2] = "poi " + values[indexItem + 2]
                     }
-                return value;
             }
+            return value;
         }).join(' ');
         return result
     }
 
-    const handleSubmit = (value) => {
-        let dataSubmit = ''
-        conditions.forEach((item, index) => {
-            if (index === 0) {
-                // handleContentSubmit(item)
-                // const values = Object.values(item)
-                // const listKey = Object.keys(item)
-                // const result = values.map((value, indexItem) => {
-                //     // Không + giá trị của connected vào chuỗi
-
-                //     // console.log(Object.keys(item)[indexItem])
-                //     if (Object.keys(item)[indexItem] !== "connected") {
-                //         if (value === "find in" || value === "find check") {
-                //             if (value === "find in") {
-                //                 values[indexItem + 2] = "in"
-                //             } else {
-                //                 const index = listKey[indexItem + 3][listKey[indexItem + 3].length - 1]
-                //                 values[indexItem + 2] = "check"
-                //                 values[indexItem + 3] = item["check" + index]
-                //                 values[29] = ""
-                //                 values[30] = ""
-                //                 values[31] = ""
-                //                 values[32] = ""
-                //             }
-                //             value = "find " + values[indexItem + 4]
-                //             values[indexItem + 4] = ""
-
-                //         } else
-                //             if (value === "index of") {
-                //                 values[indexItem + 2] = "poi " + values[indexItem + 2]
-                //             }
-                //         return value;
-                //     }
-                // }).join(' ');
-                dataSubmit += '( ' + handleContentSubmit(item) + ') '
-            } else if (index !== 0) {
-                if (!conditionCheckAction.includes(listTextAndOr[index - 1])) {
-                    dataSubmit += (item.no1 !== "") ? listTextAndOr[index - 1] + ' ( ' + handleContentSubmit(item) + ') ' : ""
-                }
-            }
-        })
-
+    const handleDataGrid = () => {
         const checkConnect1To2 = (conditions[0].no1 === "" && conditions[0].value1 === "") || (conditions[1].no1 === "" && conditions[1].value1 === "")
         const checkConnect2To3 = (conditions[1].no1 === "" && conditions[1].value1 === "") || (conditions[2].no1 === "" && conditions[2].value1 === "")
         const checkConnect3To4 = (conditions[2].no1 === "" && conditions[2].value1 === "") || (conditions[3].no1 === "" && conditions[3].value1 === "")
@@ -203,43 +142,29 @@ const CheckRule = () => {
             group3: { ...conditions[2], connected: conditionCheckAction.includes(listTextAndOr[2]) ? "" : checkConnect3To4 ? "" : listTextAndOr[2] },
             group4: { ...conditions[3], connected: "" },
         }
+        return dataGr
+    }
 
-        // let newArr1 = Object.values(dataGr.group1)
-        // let newArr2 = Object.values(dataGr.group2)
-        // let newArr3 = Object.values(dataGr.group3)
-        // let newArr4 = Object.values(dataGr.group4)
-
-        // for (let i = 0; i < newArr1.length; i++) {
-        //     if (newArr1[i] === "find check" || newArr1[i] === "find in") {
-        //         newArr1[i] = "find"
-        //     }
-        // }
-        // for (let i = 0; i < newArr2.length; i++) {
-        //     if (newArr2[i] === "find check" || newArr2[i] === "find in") {
-        //         newArr2[i] = "find"
-        //     }
-        // }
-        // for (let i = 0; i < newArr3.length; i++) {
-        //     if (newArr3[i] === "find check" || newArr3[i] === "find in") {
-        //         newArr3[i] = "find"
-        //     }
-        // }
-        // for (let i = 0; i < newArr4.length; i++) {
-        //     if (newArr4[i] === "find check" || newArr4[i] === "find in") {
-        //         newArr4[i] = "find"
-        //     }
-        // }
-
-        // const newDataGr = { newArr1, newArr2, newArr3, newArr4 }
+    const handleSubmit = (value) => {
+        let dataSubmit = ''
+        conditions.forEach((item, index) => {
+            if (index === 0) {
+                dataSubmit += '( ' + handleContentSubmit(item) + ') '
+            } else if (index !== 0) {
+                if (!conditionCheckAction.includes(listTextAndOr[index - 1])) {
+                    dataSubmit += (item.no1 !== "") ? listTextAndOr[index - 1] + ' ( ' + handleContentSubmit(item) + ') ' : ""
+                }
+            }
+        })
 
         let dataJson = [
             {
-                rule: dataGr
+                rule: handleDataGrid()
             }
         ]
 
         const dataResult = isOpenTable ? {
-            rule: dataGr,
+            rule: handleDataGrid(),
             mockValue: value
         } : {
             user_role: inforUser.user_role,
@@ -252,30 +177,15 @@ const CheckRule = () => {
         authAxios()
             .post(`${localhost}/${api}`, dataResult).then(res => {
                 showMessageNotification(res.data, "success")
-                // openNotification(res.data.message, "success")
-                // setConditions([
-                //     { no: "", operator: '>=', value: "", poi: "", connect: "", noChild: "", operatorChild: '>=', valueChild: "", poiChild: "" },
-                //     { no: "", operator: '>=', value: "", poi: "", connect: "", noChild: "", operatorChild: '>=', valueChild: "", poiChild: "" },
-                //     { no: "", operator: '>=', value: "", poi: "", connect: "", noChild: "", operatorChild: '>=', valueChild: "", poiChild: "" }
-                // ]);
-                // setAction({ no: "", operator: '>=', value: "", connect: "", noChild: "", operatorChild: '>=', valueChild: "" });
-                // form.resetFields()
                 form.setFieldValue("field_name", "")
-                // openNotificationSweetAlert()
                 setDataRaw("")
-                // fetchListPumb()
                 fetchLogicTempData(pumpId)
                 if (!isOpenTable) {
                     clearCondition()
                 }
-
             }).catch(err => {
-                // openNotificationSweetAlert()
                 showMessageNotification(err.data, "error")
-                // openNotification(err.data.message, "error")
-                // setMessageNotifi(err.data.message)
             })
-
     };
 
     const changeTextAndOr = (value, index) => {
@@ -287,14 +197,11 @@ const CheckRule = () => {
             newList[index] = value
         } else {
             newList.splice(index, newListCondition.length - (index + 1))
-
             for (let i = newListCondition.length; i > index + 1; i--) {
                 newListCondition[i - 1] = defaultConditions[i - 1]
             }
             setConditions(newListCondition)
-
         }
-
         setListTextAndOr(newList)
     }
 
@@ -359,13 +266,25 @@ const CheckRule = () => {
                             </Select>
                         }
                     </div>
+                    <Popconfirm
+                        overlayClassName='hidden-btn-ok-popconfirm'
+                        placement="top"
+                        title={<Input
+                            placeholder={condition["operator"] !== "index of" ? 'Value ' : "No."}
+                            onChange={(val) => handleConditionChange(index, "value" + position, val)}
+                        />}
+                        icon={false}
+                        okText={undefined}
+                        showCancel={false}
+                    >
+                        <Input
+                            value={condition["value" + position]}
+                            placeholder={condition["operator"] !== "index of" ? 'Value ' : "No."}
+                            style={{ width: "30%" }}
+                            readOnly
+                        />
+                    </Popconfirm>
 
-                    <Input
-                        value={condition["value" + position]}
-                        placeholder={condition["operator"] !== "index of" ? 'Value ' : "No."}
-                        onChange={(val) => handleConditionChange(index, "value" + position, val)}
-                        style={{ width: "30%" }}
-                    />
                     {listConditionShowNote.includes(condition["operator" + position]) &&
                         <Tooltip placement="bottom" title={() => showNoteRule(condition, position)} arrow={false}>
                             <ExclamationOutlined className='icon-note' />
@@ -404,20 +323,9 @@ const CheckRule = () => {
                         />
                     </label>
                 }
-
             </div>
         )
     }
-
-    const openNotification = (data, type) => {
-        notification[type]({
-            message: 'Thông báo',
-            description: data,
-            duration: 3,
-            maxCount: 1,
-            placement: "topRight"
-        });
-    };
 
     const showMessageNotification = (data, status) => {
         if (data.list_error !== undefined) {
@@ -448,7 +356,6 @@ const CheckRule = () => {
     }
 
     useEffect(() => {
-
         if (!conditionCheckAction.includes(dataNotification.message)) {
             showError()
         }
@@ -465,12 +372,12 @@ const CheckRule = () => {
             No7: 80,
             No8: 10,
         })
+        fetchListPumb()
         const handleKeyPress = (event) => {
             if (event.key === "Enter") {
                 event.preventDefault();
             }
         };
-
         document.addEventListener("keydown", handleKeyPress);
 
         return () => {
@@ -493,14 +400,13 @@ const CheckRule = () => {
             )
             .then((res) => {
                 setListField(res.data.lst_data)
-                // setListPumb(res.data.list_pumb);
             })
             .catch((err) => {
                 console.log(err);
             });
     }
 
-    const chooseModel = (value, data) => {
+    const chooseModel = (value) => {
         form.setFieldValue("field_name", "")
         clearCondition()
         setPumpId(value)
@@ -527,10 +433,6 @@ const CheckRule = () => {
             });
     };
 
-    useEffect(() => {
-        fetchListPumb()
-    }, []);
-
     const showTable = () => {
         setDataNotification({ message: "", status: "" })
         setIsOpenTable(prev => !prev)
@@ -540,13 +442,8 @@ const CheckRule = () => {
         if (value.jsonData !== "") {
             let data = value.jsonData
             const newStr = data.replace(/'/g, '"');
-
             const obj = JSON.parse(newStr);
-
             let dataGet = [obj.rule.group1, obj.rule.group2, obj.rule.group3, obj.rule.group4]
-
-
-
             setConditions(dataGet)
             let listConnect = []
             dataGet.forEach(item => {
@@ -585,26 +482,36 @@ const CheckRule = () => {
             clearCondition()
         }
     }
+
+    const chooseOperatorLogic = (condition, index, key) => {
+        return <Select
+            value={condition[key]}
+            onChange={(val) => handleConditionChange(index, key, val)}
+            className="class-choose-condition"
+            allowClear
+        >
+            <Option value="and">AND</Option>
+            <Option value="or">OR</Option>
+        </Select>
+    }
+
     return (
         <div className='container-create-rule' style={{ display: "flex" }}>
             <div className='body-create-rule' style={{ width: "100%" }}>
                 <Form form={form} className='form-create-rule' onFinish={onFinish}>
                     <h2 style={{ textAlign: "center", textTransform: "uppercase", marginTop: 0 }}>Bảng tạo qui tắc rule 18</h2>
-
                     <Row>
                         <Col span={8} style={{ display: "flex", columnGap: "2ch" }}>
                             <Form.Item name={"pump_id"}>
                                 <Select
                                     size={"middle"}
                                     id="code_pump"
-                                    className="SelectTTDN"
                                     style={{ textAlign: "left", width: "200px", border: "2px solid #00000057", borderRadius: 8 }}
                                     optionFilterProp="children"
                                     placeholder="Chọn mã máy"
                                     onChange={chooseModel}
-
                                 >
-                                    {listPumb.map((item, index) => (
+                                    {listPumb.map((item) => (
                                         <Select.Option key={item.pumb_id} value={item.pumb_id} is_master={item.is_master} is_multi={item.is_multi}>
                                             {item.pumb_model}
                                         </Select.Option>
@@ -644,26 +551,13 @@ const CheckRule = () => {
                                 <>
                                     {index < listTextAndOr.length + 1 &&
                                         <>
-
                                             <div style={{ display: "flex", backgroundColor: "#ffffffcc", padding: "1.2%", borderRadius: 16 }}>
                                                 <div style={{ width: "20.5%", display: "flex" }}>
                                                     {showGroup(condition, index, 1)}
                                                 </div>
                                                 <div style={{ width: "6%", display: "flex", alignItems: "center" }}>
-                                                    <Select
-                                                        value={condition.connect1}
-                                                        onChange={(val) => handleConditionChange(index, 'connect1', val)}
-                                                        style={{
-                                                            width: "100%", margin: "0% 10%", border: "2px solid rgb(145 209 177 / 81%)",
-                                                            borderRadius: 8
-                                                        }}
-                                                        allowClear
-                                                    >
-                                                        <Option value="and">AND</Option>
-                                                        <Option value="or">OR</Option>
-                                                    </Select>
+                                                    {chooseOperatorLogic(condition, index, "connect1")}
                                                 </div>
-
 
                                                 {condition.connect1 !== "" &&
                                                     <>
@@ -671,18 +565,7 @@ const CheckRule = () => {
                                                             {showGroup(condition, index, 2)}
                                                         </div>
                                                         <div style={{ width: "6%", display: "flex", alignItems: "center" }}>
-                                                            <Select
-                                                                value={condition.connect2}
-                                                                onChange={(val) => handleConditionChange(index, 'connect2', val)}
-                                                                style={{
-                                                                    width: "100%", margin: "0% 10%", border: "2px solid rgb(145 209 177 / 81%)",
-                                                                    borderRadius: 8
-                                                                }}
-                                                                allowClear
-                                                            >
-                                                                <Option value="and">AND</Option>
-                                                                <Option value="or">OR</Option>
-                                                            </Select>
+                                                            {chooseOperatorLogic(condition, index, "connect2")}
                                                         </div>
                                                     </>
                                                 }
@@ -693,21 +576,9 @@ const CheckRule = () => {
                                                             {showGroup(condition, index, 3)}
                                                         </div>
                                                         <div style={{ width: "6%", display: "flex", alignItems: "center" }}>
-                                                            <Select
-                                                                value={condition.connect3}
-                                                                onChange={(val) => handleConditionChange(index, 'connect3', val)}
-                                                                style={{
-                                                                    width: "100%", margin: "0% 10%", border: "2px solid rgb(145 209 177 / 81%)",
-                                                                    borderRadius: 8
-                                                                }}
-                                                                allowClear
-                                                            >
-                                                                <Option value="and">AND</Option>
-                                                                <Option value="or">OR</Option>
-                                                            </Select>
+                                                            {chooseOperatorLogic(condition, index, "connect3")}
                                                         </div>
                                                     </>
-
                                                 }
                                                 {condition.connect3 !== "" &&
                                                     <div style={{ width: "20.5%", display: "flex" }}>
@@ -716,14 +587,11 @@ const CheckRule = () => {
                                                 }
                                             </div>
 
-                                            {/* && !(conditionCheckAction.includes(listTextAndOr[index])) */}
                                             {index < conditions.length - 1 &&
                                                 <Select
                                                     value={listTextAndOr[index]}
                                                     onChange={(value) => changeTextAndOr(value, index)}
                                                     style={{ width: 80, border: "2px solid rgb(145 209 177 / 81%)", borderRadius: 8 }}
-
-                                                    // optionFilterProp="children"
                                                     allowClear={true}
                                                 >
                                                     <Option value="and">AND</Option>
@@ -740,7 +608,7 @@ const CheckRule = () => {
 
                     <Row style={{ display: "flex", justifyContent: "flex-start" }}>
                         <Row style={{ display: "flex", columnGap: "2ch" }}>
-                            <button type='button' className='button-tryIt' style={{ background: `linear-gradient(to right bottom, rgb(239 71 101), rgb(255 154 90 / 95%))` }} onClick={showTable}>Dùng thử !</button>
+                            <button type='button' className='button-tryIt' onClick={showTable}>Dùng thử !</button>
                             <button type='submit' className="button-30">Lưu quy tắc</button>
                         </Row>
                     </Row>
