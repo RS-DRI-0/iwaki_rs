@@ -123,13 +123,6 @@ export const authLogin = (username, password, loading) => {
             window.location = "/last_check";
           }
         } else if (res.data.user_role_title === "ADMIN") {
-          // const userId = JSON.parse(
-          //   sessionStorage.getItem("info_user")
-          // ).user_id;
-          // sessionStorage.clear();
-          // localStorage.clear();
-          // cookies.remove(`token_iwaki_${userId}`);
-          // cookies.remove(`refresh_iwaki_${userId}`);
           window.location = "/check_rule";
         } else if (res.data.user_role_title === "APP_MANAGER") {
           if (screenWidth < 450) {

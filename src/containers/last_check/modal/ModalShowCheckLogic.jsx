@@ -29,10 +29,8 @@ const ModalShowCheckLogic = ({
   const [dataCheckLogicListReport, setDataCheckLogicListReport] = useState([])
   const [listInput, setListInput] = useState([])
   const [listCircle, setListCircle] = useState([])
-  // const [dataCheckLogicListReport, setDataCheckLogicListReport] = useState()
   const inforUser = JSON.parse(sessionStorage.getItem("info_user"));
   const [listIndexInput, setListIndexInput] = useState([])
-  // const [listReport, setListReport] = useState([])
   const [listNoOther, setListNoOther] = useState([])
 
   const handleCancel = () => {
@@ -125,7 +123,6 @@ const ModalShowCheckLogic = ({
         }
 
         setListCircle(res.data.lst_circle)
-        // setCountInput(Number(res.data.lst_circle[0].input_count))
         setListLogicMulti(res.data.lst_logic_multi)
         setIsCheckLogic(true)
         if (dataDetail.grid.length > 0) {
@@ -136,13 +133,6 @@ const ModalShowCheckLogic = ({
           res.data.lst_other.forEach(item => {
             newArrOther.push(item.content)
           })
-          // let listNoOther = res.data.lst_other.map(item => item.No)
-          // newDataLastCheck.forEach(item => {
-          //   if (listNoOther.includes(item.No)) {
-          //     item.Result = "✖"
-          //   }
-          // })
-          // setListNoOther(listNoOther)
         }
 
         setListReport(newArrOther)
@@ -200,7 +190,7 @@ const ModalShowCheckLogic = ({
     fetchDataCheckLogic()
   }, [isOpenModalCheckLogic]);
 
-  const checkMaster2 = Number(dataPumb.is_master) === 2
+  const checkMaster2 = Number(dataPumb.is_master) !== 0
 
   return (
     <>

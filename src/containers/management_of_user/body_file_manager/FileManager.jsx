@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./ModalFileManager.css";
-import { Button, Col, Row, Pagination, FloatButton, Select } from "antd";
+import { Button, Col, Row, Pagination, FloatButton} from "antd";
 import dayjs from "dayjs";
 import { localhost } from "../../../server";
 import language from "../../../language.json";
@@ -11,9 +11,7 @@ import IconStatusQualified from "../../../images/file_manager/IconStatusQualifie
 import IconStatusNotQualified from "../../../images/file_manager/IconStatusNotQualified.svg";
 import IconStatusImgNotGood from "../../../images/file_manager/IconStatusImgNotGood.svg";
 import IconStatusProcessing from "../../../images/file_manager/IconStatusProcessing.svg";
-import IconPumbType from "../../../images/file_manager/IconPumbType.svg";
 import IconLocation from "../../../images/file_manager/IconLocation.svg";
-import IconNameOrder from "../../../images/file_manager/IconNameOrder.svg";
 import IconTimeout from "../../../images/file_manager/timeOutIcon.svg";
 import dataAlertIcon from "../../../images/file_manager/data_alert.svg";
 import NoDataIcon from "../../../images/file_manager/NoDataIcon.svg";
@@ -454,38 +452,7 @@ const FileManager = ({
                   showSizeChanger
                   pageSizeOptions={[5, 10, 15, 20]}
                   locale={{ items_per_page: "" }}
-                // itemRender={(current, type, originalElement) => {
-                //   console.log(originalElement)
-                //   if (type === 'pageSize') {
-                //     return (
-                //       <Select
-                //         value={pager.pageSize}
-                //         onChange={handleChangePagination}
-                //         showSearch={false} // Tắt tìm kiếm trong dropdown
-                //         style={{ width: 120 }}
-
-                //       >
-                //         <Select.Option value={10}>10</Select.Option>
-                //         <Select.Option value={20}>20</Select.Option>
-                //         <Select.Option value={50}>50</Select.Option>
-                //         <Select.Option value={100}>100</Select.Option>
-                //       </Select>
-                //     );
-                //   }
-                //   return originalElement;
-                // }}
                 />
-                {/* <Select
-                  value={pager.pageSize}
-                  onChange={handleChangePagination}
-                  showSearch={false} // Tắt tính năng tìm kiếm
-                  style={{ width: 120, marginTop: 16 }}
-                >
-                  <Select.Option value={5}>5</Select.Option>
-                  <Select.Option value={10}>10</Select.Option>
-                  <Select.Option value={15}>15</Select.Option>
-                  <Select.Option value={20}>20</Select.Option>
-                </Select> */}
                 <span>{pager.count}</span>
                 <img src={IconTotalFile} alt=""></img>
               </div>

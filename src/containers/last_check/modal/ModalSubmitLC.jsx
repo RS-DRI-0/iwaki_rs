@@ -9,7 +9,6 @@ const ModalSubmitLC = ({
     onFinish,
     listNotQualified,
     dataQA,
-    dataGridLastCheck
 }) => {
     const checkQualified = listNotQualified.length > 0
     const handleCancel = () => {
@@ -20,62 +19,11 @@ const ModalSubmitLC = ({
         if (dataQA !== "") {
             return <span className='highlight-text-status' style={{ color: "rgb(255 168 0)" }}>{language["english"].images_not_good}</span>
         } else if (checkQualified) {
-            // return language["english"].not_qualified
             return <span className='highlight-text-status' style={{ color: "#C63F3F" }}>{language["english"].not_qualified}</span>
         }
         else {
-            // return language["english"].qualified
             return <span className='highlight-text-status' style={{ color: "#07864B" }}>{language["english"].qualified}</span>
         }
-        // if (dataGridLastCheck.length === 0) {
-        //     if (dataQA !== "") {
-        //         return language["english"].images_not_good
-        //     } else if (checkQualified) {
-        //         return language["english"].not_qualified
-        //     }
-        //     else {
-        //         return language["english"].qualified
-        //     }
-        // } else if (dataGridLastCheck.length !== 0) {
-        //     if (dataQA !== "") {
-        //         return language["english"].images_not_good
-        //     } else if (checkQualified) {
-        //         return language["english"].not_qualified
-        //     }
-        //     else {
-        //         return language["english"].qualified
-        //     }
-        // }
-    }
-
-    const showColorStatus = () => {
-        if (dataQA !== "") {
-            return "rgb(255 168 0)"
-        } else if (checkQualified) {
-            return "#C63F3F"
-        }
-        else {
-            return "#07864B"
-        }
-        // if (dataGridLastCheck.length === 0) {
-        //     if ((dataQA !== "") && dataGridLastCheck.length === 0) {
-        //         return "rgb(255 168 0)"
-        //     } else if (checkQualified) {
-        //         return "#C63F3F"
-        //     }
-        //     else {
-        //         return "#07864B"
-        //     }
-        // } else if (dataGridLastCheck.length !== 0) {
-        //     if (dataQA !== "") {
-        //         return "rgb(255 168 0)"
-        //     } else if (checkQualified) {
-        //         return "#C63F3F"
-        //     }
-        //     else {
-        //         return "#07864B"
-        //     }
-        // }
     }
 
     return (

@@ -64,8 +64,6 @@ const ModalViewDetail = ({
     setOpenViewImage(true);
   };
 
-
-
   const UpdateCusStatus = async (value, type) => {
     if (type !== value.cus_status) {
       const FormData = require("form-data");
@@ -269,7 +267,6 @@ const ModalViewDetail = ({
 
               />
             }
-
 
             {showCheckVerified ? (
               <Row className="container-footer-view-detail">
@@ -535,14 +532,6 @@ const BoxPackage = ({ data, chooseLanguage, showData, dataDetail }) => {
     }
     else if (dataDetail.qa_all === "1") {
       return <span style={{ fontSize: 12 }}>{data[chooseLanguage]}</span>
-      // if (data.lst_qa_content.length > 0) {
-      //   if (data.lst_qa_content.length === 1) {
-      //     return <span style={{ fontSize: 12 }}>{data.lst_qa_content[0][chooseLanguage]}</span>
-      //   } else {
-      //     let newValue = data.lst_qa_content.map(item => item[chooseLanguage]).join(",")
-      //     return <span style={{ fontSize: 12 }}>{newValue}</span>
-      //   }
-      // }
     }
 
   }

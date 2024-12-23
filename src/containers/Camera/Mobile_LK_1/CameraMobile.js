@@ -39,7 +39,7 @@ const ToastCameraNotFound = Swal.mixin({
   timer: 3000,
   timerProgressBar: true,
   willClose: () => {
-    // window.location.href = "/";
+    window.location.href = "/";
   },
   customClass: {
     popup: "my-custom-popup",
@@ -486,14 +486,14 @@ const MobileWebCam2 = () => {
 
           const textScreenResolution = ctx.measureText(
             `w:${screenResolution.width}px` +
-              "-" +
-              `h:${screenResolution.height}px`
+            "-" +
+            `h:${screenResolution.height}px`
           ).width;
 
           ctx.fillText(
             `w:${screenResolution.width}px` +
-              "-" +
-              `h:${screenResolution.height}px`,
+            "-" +
+            `h:${screenResolution.height}px`,
             x,
             y
           );
@@ -522,7 +522,7 @@ const MobileWebCam2 = () => {
 
       authAxios()
         .post(`${localhost}/log_cap_err`, data)
-        .then((res) => {})
+        .then((res) => { })
         .catch((err) => {
           console.log(err);
         });
@@ -594,20 +594,21 @@ const MobileWebCam2 = () => {
     setShowModalUploadImageCapture(false);
     setCheckFlash(false);
     const startTimeClick = Date.now();
-
     try {
       let totalSizeOrigin = imageList.reduce((previousValue, image) => {
         return previousValue + image.imageOriginDataFile;
       }, 0);
+
       setTotalSizeImageOriginal(totalSizeOrigin);
       let totalSize = imageList.reduce((previousValue, image) => {
         return (
           previousValue +
           parseInt(image.imageBase64.replace(/=/g, "").length * 0.75) /
-            1024 /
-            1024
+          1024 /
+          1024
         );
       }, 0);
+
       if (totalSize <= 50) {
         const items2 = JSON.parse(sessionStorage.getItem("OptionMachine"));
         const prioriti = isPrioritize ? "1" : "0";
@@ -658,8 +659,8 @@ const MobileWebCam2 = () => {
                     items2.is_multi === "0"
                       ? "0"
                       : valueCheckBoxRadio === 1
-                      ? "1"
-                      : "0",
+                        ? "1"
+                        : "0",
                   vl_model_name:
                     isDataQRCode !== ""
                       ? isDataQRCode.split('","')[1].replace('"', "").trim()
@@ -767,7 +768,7 @@ const MobileWebCam2 = () => {
     );
     authAxios()
       .post(`${localhost}/upload_details`, data)
-      .then((res) => {})
+      .then((res) => { })
       .catch((err) => {
         console.log(err);
       });
@@ -927,14 +928,13 @@ const MobileWebCam2 = () => {
         //     console.log('Base64 Image (PNG):', base64String);
         //   };
         // }
-
         const checkFileSize =
           parseInt(imageBase64.replace(/=/g, "").length * 0.75) / 1024 / 1024;
         let scaleFactor = 1;
         let quality = 1;
-        if (1 <= checkFileSize && checkFileSize < 5) {
+        if (checkFileSize < 5) {
           scaleFactor = 0.7;
-          quality = 0.9;
+          quality = 0.7;
         } else if (5 <= checkFileSize && checkFileSize < 10) {
           scaleFactor = 0.55;
           quality = 0.8;
@@ -952,7 +952,6 @@ const MobileWebCam2 = () => {
             const ctx = canvas.getContext("2d");
             const newWidth = img.width * scaleFactor;
             const newHeight = img.height * scaleFactor;
-
             canvas.width = newWidth;
             canvas.height = newHeight;
 
@@ -972,7 +971,8 @@ const MobileWebCam2 = () => {
               }
             }
             const resizedImageBase64 = canvas.toDataURL("image/jpeg", quality);
-
+            const checkFileSizeRe =
+              parseInt(resizedImageBase64.replace(/=/g, "").length * 0.75) / 1024 / 1024;
             const now = new Date();
 
             const day =
@@ -1002,9 +1002,9 @@ const MobileWebCam2 = () => {
               imageBase64: resizedImageBase64,
               imageCheck: false,
               imageOriginDataFile: checkFileSize,
+              imageLength: checkFileSizeRe,
             };
-
-            setImageList((prevImageList) => [...prevImageList, imageInfo]);
+            setImageList(prevImageList => [...prevImageList, imageInfo]);
           })
           .catch((err) => {
             message.error(
@@ -1130,7 +1130,7 @@ const MobileWebCam2 = () => {
     setShowModalUploadImageCapture(true);
   };
 
-  const customUpload = () => {};
+  const customUpload = () => { };
 
   const handleOkImageCapture = () => {
     setIsModalOpenImageCapture(false);
