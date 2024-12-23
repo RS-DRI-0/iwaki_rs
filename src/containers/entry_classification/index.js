@@ -12,7 +12,6 @@ import ReactLoading from "react-loading";
 import styled from "tachyons-components";
 import WarningIcon from "../../images/WarningNotiIcon.svg";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
-import { entry_classification } from "./data";
 import ModalQA from "./modal/ModalQA";
 import ModalQaImage from "./modal/ModalQaImage";
 
@@ -413,6 +412,7 @@ const Entry_Classification = () => {
         updatedData[i].value_id = return_data[i];
       }
       setValueBase64(updatedData);
+      setDataResult(updatedData);
       if (value === "R") {
         for (let i = 0; i < updatedData.length; i++) {
           if (updatedData[i].value_id !== "QA") {

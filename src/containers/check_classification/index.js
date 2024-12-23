@@ -65,8 +65,8 @@ const Check_Classification = () => {
   const [loadingTable, setLoadingTable] = useState(true);
   const [indexImage, setIndexImage] = useState(0);
   const [checkChooseModel, setCheckChooseModel] = useState(false);
-  const [onTickException, setOnTickException] = useState(false)
-  const [isOpenModalSubmit, setIsOpenModalSubmit] = useState(false)
+  const [onTickException, setOnTickException] = useState(false);
+  const [isOpenModalSubmit, setIsOpenModalSubmit] = useState(false);
 
   const [loadingImage, setLoadingImage] = useState(true);
 
@@ -168,8 +168,8 @@ const Check_Classification = () => {
         setDataUserID2(res.data.e2_user);
 
         const mergedList = res.data.lst_thum_base64.map((file, index) => {
-          const entry_e1_value = entry_1[index];
-          const entry_e2_value = entry_2[index];
+          let entry_e1_value = entry_1[index];
+          let entry_e2_value = entry_2[index];
 
           const entry_e1_value_old = entry_1_old[index];
           const entry_e2_value_old = entry_2_old[index];
@@ -177,6 +177,7 @@ const Check_Classification = () => {
           let check_QA;
           if (res.data.is_qa_e1 === "1" || res.data.is_qa_e2 === "1") {
             check_QA = true;
+            entry_e1_value = index + 1;
           } else {
             check_QA = entry_e1_value === "QA" || entry_e2_value === "QA";
           }
@@ -199,7 +200,7 @@ const Check_Classification = () => {
         });
 
         setValueBase64(mergedList);
-        setOnTickException(Number(res.data.e1_other) === 1)
+        setOnTickException(Number(res.data.e1_other) === 1);
 
         // }
       })
@@ -242,7 +243,7 @@ const Check_Classification = () => {
       data.append("user_role", inforUser.user_role);
       authAxios()
         .post(`${localhost}/return_pack_check_clf`, data)
-        .then((res) => { })
+        .then((res) => {})
         .catch((err) => {
           console.log(err);
         });
@@ -268,15 +269,13 @@ const Check_Classification = () => {
     } else if (item.is_qa_e1 === "0" && item.is_qa_e2 === "0") {
       return item.Input_e1;
     } else if (item.is_qa_e1 === "1" && item.is_qa_e2 === "1") {
-      return item.id;
+      return item.Input_e1;
     } else {
       return item.Input_e1;
     }
   };
 
   const onFinish = () => {
-
-
     let countNumbers = 0;
     let countCheckMark = 0;
     let countP = 0;
@@ -311,14 +310,14 @@ const Check_Classification = () => {
         item.Input_e1 === "☑"
           ? "S"
           : item.Input_e1 === "QA"
-            ? item.qa_e1
-            : item.Input_e1,
+          ? item.qa_e1
+          : item.Input_e1,
       Input_e2:
         item.Input_e2 === "☑"
           ? "S"
           : item.Input_e2 === "QA"
-            ? item.qa_e2
-            : item.Input_e2,
+          ? item.qa_e2
+          : item.Input_e2,
     }));
 
     const concatenatedValues = updatedDataList
@@ -332,7 +331,6 @@ const Check_Classification = () => {
     const valueSubmitInput = JSON.parse(
       sessionStorage.getItem("ValueSubmitInput")
     );
-
     authAxios()
       .post(`${localhost}/submit_check_clf`, {
         user_role: parseInt(inforUser.user_role),
@@ -394,10 +392,10 @@ const Check_Classification = () => {
           dataPumb.value === "1"
             ? ""
             : dataPumb.value === "3"
-              ? valueSubmitInput === null
-                ? ""
-                : valueSubmitInput
-              : "",
+            ? valueSubmitInput === null
+              ? ""
+              : valueSubmitInput
+            : "",
         str_result:
           dataPumb.value === "1"
             ? valueSubmitInput === null
@@ -411,10 +409,10 @@ const Check_Classification = () => {
         sessionStorage.removeItem("ValueSubmitInput");
         setStartTime(0);
         setValueBase64([]);
-        setOnTickException(false)
+        setOnTickException(false);
         openNotificationSweetAlert(SuccessIcon, res.data.message);
         fetchDataInsert(dataPumb.value);
-        setIsOpenModalSubmit(false)
+        setIsOpenModalSubmit(false);
       })
       .catch((err) => {
         sessionStorage.removeItem("ValueSubmitInput");
@@ -560,7 +558,7 @@ const Check_Classification = () => {
           updatedData[i].is_qa_e1 === "1" &&
           updatedData[i].is_qa_e2 === "1"
         ) {
-          return updatedData[i].id;
+          updatedData[i].Input_e1 = return_data[i];
         } else {
           updatedData[i].Input_e1 = return_data[i];
         }
@@ -575,7 +573,7 @@ const Check_Classification = () => {
               ...updatedData[_index], // Keep other properties unchanged
               check_QA:
                 updatedData[_index].is_qa_e1 === "0" &&
-                  updatedData[_index].is_qa_e2 === "0"
+                updatedData[_index].is_qa_e2 === "0"
                   ? false
                   : true, // Set check_QA to false
               qa_e1: "",
@@ -590,7 +588,7 @@ const Check_Classification = () => {
               ...updatedData[_index], // Keep other properties unchanged
               check_QA:
                 updatedData[_index].is_qa_e1 === "0" &&
-                  updatedData[_index].is_qa_e2 === "0"
+                updatedData[_index].is_qa_e2 === "0"
                   ? false
                   : true, // Set check_QA to false
               qa_e2: "",
@@ -605,7 +603,7 @@ const Check_Classification = () => {
               ...updatedData[_index], // Keep other properties unchanged
               check_QA:
                 updatedData[_index].is_qa_e1 === "0" &&
-                  updatedData[_index].is_qa_e2 === "0"
+                updatedData[_index].is_qa_e2 === "0"
                   ? false
                   : true, // Set check_QA to false
               qa_e1: "",
@@ -615,14 +613,20 @@ const Check_Classification = () => {
           updatedData[_index].is_qa_e1 === "1" &&
           updatedData[_index].is_qa_e2 === "1"
         ) {
-          return updatedData[_index].id;
+          if (_index >= 0 && _index < updatedData.length) {
+            updatedData[_index] = {
+              ...updatedData[_index],
+            };
+          }
+
+          // return updatedData[_index].id;
         } else {
           if (_index >= 0 && _index < updatedData.length) {
             updatedData[_index] = {
               ...updatedData[_index], // Keep other properties unchanged
               check_QA:
                 updatedData[_index].is_qa_e1 === "0" &&
-                  updatedData[_index].is_qa_e2 === "0"
+                updatedData[_index].is_qa_e2 === "0"
                   ? false
                   : true, // Set check_QA to false
               qa_e1: "",
@@ -630,6 +634,7 @@ const Check_Classification = () => {
           }
         }
       }
+
       setValueBase64(updatedData);
     }
   };
@@ -727,7 +732,7 @@ const Check_Classification = () => {
         ...updatedData[isIndexQA], // Keep other properties unchanged
         check_QA:
           updatedData[isIndexQA].is_qa_e1 === "0" &&
-            updatedData[isIndexQA].is_qa_e2 === "0"
+          updatedData[isIndexQA].is_qa_e2 === "0"
             ? false
             : true, // Set check_QA to false
       };
@@ -767,7 +772,7 @@ const Check_Classification = () => {
         }
         if (event.ctrlKey && event.code === "Space") {
           event.preventDefault();
-          changeValueRadio()
+          changeValueRadio();
         }
       };
 
@@ -780,8 +785,8 @@ const Check_Classification = () => {
   }, [valueBase64, isOpenModalQATotal, isOpenModalQA]);
 
   const changeValueRadio = () => {
-    setOnTickException(prev => !prev)
-  }
+    setOnTickException((prev) => !prev);
+  };
 
   const fetchListQaValue = () => {
     authAxios()
@@ -1079,21 +1084,20 @@ const Check_Classification = () => {
   }, [indexImage]);
 
   const checkColorException = () => {
-    if ((Number(dataDetail.e1_other) !== Number(dataDetail.e2_other))) {
-      return "red"
+    if (Number(dataDetail.e1_other) !== Number(dataDetail.e2_other)) {
+      return "red";
     } else {
-      return "black"
+      return "black";
     }
-  }
+  };
 
   const onSubmit = () => {
-    if ((Number(dataDetail.e1_other) !== Number(dataDetail.e2_other))) {
-      setIsOpenModalSubmit(true)
+    if (Number(dataDetail.e1_other) !== Number(dataDetail.e2_other)) {
+      setIsOpenModalSubmit(true);
     } else {
-      onFinish()
+      onFinish();
     }
-  }
-
+  };
   return (
     <>
       {loadingBtnSubmit && (
@@ -1414,9 +1418,29 @@ const Check_Classification = () => {
                 }}
               >
                 <div style={{ display: "grid", width: "25rem" }}>
-                  <div style={{ display: "flex", paddingLeft: "27px", alignItems: "center" }}>
-                    <Radio className="btn-radio-clf" style={{ textAlign: "center" }} checked={onTickException} onClick={changeValueRadio}></Radio>
-                    <span style={{ paddingLeft: "1%", fontSize: 16, fontWeight: 600, color: checkColorException() }}>Tồn tại group ngoại lệ (Có phiếu Servo,...)</span>
+                  <div
+                    style={{
+                      display: "flex",
+                      paddingLeft: "27px",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Radio
+                      className="btn-radio-clf"
+                      style={{ textAlign: "center" }}
+                      checked={onTickException}
+                      onClick={changeValueRadio}
+                    ></Radio>
+                    <span
+                      style={{
+                        paddingLeft: "1%",
+                        fontSize: 16,
+                        fontWeight: 600,
+                        color: checkColorException(),
+                      }}
+                    >
+                      Tồn tại group ngoại lệ (Có phiếu Servo,...)
+                    </span>
                   </div>
                   <span style={{ fontSize: 12 }}>(Ctrl + space)</span>
                 </div>
